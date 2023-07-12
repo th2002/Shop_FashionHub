@@ -55,7 +55,7 @@
                 </div>
                 <div class="nav__center">
                     <div class="nav_logo">
-                        <img src="../../content/images/logos/logo_fashionhub-removebg-preview 2.png" alt=""
+                        <img src="../../../assets/images/logos/logo_fashionhub-removebg-preview 2.png" alt=""
                             class="nav_logo-img">
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                             <ul class="nav_cart-list">
                                 <li class="nav_cart-item">
                                     <div class="nav_cart-item-left">
-                                        <img src="../../content/images/product/sp1 2.png" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="nav_cart-item-img">
                                     </div>
                                     <div class="nav_cart-item-center">
@@ -96,7 +96,7 @@
                                 </li>
                                 <li class="nav_cart-item">
                                     <div class="nav_cart-item-left">
-                                        <img src="../../content/images/product/sp1 2.png" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="nav_cart-item-img">
                                     </div>
                                     <div class="nav_cart-item-center">
@@ -116,7 +116,7 @@
                                 </li>
                                 <li class="nav_cart-item">
                                     <div class="nav_cart-item-left">
-                                        <img src="../../content/images/product/sp1 2.png" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="nav_cart-item-img">
                                     </div>
                                     <div class="nav_cart-item-center">
@@ -136,7 +136,7 @@
                                 </li>
                                 <li class="nav_cart-item">
                                     <div class="nav_cart-item-left">
-                                        <img src="../../content/images/product/sp1 2.png" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="nav_cart-item-img">
                                     </div>
                                     <div class="nav_cart-item-center">
@@ -156,7 +156,7 @@
                                 </li>
                                 <li class="nav_cart-item">
                                     <div class="nav_cart-item-left">
-                                        <img src="../../content/images/product/sp1 2.png" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="nav_cart-item-img">
                                     </div>
                                     <div class="nav_cart-item-center">
@@ -194,11 +194,11 @@
                 </div>
             </nav>
             <div class="slider">
-                <img class="slider__img-item" src="../../content/images/slider/i1.webp" alt="">
-                <img class="slider__img-item" src="../../content/images/slider/i2.webp" alt="">
-                <img class="slider__img-item" src="../../content/images/slider/i3.webp" alt="">
-                <img class="slider__img-item" src="../../content/images/slider/i4.webp" alt="">
-                <img class="slider__img-item" src="../../content/images/slider/i5.webp" alt="">
+                <img class="slider__img-item" src="../../../assets/images/slider/i1.webp" alt="">
+                <img class="slider__img-item" src="../../../assets/images/slider/i2.webp" alt="">
+                <img class="slider__img-item" src="../../../assets/images/slider/i3.webp" alt="">
+                <img class="slider__img-item" src="../../../assets/images/slider/i4.webp" alt="">
+                <img class="slider__img-item" src="../../../assets/images/slider/i5.webp" alt="">
             </div>
         </header>
 
@@ -213,7 +213,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -233,7 +234,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -253,7 +255,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -273,7 +276,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -293,7 +297,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -313,7 +318,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -333,7 +339,8 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../content/images/product/sp1.webp" alt="" class="product_img-item">
+                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                        class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -375,7 +382,7 @@
                             <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
-                                        <img src="../../content/images/product/sp1.webp" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="product_img-item">
                                         <div class="product_cart">
                                             <button class="product_btn product_btn-buy">Mua Ngay </button>
@@ -396,7 +403,7 @@
                             <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
-                                        <img src="../../content/images/product/sp1.webp" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="product_img-item">
                                         <div class="product_cart">
                                             <button class="product_btn product_btn-buy">Mua Ngay </button>
@@ -417,7 +424,7 @@
                             <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
-                                        <img src="../../content/images/product/sp1.webp" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="product_img-item">
                                         <div class="product_cart">
                                             <button class="product_btn product_btn-buy">Mua Ngay </button>
@@ -438,7 +445,7 @@
                             <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
-                                        <img src="../../content/images/product/sp1.webp" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="product_img-item">
                                         <div class="product_cart">
                                             <button class="product_btn product_btn-buy">Mua Ngay </button>
@@ -459,7 +466,70 @@
                             <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
-                                        <img src="../../content/images/product/sp1.webp" alt=""
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                            class="product_img-item">
+                                        <div class="product_cart">
+                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
+                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                                        </div>
+                                    </div>
+                                    <div class="product_name">
+                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
+                                    </div>
+                                    <div class="product_price product_price-new">
+                                        <h4>1.675.000đ</h4>
+                                    </div>
+                                    <div class="product_price product_price-old">
+                                        <h4>2.675.000đ</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="product_item">
+                                    <div class="product_img">
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                            class="product_img-item">
+                                        <div class="product_cart">
+                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
+                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                                        </div>
+                                    </div>
+                                    <div class="product_name">
+                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
+                                    </div>
+                                    <div class="product_price product_price-new">
+                                        <h4>1.675.000đ</h4>
+                                    </div>
+                                    <div class="product_price product_price-old">
+                                        <h4>2.675.000đ</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="product_item">
+                                    <div class="product_img">
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
+                                            class="product_img-item">
+                                        <div class="product_cart">
+                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
+                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                                        </div>
+                                    </div>
+                                    <div class="product_name">
+                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
+                                    </div>
+                                    <div class="product_price product_price-new">
+                                        <h4>1.675.000đ</h4>
+                                    </div>
+                                    <div class="product_price product_price-old">
+                                        <h4>2.675.000đ</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="product_item">
+                                    <div class="product_img">
+                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
                                             class="product_img-item">
                                         <div class="product_cart">
                                             <button class="product_btn product_btn-buy">Mua Ngay </button>
@@ -661,7 +731,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="../../content/js/slider.js"></script>
+    <script src="../../../assets/js/slider.js"></script>
 </body>
 
 </html>
