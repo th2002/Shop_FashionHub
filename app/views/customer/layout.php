@@ -55,7 +55,7 @@
                 </div>
                 <div class="nav__center">
                     <div class="nav_logo">
-                        <img src="../../../assets/images/logos/logo_fashionhub-removebg-preview 2.png" alt=""
+                        <img src="../../../assets/images/logos/logo_fashionhub-removebg-preview2.png" alt=""
                             class="nav_logo-img">
                     </div>
                 </div>
