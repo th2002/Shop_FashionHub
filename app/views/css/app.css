@@ -120,8 +120,14 @@ nav{
     padding: 0 60px;
     
 }
-.nav__logo{
+.nav_logo{
     margin-top: 10px;
+    width: 131px;
+    height: 100px;
+}
+.nav_logo-img{
+    width: 100%;
+    height: auto;
 }
 .nav__right{
     display: flex;
@@ -219,7 +225,7 @@ nav{
   .nav_cart-item-info{
     margin: 0;
     font-size: 14px;
-    font-weight: 900;
+    font-weight: 500;
     line-height: 15px;
     max-height: 4rem;
     overflow: hidden;
@@ -450,8 +456,9 @@ footer{
 .product_img{
     position: relative;
     border-radius: 7px;
+    max-height: 330px;
     overflow: hidden;
-    min-height: 275px;
+    /* min-height: 275px; */
     box-shadow: 0px 1px 5px 1px #9b9b9b;
 
 }
