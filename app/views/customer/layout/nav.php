@@ -18,7 +18,7 @@
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-            <img src="../../../assets/images/logos/logo_fashionhub-removebg-preview2.png" alt="" class="nav_logo-img">
+            <img src="../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
         </div>
     </div>
     <div class="nav__right">
