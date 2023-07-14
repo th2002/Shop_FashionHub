@@ -1,20 +1,4 @@
 <!-- Day la menu -->
-<div class="banner_top">
-    <div class="banner_top__center">
-        <h3>Qùa tặng hấp dẫn</h3>
-    </div>
-    <div class="banner_top__right">
-        <div class="banner_top__right-season">
-            <span>Welcome</span>
-            <h1>Summer</h1>
-        </div>
-        <div class="banner_top__right-year">
-            <h4>2023</h4>
-        </div>
-    </div>
-</div>
-</div>
-
 <nav>
     <div class="nav__left">
         <ul class="nav__page-list">
