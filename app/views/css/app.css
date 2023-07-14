@@ -10,29 +10,31 @@ html{
     font-family: 'Roboto';
 }
 .banner_top{
+    position: relative;
     width: 100%;
     height: var(--banner__top-height);
     background-color: #54C3E8;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 }
 .banner_top__center{
-    width: 90%;
+    position: absolute;
+    width: 138px;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    left: 50%;  
+    transform: translateX(-50%);
 }
 .banner_top__center h3{
+    line-height: 48px;
     color: #fff;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 900;
 }
 .banner_top__right{
     display: flex;
-    justify-content: space-between;
+    position: absolute;
     align-items: center;
+    right: 0;
 }
 .banner_top__right-season{
     display: flex;
@@ -97,7 +99,7 @@ nav{
 
 .nav__page-item{
     padding: 0 15px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
 }
 .nav__page-list:first-child{

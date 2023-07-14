@@ -22,7 +22,7 @@
         <header>
             <div class="banner_top">
                 <div class="banner_top__center">
-                    <h3>Qùa tặng hấp dẫn</h3>
+                    <h3>Quà tặng hấp dẫn</h3>
                 </div>
                 <div class="banner_top__right">
                     <div class="banner_top__right-season">
