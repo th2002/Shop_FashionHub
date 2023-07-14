@@ -209,28 +209,35 @@
             <div class="container__popular-list">
                 <div class="grid wide">
                     <div class="row slider-popular">
+                        <?php 
+                            require_once "../../../app/models/DAO/connect.php";
+                            $conn = connect();
+                            $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where featured = 1;";
+                            $result = mysqli_query($conn,$sql);
+                        ?>
+                        <?php foreach($result as $key => $value):?>
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../../assets/images/products/sp1.webp" alt=""
-                                        class="product_img-item">
+                                    <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
                                     </div>
                                 </div>
                                 <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
+                                    <h4><?php echo $value['name']; ?></h4>
                                 </div>
                                 <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
+                                    <h4><?php echo $value['price']; ?></h4>
                                 </div>
                                 <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
+                                    <h4><?php echo $value['sale_price']; ?></h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col l-3">
+                        <?php endforeach ?>
+                        <!-- <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
                                     <img src="../../../assets/images/products/sp2-removebg-preview 1.png" alt=""
@@ -254,8 +261,7 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../../assets/images/products/sp2.webp" alt=""
-                                        class="product_img-item">
+                                    <img src="../../../assets/images/products/sp2.webp" alt="" class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -317,8 +323,7 @@
                         <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
-                                    <img src="../../../assets/images/products/sp3.webp" alt=""
-                                        class="product_img-item">
+                                    <img src="../../../assets/images/products/sp3.webp" alt="" class="product_img-item">
                                     <div class="product_cart">
                                         <button class="product_btn product_btn-buy">Mua Ngay </button>
                                         <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -355,7 +360,7 @@
                                     <h4>2.675.000đ</h4>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -378,7 +383,35 @@
                 <div class="container__product-list container__popular-list">
                     <div class="grid wide">
                         <div class="row">
+                            <?php 
+                            require_once "../../../app/models/DAO/connect.php";
+                            $conn = connect();
+                            $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
+                            $result = mysqli_query($conn,$sql);
+                            ?>
+                            <?php foreach($result as $key => $value):?>
                             <div class="col l-3">
+                                <div class="product_item">
+                                    <div class="product_img">
+                                        <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
+                                        <div class="product_cart">
+                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
+                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                                        </div>
+                                    </div>
+                                    <div class="product_name">
+                                        <h4><?php echo $value['name']; ?></h4>
+                                    </div>
+                                    <div class="product_price product_price-new">
+                                        <h4><?php echo $value['price']; ?></h4>
+                                    </div>
+                                    <div class="product_price product_price-old">
+                                        <h4><?php echo $value['sale_price']; ?></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach ?>
+                            <!-- <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
                                         <img src="../../../assets/images/products/sp1 2.png" alt=""
@@ -548,189 +581,191 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-            </div>
-            <style>
-            .container__page {
-                width: 100%;
-                height: 200px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .container__page-list {
-                max-width: 30%;
-                height: 30px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                list-style: none;
-                background-color: aliceblue;
-            }
-
-            .container__page-item {
-                padding: 0 10px;
-                border: 1px salmonblue solid;
-                width: 40px;
-                height: 30px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 5px;
-            }
-
-            .container__page-item.active {
-                background-color: aqua;
-            }
-
-            .container__page-link {
-                text-decoration: none;
-                font-size: 18px;
-            }
-            </style>
-            <div class="container__page">
-                <ul class="container__page-list">
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">
-                            <i class="container__page-icon fa-solid fa-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li class="container__page-item active">
-                        <a class="container__page-link" href="">1</a>
-                    </li>
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">2</a>
-                    </li>
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">3</a>
-                    </li>
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">4</a>
-                    </li>
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">5</a>
-                    </li>
-                    <li class="container__page-item">
-                        <a class="container__page-link" href="">
-                            <i class="container__page-icon fa-solid fa-chevron-right"></i>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-
-        <footer>
-            <div class="row">
-                <div class="col l-3">
-                    <div class="footer_item">
-                        <div class="footer_item-head">
-                            <h3>THÔNG TIN</h3>
-                            <ul class="footer_item-list">
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Giới Thiệu Maison</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Hệ Thống Cửa Hàng</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Tuyển Dụng</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <img class="footer_item-logo" src="../../content/images/logos/image0.png" alt="">
-                                </li>
-                            </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="col l-3">
-                    <div class="footer_item">
-                        <div class="footer_item-head">
-                            <h3>TRỢ GIÚP</h3>
-                            <ul class="footer_item-list">
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Phương Thức Thanh Toán</a>
+                        <style>
+                        .container__page {
+                            width: 100%;
+                            height: 200px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .container__page-list {
+                            max-width: 30%;
+                            height: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            list-style: none;
+                            background-color: aliceblue;
+                        }
+
+                        .container__page-item {
+                            padding: 0 10px;
+                            border: 1px salmonblue solid;
+                            width: 40px;
+                            height: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 0 5px;
+                        }
+
+                        .container__page-item.active {
+                            background-color: aqua;
+                        }
+
+                        .container__page-link {
+                            text-decoration: none;
+                            font-size: 18px;
+                        }
+                        </style>
+                        <div class="container__page">
+                            <ul class="container__page-list">
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">
+                                        <i class="container__page-icon fa-solid fa-chevron-left"></i>
+                                    </a>
                                 </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Chính Sách Giao Hàng</a>
+                                <li class="container__page-item active">
+                                    <a class="container__page-link" href="">1</a>
                                 </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Chính Sách Mua Hàng</a>
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">2</a>
                                 </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Chính Sách Đổi Trả</a>
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">3</a>
                                 </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Chính Sách Bảo Hành</a>
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">4</a>
                                 </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Chính Sách Bảo Mật</a>
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">5</a>
+                                </li>
+                                <li class="container__page-item">
+                                    <a class="container__page-link" href="">
+                                        <i class="container__page-icon fa-solid fa-chevron-right"></i>
+                                    </a>
                                 </li>
 
                             </ul>
                         </div>
+
                     </div>
-                </div>
-                <div class="col l-3">
-                    <div class="footer_item">
-                        <div class="footer_item-head">
-                            <h3>THANH TOÁN</h3>
-                            <ul class="footer_item-list">
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Visa / Mastercard / JCB</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">HATM / Internet Banking</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Quét Mã QR</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Mua Trước Trả Sau</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Ví Điện Tử</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Thanh Toán Khi Nhận Hàng</a>
-                                </li>
-                            </ul>
+
+                    <footer>
+                        <div class="row">
+                            <div class="col l-3">
+                                <div class="footer_item">
+                                    <div class="footer_item-head">
+                                        <h3>THÔNG TIN</h3>
+                                        <ul class="footer_item-list">
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Giới Thiệu Maison</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Hệ Thống Cửa Hàng</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Tuyển Dụng</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <img class="footer_item-logo"
+                                                    src="../../content/images/logos/image0.png" alt="">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="footer_item">
+                                    <div class="footer_item-head">
+                                        <h3>TRỢ GIÚP</h3>
+                                        <ul class="footer_item-list">
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Phương Thức Thanh Toán</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Chính Sách Giao Hàng</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Chính Sách Mua Hàng</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Chính Sách Đổi Trả</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Chính Sách Bảo Hành</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Chính Sách Bảo Mật</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="footer_item">
+                                    <div class="footer_item-head">
+                                        <h3>THANH TOÁN</h3>
+                                        <ul class="footer_item-list">
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Visa / Mastercard / JCB</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">HATM / Internet Banking</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Quét Mã QR</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Mua Trước Trả Sau</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Ví Điện Tử</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Thanh Toán Khi Nhận Hàng</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-3">
+                                <div class="footer_item">
+                                    <div class="footer_item-head">
+                                        <h3>Giao Hàng</h3>
+                                        <ul class="footer_item-list">
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Giao Hàng Tiêu Chuẩn</a>
+                                            </li>
+                                            <li class="footer_item-des">
+                                                <a href="" class="footer_item-link">Maison NOW</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
-                    </div>
+
+                    </footer>
+
                 </div>
-                <div class="col l-3">
-                    <div class="footer_item">
-                        <div class="footer_item-head">
-                            <h3>Giao Hàng</h3>
-                            <ul class="footer_item-list">
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Giao Hàng Tiêu Chuẩn</a>
-                                </li>
-                                <li class="footer_item-des">
-                                    <a href="" class="footer_item-link">Maison NOW</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-        </footer>
-
-    </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="../../../assets/js/slider.js"></script>
+                <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+                <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+                <script src="../../../assets/js/slider.js"></script>
 </body>
 
 </html>
