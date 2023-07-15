@@ -37,11 +37,11 @@
     </div>
 
     <?php
-        require './layout/nav.php';
+        require 'layout/nav.php';
     ?>
 
     <?php
-        require './layout/slider.php';
+        require 'layout/slider.php';
     ?>
     </header>
 
@@ -50,10 +50,15 @@
             <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
         </div>
 
-        <?php
-            require './layout/top10_products.php';
-        ?>
-
+        <div class="container__popular-list">
+            <div class="grid wide">
+                <div class="row slider-popular">
+                    <?php
+                    require 'layout/top10_products.php';
+                ?>
+                </div>
+            </div>
+        </div>
 
         <div class="container__handpicked">
             <h1 class="container__handpicked-text">Handpicked</h1>
@@ -64,9 +69,21 @@
                 src="../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
         </div>
 
-        <?php
-            require './layout/products.php';
-        ?>
+        <div class="container__product">
+            <div class="container__product-text">
+                <h1 class="container__popular-text">DANH SÁCH SẢN PHẨM</h1>
+            </div>
+            <div class="container__product-list container__popular-list">
+                <div class="grid wide">
+                    <div class="row">
+                        <?php
+                                require 'layout/products.php';
+                            ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <style>
