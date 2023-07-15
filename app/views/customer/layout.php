@@ -61,7 +61,8 @@
         </div>
 
         <div class="container__handpicked">
-            <h1 class="container__handpicked-text">Handpicked</h1>
+            <b class="container__handpicked-text">Handpicked</b>
+            <strong class="container__trends">Trends</strong>
         </div>
 
         <div class="container__banner">

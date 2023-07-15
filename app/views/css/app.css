@@ -394,23 +394,39 @@ nav{
 
 }
 .container__handpicked{
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    
+    margin-top: 20px;
+    height: 110px;
 
 }
 .container__handpicked-text{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: linear-gradient(to top, #000000, #009EDB);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     /* fallback for non-webkit browsers */
-    background-clip: text;
-    text-fill-color: transparent;
     font-weight: 900;
-    
+    font-size: 30px;
+    letter-spacing: 10px;
 }
+
+.container__trends {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+    font-size: 45px;
+    border-bottom: 20px solid #F9E076;
+    line-height: 10px;
+    width: 178px;
+}
+
 .container__banner{
     margin-top: 50px;
     display: flex;
@@ -526,6 +542,10 @@ footer{
     top: 100%;
     transition: .2s all linear;
 
+  }
+
+  .product_img:hover {
+    cursor: pointer;
   }
 .product_btn{
     cursor: pointer;
