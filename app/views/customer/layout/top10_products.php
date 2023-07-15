@@ -1,10 +1,5 @@
 <!-- Day la top 10 san pham ban chay -->
-<?php 
-    require_once "../../../models/DAO/connect.php";
-    $conn = connect();
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where featured = 1;";
-    $result = mysqli_query($conn,$sql);
-?>
+
 <?php foreach($result as $key => $value):?>
 <div class="col l-3">
     <div class="product_item">

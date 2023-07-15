@@ -2,7 +2,7 @@
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "fashionhub_shop");
+define("DB_NAME", "fa");
 function connect()
 {
     $host = DB_HOST;
