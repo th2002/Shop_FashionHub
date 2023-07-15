@@ -69,22 +69,22 @@
                 src="../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
         </div>
 
-        <?php 
-            // require_once '../../models/DAO/connect.php';
-            // $conn = connect();
-            // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
-            // $result = mysqli_query($conn,$sql);
-        ?>
-
-        <div class="container__product-list container__popular-list">
-            <div class="grid wide">
-                <div class="row">
-                    <?php
-                        require 'layout/products.php';
-                    ?>
+        <div class="container__product">
+            <div class="container__product-text">
+                <h1 class="container__popular-text">DANH SÁCH SẢN PHẨM</h1>
+            </div>
+            <div class="container__product-list container__popular-list">
+                <div class="grid wide">
+                    <div class="row">
+                        <?php
+                                require 'layout/products.php';
+                            ?>
+                    </div>
                 </div>
             </div>
         </div>
+
+
 
         <style>
         .container__page {
