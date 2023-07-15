@@ -46,11 +46,14 @@
         <div class="container__popular">
             <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
         </div>
+        <div class="row slider-popular">
         <?php
             require_once "../../models/DAO/top10.php";
             $result = select_product_top10();
             include_once './layout/top10_products.php';
         ?>
+        </div>
+       
         <div class="container__handpicked">
             <h1 class="container__handpicked-text">Handpicked</h1>
         </div>
