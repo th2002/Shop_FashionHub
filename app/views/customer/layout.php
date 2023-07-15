@@ -76,9 +76,9 @@
             // $result = mysqli_query($conn,$sql);
         ?>
 
-        <div class="container__popular-list">
+        <div class="container__product-list container__popular-list">
             <div class="grid wide">
-                <div class="row slider-popular">
+                <div class="row">
                     <?php
                         require 'layout/products.php';
                     ?>
