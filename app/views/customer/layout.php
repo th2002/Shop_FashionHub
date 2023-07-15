@@ -1,3 +1,6 @@
+<?php
+    require_once "../../../app/models/DAO/connect.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -210,33 +213,9 @@
                 <div class="grid wide">
                     <div class="row slider-popular">
                         <?php 
-                            require_once "../../../app/models/DAO/connect.php";
-                            $conn = connect();
-                            $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where featured = 1;";
-                            $result = mysqli_query($conn,$sql);
+                            include_once "../../views/customer/layout/top10_products.php";
                         ?>
-                        <?php foreach($result as $key => $value):?>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4><?php echo $value['name']; ?></h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4><?php echo $value['price']; ?></h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4><?php echo $value['sale_price']; ?></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach ?>
+
                         <!-- <div class="col l-3">
                             <div class="product_item">
                                 <div class="product_img">
@@ -384,33 +363,9 @@
                     <div class="grid wide">
                         <div class="row">
                             <?php 
-                            require_once "../../../app/models/DAO/connect.php";
-                            $conn = connect();
-                            $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
-                            $result = mysqli_query($conn,$sql);
+                                include_once "../../views/customer/layout/products.php";
                             ?>
-                            <?php foreach($result as $key => $value):?>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4><?php echo $value['name']; ?></h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4><?php echo $value['price']; ?></h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4><?php echo $value['sale_price']; ?></h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php endforeach ?>
+                            
                             <!-- <div class="col l-3">
                                 <div class="product_item">
                                     <div class="product_img">
@@ -630,10 +585,11 @@
                                         <i class="container__page-icon fa-solid fa-chevron-left"></i>
                                     </a>
                                 </li>
-                                <li class="container__page-item active">
-                                    <a class="container__page-link" href="">1</a>
-                                </li>
-                                <li class="container__page-item">
+                            <?php for ($i = 1 ; $i <= $page ; $i++) { ?>
+                                    <li class="container__page-item active">
+                                        <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a>
+                                    </li>
+                                <!-- <li class="container__page-item">
                                     <a class="container__page-link" href="">2</a>
                                 </li>
                                 <li class="container__page-item">
@@ -644,7 +600,8 @@
                                 </li>
                                 <li class="container__page-item">
                                     <a class="container__page-link" href="">5</a>
-                                </li>
+                                </li> -->
+                            <?php } ?>
                                 <li class="container__page-item">
                                     <a class="container__page-link" href="">
                                         <i class="container__page-icon fa-solid fa-chevron-right"></i>
