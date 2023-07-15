@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -7,7 +9,7 @@
     --banner__top-height:48px;
 }
 html{
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 .wrapper {
     position: relative;
@@ -17,7 +19,7 @@ html{
     position: relative;
     width: 100%;
     height: var(--banner__top-height);
-    background-color: #54C3E8;
+    background-color: #E76161;
     display: flex;
     align-items: center;
 }
@@ -56,7 +58,7 @@ html{
     font-size: 18px;
 }
 .banner_top__right-year{
-    background-color:#ff0000;
+    background-color:#F99B7D;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,6 +98,7 @@ nav{
 .nav__left{
   flex-basis: 34%;
   margin-left: 20px;
+  text-transform: uppercase;
 }
 .nav__page-list{
     display: flex;
@@ -383,7 +386,7 @@ nav{
     align-items: center;
 }
 .container__popular-text{
-    color: #646464;
+    color: #454141;
     font-weight: 400;
 }
 .container__popular-list{

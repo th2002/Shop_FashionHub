@@ -37,11 +37,11 @@
     </div>
 
     <?php
-        require './layout/nav.php';
+        require 'layout/nav.php';
     ?>
 
     <?php
-        require './layout/slider.php';
+        require 'layout/slider.php';
     ?>
     </header>
 
@@ -51,7 +51,7 @@
         </div>
 
         <?php
-            require './layout/top10_products.php';
+            require 'layout/top10_products.php';
         ?>
 
 
@@ -64,8 +64,14 @@
                 src="../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
         </div>
 
+        <?php 
+            // require_once '../../models/DAO/connect.php';
+            // $conn = connect();
+            // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
+            // $result = mysqli_query($conn,$sql);
+        ?>
         <?php
-            require './layout/products.php';
+            require 'layout/products.php';
         ?>
 
 
