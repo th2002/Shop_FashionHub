@@ -50,9 +50,12 @@
             <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
         </div>
 
+
         <?php
             require 'layout/top10_products.php';
         ?>
+
+
 
 
         <div class="container__handpicked">
