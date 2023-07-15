@@ -50,13 +50,15 @@
             <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
         </div>
 
-
-        <?php
-            require 'layout/top10_products.php';
-        ?>
-
-
-
+        <div class="container__popular-list">
+            <div class="grid wide">
+                <div class="row slider-popular">
+                    <?php
+                    require 'layout/top10_products.php';
+                ?>
+                </div>
+            </div>
+        </div>
 
         <div class="container__handpicked">
             <h1 class="container__handpicked-text">Handpicked</h1>
@@ -73,10 +75,16 @@
             // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
             // $result = mysqli_query($conn,$sql);
         ?>
-        <?php
-            require 'layout/products.php';
-        ?>
 
+        <div class="container__popular-list">
+            <div class="grid wide">
+                <div class="row slider-popular">
+                    <?php
+                        require 'layout/products.php';
+                    ?>
+                </div>
+            </div>
+        </div>
 
         <style>
         .container__page {

@@ -9,10 +9,8 @@
 ?>
 <?php foreach($result as $key => $value):?>
     
-    <div class="container__popular-list">
-            <div class="grid wide">
-                <div class="row slider-popular">
-                    <div class="col l-3">
+            
+    <div class="col l-3">
                         <div class="product_item">
                             <div class="product_img">
                                 <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
@@ -32,8 +30,4 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-    </div>        
-
 <?php endforeach ?>
