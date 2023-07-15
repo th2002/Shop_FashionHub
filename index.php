@@ -1,5 +1,3 @@
 <?php
-
-    header('location:','customer/index.php');
-
+    header('location:','app/views/customer');
 ?>
