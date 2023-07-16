@@ -233,6 +233,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="container__title-trademark">
+            <strong>
+                Thương hiệu
+            </strong>
+        </div>
+
+        <div class="container__logo">
+            <div class="container__logo-logo1">
+                <img src="https://file.hstatic.net/1000284478/file/skechers_a3dd17d7f3784683a72a5599b39be2e6.svg"
+                    alt="">
+            </div>
+            <div class="container__logo-logo2">
+                <img src="https://file.hstatic.net/1000284478/file/puma_371c0176827c44c2b9ccd94f30ab3b09.svg">
+            </div>
+            <div class="container__logo-logo3">
+                <img src="https://file.hstatic.net/1000284478/file/marhenj_a68996bf794e419891e7400597616f25.svg" alt="">
+            </div>
+            <div class="container__logo-logo4">
+                <img src="https://file.hstatic.net/1000284478/file/converse_934171edd98a4b50b3d4782cc81aed99.svg">
+            </div>
+            <div class="container__logo-logo5">
+                <img src="https://file.hstatic.net/1000284478/file/mujosh_edaa9c20533d45869a4701e02c8205b2.svg">
+            </div>
+            <div class="container__logo-logo6">
+                <img src="https://file.hstatic.net/1000284478/file/pinko_5c1f58d6c2b9482c9d2a8cbf7a279eec.svg">
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -335,7 +363,7 @@
 
 
         </div>
-
+        <p>© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights reserved</p>
     </footer>
 
 

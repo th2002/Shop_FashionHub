@@ -11,6 +11,7 @@
 html{
     font-family: 'Roboto', sans-serif;
 }
+
 .wrapper {
     position: relative;
     width: 100%;
@@ -625,13 +626,47 @@ nav{
     text-transform: uppercase;
 }
 
+.container__title-trademark {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+}
 
+.container__title-trademark strong{
+    font-size: 40px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    line-height: 50px;
+}
+
+.container__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 90%;
+}
+
+.container__logo > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 216px;
+    height: 21px;
+}
 
 /*footer*/
 footer{
+    position: relative;
     margin-top: 100px;
     width: 100%;
-    height: 352px;
+    height: 361px;
     background-color: #2E2E2E;
 }
 .footer_item{
@@ -664,6 +699,14 @@ footer{
     text-decoration: underline;
     color: #d42a2a;
     transition: all .2s linear;
+}
+
+footer > p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 12px;
 }
 
 /*product*/
