@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="../../../assets/css/grid.css">
     <link rel="stylesheet" href="../css/app.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Shop FashionHub</title>
 </head>
 
 <body>
@@ -156,7 +157,82 @@
 
             </ul>
         </div>
-
+        <div class="container__grid_img">
+            <div class="container__grid_img-row-1">
+                <div class="container__grid_img-1">
+                    <div class="container__grid_img-content-1">
+                        <div class="title-content-1">
+                            <h1>Trang Phục</h1>
+                        </div>
+                        <div class="content-content-1">
+                            <p>
+                                Thoải mái lựa chọn và khẳng định phong cách thời trang sành điệu,
+                                cá tính với các item quần áo,
+                                đầm váy đến từ các thương hiệu thời trang
+                                trong và ngoài nước: Max&Co., MLB, GiGi, Puma,…
+                            </p>
+                        </div>
+                        <div class="btn-bottom">
+                            <a>Khám phá</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container__grid_img-2">
+                    <div class="container__grid_img-content-2">
+                        <div class="title-content-2">
+                            <h1>Giày Dép</h1>
+                        </div>
+                        <div class="content-content-2">
+                            <p>
+                                Tôn vinh vóc dáng xinh đẹp của phái nữ
+                                với các mẫu thiết kế giày dép thời trang và hiện đại:
+                                giày cao gót, giày sandals, giày thể thao,...
+                                đến từ các thương hiệu nổi tiếng như Charles & Keith, Pedro, Puma,…
+                            </p>
+                        </div>
+                        <div class="btn-bottom">
+                            <a>Khám phá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container__grid_img-row-2">
+                <div class="container__grid_img-3">
+                    <div class="container__grid_img-content-3">
+                        <div class="title-content-3">
+                            <h1>Túi xách</h1>
+                        </div>
+                        <div class="content-content-3">
+                            <p>
+                                Với kích thước và kiểu dáng đa dạng, đảm bảo mọi tiện ích và phù hợp nhiều đối tượng,
+                                các bộ sưu tập đến từ các thương hiệu: Charles & Keith, Pedro, Marhen.J,... sẽ làm thỏa
+                                mãn các nàng.
+                            </p>
+                        </div>
+                        <div class="btn-bottom">
+                            <a>Khám phá</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container__grid_img-4">
+                    <div class="container__grid_img-content-4">
+                        <div class="title-content-4">
+                            <h1>Phụ kiện</h1>
+                        </div>
+                        <div class="content-content-4">
+                            <p>
+                                Với kho tàng phụ kiện phong phú như mắt kính, trang sức, mũ nón... đến từ các thương
+                                hiệu như Charles & Keith, Ted Baker, The Kooples,... sẽ khiến các fashionista mê mẩn và
+                                yêu thích.
+                            </p>
+                        </div>
+                        <div class="btn-bottom">
+                            <a>Khám phá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
