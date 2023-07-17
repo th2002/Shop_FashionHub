@@ -8,8 +8,12 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
+    .menu-chucnang{
+        display: flex;
+        
+    }
     .add-category{
-        padding: 20px;
+        padding: 10px;
 
     }
     .add-links{
@@ -98,7 +102,10 @@ $products = getAllProducts();
 ?>
 
 <h2 class="title">Danh sách sản phẩm</h2>
-
+<div class="menu-chucnang">
+<h4 class="add-category"><a href="" class="add-links">Thêm</a></h4>
+<h4 class="add-category"><a href="export.php" class="add-links">Xuất Excel</a></h4>
+</div>
 <table class="category-table">
     <thead>
         <tr>
