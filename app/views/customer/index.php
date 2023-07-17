@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,12 +62,9 @@
         <div class="container__banner">
             <img class="container__banner-img" src="../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
         </div>
-
         <?php
         // require './layout/products.php';
         ?>
-
-
         <style>
             .container__page {
                 width: 100%;
@@ -135,120 +131,15 @@
                         <i class="container__page-icon fa-solid fa-chevron-right"></i>
                     </a>
                 </li>
-
             </ul>
         </div>
-
     </div>
-
-    <footer>
-        <div class="row">
-            <div class="col l-3">
-                <div class="footer_item">
-                    <div class="footer_item-head">
-                        <h3>THÔNG TIN</h3>
-                        <ul class="footer_item-list">
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Giới Thiệu Maison</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Hệ Thống Cửa Hàng</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Tuyển Dụng</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <img class="footer_item-logo" src="../../content/images/logos/image0.png" alt="">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col l-3">
-                <div class="footer_item">
-                    <div class="footer_item-head">
-                        <h3>TRỢ GIÚP</h3>
-                        <ul class="footer_item-list">
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Phương Thức Thanh Toán</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Chính Sách Giao Hàng</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Chính Sách Mua Hàng</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Chính Sách Đổi Trả</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Chính Sách Bảo Hành</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Chính Sách Bảo Mật</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col l-3">
-                <div class="footer_item">
-                    <div class="footer_item-head">
-                        <h3>THANH TOÁN</h3>
-                        <ul class="footer_item-list">
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Visa / Mastercard / JCB</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">HATM / Internet Banking</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Quét Mã QR</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Mua Trước Trả Sau</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Ví Điện Tử</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Thanh Toán Khi Nhận Hàng</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col l-3">
-                <div class="footer_item">
-                    <div class="footer_item-head">
-                        <h3>Giao Hàng</h3>
-                        <ul class="footer_item-list">
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Giao Hàng Tiêu Chuẩn</a>
-                            </li>
-                            <li class="footer_item-des">
-                                <a href="" class="footer_item-link">Maison NOW</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-    </footer>
-
-
+    <?php 
+        include './layout/footer.php'
+    ?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="../../../assets/js/slider.js"></script>
 </body>
-
 </html>
