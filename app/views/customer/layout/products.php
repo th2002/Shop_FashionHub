@@ -1,6 +1,5 @@
 <!-- Day la san pham -->
 <?php 
-    require_once "../../../models/DAO/connect.php";
     $conn = connect();
     $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id;";
     $result = mysqli_query($conn,$sql);
@@ -19,7 +18,7 @@
             <h4><?php echo $value['name']; ?></h4>
         </div>
         <div class="product_price product_price-new">
-            <h4><?php echo $value['price']; ?></h4>
+            <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
         </div>
         <div class="product_price product_price-old">
             <h4><?php echo $value['sale_price']; ?></h4>
