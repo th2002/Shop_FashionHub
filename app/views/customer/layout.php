@@ -213,133 +213,9 @@
                 <div class="grid wide">
                     <div class="row slider-popular">
                         <?php 
-                            include_once "../../views/customer/layout/top10_products.php";
+                            include_once "./layout/top10_products.php";
                         ?>
 
-                        <!-- <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp2-removebg-preview 1.png" alt=""
-                                        class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp2.webp" alt="" class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp1 2.png" alt=""
-                                        class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp3-removebg-preview 1.png" alt=""
-                                        class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp3.webp" alt="" class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col l-3">
-                            <div class="product_item">
-                                <div class="product_img">
-                                    <img src="../../../assets/images/products/sp4-removebg-preview 1.png" alt=""
-                                        class="product_img-item">
-                                    <div class="product_cart">
-                                        <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                    </div>
-                                </div>
-                                <div class="product_name">
-                                    <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                </div>
-                                <div class="product_price product_price-new">
-                                    <h4>1.675.000đ</h4>
-                                </div>
-                                <div class="product_price product_price-old">
-                                    <h4>2.675.000đ</h4>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -363,181 +239,8 @@
                     <div class="grid wide">
                         <div class="row">
                             <?php 
-                                include_once "../../views/customer/layout/products.php";
+                                include_once "./layout/products.php";
                             ?>
-                            
-                            <!-- <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp1.webp" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp3-removebg-preview 1.png" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp4-removebg-preview 1.png" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp3.webp" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp4.jpg" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp5.webp" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="product_item">
-                                    <div class="product_img">
-                                        <img src="../../../assets/images/products/sp7.webp" alt=""
-                                            class="product_img-item">
-                                        <div class="product_cart">
-                                            <button class="product_btn product_btn-buy">Mua Ngay </button>
-                                            <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
-                                        </div>
-                                    </div>
-                                    <div class="product_name">
-                                        <h4>Áo kiểu nữ cổ đổ tay ngắn Cotton Jersey</h4>
-                                    </div>
-                                    <div class="product_price product_price-new">
-                                        <h4>1.675.000đ</h4>
-                                    </div>
-                                    <div class="product_price product_price-old">
-                                        <h4>2.675.000đ</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
                         </div>
                         <style>
                         .container__page {
@@ -580,34 +283,33 @@
                         </style>
                         <div class="container__page">
                             <ul class="container__page-list">
-                                <li class="container__page-item">
-                                    <a class="container__page-link" href="">
+                               <?php if($current_page > 1) {
+                                    $prev = $current_page - 1;
+                                ?>
+                                 <li class="container__page-item">
+                                    <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$prev?>">
                                         <i class="container__page-icon fa-solid fa-chevron-left"></i>
                                     </a>
                                 </li>
-                            <?php for ($i = 1 ; $i <= $page ; $i++) { ?>
-                                    <li class="container__page-item active">
-                                        <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a>
-                                    </li>
-                                <!-- <li class="container__page-item">
-                                    <a class="container__page-link" href="">2</a>
-                                </li>
+                                <?php }?>
+                                <?php for ($i = 1 ; $i <= $page ; $i++) { ?>
+                                    <?php if($i != $current_page) {?>
+                                        <li class="container__page-item">
+                                            <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <div class="container__page-item active"><a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a></div>
+                                    <?php }?>
+                                <?php } ?>
+                                <?php if($current_page < $page) {
+                                    $next = $current_page + 1;    
+                                ?>
                                 <li class="container__page-item">
-                                    <a class="container__page-link" href="">3</a>
-                                </li>
-                                <li class="container__page-item">
-                                    <a class="container__page-link" href="">4</a>
-                                </li>
-                                <li class="container__page-item">
-                                    <a class="container__page-link" href="">5</a>
-                                </li> -->
-                            <?php } ?>
-                                <li class="container__page-item">
-                                    <a class="container__page-link" href="">
+                                    <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$next?>">
                                         <i class="container__page-icon fa-solid fa-chevron-right"></i>
                                     </a>
                                 </li>
-
+                                <?php }?>
                             </ul>
                         </div>
 
@@ -726,3 +428,5 @@
 </body>
 
 </html>
+
+
