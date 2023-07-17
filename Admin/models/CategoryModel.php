@@ -111,4 +111,7 @@ function addProductImage($productId, $imagePath)
     $query = $db->prepare("INSERT INTO product_images (product_id, image_url) VALUES (?, ?)");
     $query->execute([$productId, $imagePath]);
 
+    return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
+}
+
 ?>
