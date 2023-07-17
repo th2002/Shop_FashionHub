@@ -100,4 +100,15 @@ function deleteCategory($cate_id){
 
     return $query->rowCount();
 }
+
+
+
+// Hàm thêm hình ảnh sản phẩm
+function addProductImage($productId, $imagePath)
+{
+    global $db;
+
+    $query = $db->prepare("INSERT INTO product_images (product_id, image_url) VALUES (?, ?)");
+    $query->execute([$productId, $imagePath]);
+
 ?>
