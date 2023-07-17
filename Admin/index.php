@@ -25,7 +25,7 @@
           </a>
         </li>
         <li>
-          <a href="view/categoryList.php">
+          <a href="./view/productList.php">
             <i class="bx bx-box"></i>
             <span class="links_name">Sản phẩm</span>
           </a>

@@ -107,7 +107,7 @@ button[type="submit"] {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="../view/productList.php">
             <i class="bx bx-box"></i>
             <span class="links_name">Sản phẩm</span>
           </a>
