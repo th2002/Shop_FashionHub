@@ -114,4 +114,74 @@ function addProductImage($productId, $imagePath)
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 
+// Hàm lấy danh sách hình ảnh của một sản phẩm
+function getProductImages($productId) {
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM product_images WHERE product_id = ?");
+    $query->execute([$productId]);
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// hàm đăng ký tài khoản
+function registerUser($username, $password, $email, $confirm_password) {
+    global $db;
+    $registerDate = date("Y-m-d H:i:s");
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+  
+    $query = $db->prepare("INSERT INTO users (user_name, password, email, register_date) VALUES (?, ?, ?, ?)");
+    $query->execute([$username, $hashedPassword, $email, $registerDate]);
+  
+    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+}
+
+  
+  // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
+function checkEmailExists($email)
+{
+    // Thực hiện truy vấn kiểm tra
+    // Đây chỉ là một ví dụ, bạn cần thay thế nó với truy vấn thực tế
+    global $db;
+    $query = $db->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $query->execute([$email]);
+    $count = $query->fetchColumn();
+
+    // Kiểm tra số lượng kết quả trả về
+    return ($count > 0);
+}
+
+// hàm lấy danh sách người dùng
+function getAllUsers(){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM users");
+    $query->execute();
+
+    $users = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return $users;
+}
+
+// Lấy thông tin người dùng theo ID
+function getUserById($id) {
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM users WHERE id = ?");
+    $query->execute([$id]);
+
+    return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+// Hàm cập nhật thông tin người dùng
+function updateUser($id, $username, $email, $status, $role, $cus_id, $admin_id) {
+    global $db;
+
+    $query = $db->prepare("UPDATE users SET user_name = ?, email = ?, status = ?, role = ? WHERE id = ?");
+    $query->execute([$username, $email, $status, $role, $id]);
+
+    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+}
+
+
 ?>

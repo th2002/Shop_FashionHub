@@ -93,7 +93,7 @@ include_once("../parts/header.php");
 <?php
 require_once '../models/CategoryModel.php';
 
-$products = getAllProducts();
+$users = getAllUsers();
 
 ?>
 
@@ -103,34 +103,36 @@ $products = getAllProducts();
     <thead>
         <tr>
             <th>ID</th>
-            <th>Tên sản phẩm</th>
-            <th>Giá</th>
-            <th>Hình ảnh</th>
+            <th>Tên người dùng</th>
+            <th>Email</th>
+            <th>Ngày đăng ký</th>
+            <th>Trạng thái</th>
+            <th>Vai trò</th>
+            <th>ID khách hàng</th>
+            <th>ID admin</th>
             <th>Thao tác</th>
+
+
+
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($products as $product) { ?>
-            <tr>
-                <td><?php echo $product['id']; ?></td>
-                <td><?php echo $product['name']; ?></td>
-                <td><?php echo $product['price']; ?></td>
-                <td>
-                <div class="product-image">
-                    <?php
-                    $images = getProductImages($product['id']);
-                    foreach ($images as $image) {
-                        echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
-                    }
-                    ?>
-                </div>
-                </td>
-                <td>
-                    <a href="editProduct.php?id=<?php echo $product['id']; ?>">Sửa</a>
-                    <a href="../controller/deleteProduct.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')">Xóa</a>
-                </td>
-            </tr>
-        <?php } ?>
+    <?php foreach ($users as $user) { ?>
+                <tr>
+                    <td><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['user_name']; ?></td>
+                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['register_date']; ?></td>
+                    <td><?php echo $user['status'] ? 'Đã kích hoạt' : 'Chưa kích hoạt'; ?></td>
+                    <td><?php echo $user['role'] ? 'Admin' : 'Khách hàng'; ?></td>
+                    <td><?php echo $user['cus_id']; ?></td>
+                    <td><?php echo $user['admin_id']; ?></td>
+                    <td>
+                        <a href="editUsers.php?id=<?php echo $user['id']; ?>">Sửa</a>
+                        <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')">Xóa</a>
+                    </td>
+                </tr>
+            <?php } ?>
     </tbody>
 </table>
 
