@@ -1,26 +1,37 @@
 <?php
-// Thông tin cấu hình kết nối
-$host = 'localhost';
-$dbname = 'fashionhub_shop';
-$username = 'root';
-$password = '';
+session_start();
 
-try {
-    // Tạo kết nối PDO
-    $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+// Đường dẫn gốc của trang web
 
-    // Thiết lập các thuộc tính kết nối (tuỳ chọn)
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$baseURL = "http://localhost/Shop_FashionHub";
 
-    // Trả về đối tượng kết nối để sử dụng trong các chức năng khác
-    return $db;
-} catch (PDOException $e) {
-    // Xử lý lỗi nếu không thể kết nối đến cơ sở dữ liệu
-    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
-    die();
-}
-// Đóng kết nối
-$db = null;
+// Đường dẫn tới thư mục chứa tài nguyên tĩnh
+
+$contentURL = "$baseURL/app/views/admin/public";
+
+// Đường dẫn tới thư mục chứa hình ảnh
+
+$imageURL = "$contentURL/images";
+
+// Đường dẫn tới các file CSS và JS
+
+$cssURL = "$contentURL/css";
+$jsURL = "$contentURL/js";
+
+// Đường dẫn tới các file trong thư mục views/admin
+
+$viewURL = "$baseURL/app/views/admin";
+
+// Đường dẫn tới thư mục gốc của dự án
+
+$rootDir = $_SERVER['DOCUMENT_ROOT'] . "/Shop_FashionHub";
+
+// Đường dẫn tới thư mục chứa hình ảnh khi upload
+
+$imageDir = "$rootDir/app/views/admin/images";
+
+// ...
+
+// Các hàm và code khác
 
 ?>

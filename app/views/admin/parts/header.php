@@ -1,6 +1,9 @@
 <?php 
-require_once("../../global.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
+$color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#333';
+$color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#555';
+$color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#777';
 
 ?>
 <!DOCTYPE html>
@@ -9,8 +12,8 @@ require_once("../../global.php");
   <head>
     <meta charset="UTF-8" />
     <title>Admin</title>
-    <link rel="stylesheet" href="../public/css/style.css" />
-    <link rel="stylesheet" href="../public/css/singin.css" />
+    <link rel="stylesheet" href="<?php echo $cssURL; ?>/style.css" />
+    <link rel="stylesheet" href="<?php echo $cssURL; ?>/singin.css" />
 
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
@@ -19,6 +22,11 @@ require_once("../../global.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <style>
+   
+  .sidebar {
+    background-image: linear-gradient(to left, <?php echo $color1; ?>, <?php echo $color2; ?>, <?php echo $color3; ?>);
+  }
+
         form {
   width: 50%;
   margin: auto;
@@ -107,7 +115,7 @@ button[type="submit"] {
           </a>
         </li>
         <li>
-          <a href="../view/productList.php">
+          <a href="<?php echo $viewURL; ?>/view/productList.php">
             <i class="bx bx-box"></i>
             <span class="links_name">Sản phẩm</span>
           </a>
@@ -155,7 +163,7 @@ button[type="submit"] {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="<?php echo $viewURL;  ?>/view/setting.php">
             <i class="bx bx-cog"></i>
             <span class="links_name">Cài đặt</span>
           </a>
