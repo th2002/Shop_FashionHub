@@ -207,6 +207,23 @@ function updateUser($id, $username, $email, $status, $role, $cus_id, $admin_id) 
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
+// Hàm kiểm tra đăng nhập
+
+function authenUser($username, $password){
+    global $db;
+
+    // kiểm tra  tên login có tồn tại hay không
+    $query = $db->prepare("SELECT * FROM users where user_name = ?");
+    $query->execute([$username]);
+
+    $user = $query->fetch(PDO::FETCH_ASSOC);
+
+    if($user && password_verify($password, $user['password'])){
+        return true;
+
+    }
+    return false;
+}
 
 
 ?>

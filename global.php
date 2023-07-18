@@ -20,4 +20,7 @@ try {
     echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
     die();
 }
+// Đóng kết nối
+$db = null;
+
 ?>

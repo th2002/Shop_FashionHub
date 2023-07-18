@@ -1,4 +1,10 @@
 <!-- slidebar -->
+<?php require_once '../view/setting.php'; ?>
+<style>
+    .sidebar {
+        background-image: linear-gradient(to right, <?php echo isset($color1) ? $color1 : '#333'; ?>, <?php echo isset($color2) ? $color2 : '#555'; ?>, <?php echo isset($color3) ? $color3 : '#777'; ?>);
+    }
+</style>
 <section class="home-section">
       <nav class="header">
         <div class="sidebar-button">
