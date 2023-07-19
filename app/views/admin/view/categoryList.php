@@ -1,3 +1,4 @@
+
 <!-- header  -->
 <?php
 include_once("../parts/header.php");
@@ -8,43 +9,101 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
-    .add-category{
+    .menu-chucnang {
+        display: flex;
+        justify-content: space-between;
         padding: 20px;
 
+
     }
-    .add-links{
+
+    .menu-left {
+        display: flex;
+
+    }
+
+
+    .add-category {
+        margin-right: 10px;
+
+    }
+
+    .add-links {
         background-color: #007bff;
         color: #fff;
         font-weight: 500;
-
-        padding:8px 12px;
+        padding: 8px 12px;
         border-radius: 4px;
-       
+
     }
-    .add-links:hover{
+
+    #xuat-excel {
+        background-color: #642de9;
+        transition: background-color 0.9s;
+
+    }
+
+    #xuat-excel:hover {
+        background-color: #34225f;
+        /* Màu nền hover mờ hơn */
+
+    }
+
+    #xuat-pdf {
+        background-color: #e58782;
+        transition: background-color 0.9s;
+    }
+
+    #xuat-pdf:hover {
+        background-color: #915652;
+        /* Màu nền hover mờ hơn */
+    }
+
+    #In {
+        background-color: #128f89;
+        transition: background-color 0.9s;
+    }
+
+    #In:hover {
+        background-color: #2b514f;
+        /* Màu nền hover mờ hơn */
+    }
+
+    .add-links:hover {
         background-color: #0056b3;
-    
-      
+
+
     }
+
+    .fas {
+        margin-right: 5px;
+        /* Khoảng cách giữa biểu tượng và chữ "Thêm" */
+        color: #1ee124;
+    }
+
     h5 {
-      font-size: 18px;
-      color: #333;
+        font-size: 18px;
+        color: #333;
     }
 
     #current-time {
-      font-size: 32px;
-      color: #007bff;
-      font-weight: bold;
+        font-size: 16px;
+        color: #007bff;
+        font-weight: bold;
     }
-    .table{
+
+    .table {
         padding: 20px;
     }
+
     .category-table {
         width: 100%;
         border-collapse: collapse;
         overflow-x: auto;
-        background: #f7f7f7; /* Màu nền bảng */
-      box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8); /* Đổ bóng */
+        background: #f7f7f7;
+        /* Màu nền bảng */
+        box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8);
+        /* Đổ bóng */
     }
 
     .category-table th,
@@ -73,13 +132,28 @@ include_once("../parts/header.php");
         border-radius: 4px;
         font-size: 12px;
     }
-    .action-links .btn-sua{
-        background-color: #007bff;
-        
+
+
+
+    .product-image img {
+        width: 100px;
+        /* Đặt kích thước hình ảnh */
+        height: 100px;
+        /* Căn chỉnh chiều cao tự động */
+        display: block;
+        /* Hiển thị hình ảnh dạng khối */
+        margin: 0 auto;
+        /* Căn giữa hình ảnh */
     }
-    .action-links .btn-xoa{
+
+    .action-links .btn-sua {
+        background-color: #007bff;
+
+    }
+
+    .action-links .btn-xoa {
         background-color: #dc3545;
-    
+
     }
 
 
@@ -91,9 +165,6 @@ include_once("../parts/header.php");
     .action-links .btn-xoa:hover {
         background-color: #c82333;
 
-    }
-
-    .category-table .action-links a.delete:hover {
     }
 
     @media (max-width: 768px) {
@@ -110,9 +181,25 @@ include_once("../parts/header.php");
 $categories = getAllCategories(); 
 ?>
 <h2 class="title">Danh mục</h2>
-<h1>Thời gian hiện tại: <?php echo date('Y-m-d H:i:s'); ?></h1>
-<h5>Thời gian hiện tại: <span id="current-time"></span></h5>
-<h4 class="add-category"><a href="addCategory.php" class="add-links">Thêm</a></h4>
+<div class="menu-chucnang">
+    <div class="menu-left">
+        <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
+                </i>Thêm</a></h4>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
+                    class="fas fa-file-excel"></i>
+                Xuất Excel</a></h4>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
+                Xuất PDF</a></h4>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
+                liệu</a></h4>
+
+
+    </div>
+    <div class="menu-right">
+        <h5>Thời gian hiện tại: <span id="current-time"></span></h5>
+
+    </div>
+</div>
 <div class="table">
 <table class="category-table">
     <thead>
@@ -141,6 +228,16 @@ $categories = getAllCategories();
         </tr>
     <?php } ?>
 </table>
+</div>
+<!-- Hiển thị phân trang -->
+<div class="pagination">
+    <?php for ($page = 1; $page <= $totalPages; $page++) { ?>
+        <?php if ($page == $currentPage) { ?>
+            <span class="current-page"><?php echo $page; ?></span>
+        <?php } else { ?>
+            <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+        <?php } ?>
+    <?php } ?>
 </div>
 
 

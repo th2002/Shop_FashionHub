@@ -224,6 +224,18 @@ function authenUser($username, $password){
     }
     return false;
 }
+// Hàm phân trang danh mục
+function getCategoriesWithPagination($limit, $offset) {
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM categories LIMIT ? OFFSET ?");
+    $query->bindValue(1, $limit, PDO::PARAM_INT);
+    $query->bindValue(2, $offset, PDO::PARAM_INT);
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 
 ?>
