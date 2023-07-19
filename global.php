@@ -18,9 +18,16 @@ $imageURL = "$contentURL/images";
 $cssURL = "$contentURL/css";
 $jsURL = "$contentURL/js";
 
+
 // Đường dẫn tới các file trong thư mục views/admin
 
 $viewURL = "$baseURL/app/views/admin";
+
+// Đường dẫn tới controller admin
+$controller = "$baseURL/app/controller";
+
+// Đường dẫn tới modesls/DAO
+$models = "$baseURL/app/models/DAO";
 
 // Đường dẫn tới thư mục gốc của dự án
 

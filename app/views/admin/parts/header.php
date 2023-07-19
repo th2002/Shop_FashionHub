@@ -5,6 +5,10 @@ $color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#333';
 $color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#555';
 $color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#777';
 
+$modelPath = "$rootDir/app/models/DAO/functions.php";
+
+// Gọi tệp functions
+require_once $modelPath;
 ?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->

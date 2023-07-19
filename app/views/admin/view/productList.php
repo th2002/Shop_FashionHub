@@ -95,7 +95,10 @@ include_once("../parts/header.php");
 
 
 <?php
-require_once '../models/CategoryModel.php';
+$modelPath = "$rootDir/app/models/DAO/functions.php";
+
+// Gọi tệp functions
+require_once $modelPath;
 
 $products = getAllProducts();
 

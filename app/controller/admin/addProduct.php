@@ -1,6 +1,10 @@
 <?php
-require_once '../../global.php';
-require_once '../models/CategoryModel.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+
+$modelPath = "$rootDir/app/models/DAO/functions.php";
+
+// Gọi tệp functions
+require_once $modelPath;
 
 // Khởi tạo biến thông báo mặc định
 $message = '';
@@ -45,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Thêm sản phẩm thất bại!";
     }
 }
-header("Location: ../view/productList.php");
+header("Location: $viewURL/view/productList.php");
+
 exit();
 // Gọi tệp view để hiển thị giao diện thêm sản phẩm
 require_once '../view/addProduct.php';
