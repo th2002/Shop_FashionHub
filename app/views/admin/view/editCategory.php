@@ -1,5 +1,15 @@
+
+
+<!-- header -->
+<?php include_once("../parts/header.php"); ?>
+<!-- end header -->
+
+<!-- slidebar -->
+<?php include_once("../parts/slidebar.php"); ?>
+<!-- slidebar -->
+
+<h2 class="title">Sửa danh mục</h2>
 <?php
-require_once '../models/CategoryModel.php';
 
 // Kiểm tra xem có ID được truyền từ URL không
 if (isset($_GET['id'])) {
@@ -27,7 +37,19 @@ if (isset($_GET['id'])) {
 
             if ($result) {
                 // Đặt thông báo thành công
-                $message = "Cập nhật danh mục thành công!";
+                echo '<script>
+                Swal.fire({
+                  icon: "success",
+                  title: "Sủa danh mục thành công",
+                  showCancelButton: false,
+                  confirmButtonText: "OK",
+                  timer: 1000, // 5 giây
+                  timerProgressBar: true,
+                  willClose: function() {
+                    window.location.href = "categoryList.php";
+                  }
+                });
+                </script>';
             } else {
                 // Đặt thông báo lỗi
                 $message = "Có lỗi xảy ra khi cập nhật danh mục.";
@@ -36,17 +58,6 @@ if (isset($_GET['id'])) {
     }
 }
 ?>
-
-<!-- header -->
-<?php include_once("../parts/header.php"); ?>
-<!-- end header -->
-
-<!-- slidebar -->
-<?php include_once("../parts/slidebar.php"); ?>
-<!-- slidebar -->
-
-<h2 class="title">Sửa danh mục</h2>
-
 <!-- Mã HTML cho form nhập dữ liệu -->
 <form method="POST" action="editCategory.php?id=<?php echo $categoryId; ?>">
     <?php if (!empty($category) && isset($category['id'])) { ?>

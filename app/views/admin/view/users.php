@@ -91,7 +91,7 @@ include_once("../parts/header.php");
 
 
 <?php
-require_once '../models/CategoryModel.php';
+// require_once '../models/CategoryModel.php';
 
 $users = getAllUsers();
 
@@ -127,9 +127,9 @@ $users = getAllUsers();
                     <td><?php echo $user['role'] ? 'Admin' : 'Khách hàng'; ?></td>
                     <td><?php echo $user['cus_id']; ?></td>
                     <td><?php echo $user['admin_id']; ?></td>
-                    <td>
-                        <a href="editUsers.php?id=<?php echo $user['id']; ?>">Sửa</a>
-                        <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')">Xóa</a>
+                    <td class="action-links">
+                        <a href="editUsers.php?id=<?php echo $user['id']; ?>" class="action-links">Sửa</a>
+                        <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')" class="action-links">Xóa</a>
                     </td>
                 </tr>
             <?php } ?>

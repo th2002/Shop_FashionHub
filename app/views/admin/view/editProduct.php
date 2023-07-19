@@ -1,5 +1,16 @@
+
+
+<!-- header -->
+<?php include_once("../parts/header.php"); ?>
+<!-- end header -->
+
+<!-- slidebar -->
+<?php include_once("../parts/slidebar.php"); ?>
+<!-- slidebar -->
+
+<h2 class="title">Sửa sản phẩm</h2>
 <?php
-require_once '../models/CategoryModel.php';
+
 
 // Kiểm tra xem có ID được truyền từ URL không
 if (isset($_GET['id'])) {
@@ -28,17 +39,19 @@ if (isset($_GET['id'])) {
 
             // Kiểm tra kết quả cập nhật
             if ($result) {
-                $message = "Cập nhật sản phẩm thành công!";
                 echo '<script>
-                        window.onload = function() {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Thông báo",
-                                text: "' . $message . '",
-                                confirmButtonText: "OK"
-                            });
-                        }
-                      </script>';
+Swal.fire({
+  icon: "success",
+  title: "Cập nhật sản phẩm thành công",
+  showCancelButton: false,
+  confirmButtonText: "OK",
+  timer: 2000, // 5 giây
+  timerProgressBar: true,
+  willClose: function() {
+    window.location.href = "productList.php";
+  }
+});
+</script>';
             } else {
                 $message = "Có lỗi xảy ra khi cập nhật sản phẩm.";
                 echo '<script>
@@ -56,17 +69,6 @@ if (isset($_GET['id'])) {
     }
 }
 ?>
-
-<!-- header -->
-<?php include_once("../parts/header.php"); ?>
-<!-- end header -->
-
-<!-- slidebar -->
-<?php include_once("../parts/slidebar.php"); ?>
-<!-- slidebar -->
-
-<h2 class="title">Sửa sản phẩm</h2>
-
 <!-- Mã HTML cho form nhập dữ liệu -->
 <form method="POST" action="editProduct.php?id=<?php echo $productId; ?>">
     <?php if (!empty($product) && isset($product['id'])) { ?>

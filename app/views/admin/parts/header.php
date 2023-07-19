@@ -149,7 +149,7 @@ button[type="submit"] {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="<?php echo $viewURL; ?> /view/users.php">
             <i class="bx bx-user"></i>
             <span class="links_name">Người dùng</span>
           </a>

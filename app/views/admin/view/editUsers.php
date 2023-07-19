@@ -1,5 +1,15 @@
+
+
+<!-- header -->
+<?php include_once("../parts/header.php"); ?>
+<!-- end header -->
+
+<!-- slidebar -->
+<?php include_once("../parts/slidebar.php"); ?>
+<!-- slidebar -->
 <?php
-require_once '../models/CategoryModel.php';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lấy thông tin từ form
@@ -13,21 +23,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Tiến hành cập nhật thông tin người dùng
     if (updateUser($id, $username, $email, $status, $role, $cus_id, $admin_id)) {
-        echo "Cập nhật thông tin người dùng thành công";
+        
+
+
+// Sau khi hoàn thành, sử dụng mã JavaScript để hiển thị cửa sổ thông báo và chuyển hướng trang
+echo '<script>
+Swal.fire({
+  icon: "success",
+  title: "Cập nhật thông tin người dùng thành công",
+  showCancelButton: false,
+  confirmButtonText: "OK",
+  timer: 5000, // 5 giây
+  timerProgressBar: true,
+  willClose: function() {
+    window.location.href = "users.php";
+  }
+});
+</script>';
+
     } else {
         echo "Cập nhật thông tin người dùng thất bại";
     }
 }
 ?>
-
-<!-- header -->
-<?php include_once("../parts/header.php"); ?>
-<!-- end header -->
-
-<!-- slidebar -->
-<?php include_once("../parts/slidebar.php"); ?>
-<!-- slidebar -->
-
 <h2 class="title">Sửa sản người dùng</h2>
 
 <?php

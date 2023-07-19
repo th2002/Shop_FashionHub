@@ -12,7 +12,7 @@ $categories = getAllCategories();
 <h2 class="title">Thêm sản phẩm</h2>
 
 <!-- Mã HTML cho form nhập dữ liệu -->
-<form method="POST" action="<?php echo $controller ?>admin/addProduct.php">
+<form method="POST" action="<?php echo $controller ?>/admin/addProduct.php">
 
     <label for="product_name">Tên sản phẩm:</label>
     <input type="text" name="product_name" id="product_name" required><br>

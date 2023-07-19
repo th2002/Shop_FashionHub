@@ -23,14 +23,28 @@ include_once("../parts/header.php");
     }
     .add-links:hover{
         background-color: #0056b3;
-
+    
       
     }
-    
+    h5 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    #current-time {
+      font-size: 32px;
+      color: #007bff;
+      font-weight: bold;
+    }
+    .table{
+        padding: 20px;
+    }
     .category-table {
         width: 100%;
         border-collapse: collapse;
         overflow-x: auto;
+        background: #f7f7f7; /* Màu nền bảng */
+      box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8); /* Đổ bóng */
     }
 
     .category-table th,
@@ -54,23 +68,32 @@ include_once("../parts/header.php");
         display: inline-block;
         margin-right: 5px;
         color: #fff;
-        background-color: #007bff;
         padding: 8px 12px;
         text-decoration: none;
         border-radius: 4px;
         font-size: 12px;
     }
+    .action-links .btn-sua{
+        background-color: #007bff;
+        
+    }
+    .action-links .btn-xoa{
+        background-color: #dc3545;
+    
+    }
 
-    .category-table .action-links a:hover {
+
+    .action-links .btn-sua:hover {
         background-color: #0056b3;
     }
 
-    .category-table .action-links a.delete {
-        background-color: #dc3545;
+
+    .action-links .btn-xoa:hover {
+        background-color: #c82333;
+
     }
 
     .category-table .action-links a.delete:hover {
-        background-color: #c82333;
     }
 
     @media (max-width: 768px) {
@@ -83,12 +106,14 @@ include_once("../parts/header.php");
 
 
 <?php 
-require_once '../models/CategoryModel.php';
 
 $categories = getAllCategories(); 
 ?>
 <h2 class="title">Danh mục</h2>
-<h4 class="add-category"><a href="" class="add-links">Thêm</a></h4>
+<h1>Thời gian hiện tại: <?php echo date('Y-m-d H:i:s'); ?></h1>
+<h5>Thời gian hiện tại: <span id="current-time"></span></h5>
+<h4 class="add-category"><a href="addCategory.php" class="add-links">Thêm</a></h4>
+<div class="table">
 <table class="category-table">
     <thead>
         <tr>
@@ -110,12 +135,14 @@ $categories = getAllCategories();
             <td><?php echo $category['create_at']; ?></td>
             <td><?php echo $category['update_at']; ?></td>
             <td class="action-links">
-                <a href="editCategory.php?id=<?php echo $category['id']; ?>" class="btn">Sửa</a>
-                <a href="deleteCategory.php?id=<?php echo $category['id']; ?>" class="btn">Xoá</a>
+                <a href="editCategory.php?id=<?php echo $category['id']; ?>" class="btn-sua">Sửa</a>
+                <a href="deleteCategory.php?id=<?php echo $category['id']; ?>" class="btn-xoa">Xoá</a>
             </td>
         </tr>
     <?php } ?>
 </table>
+</div>
+
 
 
 
