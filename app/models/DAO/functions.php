@@ -126,45 +126,29 @@ function getProductImages($productId) {
 }
 
 // hàm đăng ký tài khoản
-// function registerUser($username, $password, $email, $confirm_password) {
-//     global $db;
-//     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-  
-//     $query = $db->prepare("INSERT INTO users (user_name, password, email, register_date) VALUES (?, ?, ?, ?)");
-//     $query->execute([$username, $hashedPassword, $email, $registerDate]);
-  
-//     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
-// }
-function registerUser($username, $password, $email, $cus_name, $cus_phone) {
+function registerUser($user_name, $email, $password, $full_name, $phone_number){
     global $db;
-    $registerDate = date("Y-m-d H:i:s");
-  
-    // Thêm dữ liệu vào bảng users
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = $db->prepare("INSERT INTO users (user_name, password, email, register_date) VALUES (?, ?, ?, ?)");
-    $query->execute([$username, $hashedPassword, $email, $registerDate]);
-  
-    // Lấy id của bản ghi vừa được tạo ra trong bảng users
-    $user_id = $db->lastInsertId();
-  
-    // Thêm dữ liệu vào bảng customer
-    $query = $db->prepare("INSERT INTO customer (cus_name, cus_phone, user_id) VALUES (?, ?, ?)");
-    $query->execute([$cus_name, $cus_phone, $user_id]);
-  
-    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+
+    $query = $db->prepare("SELECT * FROM users where user_name = ? or email = ?");
+    $query->execute([$user_name, $email]);
+
+    $user = $query->fetch(PDO::FETCH_ASSOC);
+
+   if($user){
+        return "false"; // tên đăng nhập or email đã tồn tại
+    }
+    // Thêm dữ liệu vào database users
+
+    $hashePssword = password_hash($password, PASSWORD_DEFAULT);
+    $query = $db->prepare("INSERT INTO users (user_name, email, password, full_name, phone_number) VALUE (?, ?, ?, ?, ?)");
+    $query->execute([$user_name, $email, $hashePssword, $full_name, $phone_number]);
+
+    return $query->rowCount();
 }
 
 
-
-
-
-
-
-
-  
   // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
-function checkEmailExists($email)
-{
+function checkEmailExists($email){
     // Thực hiện truy vấn kiểm tra
     // Đây chỉ là một ví dụ, bạn cần thay thế nó với truy vấn thực tế
     global $db;

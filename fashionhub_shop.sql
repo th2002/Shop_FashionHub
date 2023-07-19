@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 17, 2023 lúc 11:23 AM
+-- Máy chủ: 127.0.0.1:3306
+-- Thời gian đã tạo: Th7 19, 2023 lúc 04:37 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -24,38 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `admin_name` varchar(200) NOT NULL,
-  `admin_email` varchar(100) NOT NULL,
-  `admin_position` varchar(100) NOT NULL COMMENT 'chức vụ',
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `admin`
---
-
-INSERT INTO `admin` (`id`, `admin_name`, `admin_email`, `admin_position`, `user_id`) VALUES
-(1, 'Trung Hiếu', 'trunghieu@gmail.com', 'Thành viên', 1),
-(2, 'Trung Hiếu', 'trunghieu@gmail.com', 'Thành viên', 2),
-(3, 'Lưu Hòa', 'luuhoa@gmail.com', 'Thành viên', 3),
-(4, 'Toàn', 'toan@gmail.com', 'Thành viên', 4),
-(5, 'Đức', 'duc@gmail.com', 'Thành viên', 5),
-(6, 'Tuấn', 'tuan@gmail.com', 'Thành viên', 6);
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `cart`
 --
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `cus_id` int(11) DEFAULT NULL,
+  `total_amount` float DEFAULT NULL COMMENT 'tổng giá tiền',
   `create_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -72,25 +47,6 @@ CREATE TABLE `cartitems` (
   `quantity` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `cartitems`
---
-
-INSERT INTO `cartitems` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
-(1, NULL, NULL, '1'),
-(2, NULL, NULL, '1'),
-(3, NULL, NULL, '1'),
-(4, NULL, NULL, '1'),
-(5, NULL, NULL, '1'),
-(6, NULL, NULL, '1'),
-(7, NULL, NULL, '1'),
-(8, NULL, NULL, '1'),
-(9, NULL, NULL, '12'),
-(10, NULL, NULL, '12'),
-(11, NULL, NULL, '5555'),
-(12, NULL, NULL, '1'),
-(13, NULL, NULL, '888');
-
 -- --------------------------------------------------------
 
 --
@@ -100,8 +56,7 @@ INSERT INTO `cartitems` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 CREATE TABLE `category_product` (
   `id` int(11) NOT NULL,
   `cate_name` varchar(200) DEFAULT NULL,
-  `cate_slug` varchar(200) DEFAULT NULL,
-  `cate_banner` varchar(100) DEFAULT NULL,
+  `has_size` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: không có size; 1: có size',
   `create_at` date DEFAULT NULL,
   `update_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -110,18 +65,38 @@ CREATE TABLE `category_product` (
 -- Đang đổ dữ liệu cho bảng `category_product`
 --
 
-INSERT INTO `category_product` (`id`, `cate_name`, `cate_slug`, `cate_banner`, `create_at`, `update_at`) VALUES
-(1, 'Quần áo', 'áo có yần', 'Nono', NULL, NULL),
-(2, 'Giày dép', 'áo có yần', 'Nono', NULL, NULL),
-(3, 'Túi ví', 'áo có yần', 'Nono', NULL, NULL),
-(4, 'Mắt kính', 'áo có yần', 'Nonono', NULL, NULL),
-(5, 'Phụ kiện', NULL, NULL, NULL, NULL),
-(6, 'Quần Không áo', 'áo có yần', 'Nono', '2023-07-16', '2023-07-16'),
-(7, 'Quần Không áo', 'áo có yần', 'Nono', '2023-07-16', '2023-07-16'),
-(8, 'Quần đùi dài', 'áo có yần', 'Nonono', '2023-07-16', '2023-07-16'),
-(9, 'Quần áo', 'áo có yần', 'Nono', '2023-07-16', '2023-07-16'),
-(10, 'Quần áo', 'áo có yần', 'Nono', '2023-07-16', '2023-07-16'),
-(11, 'Quần rách gucci', 'áo có yần', 'Nono', '2023-07-16', '2023-07-16');
+INSERT INTO `category_product` (`id`, `cate_name`, `has_size`, `create_at`, `update_at`) VALUES
+(1, 'Quần áo', 1, NULL, NULL),
+(2, 'Giày dép', 1, NULL, NULL),
+(3, 'Túi ví', 0, NULL, NULL),
+(4, 'Mắt kính', 0, NULL, NULL),
+(5, 'Phụ kiện', 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cate_size`
+--
+
+CREATE TABLE `cate_size` (
+  `cate_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `create_at` date DEFAULT NULL,
+  `update_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -139,28 +114,6 @@ CREATE TABLE `coupon` (
   `create_at` date DEFAULT NULL,
   `update_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `customer`
---
-
-CREATE TABLE `customer` (
-  `id` int(11) NOT NULL,
-  `cus_name` varchar(200) DEFAULT NULL,
-  `cus_email` varchar(100) DEFAULT NULL,
-  `cus_phone` varchar(11) DEFAULT NULL,
-  `cus_image` varchar(200) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `customer`
---
-
-INSERT INTO `customer` (`id`, `cus_name`, `cus_email`, `cus_phone`, `cus_image`, `user_id`) VALUES
-(1, 'Khách hàng 1', 'khachhang@gmail.com', '0906757332', NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -893,44 +846,15 @@ INSERT INTO `district` (`id`, `_name`, `_prefix`, `_province_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `invoicedetails`
---
-
-CREATE TABLE `invoicedetails` (
-  `id` int(11) NOT NULL,
-  `invoice_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `quantity` varchar(50) DEFAULT NULL,
-  `price` int(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `invoices`
 --
 
 CREATE TABLE `invoices` (
   `id` int(11) NOT NULL,
   `oder_id` int(11) DEFAULT NULL,
-  `cus_id` int(11) DEFAULT NULL,
   `status_delivery` tinyint(1) DEFAULT 0 COMMENT '0:đã giao, 1:chưa giao',
   `status_payment` tinyint(1) DEFAULT 0 COMMENT '0:chưa thanh toán, 1: đã thanh toán',
   `create_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `oderitems`
---
-
-CREATE TABLE `oderitems` (
-  `id` int(11) NOT NULL,
-  `oders_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `quantity` varchar(50) DEFAULT NULL COMMENT 'số lượng muốn mua',
-  `price` float DEFAULT NULL COMMENT 'giá tiền = giá * số lượng'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -941,7 +865,7 @@ CREATE TABLE `oderitems` (
 
 CREATE TABLE `oders` (
   `id` int(11) NOT NULL,
-  `cus_id` int(11) DEFAULT NULL,
+  `cart_id` int(11) DEFAULT NULL COMMENT 'lấy id giỏ hàng của khách hàng',
   `invoice_id` int(11) DEFAULT NULL,
   `recipient_name` varchar(200) DEFAULT NULL COMMENT 'tên người nhận',
   `phone_number` varchar(11) DEFAULT NULL COMMENT 'sdt người nhận',
@@ -950,8 +874,7 @@ CREATE TABLE `oders` (
   `district_id` int(10) UNSIGNED DEFAULT NULL,
   `ward_id` int(10) UNSIGNED DEFAULT NULL,
   `coupon_code_id` int(11) DEFAULT NULL COMMENT 'mã giảm giá',
-  `payment_method:` tinyint(4) DEFAULT 0 COMMENT '0:tiền mặt COD, 1:bank',
-  `total_amount` varchar(100) NOT NULL COMMENT 'tổng tiền',
+  `payment_method` tinyint(4) DEFAULT 0 COMMENT '0:tiền mặt COD, 1:bank',
   `created_at` datetime NOT NULL COMMENT 'ngày tạo oder'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -964,8 +887,6 @@ CREATE TABLE `oders` (
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `thumbnail` varchar(200) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL COMMENT 'đường dẫn',
   `decsription` text DEFAULT NULL,
   `quantity` varchar(50) DEFAULT NULL,
   `price` float NOT NULL,
@@ -973,7 +894,6 @@ CREATE TABLE `products` (
   `featured` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0:bình thường, 1:nổi bật',
   `best_seller` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0: bình thường, 1: bán chạy',
   `cate_id` int(11) DEFAULT NULL COMMENT 'thuộc về loại hàng nào',
-  `cartitem_id` int(11) DEFAULT NULL,
   `create_at` date DEFAULT NULL,
   `update_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -982,11 +902,27 @@ CREATE TABLE `products` (
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `thumbnail`, `slug`, `decsription`, `quantity`, `price`, `sale_price`, `featured`, `best_seller`, `cate_id`, `cartitem_id`, `create_at`, `update_at`) VALUES
-(27, 'Áo ngắn dài tayy', '100.jpgl', 'pccfffl', '<br />\r\n<b>Warning</b>:  Undefined array key \"description\" in <b>C:\\xampp\\htdocs\\Shop_FashionHub_1\\Admin\\view\\editProduct.php</b> on line <b>83</b><br />\r\n', '55559', 555559, 150000, 0, 1, 3, 10, '2023-07-16', '2023-07-16'),
-(28, 'Quần ngắn không dây', '100.jpg', 'pccfff', NULL, '555593', 120001, 2222, 1, 1, 7, 11, '2023-07-16', '2023-07-16'),
-(29, 'Áo ngắn dài tayy', '100.jpg', 'pcc', 'cc', '1', 12000, 1222, 1, 1, 9, 12, '2023-07-16', '2023-07-16'),
-(30, 'Quần ngắn không dây', '100.jpg', 'pcc', 'kkk', '888', 12000, 9000, 1, 1, 7, 13, '2023-07-16', '2023-07-16');
+INSERT INTO `products` (`id`, `name`, `decsription`, `quantity`, `price`, `sale_price`, `featured`, `best_seller`, `cate_id`, `create_at`, `update_at`) VALUES
+(1, 'Áo thun nữ cổ tròn tay ngắn Basic Boxy Fit', 'Tự do mix&match với chiếc áo thun Basic Boxy Fit này! Chiếc áo thun cơ bản với logo thương hiệu B tinh tế, đơn giản để kết hợp với nhiều loại trang phục, mang lại cho bạn vẻ ngoài năng động, cá tính.\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Nữ\r\nKiểu dáng: Áo thun\r\nMàu sắc: L.Purple, S.Cream, Black\r\nChất liệu: 100% Cotton\r\nCổ tròn, tay ngắn\r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\nBo viền cổ áo\r\nChất vải mềm mịn, thấm hút tốt\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nLogo: Chi tiết logo bóng chày nổi bật ở ngực trái\r\nPhom áo: Suông vừa vặn\r\nTúi áo: Không\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1090000, NULL, 1, 1, 1, '2023-07-14', NULL),
+(2, 'Quần short ngắn nữ Logo 4In', 'Hè đến với tinh thần thể thao tràn đầy, MLB lên kệ ngay chiếc quần short đáp ứng đúng nhu cầu vận động thoải mái và cực kỳ cá tính cho MLB Fans đây. Bạn có thể kết hợp chiếc quần short này với chiếc áo polo cùng set “tông xoẹt tông” chắc chắn sẽ đem đến cho bạn một diện mạo đủ trendy và thoải mái, “chinh chiến\" mọi hoạt động ngày hè!\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Nữ\r\nKiểu dáng: Quần shorts\r\nMàu sắc: Navy, Pink, Cream, Green\r\nChất liệu: Nhung\r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\nLưng cao tôn dáng\r\nChất vải nhung mềm mại\r\nGam màu hiên đại dễ dàng phối với nhiều trang phục và phụ kiện khác\r\nLogo: Được thêu nổi bật ở mặt trước\r\nTúi xéo hai bên\r\nPhom quần: Suông thoải mái\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi du lịch....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1399000, NULL, 1, 1, 1, '2023-07-14', NULL),
+(3, 'Giày sneakers unisex cổ thấp Chunky Liner', 'Chất liệu: Da cao cấp\r\nKiểu dáng giày thể thao cổ thấp thời trang \r\nĐế cao chunky hiện đại\r\nThiết kế lấy cảm hứng từ hiệp hội bóng chày MLB\r\nLogo bóng chày in nổi bật ở má ngoài\r\nLớp lót êm ái, nâng dáng bước chân\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nXuất xứ thương hiệu: Hàn quốc', '100', 3199000, 4199000, 1, 1, 2, '2023-07-14', NULL),
+(4, 'Giày sneakers unisex cổ thấp CA Pro Glitch', 'Chất liệu: Da tổng hợp, Cao su \r\nKiểu dáng giày thể thao cổ thấp thời trang\r\nPhom ôm chân, dễ dàng di chuyển\r\nDây mảnh đan chéo đơn giản\r\nLogo Puma Cat nổi bật\r\nĐế ngoài cao su có độ bám tốt\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nXuất xứ thương hiệu: Đức', '100', 3590000, 4590000, 1, 1, 2, '2023-07-14', NULL),
+(5, 'Dép unisex quai ngang bản rộng Chunky Bouncer', 'Đôi dép quai ngang đơn giản nhưng hiện đại với phom đế cao chunky cùng phần quai dép cách điệu độc đáo. Không cần cầu kì, đôi dép này hoàn hảo để phối với nhiều loại trang phục, mang đến cho bạn vẻ ngoài năng động, cá tính.\r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Unisex\r\nKiểu dáng: Dép quai ngang\r\nMàu sắc: White, Red, Black,Green\r\nChất liệu: Upper Injection EVA\r\nThiết kế:\r\nQuai ngang bản rộng cá tính\r\nĐế có rãnh chống trơn trượt, tăng độ bám\r\nPhong cách phóng khoáng, hiện đại, đa năng\r\nLogo: Chi tiết logo bóng chày được in trên quai dép\r\nMũi dép tròn, đế thấp\r\nDây quai: Mềm mại, dễ dàng thao tác xỏ/tháo\r\nThích hợp dùng trong các dịp: Đi biển, đi chơi, hoạt động ngoài trời.....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1790000, 2790000, 1, 1, 2, '2023-07-14', NULL),
+(6, 'Dép nữ quai ngang bản rộng phối logo in nổi thời trang', 'Chất liệu: Rubber/ Fabric\r\nĐộ cao: 2.5cm\r\nKiểu dáng dép nữ mũi tròn hiện đại\r\nThiết kế quai ngang bản rộng cá tính\r\nPhối logo in chạm nổi độc đáo\r\nMàu sắc hiện đại, dễ dàng kết hợp với nhiều phong cách khác nhau\r\nXuất xứ thương hiệu: Singapore', '100', 1990000, NULL, 1, 1, 2, '2023-07-14', NULL),
+(7, 'Áo sơ mi unisex cổ bẻ tay ngắn Mega Dia Monogram', 'Bỏ qua những chiếc áo sơ mi basic vốn có, cùng làm mới tủ đồ MLB với họa tiết monogram độc đáo mùa hè này. Hãy \"biến hóa\" phong cách tươi mới cho bản thân bằng sơ mi họa tiết mang vẻ phóng khoáng nhưng không kém phần năng động cho giới trẻ.\r\n\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Unisex\r\nKiểu dáng: Áo sơ mi\r\nMàu sắc: Sky Blue, White\r\nChất liệu: 100% cotton\r\nCổ bẻ chữ V, tay ngắn\r\nHoạ tiết: Monogram\r\nThiết kế:\r\nNút cài tròn cùng tone màu\r\nChất vải mềm mại, thoáng mát\r\nGam màu hiện đại dễ dàng kết hợp với nhiều loại trang phục khác nhau\r\nLogo: Chi tiết logo bóng chày thêu nổi bật ở ngực trái\r\nPhom áo: Rộng thoải mái\r\nTúi áo: Không\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi làm,...\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 3590000, 4590000, 1, 1, 1, '2023-07-14', NULL),
+(8, 'Quần short ngắn nữ lưng thun Dolphin', 'Màu sắc: Light Purple/ Navy/ Red\r\nThành phần vải: 65% cotton, 35% polyester\r\nKiểu dáng quần shorts trên gối trẻ trung\r\nLưng thun co giãn thoải mái, đi kèm dây rút dễ dàng điều chỉnh\r\nPhối logo thương hiệu ở góc trái quần\r\nThiết kế bo viền màu tương phản, phối túi xéo hai bên\r\nChất vải mềm mịn, thoáng mát\r\nGam màu hiện đại dễ dàng phối với nhiều phụ kiện khác nhau \r\nXuất xứ thương hiệu: Hàn Quốc', '100', 1090000, NULL, 1, 1, 1, '2023-07-14', NULL),
+(9, 'Ví nữ dáng ngắn gập Studio Leather Tri Fold', 'Sở hữu phom dáng ngắn cổ điển, chất liệu da cao cấp cùng logo PEDRO kim loại ấn tượng ở mặt trước, chiếc ví dáng ngắn Studio Leather Tri Fold sẽ là nơi lưu trữ an toàn cho các loại thẻ cùng tiền mặt. \r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Ví dáng ngắn\r\nMàu sắc: Black, Cream, Blush\r\nChất liệu: Calf Leather\r\nLớp lót: Calf Leather & Fabric\r\nKích thước: H9.2 x W11 x D3 (cm)\r\nThiết kế:\r\nNắp gập cổ điển\r\nNhiều ngăn đựng tiền và ngăn đựng thẻ tín dụng\r\nChất liệu da mềm mại, đường may tỉ mỉ\r\nDây đeo: Không\r\nSức chứa: Có thể đựng vừa thẻ tín dụng, tiền,...\r\nChống thấm nước: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm, đi học....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1339000, NULL, 1, 1, 3, '2023-07-14', NULL),
+(10, 'Ví nữ dáng dài chữ nhật Studio Leather Bi Fold', 'Với chất liệu da cao cấp cùng logo kim loại đem đến nét hiện đại, trẻ trung, chiếc ví dáng dài Studio Leather Bi Fold trở thành một vật dụng hữu ích tô điểm thêm phong cách riêng của các nàng. \r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Ví dáng dài\r\nMàu sắc: Black, Cream, Navy\r\nChất liệu: Calf Leather\r\nLớp lót: Calf Leather & Fabric\r\nKích thước: H10 x W19.5 x D3.5 (cm)\r\nThiết kế:\r\nNắp gập cổ điển\r\nNhiều ngăn đựng tiền và ngăn đựng thẻ tín dụng\r\nChất liệu da mềm mại, đường may tỉ mỉ\r\nDây đeo: Không\r\nSức chứa: Có thể đựng vừa thẻ tín dụng, tiền,...\r\nChống thấm nước: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm, đi học....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1999000, 2999000, 1, 1, 3, '2023-07-14', NULL),
+(11, 'Túi xách nữ hình thang Sammy 21 In Signature', 'Chiếc túi xách xuất hiện nổi bật với thiết kế sang trọng sẽ giúp hoàn thiện cho vẻ ngoài bạn. Với phần khóa tông màu vàng tuyệt đẹp tạo sự tương phản đầy thú vị, chiếc túi này giúp bạn dễ dàng phối với mọi loại trang phục của mình. Túi có đi kèm dây đeo có thể tháo rời, bạn có thể xách tay hoặc đeo chéo tùy theo sở thích. Kết hợp chiếc túi này với một chiếc váy xếp li da và chiếc áo khoác bomber để có vẻ ngoài chuẩn streetstyle.\r\n \r\nThương hiệu: COACH\r\nXuất xứ: New York\r\nGiới tính: Nữ\r\nKiểu dáng: Túi xách\r\nMàu sắc: Brown\r\nChất liệu: Da\r\nKích thước: L21.5 x H15.5 x W10 (cm)\r\nThiết kế:\r\nKiểu dáng túi xách phom hình thang thời trang\r\nNắp gập, tay cầm da cố định\r\nLogo chữ C được đính sang trọng ở nắp túi\r\nĐóng mở bằng khóa bấm\r\nDây đeo: Có thể tháo rời\r\nSức chứa: Có thể đựng vừa chìa khoá, điện thoại, ví tiền, các phụ kiện nhỏ khác...\r\nChống thấm nước: Không\r\nThân thiện với môi trường: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 14760000, NULL, 1, 1, 3, '2023-07-14', NULL),
+(12, 'Túi đeo vai nữ phom chữ nhật Studio Rift Leather', 'Chiếc túi đeo vai Studio Rift Leather sở hữu vẻ ngoài trang nhã với gam màu hiện đại và thiết kế tối giản, tinh tế với logo dập nổi, lại có sức chứa rộng rãi. Items này vừa hữu dụng, lại vừa mang đến cho bạn một phong cách hiện đại, gọn gàng.\r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Túi đeo vai\r\nMàu sắc: Black, Cream\r\nChất liệu: Calf Leather\r\nLớp lót: Suede Microfiber\r\nKích thước: H25 x W32 x D10.3 (cm)\r\nThiết kế:\r\nKiểu dáng túi nữ phom hình chữ nhật thời trang\r\nNgăn chứa rộng rãi giúp đựng được nhiều vật dụng\r\nGam màu hiện đại, phù hợp với nhiều trang phục \r\nLogo: Chi tiết logo in nhỏ ở mặt túi trước\r\nĐóng mở bằng nút đóng nhanh\r\nDây đeo: Dây đeo vai đôi bản mảnh\r\nSức chứa: Có thể đựng vừa chìa khoá, điện thoại, ví tiền, các phụ kiện nhỏ khác...\r\nChống thấm nước: Không\r\nThân thiện với môi trường: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 3399000, NULL, 1, 1, 3, '2023-07-14', NULL),
+(13, 'Kính mát unisex phom vuông thời trang', 'Chất liệu: Nhựa và im loại cao cấp \r\nKiểu dáng: Phom dáng vuông thời thượng\r\nThiết kế gọng bản dày hiện đại\r\nTròng kính tráng màu nổi bật\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 146 x 48 x 150 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2990000, 3990000, 1, 1, 4, '2023-07-14', NULL),
+(14, 'Kính mát unisex phom vuông hiện đại', 'Chất liệu: Nhựa và im loại cao cấp \r\nKiểu dáng: Phom dáng vuông thời thượng\r\nThiết kế gọng bản mỏng hiện đại\r\nTròng kính tráng màu nổi bật\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 147.5 x 50 x 150 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2590000, NULL, 1, 1, 4, '2023-07-14', NULL),
+(15, 'Kính mát unisex gọng phi công bản mảnh thời trang', 'Chất liệu: Kim loại cao cấp  \r\nKiểu dáng kính phi công cá tính\r\nThiết kế gọng kính đa giác thời trang\r\nKhung kính bản mảnh hiện đại, thanh lịch\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 145 x 50 x 148 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 1999000, NULL, 1, 1, 4, '2023-07-14', NULL),
+(16, 'Kính mát nữ gọng oval hiện đại', 'Chất liệu: Nhựa và kim loại cao cấp \r\nKiểu dáng: Gọng kính oval hiện đại\r\nMàu sắc thời trang, cá tính\r\nKhung kính dày dặn, chắc chắn\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 145 x 47 x 147 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2590000, 3590000, 1, 1, 4, '2023-07-14', NULL),
+(17, 'Nón bóng chày unisex Pac-Man', 'Thương hiệu: DSQUARED2\r\nXuất xứ: Ý\r\nGiới tính: Unisex\r\nKiểu dáng: Nón bóng chày\r\nMàu sắc: Black\r\nChất liệu: 100% Cotton \r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\n\r\nWebbing điều chỉnh kích thước ở phía sau\r\nChi tiết chữ “PAC-MAN” in nổi bật ở phía sau\r\nChất vải cao cấp thoáng mát và co giãn tạo cảm giác thoải mái\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện khác\r\nLogo: Được in ở mặt trước của nón\r\nThích hợp đội trong các dịp: Đi chơi, hoạt động ngoài trời....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 7800000, NULL, 1, 1, 5, '2023-07-14', NULL),
+(18, 'Móc khóa nữ hình chú chó đáng yêu', 'Chiếc móc khóa hình chú chó đáng yêu này là một sản phẩm đáng chú ý cho những người yêu thích các \"bé cún cưng\" và muốn thể hiện phong cách dễ thương của mình. Với thiết kế tinh xảo, hình dáng chú chó đáng yêu cùng màu sắc nổi bật, chiếc móc khóa sẽ làm cho phong cách thời trang của bạn trở nên nên độc đáo và thu hút mọi ánh nhìn. Sản phẩm này không chỉ là một phụ kiện trang trí, mà còn là biểu tượng cho tình yêu và sự gắn bó với những chú chó.\r\n \r\nThương hiệu: Ceci\r\nXuất xứ: Việt Nam\r\nGiới tính: Nữ\r\nKiểu dáng: Phụ kiện\r\nMàu sắc: Black, Blue, Red, Pink\r\nChất liệu: Resin\r\nThiết kế:\r\nGồm 1 móc hình chú chó dễ thương và 1 thẻ treo chữ nhật\r\nKhoe tròn kim loại chắc chắn\r\nGam màu hiện đại, trẻ trung dễ dàng phối với nhiều loại túi', '100', 179000, NULL, 1, 1, 5, '2023-07-14', NULL),
+(19, 'Thắt lưng nữ bản vừa Statement', 'Một chiếc thắt lưng có thể khiến vẻ ngoài của bạn thêm phần hoàn hảo. Chiếc thắt lưng bản vừa này đơn giản nhưng tinh tế với phần khóa chốt logo thương hiệu màu bạc sang trọng, chắc chắn sẽ làm nổi bật vòng eo của bạn. Phối cùng với chiếc áo vest thời thượng, bạn sẽ mang phong cách của những người phụ nữ bận rộn quyến rũ.\r\n \r\nThương hiệu: DSQUARED2\r\nXuất xứ: Ý\r\nGiới tính: Nữ\r\nKiểu dáng: Thắt lưng bản vừa\r\nMàu sắc: Black\r\nChất liệu: 100% Leather\r\nKhóa: 100% Brass\r\nThiết kế:\r\nĐộ dài linh hoạt, phù hợp với nhiều thể trạng cơ thể\r\nKhóa cài chốt xỏ\r\nMàu sắc hiện đại dễ dàng kết hợp với nhiều loại trang phục khác nhau\r\nLogo: Khoá cài logo thương hiệu đẳng cấp', '100', 12500000, 13500000, 1, 1, 5, '2023-07-14', NULL),
+(20, 'Vớ cổ cao unisex thời trang', 'Màu sắc: Black, White \r\nChất liệu: 70% Cotton, 28% Polyester, 2% Polyurethane \r\nKiểu dáng vớ cổ cao phong cách unisex thời trang \r\nPhối tên thương hiệu nổi bật \r\nMàu sắc dễ phối với nhiều mẫu giày sneakers\r\nThấm hút mồ hôi tốt, không gây hầm, bí\r\nXuất xứ thương hiệu: Hàn Quốc', '100', 295000, NULL, 1, 1, 5, '2023-07-14', '2023-07-14');
 
 -- --------------------------------------------------------
 
@@ -1005,8 +941,26 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_url`) VALUES
-(21, 28, '../images/addidas.jpg'),
-(22, 29, '../images/nike-min.jpg');
+(1, 17, 'https://product.hstatic.net/1000284478/product/1062_bcw0750_1_39d53343a4124f62a69394e309460b4a_large.jpg'),
+(2, 18, 'https://product.hstatic.net/1000284478/product/13_cc9-03000009_1_18608cc3c29442e69d95648e245af869_large.jpg'),
+(3, 19, 'https://product.hstatic.net/1000284478/product/m802_bew0360_1_cc62b6622a2c4aac8843e80170c0e28d_large.jpg'),
+(4, 20, 'https://product.hstatic.net/1000284478/product/owh_fs3scf5354x_2_4261c72edd1b4dc4b7c791a2e3f2160c_grande.jpg'),
+(5, 16, 'https://product.hstatic.net/1000284478/product/whc2_mj102sj535_2_1546957de5e4434db8d88c0761538c53_grande.jpg'),
+(6, 15, 'https://product.hstatic.net/1000284478/product/bkc1_mj101sj545_2_f3ee495b1f144637b06567054f104dd7_grande.jpg'),
+(7, 14, 'https://product.hstatic.net/1000284478/product/mtc2_mj101sj537_2_3646fecf13a14d5a89ef3f1be6823317_grande.jpg'),
+(8, 13, 'https://product.hstatic.net/1000284478/product/bkc1_mj101sj538_2_979035748e0940b3bcb5041dc471a15e_grande.jpg'),
+(9, 12, 'https://product.hstatic.net/1000284478/product/09_pw2-46390021_2_0382e14cb9c64ef0a257e515dadbbae6_grande.jpg'),
+(10, 11, 'https://product.hstatic.net/1000284478/product/b4nq4_cj831_1_2c001e1f610c4075a6d9869fe60449af_large.jpg'),
+(11, 10, 'https://product.hstatic.net/1000284478/product/01_pw4-15940084-1_1_1d2b751b3d35487982f95f073255f1ba_large.jpg'),
+(12, 9, 'https://product.hstatic.net/1000284478/product/83_pw4-15940085-1_1_d393a70004a6465aa7b685535cdafecd_large.jpg'),
+(13, 8, 'https://product.hstatic.net/1000284478/product/07_pneu23ks09_2_f92190730f6c4f5b84c4f821247dc8fb_grande.jpg'),
+(14, 7, 'https://product.hstatic.net/1000284478/product/50whs_3awsm0533_2_1c814d4400434ae893d32b0c4cab6de1_grande.jpg'),
+(15, 6, 'https://product.hstatic.net/1000284478/product/13_pw1-66380013_2_b9d7874712084a9b819efe62d89ba88b_grande.jpg'),
+(16, 5, 'https://product.hstatic.net/1000284478/product/07whs_3alpfbs33_2_7948cc3a4f604ea587ceaaec075d5e41_grande.jpg'),
+(17, 4, 'https://product.hstatic.net/1000284478/product/02_390681_1_7037793dd622419cb2cd67a1e22da171_large.jpg'),
+(18, 3, 'https://product.hstatic.net/1000284478/product/50gns_3asxclb3n_1_1c3a2975cee14f4b9e71fe6b7da7d61d_large.jpg'),
+(19, 2, 'https://product.hstatic.net/1000284478/product/50crs_3fspb0533_1_6e50de55ef5547dabf8630d0bfc38563_large.jpg'),
+(20, 1, 'https://product.hstatic.net/1000284478/product/50bks_3ftsb1233_1_0af1ef8a58c0411585278247011cea74_large.jpg');
 
 -- --------------------------------------------------------
 
@@ -1092,6 +1046,42 @@ INSERT INTO `province` (`id`, `_name`, `_code`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `size`
+--
+
+CREATE TABLE `size` (
+  `id` int(11) NOT NULL,
+  `name_size` varchar(50) DEFAULT NULL,
+  `size_cate` tinyint(4) DEFAULT NULL COMMENT '0: quần áo; 1: giày dép'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `size`
+--
+
+INSERT INTO `size` (`id`, `name_size`, `size_cate`) VALUES
+(1, 'XS', 0),
+(2, 'S', 0),
+(3, 'M', 0),
+(4, 'L', 0),
+(5, 'XL', 0),
+(6, 'XXL', 0),
+(7, '35', 1),
+(8, '36', 1),
+(9, '37', 1),
+(10, '38', 1),
+(11, '39', 1),
+(12, '40', 1),
+(13, '41', 1),
+(14, '42', 1),
+(15, '43', 1),
+(16, '44', 1),
+(17, '45', 1),
+(18, '46', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `submit_contact`
 --
 
@@ -1113,25 +1103,29 @@ CREATE TABLE `submit_contact` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user_name` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0 COMMENT '0:chưa kích hoạt, 1: đã kích hoạt',
-  `role` tinyint(1) DEFAULT 0 COMMENT '0:khách hàng, 1:admin',
-  `cus_id` int(11) DEFAULT NULL,
-  `admin_id` int(11) DEFAULT NULL
+  `user_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL COMMENT 'họ tên',
+  `phone_number` int(11) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `role` tinyint(4) DEFAULT 0 COMMENT '0: khách hàng; 1: admin',
+  `position` tinyint(4) DEFAULT 0 COMMENT '0: thành viên; 1: quản lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `user_name`, `password`, `status`, `role`, `cus_id`, `admin_id`) VALUES
-(2, 'trunghieu123', '123456', 1, 1, NULL, 2),
-(3, 'luuhoa123', '123456', 1, 1, NULL, 3),
-(4, 'toan123', '123456', 1, 1, NULL, 4),
-(5, 'duc123', '123456', 1, 1, NULL, 5),
-(6, 'tuan123', '123456', 1, 1, NULL, 6),
-(7, 'khachhang123', '123456', 1, 1, 1, NULL);
+INSERT INTO `users` (`id`, `user_name`, `email`, `password`, `full_name`, `phone_number`, `images`, `role`, `position`) VALUES
+(1, 'trunghieu123', 'hieu@gmnail.com', '123456', 'Đinh Lê Trung Hiếu', 906757332, NULL, 1, 0),
+(2, 'duc123', 'duc@gmail.com', '123456', 'Đức', 123456789, NULL, 1, 0),
+(3, 'hoa123', 'hoa@gmail.com', '123456', 'Lưu Việt Hòa', 123456789, NULL, 1, 0),
+(4, 'tuan123', 'tuan@gmail.com', '123456', 'Tuấn', 123456789, NULL, 1, 0),
+(5, 'toan123', 'toan@gmail.com', '123456', 'Văn Toàn', 123456789, NULL, 1, 0),
+(6, 'customer1', 'customer1@gmail.com', '123456', 'khách hàng 1', 123456789, NULL, 0, 0),
+(7, 'customer2', 'customer2@gmail.com', '123456', 'Khách hàng 2', 123456789, NULL, 0, 0),
+(8, 'quanly123', 'quanly@gmail.com', '123456', 'quản lý', 123456789, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -12448,18 +12442,11 @@ INSERT INTO `ward` (`id`, `_name`, `_prefix`, `_province_id`, `_district_id`) VA
 --
 
 --
--- Chỉ mục cho bảng `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `moi admin co 1 tai khoan` (`user_id`);
-
---
 -- Chỉ mục cho bảng `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `gio hang cua khach hang` (`cus_id`);
+  ADD KEY `id cua khach hang` (`cus_id`);
 
 --
 -- Chỉ mục cho bảng `cartitems`
@@ -12476,17 +12463,23 @@ ALTER TABLE `category_product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `cate_size`
+--
+ALTER TABLE `cate_size`
+  ADD KEY `size cua loai hang` (`cate_id`),
+  ADD KEY `id_size` (`size_id`);
+
+--
+-- Chỉ mục cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `coupon`
 --
 ALTER TABLE `coupon`
   ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mot khach hang co mot tai khoan` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `district`
@@ -12496,35 +12489,17 @@ ALTER TABLE `district`
   ADD KEY `_province_id` (`_province_id`);
 
 --
--- Chỉ mục cho bảng `invoicedetails`
---
-ALTER TABLE `invoicedetails`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `lien ket voi hoa don` (`invoice_id`),
-  ADD KEY `lien ket den san pham` (`product_id`);
-
---
 -- Chỉ mục cho bảng `invoices`
 --
 ALTER TABLE `invoices`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `lay oder load len hoa don` (`oder_id`),
-  ADD KEY `cus_id cua hoa don` (`cus_id`);
-
---
--- Chỉ mục cho bảng `oderitems`
---
-ALTER TABLE `oderitems`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `item cua oder` (`oders_id`),
-  ADD KEY `co san pham nao` (`product_id`);
+  ADD KEY `lay oder load len hoa don` (`oder_id`);
 
 --
 -- Chỉ mục cho bảng `oders`
 --
 ALTER TABLE `oders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `khach hang oder` (`cus_id`),
   ADD KEY `ma giam gia` (`coupon_code_id`),
   ADD KEY `id thanh pho` (`province_id`),
   ADD KEY `id quan` (`district_id`),
@@ -12536,8 +12511,7 @@ ALTER TABLE `oders`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `loai hang` (`cate_id`),
-  ADD KEY `id card_item` (`cartitem_id`);
+  ADD KEY `loai hang` (`cate_id`);
 
 --
 -- Chỉ mục cho bảng `product_images`
@@ -12553,6 +12527,12 @@ ALTER TABLE `province`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `size`
+--
+ALTER TABLE `size`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `submit_contact`
 --
 ALTER TABLE `submit_contact`
@@ -12562,9 +12542,7 @@ ALTER TABLE `submit_contact`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mot tai khoan thuoc ve mot khach hang` (`cus_id`),
-  ADD KEY `mot tai khoan thuoc ve mot admin` (`admin_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `ward`
@@ -12578,12 +12556,6 @@ ALTER TABLE `ward`
 --
 
 --
--- AUTO_INCREMENT cho bảng `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
@@ -12593,13 +12565,19 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT cho bảng `cartitems`
 --
 ALTER TABLE `cartitems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `coupon`
@@ -12608,33 +12586,15 @@ ALTER TABLE `coupon`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `customer`
---
-ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT cho bảng `district`
 --
 ALTER TABLE `district`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=710;
 
 --
--- AUTO_INCREMENT cho bảng `invoicedetails`
---
-ALTER TABLE `invoicedetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `oderitems`
---
-ALTER TABLE `oderitems`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -12647,19 +12607,25 @@ ALTER TABLE `oders`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `province`
 --
 ALTER TABLE `province`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT cho bảng `size`
+--
+ALTER TABLE `size`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `submit_contact`
@@ -12671,7 +12637,7 @@ ALTER TABLE `submit_contact`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `ward`
@@ -12684,16 +12650,10 @@ ALTER TABLE `ward`
 --
 
 --
--- Các ràng buộc cho bảng `admin`
---
-ALTER TABLE `admin`
-  ADD CONSTRAINT `moi admin co 1 tai khoan` FOREIGN KEY (`user_id`) REFERENCES `admin` (`id`);
-
---
 -- Các ràng buộc cho bảng `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `gio hang cua khach hang` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`);
+  ADD CONSTRAINT `id cua khach hang` FOREIGN KEY (`cus_id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `cartitems`
@@ -12703,31 +12663,17 @@ ALTER TABLE `cartitems`
   ADD CONSTRAINT `thuoc ve mot san pham` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Các ràng buộc cho bảng `customer`
+-- Các ràng buộc cho bảng `cate_size`
 --
-ALTER TABLE `customer`
-  ADD CONSTRAINT `mot khach hang co mot tai khoan` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Các ràng buộc cho bảng `invoicedetails`
---
-ALTER TABLE `invoicedetails`
-  ADD CONSTRAINT `lien ket den san pham` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `lien ket voi hoa don` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`);
+ALTER TABLE `cate_size`
+  ADD CONSTRAINT `id_size` FOREIGN KEY (`size_id`) REFERENCES `size` (`id`),
+  ADD CONSTRAINT `size cua loai hang` FOREIGN KEY (`cate_id`) REFERENCES `category_product` (`id`);
 
 --
 -- Các ràng buộc cho bảng `invoices`
 --
 ALTER TABLE `invoices`
-  ADD CONSTRAINT `cus_id cua hoa don` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`),
   ADD CONSTRAINT `lay oder load len hoa don` FOREIGN KEY (`oder_id`) REFERENCES `oders` (`id`);
-
---
--- Các ràng buộc cho bảng `oderitems`
---
-ALTER TABLE `oderitems`
-  ADD CONSTRAINT `co san pham nao` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `item cua oder` FOREIGN KEY (`oders_id`) REFERENCES `oders` (`id`);
 
 --
 -- Các ràng buộc cho bảng `oders`
@@ -12737,14 +12683,12 @@ ALTER TABLE `oders`
   ADD CONSTRAINT `id quan` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`),
   ADD CONSTRAINT `id thanh pho` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
   ADD CONSTRAINT `id xa/huyen` FOREIGN KEY (`ward_id`) REFERENCES `ward` (`id`),
-  ADD CONSTRAINT `khach hang oder` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`),
   ADD CONSTRAINT `ma giam gia` FOREIGN KEY (`coupon_code_id`) REFERENCES `coupon` (`id`);
 
 --
 -- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `id card_item` FOREIGN KEY (`cartitem_id`) REFERENCES `cartitems` (`id`),
   ADD CONSTRAINT `loai hang` FOREIGN KEY (`cate_id`) REFERENCES `category_product` (`id`);
 
 --
@@ -12752,13 +12696,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `ma_sp cua img` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Các ràng buộc cho bảng `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `mot tai khoan thuoc ve mot admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
-  ADD CONSTRAINT `mot tai khoan thuoc ve mot khach hang` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

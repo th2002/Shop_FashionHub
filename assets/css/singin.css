@@ -6,8 +6,9 @@
   list-style: none;
 }
 body {
-  background-color: #2154c2;
-  transition: all 0.8s ease;
+  background: linear-gradient(to right, #82c9dd, #138c94);
+
+  transition: all 0.8s ease-in-out;
   font-family: "Poppins", sans-serif;
 }
 .form {
@@ -18,7 +19,11 @@ body {
   align-items: center;
   background: local;
   position: relative;
-  background: #001c40;
+  background: linear-gradient(to right, #80a1db, #b83a8e);
+    border-bottom-left-radius: 100%;
+   box-shadow: 0 10px 14px 0 rgba(0, 0, 0, 0.7);
+  border-top-right-radius: 100%;
+
   border-bottom-left-radius: 100%;
 }
 .singin h1 {

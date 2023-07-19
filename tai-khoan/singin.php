@@ -6,56 +6,10 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp models
 require_once $modelPath;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm_password'];
-    $cus_name = $_POST['cus_name'];
-    $cus_phone = $_POST['cus_phone'];
-    // Không thực hiện việc lưu ảnh khách hàng vào CSDL, chỉ lưu tên tệp ảnh vào cột cus_image
-    // $cus_image = $_FILES['cus_image']['name'];
-  
-    // Kiểm tra điều kiện
-  
-    $errors = [];
-  
-    // Kiểm tra email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Email không đúng định dạng!";
-    } elseif (checkEmailExists($email)) {
-        $errors[] = "Email đã được dùng";
-    }
-  
-    // Kiểm tra mật khẩu
-    if (strlen($password) < 6) {
-        $errors[] = "Mật khẩu phải trên 6 ký tự!";
-    } elseif ($password !== $confirmPassword) {
-        $errors[] = "Nhập lại mật khẩu sai!";
-    }
-  
-    // Nếu không có lỗi, thực hiện đăng ký
-    if (empty($errors)) {
-        // Thực hiện đăng ký và lưu thông tin đăng ký
-        $result = registerUser($username, $password, $email, $cus_name, $cus_phone);
-        if ($result) {
-            // Hiển thị thông báo thành công
-            echo "<script>alert('Đăng ký thành công');</script>";
-            // Chờ 1 giây và chuyển hướng đến trang đăng nhập
-            // echo "<script>setTimeout(function() { window.location.href = 'login.php'; }, 1000);</script>";
-            // exit();
-        } else {
-            // Hiển thị thông báo lỗi nếu không thành công
-            echo "<script>alert('Đăng ký thất bại');</script>";
-        }
-    }
-}
-
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,16 +23,111 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Đăng ký</title>
 </head>
 <style>
+ .snowflake {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 61.8% 38.2%, 100% 45.1%, 73.2% 76.8%, 82.6% 100%, 50% 87.4%, 17.4% 100%, 26.8% 76.8%, 0% 45.1%, 38.2% 38.2%); /* Điều chỉnh clip-path cho hình tuyết */
+
+  opacity: 0.7;
+  pointer-events: none;
+  animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+  70% {
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  90% {
+    transform: translateY(90vh) rotate(360deg);
+  }
+}
     #error-message {
         color: red;
     }
 
     .error {
+        border-radius:4px;
+        padding:5px;
         color: red;
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3)
     }
+    .error li{
+
+    }
+    @media(max-width:354px){
+    .error{
+        width: 80%;
+        
+    }
+    }
+    
 </style>
 
 <body>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $user_name = $_POST['user_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirm_password'];
+        $full_name = $_POST['full_name'];
+        $phone_number = $_POST['phone_number'];
+      
+        $errors = [];
+        // Kiểm tra rỗng
+        if(empty($user_name) || empty($password) || empty($confirmPassword) || empty($email) || empty($full_name) || empty($phone_number)){
+            $errors[] ="Vui lòng nhập đầy đủ thông tin!";
+        }
+        // Kiểm tra email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Email không đúng định dạng!";
+        } elseif (checkEmailExists($email)) {
+            $errors[] = "Email đã được dùng";
+        }
+    
+        // Kiểm tra mật khẩu
+        if(strlen($password) < 6 ){
+            $errors[] = "Mật khẩu phải trên 6 ký tự!";
+        }elseif($password !== $confirmPassword){
+            $errors[] = "Nhập lại mật khẩu sai!";
+        }
+      
+        // Nếu không có lỗi, thực hiện đăng ký
+        if (empty($errors)) {
+            $register = registerUser($user_name, $email, $password, $full_name, $phone_number);
+            if ($register === "false") {
+                $errors[] ="Tên đăng nhập hoặc email đã tồn tại!";
+            } elseif($register) {
+                echo '<script>
+                    Swal.fire({
+                      icon: "success",
+                      title: "Sủa danh mục thành công",
+                      showCancelButton: false,
+                      confirmButtonText: "OK",
+                      timer: 1000, // 5 giây
+                      timerProgressBar: true,
+                      willClose: function() {
+                        window.location.href = "login.php";
+                      }
+                    });
+                    </script>';
+            }else{
+                echo "<script>alert('Đăng ký thất bại');</script>";
+            }
+        }
+    }
+    ?>
+    <div class="snowflake"></div>
     <div class="form">
         <form action="" class="singin" method="post" enctype="multipart/form-data">
 
@@ -91,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </ul>
             <?php } ?>
             <span>
-                <input type="text" placeholder="Tên" name="username">
+                <input type="text" placeholder="Tên đăng nhập" name="user_name">
             </span>
             <span>
                 <input type="text" placeholder="Email" name="email">
@@ -105,11 +154,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Thêm các trường thông tin khách hàng -->
             <span>
-                <input type="text" placeholder="Tên khách hàng" name="cus_name">
+                <input type="text" placeholder="Tên khách hàng" name="full_name">
             </span>
             
             <span>
-                <input type="text" placeholder="Số điện thoại khách hàng" name="cus_phone">
+                <input type="text" placeholder="Số điện thoại khách hàng" name="phone_number">
             </span>
             
 
@@ -117,6 +166,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h4>Bạn đã có tài khoản? <a href="login.php">Đăng nhập</a></h4>
         </form>
     </div>
-</body>
+    <script>
+        function createSnowflakes() {
+  const numFlakes = 100;
+  const body = document.querySelector('body');
 
+  for (let i = 0; i < numFlakes; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.style.left = `${Math.random() * 98}%`;
+    flake.style.animationDuration = `${Math.random() * 0 + 8}s`;
+    flake.style.animationDelay = `${Math.random()}s`;
+    body.appendChild(flake);
+  }
+}
+
+createSnowflakes();
+
+    </script>
+</body>
 </html>
