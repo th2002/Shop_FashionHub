@@ -10,6 +10,7 @@ require_once $modelPath;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,58 +24,62 @@ require_once $modelPath;
     <title>Đăng ký</title>
 </head>
 <style>
- .snowflake {
-  position: absolute;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  background-color: #fff;
-  border-radius: 50%;
-  clip-path: polygon(50% 0%, 61.8% 38.2%, 100% 45.1%, 73.2% 76.8%, 82.6% 100%, 50% 87.4%, 17.4% 100%, 26.8% 76.8%, 0% 45.1%, 38.2% 38.2%); /* Điều chỉnh clip-path cho hình tuyết */
+    .snowflake {
+        position: absolute;
+        top: -10px;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        clip-path: polygon(50% 0%, 61.8% 38.2%, 100% 45.1%, 73.2% 76.8%, 82.6% 100%, 50% 87.4%, 17.4% 100%, 26.8% 76.8%, 0% 45.1%, 38.2% 38.2%);
+        /* Điều chỉnh clip-path cho hình tuyết */
 
-  opacity: 0.7;
-  pointer-events: none;
-  animation: snowfall linear infinite;
-}
+        opacity: 0.7;
+        pointer-events: none;
+        animation: snowfall linear infinite;
+    }
 
-@keyframes snowfall {
-  70% {
-    transform: translateY(0) rotate(0deg);
-  }
-  10% {
-    transform: translateY(100vh) rotate(360deg);
-  }
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  90% {
-    transform: translateY(90vh) rotate(360deg);
-  }
-}
+    @keyframes snowfall {
+        70% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        10% {
+            transform: translateY(100vh) rotate(360deg);
+        }
+
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        90% {
+            transform: translateY(90vh) rotate(360deg);
+        }
+    }
+
     #error-message {
         color: red;
     }
 
     .error {
-        border-radius:4px;
-        padding:5px;
+        border-radius: 4px;
+        padding: 5px;
         color: red;
         box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3)
     }
-    .error li{
 
+    .error li {}
+
+    @media(max-width:354px) {
+        .error {
+            width: 80%;
+
+        }
     }
-    @media(max-width:354px){
-    .error{
-        width: 80%;
-        
-    }
-    }
-    
 </style>
 
 <body>
-<?php
+    <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_name = $_POST['user_name'];
         $email = $_POST['email'];
@@ -133,11 +138,13 @@ require_once $modelPath;
 
             <h1>ĐĂNG KÝ</h1>
             <?php if (!empty($errors)) { ?>
-                <ul class="error">
-                    <?php foreach ($errors as $error) { ?>
-                        <li><?php echo $error; ?></li>
-                    <?php } ?>
-                </ul>
+            <ul class="error">
+                <?php foreach ($errors as $error) { ?>
+                <li>
+                    <?php echo $error; ?>
+                </li>
+                <?php } ?>
+            </ul>
             <?php } ?>
             <span>
                 <input type="text" placeholder="Tên đăng nhập" name="user_name">
@@ -156,11 +163,11 @@ require_once $modelPath;
             <span>
                 <input type="text" placeholder="Tên khách hàng" name="full_name">
             </span>
-            
+
             <span>
                 <input type="text" placeholder="Số điện thoại khách hàng" name="phone_number">
             </span>
-            
+
 
             <button class="btn" name="submit">Đăng Ký</button>
             <h4>Bạn đã có tài khoản? <a href="login.php">Đăng nhập</a></h4>
@@ -168,21 +175,22 @@ require_once $modelPath;
     </div>
     <script>
         function createSnowflakes() {
-  const numFlakes = 100;
-  const body = document.querySelector('body');
+            const numFlakes = 100;
+            const body = document.querySelector('body');
 
-  for (let i = 0; i < numFlakes; i++) {
-    const flake = document.createElement('div');
-    flake.className = 'snowflake';
-    flake.style.left = `${Math.random() * 98}%`;
-    flake.style.animationDuration = `${Math.random() * 0 + 8}s`;
-    flake.style.animationDelay = `${Math.random()}s`;
-    body.appendChild(flake);
-  }
-}
+            for (let i = 0; i < numFlakes; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+                flake.style.left = `${Math.random() * 98}%`;
+                flake.style.animationDuration = `${Math.random() * 0 + 8}s`;
+                flake.style.animationDelay = `${Math.random()}s`;
+                body.appendChild(flake);
+            }
+        }
 
-createSnowflakes();
+        createSnowflakes();
 
     </script>
 </body>
+
 </html>
