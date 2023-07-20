@@ -11,7 +11,7 @@
           <span class="dashboard">Dashboard</span>
         </div>
         <div class="search-box">
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder="Tìm kiếm..." />
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">

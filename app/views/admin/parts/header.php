@@ -117,6 +117,7 @@ button[type="submit"] {
       box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   }
 }
+
   </style>
   <body>
     <div class="sidebar">
@@ -126,7 +127,7 @@ button[type="submit"] {
       </div>
       <ul class="nav-links">
         <li>
-          <a href="#" class="active">
+          <a href="../index.php" class="">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -193,3 +194,7 @@ button[type="submit"] {
         </li>
       </ul>
     </div>
+    <script>
+
+
+    </script>
