@@ -183,22 +183,22 @@ function getUserById($id) {
 }
 
 // Hàm cập nhật thông tin người dùng
-function updateUser($id, $username, $email, $status, $role, $cus_id, $admin_id) {
+function updateUser($id, $user_name, $email, $role) {
     global $db;
 
-    $query = $db->prepare("UPDATE users SET user_name = ?, email = ?, status = ?, role = ? WHERE id = ?");
-    $query->execute([$username, $email, $status, $role, $id]);
+    $query = $db->prepare("UPDATE users SET user_name = ?, email = ?, role = ? WHERE id = ?");
+    $query->execute([$user_name, $email, $role, $id]);
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
 // Hàm kiểm tra đăng nhập
 
-function authenUser($username, $password){
+function authenUser($user_name, $password){
     global $db;
 
     // kiểm tra  tên login có tồn tại hay không
     $query = $db->prepare("SELECT * FROM users where user_name = ?");
-    $query->execute([$username]);
+    $query->execute([$user_name]);
 
     $user = $query->fetch(PDO::FETCH_ASSOC);
 

@@ -9,6 +9,18 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 
 // Gọi tệp functions
 require_once $modelPath;
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
+// if (!isset($_SESSION['username'])) {
+//   header("Location: $baseURL/tai-khoan/login.php");
+
+//   exit();
+// }
+
+// Kiểm tra xem người dùng có quyền admin hay không
+// if ($_SESSION['role'] !== 'admin') {
+//   header("Location: ../index.php");
+//   exit();
+// }
 ?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->

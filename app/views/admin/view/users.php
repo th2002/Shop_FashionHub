@@ -210,10 +210,7 @@ $users = getAllUsers();
             <th>Tên người dùng</th>
             <th>Email</th>
             <th>Ngày đăng ký</th>
-            <th>Trạng thái</th>
             <th>Vai trò</th>
-            <th>ID khách hàng</th>
-            <th>ID admin</th>
             <th>Thao tác</th>
 
 
@@ -227,10 +224,7 @@ $users = getAllUsers();
                     <td><?php echo $user['user_name']; ?></td>
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['register_date']; ?></td>
-                    <td><?php echo $user['status'] ? 'Đã kích hoạt' : 'Chưa kích hoạt'; ?></td>
                     <td><?php echo $user['role'] ? 'Admin' : 'Khách hàng'; ?></td>
-                    <td><?php echo $user['cus_id']; ?></td>
-                    <td><?php echo $user['admin_id']; ?></td>
                     <td class="action-links">
                         <a href="editUsers.php?id=<?php echo $user['id']; ?>"  class="btn-sua">Sửa</a>
                         <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>

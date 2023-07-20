@@ -16,13 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $status = $_POST['status'];
     $role = $_POST['role'];
-    $cus_id = $_POST['cus_id'];
-    $admin_id = $_POST['admin_id'];
+    // $cus_id = $_POST['cus_id'];
+    // $admin_id = $_POST['admin_id'];
 
     // Tiến hành cập nhật thông tin người dùng
-    if (updateUser($id, $username, $email, $status, $role, $cus_id, $admin_id)) {
+    if (updateUser($id, $username, $email, $role)) {
         
 
 
@@ -71,11 +70,7 @@ $users = getAllUsers();
             <label for="register_date">Ngày đăng ký:</label>
             <input type="text" id="register_date" name="register_date" value="<?php echo $user['register_date']; ?>" disabled><br>
 
-            <label for="status">Trạng thái:</label>
-            <select id="status" name="status">
-                <option value="0" <?php echo $user['status'] === 0 ? 'selected' : ''; ?>>Chưa kích hoạt</option>
-                <option value="1" <?php echo $user['status'] === 1 ? 'selected' : ''; ?>>Đã kích hoạt</option>
-            </select><br>
+            
 
             <label for="role">Vai trò:</label>
             <select id="role" name="role">
@@ -83,11 +78,7 @@ $users = getAllUsers();
                 <option value="1" <?php echo $user['role'] === 1 ? 'selected' : ''; ?>>Admin</option>
             </select><br>
 
-            <label for="cus_id">ID khách hàng:</label>
-            <input type="text" id="cus_id" name="cus_id" value="<?php echo $user['cus_id']; ?>"><br>
-
-            <label for="admin_id">ID admin:</label>
-            <input type="text" id="admin_id" name="admin_id" value="<?php echo $user['admin_id']; ?>"><br>
+ 
 
             <button type="submit">Cập nhật</button>
         </form>

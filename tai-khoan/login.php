@@ -1,4 +1,5 @@
 <?php
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 $modelPath = "$rootDir/app/models/DAO/functions.php";
@@ -6,27 +7,39 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp models
 require_once $modelPath;
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $username = $_POST['username'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_name = $_POST['user_name'];
     $password = $_POST['password'];
 
     $errors = [];
 
-    //kiểm tra đăng nhập
+    // Kiểm tra đăng nhập
+    if (!empty($user_name) && !empty($password)) {
+        $user = getUserByusername($user_name);
+        if ($user && password_verify($password, $user['password'])) {
+            // Lưu thông tin đăng nhập vào session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_name'] = $user['user_name'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['position'] = $user['position'];
 
-    if(!empty($username) && !empty($password)){
-        if(authenUser($username, $password)){
-
-            header('Location: index.php');
+            // Chuyển hướng dựa trên quyền (role) và vị trí (position) của người dùng
+            if ($user['role'] === '1' && $user['position'] === '1') {
+                // Chuyển đến trang admin
+                header("Location: $baseURL/app/views/admin/index.php");
+            }
             exit();
-        }else{
-            $errors[] = "Đăng nhập không thành công vui lòng kiểm tra lại";
+        } else {
+            $errors[] = "Đăng nhập không thành công, vui lòng kiểm tra lại";
         }
-    }else{
+    } else {
         $errors[] = "Vui lòng nhập thông tin đăng nhập.";
     }
 }
 ?>
+
+<!-- Tiếp tục các phần HTML và mã PHP của trang login.php như trước -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +65,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 </style>
 
 <body>
+
+
     <div class="form">
         <form action="" class="singin" method="post">
             <h1>ĐĂNG NHẬP</h1>
@@ -66,7 +81,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <p class="error">Thông báo lỗi</p>
             </div> -->
             <span>
-                <input type="text" placeholder="Tên tài khoản" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
+                <input type="text" placeholder="Tên tài khoản" name="user_name" value="<?php echo isset($_POST['user_name']) ? $_POST['user_name'] : ''; ?>">
             </span>
             <span>
                 <input type="password" placeholder="Mật khẩu" name="password">

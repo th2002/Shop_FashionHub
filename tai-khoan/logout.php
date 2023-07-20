@@ -1,14 +1,15 @@
 <?php
 session_start();
 
-// Nếu người dùng đã đăng nhập, hủy session để đăng xuất
-if(isset($_SESSION['id'])) {
-    session_destroy(); // Xóa toàn bộ session
-    header("Location: login.php"); // Chuyển hướng về trang đăng nhập
-    exit();
-} else {
-    // Nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
-    header("Location: login.php");
-    exit();
-}
+// Xóa các thông tin đăng nhập lưu trong session
+unset($_SESSION['user_id']);
+unset($_SESSION['username']);
+unset($_SESSION['role']);
+
+// Xóa toàn bộ session
+session_destroy();
+
+// Chuyển hướng về trang đăng nhập
+header("Location: login.php");
+exit();
 ?>
