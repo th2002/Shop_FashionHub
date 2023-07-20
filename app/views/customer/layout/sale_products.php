@@ -1,6 +1,7 @@
-<!-- Day la san pham -->
+<!-- Day la san pham giam gia -->
 <?php 
-    $result = hang_hoa_select_all();
+    
+    $result = hang_hoa_select_sale();
 ?>
 <?php foreach($result as $key => $value):?>
 <div class="col l-3">
@@ -17,6 +18,15 @@
         </div>
         <div class="product_price product_price-new">
             <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
+        </div>
+        <div class="product_price product_price-old">
+            <h4>
+                <?php 
+                    if ($value['sale_price'] !== null) {
+                    echo number_format($value['sale_price']) . " " . "₫";
+                }
+                ?>
+            </h4>
         </div>
     </div>
 </div>

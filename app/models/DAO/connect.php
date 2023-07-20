@@ -1,44 +1,92 @@
 <?php
-define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "fashionhub_shop");
-function connect()
-{
-    $host = DB_HOST;
-    $user = DB_USER;
-    $pass = DB_PASS;
-    $dbname = DB_NAME;
-    $conn = new mysqli(
-        $host,
-        $user,
-        $pass,
-        $dbname
-    );
-    if ($conn->connect_error) {
-        $error = "Connection fail" . $conn->connect_error;
-        return $error;
-    } else {
-        return $conn;
+// Kết nối đến CSDL sử dụng PDO
+function pdo_get_connection(){
+    $dburl = "mysql:host=localhost;dbname=fashionhub_shop;charset=utf8";
+    $username = 'root';
+    $password = '';
+    $conn = new PDO($dburl, $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $conn;
+}
+/**
+ * Chạy câu lệnh sql để (INSERT, UPDATE, DELETE)
+ * @param array $args mảng giá trị cung cấp cho các tham số của $sql
+ */
+function pdo_execute($sql){
+    $sql_args = array_slice(func_get_args(), 1);
+    try{
+        $conn = pdo_get_connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($sql_args);
+    }
+    catch(PDOException $e){
+        throw $e;
+    }
+    finally{
+        unset($conn);
     }
 }
-connect();
-function qr_insert($sql)
-{
-    $conn = connect();
-    if ($conn->query($sql) === TRUE) {
-        return true;
-    } else {
-        return "Error: " . $sql . "<br>" . $conn->error;
+/**
+ * Chạy câu lệnh sql SELECT
+ * @param array $args mảng giá trị cung cấp cho các tham số của $sql
+ * @return array mảng các bản ghi
+ * @throws PDOException lỗi thực thi câu lệnh
+ */
+function pdo_query($sql){
+    $sql_args = array_slice(func_get_args(), 1);
+    try{
+        $conn = pdo_get_connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($sql_args);
+        $rows = $stmt->fetchAll();
+        return $rows;
+    }
+    catch(PDOException $e){
+        throw $e;
+    }
+    finally{
+        unset($conn);
     }
 }
-function qr_select($sql)
-{
-    $conn = connect();
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        return $result;
-    } else {
-        return false;
+/**
+ * Chạy lệnh sql để lấy 1 record
+ * @param array $args mảng giá trị cung cấp cho các tham số của $sql
+ * @return array mảng chứa bản ghi
+ */
+function pdo_query_one($sql){
+    $sql_args = array_slice(func_get_args(), 1);
+    try{
+        $conn = pdo_get_connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($sql_args);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+    catch(PDOException $e){
+        throw $e;
+    }
+    finally{
+        unset($conn);
+    }
+}
+/**
+ * Chạy câu lệnh sql truy vấn 1 giá trị
+ * @param array $args mảng giá trị cung cấp cho các tham số của $sql
+ * @return giá trị
+ */
+function pdo_query_value($sql){
+    $sql_args = array_slice(func_get_args(), 1);
+    try{
+        $conn = pdo_get_connection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($sql_args);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return array_values($row)[0];
+    }
+    catch(PDOException $e){
+        throw $e;
+    }
+    finally{
+        unset($conn);
     }
 }
