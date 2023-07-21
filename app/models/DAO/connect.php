@@ -1,44 +1,23 @@
 <?php
-define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "fashionhub_shop");
-function connect()
-{
-    $host = DB_HOST;
-    $user = DB_USER;
-    $pass = DB_PASS;
-    $dbname = DB_NAME;
-    $conn = new mysqli(
-        $host,
-        $user,
-        $pass,
-        $dbname
-    );
-    if ($conn->connect_error) {
-        $error = "Connection fail" . $conn->connect_error;
-        return $error;
-    } else {
-        return $conn;
-    }
+// Thông tin cấu hình kết nối
+$host = 'localhost';
+$dbname = 'fashionhub_shop';
+$username = 'root';
+$password = '';
+
+try {
+    // Tạo kết nối PDO
+    $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+
+    // Thiết lập các thuộc tính kết nối (tuỳ chọn)
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+    // Trả về đối tượng kết nối để sử dụng trong các chức năng khác
+    return $db;
+} catch (PDOException $e) {
+    // Xử lý lỗi nếu không thể kết nối đến cơ sở dữ liệu
+    echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+    die();
 }
-connect();
-function qr_insert($sql)
-{
-    $conn = connect();
-    if ($conn->query($sql) === TRUE) {
-        return true;
-    } else {
-        return "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-function qr_select($sql)
-{
-    $conn = connect();
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        return $result;
-    } else {
-        return false;
-    }
-}
+
