@@ -32,25 +32,25 @@ function getCategoryById($id) {
 }
 
 // Hàm thêm sản phẩm
-function addProduct($name, $thumbnail, $slug, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id){
+function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO products (name, thumbnail, slug, decsription, quantity, price, sale_price, featured, best_seller, cate_id, cartitem_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $query->execute([$name, $thumbnail, $slug, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, cate_id, cartitem_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id, $create_at, $update_at]);
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 // Hàm cập nhật thông tin sản phẩm
-function updateProduct($productId, $productName, $thumbnail, $slug, $decsription, $quantity, $price) {
+function updateProduct($productId, $productName, $decsription, $quantity, $price) {
     global $db;
 
     $updateAt = date("Y-m-d");
 
-    $query = $db->prepare("UPDATE products SET name = ?, thumbnail = ?, slug = ?, decsription = ?, quantity = ?, price = ?, update_at = ? WHERE id = ?");
-    return $query->execute([$productName, $thumbnail, $slug, $decsription, $quantity, $price, $updateAt, $productId]);
+    $query = $db->prepare("UPDATE products SET name = ?, decsription = ?, quantity = ?, price = ?, update_at = ? WHERE id = ?");
+    return $query->execute([$productName, $decsription, $quantity, $price, $updateAt, $productId]);
 }
 
 // Hàm xóa sản phẩm

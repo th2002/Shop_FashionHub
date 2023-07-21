@@ -28,14 +28,13 @@ if (isset($_GET['id'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Lấy dữ liệu từ form sửa sản phẩm
             $productName = $_POST['product_name'];
-            $thumbnail = $_POST['thumbnail'];
-            $slug = $_POST['slug'];
+            
             $decsription = $_POST['decsription'];
             $quantity = $_POST['quantity'];
             $price = $_POST['price'];
 
             // Thực hiện cập nhật sản phẩm
-            $result = updateProduct($productId, $productName, $thumbnail, $slug, $decsription, $quantity, $price);
+            $result = updateProduct($productId, $productName, $decsription, $quantity, $price);
 
             // Kiểm tra kết quả cập nhật
             if ($result) {
@@ -75,11 +74,9 @@ Swal.fire({
         <label for="product_name">Tên sản phẩm:</label>
         <input type="text" name="product_name" id="product_name" value="<?php echo $product['name']; ?>" required><br>
 
-        <label for="thumbnail">Thumbnail:</label>
-        <input type="text" name="thumbnail" id="thumbnail" value="<?php echo $product['thumbnail']; ?>" required><br>
+        
 
-        <label for="slug">Slug:</label>
-        <input type="text" name="slug" id="slug" value="<?php echo $product['slug']; ?>" required><br>
+       
 
         <label for="decsription">decsription:</label>
         <textarea name="decsription" id="decsription" required><?php echo $product['decsription']; ?></textarea><br>
