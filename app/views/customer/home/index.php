@@ -1,24 +1,31 @@
-<!DOCTYPE html>
-<html lang="vi">
+<?php 
+ require_once '../../../../global.php';
+ require_once '../../../models/DAO/connect.php';
+ require_once '../../../models/DAO/products.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop FashionHub</title>
-    <link rel="shortcut icon" href="../../../assets/images/logos/Main Logo.png">
-    <link rel="stylesheet" href="../../css/app.css">
-    <?php
-    require '../../../models/DAO/connect.php';
-    ?>
-</head>
+ if(exist_param("contact")){
+    $VIEW_PRODUCT = "";
+    $VIEW_PRODUCT_SALE = "";
+    $VIEW_PRODUCT_FEATURED = "";
+    $VIEW_NAME = "home/contact.php";
+}
+else if(exist_param("about")){
+    $VIEW_PRODUCT = "";
+    $VIEW_PRODUCT_SALE = "";
+    $VIEW_PRODUCT_FEATURED = "";
+    $VIEW_NAME = "home/about.php";
+}
+else if(exist_param("category")){
+    $VIEW_PRODUCT = "";
+    $VIEW_PRODUCT_SALE = "";
+    $VIEW_PRODUCT_FEATURED = "";
+    $VIEW_NAME = "home/category.php";
+}
+else{
+    $VIEW_PRODUCT = "../layout/products.php";
+    $VIEW_PRODUCT_SALE = "../layout/sale_products.php";
+    $VIEW_PRODUCT_FEATURED = "../layout/top10_products.php";
+}
 
-<body>
-    <?php 
-        require '../layout.php';
-    ?>
-
-    <script src="../../../assets/js/slider.js"></script>
-</body>
-
-
-</html>
+ require_once '../layout.php';
+?>

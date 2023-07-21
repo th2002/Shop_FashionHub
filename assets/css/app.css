@@ -223,10 +223,9 @@ nav{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 10px;
   }
   .nav_cart-item-left{
-    min-width: 30px;
+    width: 100px;
     height: auto;
     overflow: hidden;
     border: 1px solid #dbd9d9;
@@ -239,7 +238,7 @@ nav{
 
   }
   .nav_cart-item-center{
-    min-width: 210px;
+
   }
   .nav_cart-item-info{
     margin: 0;
@@ -264,7 +263,7 @@ nav{
 
   }
   .nav_cart-item-price{
-    width: 118px;
+    width: 110px;
 
   }
   
@@ -386,7 +385,6 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px;
 }
 .container__popular-text{
     color: #454141;
@@ -394,7 +392,7 @@ nav{
 }
 .container__popular-list{
     margin-top: 50px;
-    margin-bottom: 30px;
+
 }
 .container__handpicked{
     position: relative;
@@ -824,12 +822,3 @@ footer > p {
 li.slick-active button {
     background-color: red;
 }
-.button-click-animation {
-    animation-name: buttonClickAnimation;
-    animation-duration: 0.5s;
-}
-@keyframes buttonClickAnimation {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }

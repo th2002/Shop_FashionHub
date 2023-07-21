@@ -1,8 +1,6 @@
 <!-- Day la top 10 san pham ban chay -->
 <?php 
-    $conn = connect();
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where featured = 1;";
-    $result = mysqli_query($conn,$sql);
+    $result = hang_hoa_select_outstanding();
 ?>
 <?php foreach($result as $key => $value):?>
 <div class="col l-3">
@@ -18,11 +16,9 @@
             <h4><?php echo $value['name']; ?></h4>
         </div>
         <div class="product_price product_price-new">
-            <h4><?php echo number_format($value['price']); ?></h4>
+            <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
         </div>
-        <div class="product_price product_price-old">
-            <h4><?php echo $value['sale_price']; ?></h4>
-        </div>
+
     </div>
 </div>
 <?php endforeach ?>

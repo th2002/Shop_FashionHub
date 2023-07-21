@@ -3,22 +3,22 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="" class="nav__page-link">Trang Chủ</a>
+                <a href="../home?index" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
-                <a href="" class="nav__page-link">Liên Hệ</a>
+                <a href="home?contact" class="nav__page-link">Liên Hệ</a>
             </li>
             <li class="nav__page-item">
-                <a href="" class="nav__page-link">Giới Thiệu</a>
+                <a href="home?about" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="" class="nav__page-link">Trang Phục</a>
+                <a href="home?category" class="nav__page-link">Danh mục</a>
             </li>
         </ul>
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-            <img src="../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
+            <img src="../../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
         </div>
     </div>
     <div class="nav__right">
