@@ -21,7 +21,7 @@ $productList = getAllProducts();
         <?php } ?>
     </select><br>
     <label for="image_file">Chọn hình ảnh:</label>
-    <input type="file" name="image_file" id="image_file" required><br>
+    <input type="file" name="image_file" id="image_file"><br>
     <button type="submit">Tải lên</button>
 </form>
 

@@ -220,6 +220,17 @@ function getCategoriesWithPagination($limit, $offset) {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// Thêm mã giảm giá
+function addCoupon($code, $type, $value, $status, $date_end){
+    global $db;
+    $create_at = date("Y-m-d");
+    $update_at = date("Y-m-d");
+    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$code, $type, $value, $status, $date_end, $create_at, $update_at]);
+
+    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+}
+
 
 
 ?>
