@@ -1,5 +1,6 @@
 <?php
     require_once "../../../app/models/DAO/connect.php";
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +11,14 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="../../../assets/css/grid.css">
     <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/toast.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-
+   
     <title>Document</title>
 </head>
 
@@ -67,116 +69,33 @@
                         <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm">
 
                     </div>
+                   
                     <div class="nav__cart">
                         <a class="nav__cart-link" href=""><i class="nav__cart-icon fa-solid fa-cart-shopping fa-bounce">
                                 <div class="nav__cart-quantity">
-                                    <span>1</span>
+                                    <span>
+                                            <?php 
+                                                session_start();
+                                              // session_destroy();
+                                                 if(isset($_SESSION['data-cart'])){
+                                                    $arr = $_SESSION['data-cart'];
+                                                    $lastElement = end($arr);
+                                                    echo $lastElement['quantity_cart'];
+                                                }else{
+                                                    echo "0";
+                                                }
+                                            ?>
+                                    </span>
                                 </div>
                             </i></a>
                         <div class="nav_cart-box">
-                            <h4 class="nav_cart-heading">Sản Phẩm Đã Thêm</h4>
+                            <h4 class="nav_cart-heading">Sản Phẩm Đã Thêm
+                            <a href=""></a>
+                            </h4>
                             <ul class="nav_cart-list">
-                                <li class="nav_cart-item">
-                                    <div class="nav_cart-item-left">
-                                        <img src="../../../assets/images/products/sp1.webp" alt=""
-                                            class="nav_cart-item-img">
-                                    </div>
-                                    <div class="nav_cart-item-center">
-                                        <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                            Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                                        <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                                    </div>
-                                    <div class="nav_cart-item-right">
-                                        <div class="nav_cart-item-price">
-                                            <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                            <span class="nav_cart-item-quantity">3</span>
-                                        </div>
-                                        <div class="nav_cart-item-delete">
-                                            <a href="">xóa</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav_cart-item">
-                                    <div class="nav_cart-item-left">
-                                        <img src="../../../assets/images/products/sp3-removebg-preview 1.png" alt=""
-                                            class="nav_cart-item-img">
-                                    </div>
-                                    <div class="nav_cart-item-center">
-                                        <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                            Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                                        <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                                    </div>
-                                    <div class="nav_cart-item-right">
-                                        <div class="nav_cart-item-price">
-                                            <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                            <span class="nav_cart-item-quantity">3</span>
-                                        </div>
-                                        <div class="nav_cart-item-delete">
-                                            <a href="">xóa</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav_cart-item">
-                                    <div class="nav_cart-item-left">
-                                        <img src="../../../assets/images/products/sp3.webp" alt=""
-                                            class="nav_cart-item-img">
-                                    </div>
-                                    <div class="nav_cart-item-center">
-                                        <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                            Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                                        <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                                    </div>
-                                    <div class="nav_cart-item-right">
-                                        <div class="nav_cart-item-price">
-                                            <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                            <span class="nav_cart-item-quantity">3</span>
-                                        </div>
-                                        <div class="nav_cart-item-delete">
-                                            <a href="">xóa</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav_cart-item">
-                                    <div class="nav_cart-item-left">
-                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
-                                            class="nav_cart-item-img">
-                                    </div>
-                                    <div class="nav_cart-item-center">
-                                        <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                            Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                                        <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                                    </div>
-                                    <div class="nav_cart-item-right">
-                                        <div class="nav_cart-item-price">
-                                            <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                            <span class="nav_cart-item-quantity">3</span>
-                                        </div>
-                                        <div class="nav_cart-item-delete">
-                                            <a href="">xóa</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav_cart-item">
-                                    <div class="nav_cart-item-left">
-                                        <img src="../../../assets/images/products/sp1 2.png" alt=""
-                                            class="nav_cart-item-img">
-                                    </div>
-                                    <div class="nav_cart-item-center">
-                                        <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                            Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                                        <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                                    </div>
-                                    <div class="nav_cart-item-right">
-                                        <div class="nav_cart-item-price">
-                                            <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                            <span class="nav_cart-item-quantity">3</span>
-                                        </div>
-                                        <div class="nav_cart-item-delete">
-                                            <a href="">xóa</a>
-                                        </div>
-                                    </div>
-                                </li>
-
+                                <?php 
+                                    include '../../models/DAO/view_cart.php';
+                                ?>    
                             </ul>
                             <button class="nav_cart-btn">Xem Giỏ Hàng</button>
                         </div>
@@ -203,8 +122,12 @@
                 <img class="slider__img-item" src="../../../assets/images/slider/i5.webp" alt="">
             </div>
         </header>
-
+       
         <div class="container">
+            <div id="toast">
+                
+            </div>
+          
             <div class="container__popular">
                 <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
             </div>
@@ -215,7 +138,6 @@
                         <?php 
                             include_once "./layout/top10_products.php";
                         ?>
-
                     </div>
                 </div>
             </div>
@@ -243,43 +165,43 @@
                             ?>
                         </div>
                         <style>
-                        .container__page {
-                            width: 100%;
-                            height: 200px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
+                            .container__page {
+                                width: 100%;
+                                height: 200px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
 
-                        .container__page-list {
-                            max-width: 30%;
-                            height: 30px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            list-style: none;
-                            background-color: aliceblue;
-                        }
+                            .container__page-list {
+                                max-width: 30%;
+                                height: 30px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                list-style: none;
+                                background-color: aliceblue;
+                            }
 
-                        .container__page-item {
-                            padding: 0 10px;
-                            border: 1px salmonblue solid;
-                            width: 40px;
-                            height: 30px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin: 0 5px;
-                        }
+                            .container__page-item {
+                                padding: 0 10px;
+                                border: 1px salmonblue solid;
+                                width: 40px;
+                                height: 30px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin: 0 5px;
+                            }
 
-                        .container__page-item.active {
-                            background-color: aqua;
-                        }
+                            .container__page-item.active {
+                                background-color: aqua;
+                            }
 
-                        .container__page-link {
-                            text-decoration: none;
-                            font-size: 18px;
-                        }
+                            .container__page-link {
+                                text-decoration: none;
+                                font-size: 18px;
+                            }
                         </style>
                         <div class="container__page">
                             <ul class="container__page-list">
@@ -314,117 +236,17 @@
                         </div>
 
                     </div>
-
-                    <footer>
-                        <div class="row">
-                            <div class="col l-3">
-                                <div class="footer_item">
-                                    <div class="footer_item-head">
-                                        <h3>THÔNG TIN</h3>
-                                        <ul class="footer_item-list">
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Giới Thiệu Maison</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Hệ Thống Cửa Hàng</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Tuyển Dụng</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <img class="footer_item-logo"
-                                                    src="../../content/images/logos/image0.png" alt="">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="footer_item">
-                                    <div class="footer_item-head">
-                                        <h3>TRỢ GIÚP</h3>
-                                        <ul class="footer_item-list">
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Phương Thức Thanh Toán</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Chính Sách Giao Hàng</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Chính Sách Mua Hàng</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Chính Sách Đổi Trả</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Chính Sách Bảo Hành</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Chính Sách Bảo Mật</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="footer_item">
-                                    <div class="footer_item-head">
-                                        <h3>THANH TOÁN</h3>
-                                        <ul class="footer_item-list">
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Visa / Mastercard / JCB</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">HATM / Internet Banking</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Quét Mã QR</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Mua Trước Trả Sau</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Ví Điện Tử</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Thanh Toán Khi Nhận Hàng</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col l-3">
-                                <div class="footer_item">
-                                    <div class="footer_item-head">
-                                        <h3>Giao Hàng</h3>
-                                        <ul class="footer_item-list">
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Giao Hàng Tiêu Chuẩn</a>
-                                            </li>
-                                            <li class="footer_item-des">
-                                                <a href="" class="footer_item-link">Maison NOW</a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                    </footer>
-
+                             
                 </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
                 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                 <script type="text/javascript"
                     src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
                 <script src="../../../assets/js/slider.js"></script>
+                <script src="../../models/js/toast.js"></script>
+                <script src="../../models/js/cart.js"></script>
+            
 </body>
 
 </html>
