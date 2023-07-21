@@ -385,7 +385,10 @@
                 <span><?php echo $row['name']; ?></span>
             </div>
             <div class="pro-gia">
-                <span> GIÁ :<?php echo $row['price']; ?> VNĐ </span>
+                <h4> GIÁ :<?php echo $row['price']; ?>  </h4>
+                <div class="product_price product_price-old">
+                         <h4> <?php echo $row['sale_price']; ?>  </h4>
+                </div>
             </div>
             <div class="pro-giua" >
                 <div class="pro-giua-giua" >
