@@ -261,7 +261,7 @@
                             background-color: aliceblue;
                         }
 
-                        .container__page-item {
+                        .container__page-list li {
                             padding: 0 10px;
                             border: 1px salmonblue solid;
                             width: 40px;
@@ -272,7 +272,7 @@
                             margin: 0 5px;
                         }
 
-                        .container__page-item.active {
+                        .active {
                             background-color: aqua;
                         }
 
@@ -282,35 +282,7 @@
                         }
                         </style>
                         <div class="container__page">
-                            <ul class="container__page-list">
-                               <?php if($current_page > 1) {
-                                    $prev = $current_page - 1;
-                                ?>
-                                 <li class="container__page-item">
-                                    <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$prev?>">
-                                        <i class="container__page-icon fa-solid fa-chevron-left"></i>
-                                    </a>
-                                </li>
-                                <?php }?>
-                                <?php for ($i = 1 ; $i <= $page ; $i++) { ?>
-                                    <?php if($i != $current_page) {?>
-                                        <li class="container__page-item">
-                                            <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a>
-                                        </li>
-                                    <?php }else{ ?>
-                                        <div class="container__page-item active"><a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$i?>"><?=$i?></a></div>
-                                    <?php }?>
-                                <?php } ?>
-                                <?php if($current_page < $page) {
-                                    $next = $current_page + 1;    
-                                ?>
-                                <li class="container__page-item">
-                                    <a class="container__page-link" href="?per_page=<?=$item_per_page?>&page=<?=$next?>">
-                                        <i class="container__page-icon fa-solid fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                                <?php }?>
-                            </ul>
+                            <ul class="container__page-list"></ul>
                         </div>
 
                     </div>
@@ -425,8 +397,8 @@
                 <script type="text/javascript"
                     src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
                 <script src="../../../assets/js/slider.js"></script>
+                <script src="../../../assets/js/page.js"></script>
 </body>
 
 </html>
-
 
