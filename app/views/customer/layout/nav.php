@@ -18,7 +18,7 @@
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-            <img src="../../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
+            <img src="../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
         </div>
     </div>
     <div class="nav__right">
@@ -38,7 +38,7 @@
                 <ul class="nav_cart-list">
                     <li class="nav_cart-item">
                         <div class="nav_cart-item-left">
-                            <img src="../../../assets/images/products/sp1.webp" alt="" class="nav_cart-item-img">
+                            <img src="../../assets/images/products/sp1.webp" alt="" class="nav_cart-item-img">
                         </div>
                         <div class="nav_cart-item-center">
                             <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
@@ -57,7 +57,7 @@
                     </li>
                     <li class="nav_cart-item">
                         <div class="nav_cart-item-left">
-                            <img src="../../../assets/images/products/sp3-removebg-preview 1.png" alt=""
+                            <img src="../../assets/images/products/sp3-removebg-preview 1.png" alt=""
                                 class="nav_cart-item-img">
                         </div>
                         <div class="nav_cart-item-center">
@@ -77,7 +77,7 @@
                     </li>
                     <li class="nav_cart-item">
                         <div class="nav_cart-item-left">
-                            <img src="../../../assets/images/products/sp3.webp" alt="" class="nav_cart-item-img">
+                            <img src="../../assets/images/products/sp3.webp" alt="" class="nav_cart-item-img">
                         </div>
                         <div class="nav_cart-item-center">
                             <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
@@ -96,7 +96,7 @@
                     </li>
                     <li class="nav_cart-item">
                         <div class="nav_cart-item-left">
-                            <img src="../../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
+                            <img src="../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
                         </div>
                         <div class="nav_cart-item-center">
                             <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
@@ -115,7 +115,7 @@
                     </li>
                     <li class="nav_cart-item">
                         <div class="nav_cart-item-left">
-                            <img src="../../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
+                            <img src="../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
                         </div>
                         <div class="nav_cart-item-center">
                             <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông

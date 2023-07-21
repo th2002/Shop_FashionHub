@@ -13,11 +13,13 @@ function hang_hoa_select_by_id($id){
 }
 
 function hang_hoa_select_outstanding(){
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where featured = 1 and sale_price is null";
+    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id
+    where featured = 1 and sale_price is null";
     return  pdo_query($sql);
 }
 
 function hang_hoa_select_sale() {
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where sale_price is not null";
+    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id
+    where sale_price is not null";
     return  pdo_query($sql);
 }
