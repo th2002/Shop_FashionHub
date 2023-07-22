@@ -208,6 +208,17 @@ function updateUser($id, $user_name, $email, $role) {
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
+
+// hàm xoá người dùng
+
+function deleteUser($id){
+    global $db;
+
+    $query = $db->prepare("DELETE FROM users where id =?");
+    $query-execute([$id]);
+
+    return $query->rowCount() >=0; // hàm trả về nếu dòng bị ảnh hưởng, ngượic lại false
+}
 // Hàm kiểm tra đăng nhập
 
 function authenUser($user_name, $password){

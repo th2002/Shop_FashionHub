@@ -10,20 +10,19 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
-// if (!isset($_SESSION['username'])) {
-//   header("Location: $baseURL/tai-khoan/login.php");
+if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+  // nếu chưa login thì chuyển về trang login
+  header('Location:' . $baseURL . '/tai-khoan/login.php');
+  exit();
+}
 
-//   exit();
-// }
-
-// Kiểm tra xem người dùng có quyền admin hay không
-// if ($_SESSION['role'] !== 'admin') {
-//   header("Location: ../index.php");
-//   exit();
-// }
+if($_SESSION['user_role'] != 1){
+  //nếu người dùng ko là admin thì chuyển  về trangngười dùng
+  header('Location:' .$baseURL . '/index.php');
+  exit();
+}
 ?>
 <!DOCTYPE html>
-<!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
@@ -187,7 +186,7 @@ button[type="submit"] {
           </a>
         </li>
         <li class="log_out">
-          <a href="#">
+          <a href="<?php echo $baseURL; ?>/tai-khoan/logout.php">
             <i class="bx bx-log-out"></i>
             <span class="links_name">Log out</span>
           </a>

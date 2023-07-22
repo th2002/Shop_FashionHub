@@ -13,7 +13,7 @@ $contentURL = "$baseURL/app/views/admin/public";
 
 $imageURL = "$contentURL/images";
 
-// Đường dẫn tới các file CSS và JS
+// Đường dẫn tới các file CSS và JS admin
 
 $cssURL = "$contentURL/css";
 $jsURL = "$contentURL/js";

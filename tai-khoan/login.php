@@ -31,6 +31,9 @@ require_once $modelPath;
     <title>Mã giảm giá Shopee nhanh nhất|</title>
 </head>
 <style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
     #error-message {
         color: red;
     }
@@ -38,10 +41,10 @@ require_once $modelPath;
         color: red;
     }
     .swal2-popup {
-            font-family: 'Poppins', sans-serif; /* Chọn font chữ bạn muốn sử dụng */
+        font-family: Arial, Helvetica, sans-serif;
             }
             .swal2-title {
-            font-size: 7px;
+            font-size: 16px;
 
             }
 </style>
@@ -67,7 +70,7 @@ if (isset($_POST['login'])) {
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 với thông báo "Đăng nhập thành công!"
         echo '<script>';
         echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
-        echo '   window.location.href = "' . ($user['role'] == 1 ? 'admin.php' : 'user.php') . '";'; // Chuyển hướng trang
+        echo '   window.location.href = "' . ($user['role'] == 1 ? '../admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang
         echo '});';
         echo '</script>';
 
