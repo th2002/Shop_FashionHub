@@ -4,39 +4,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 $modelPath = "$rootDir/app/models/DAO/functions.php";
 
+
+
 // Gọi tệp models
 require_once $modelPath;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
 
-    $errors = [];
-
-    // Kiểm tra đăng nhập
-    if (!empty($user_name) && !empty($password)) {
-        $user = getUserByusername($user_name);
-        if ($user && password_verify($password, $user['password'])) {
-            // Lưu thông tin đăng nhập vào session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['user_name'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['position'] = $user['position'];
-
-            // Chuyển hướng dựa trên quyền (role) và vị trí (position) của người dùng
-            if ($user['role'] === '1' && $user['position'] === '1') {
-                // Chuyển đến trang admin
-                header("Location: $baseURL/app/views/admin/index.php");
-            }
-            exit();
-        } else {
-            $errors[] = "Đăng nhập không thành công, vui lòng kiểm tra lại";
-        }
-    } else {
-        $errors[] = "Vui lòng nhập thông tin đăng nhập.";
-    }
-}
 ?>
+
 
 <!-- Tiếp tục các phần HTML và mã PHP của trang login.php như trước -->
 
@@ -62,12 +37,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .error {
         color: red;
     }
+    .swal2-popup {
+            font-family: 'Poppins', sans-serif; /* Chọn font chữ bạn muốn sử dụng */
+            }
+            .swal2-title {
+            font-size: 7px;
+
+            }
 </style>
 
 <body>
 
 
     <div class="form">
+        <?php
+        // Xử lý yêu cầu từ người dùng
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Hàm đăng nhập trong functions.php
+    $user = login($username, $password);
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_fullname'] = $user['full_name'];
+        $_SESSION['user_role'] = $user['role'];
+
+        // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 với thông báo "Đăng nhập thành công!"
+        echo '<script>';
+        echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
+        echo '   window.location.href = "' . ($user['role'] == 1 ? 'admin.php' : 'user.php') . '";'; // Chuyển hướng trang
+        echo '});';
+        echo '</script>';
+
+        // Dừng mã tiếp theo khỏi thực thi
+        exit();
+    } else {
+        $errors = ['Tên đăng nhập hoặc mật khẩu không đúng.'];
+    }
+}
+        ?>
         <form action="" class="singin" method="post">
             <h1>ĐĂNG NHẬP</h1>
             <?php if (!empty($errors)) { ?>
@@ -81,14 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="error">Thông báo lỗi</p>
             </div> -->
             <span>
-                <input type="text" placeholder="Tên tài khoản" name="user_name" value="<?php echo isset($_POST['user_name']) ? $_POST['user_name'] : ''; ?>">
+                <input type="text" placeholder="Tên tài khoản" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
             </span>
             <span>
                 <input type="password" placeholder="Mật khẩu" name="password">
             </span>
             
 
-            <button class="btn" name="submit">Đăng nhập</button>
+            <button class="btn" name="login">Đăng nhập</button>
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
         </form>
     </div>

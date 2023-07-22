@@ -1,15 +1,14 @@
 <?php
+// logout.php
+
 session_start();
+logout();
 
-// Xóa các thông tin đăng nhập lưu trong session
-unset($_SESSION['user_id']);
-unset($_SESSION['username']);
-unset($_SESSION['role']);
-
-// Xóa toàn bộ session
-session_destroy();
-
-// Chuyển hướng về trang đăng nhập
-header("Location: login.php");
-exit();
+function logout()
+{
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+    exit();
+}
 ?>

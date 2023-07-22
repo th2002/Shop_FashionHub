@@ -182,6 +182,23 @@ function getUserById($id) {
     return $query->fetch(PDO::FETCH_ASSOC);
 }
 
+// Hàm đăng nhập và kiểm tra mật khẩu
+function login($username, $password)
+{
+    global $db;
+
+    $stmt = $db->prepare('SELECT * FROM users WHERE user_name = :username');
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Kiểm tra xem đã tìm thấy người dùng với tên đăng nhập cụ thể hay chưa
+    if ($user && password_verify($password, $user['password'])) {
+        return $user; // Trả về thông tin người dùng nếu xác thực thành công
+    } else {
+        return false; // Trả về false nếu xác thực không thành công
+    }
+}
 // Hàm cập nhật thông tin người dùng
 function updateUser($id, $user_name, $email, $role) {
     global $db;
