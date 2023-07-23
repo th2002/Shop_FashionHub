@@ -234,7 +234,7 @@ $users = getAllUsers();
 
                     <td class="action-links">
                         <a href="editUsers.php?id=<?php echo $user['id']; ?>"  class="btn-sua">Sửa</a>
-                        <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>
+                        <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>
                     </td>
                 </tr>
             <?php } ?>

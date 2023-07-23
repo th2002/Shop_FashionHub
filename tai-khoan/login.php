@@ -67,7 +67,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_fullname'] = $user['full_name'];
         $_SESSION['user_role'] = $user['role'];
 
-        // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 với thông báo "Đăng nhập thành công!"
+        // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';
         echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
         echo '   window.location.href = "' . ($user['role'] == 1 ? '../admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang

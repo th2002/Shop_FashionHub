@@ -197,6 +197,8 @@ $products = getAllProducts();
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
+        <h4 class="add-category"><a href="#" onclick="confirmDelete()" class="add-links" id="In"><i class="fas fa-print"></i>Xóa All
+                </a></h4>        
 
 
     </div>
@@ -250,6 +252,13 @@ $products = getAllProducts();
     </table>
 </div>
 
+<script>
+    function confirmDelete() {
+        if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
+            window.location.href = '<?php echo $controller;?>/admin/deleteAllProducts.php';
+        }
+    }
+</script>
 
 
 

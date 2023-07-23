@@ -1,9 +1,9 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
-$color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#333';
-$color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#555';
-$color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#777';
+$color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#623f64';
+$color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#0f0d10';
+$color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#6398c9';
 
 $modelPath = "$rootDir/app/models/DAO/functions.php";
 
@@ -74,6 +74,31 @@ textarea {
   border: none;
   outline: 1px solid #fff;
 }
+input.vertical-bar {
+      border-left: 2px solid #ccc;
+      padding-left: 8px; /* Tạo khoảng cách giữa gạch đứng và nội dung input */
+    }
+
+    /* Tùy chỉnh kích thước và khoảng cách của input */
+    /* input {
+      width: 300px;
+      height: 30px;
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    } */
+
+    /* Hiệu ứng nhấp nháy */
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
 
 
 textarea {
@@ -104,6 +129,31 @@ button[type="submit"] {
 
     button[type="submit"]:hover {
         background-color: #45a049;
+    }
+    .button-container{
+      display: flex;
+      justify-content: space-between;
+    }
+    select{
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .category_id option {
+    text-shadow: 1px 10px 10px rgba(0, 0, 0, 0.5); /* Đổ bóng với độ mờ */
+    /* Hoặc bạn có thể thay đổi màu sắc của bóng */
+    /* text-shadow: 1px 1px 1px #000; */
+  }
+    .cancel-button{
+      padding: 10px;
+      background-color: red;
+      border-radius: 5px;
+      color: #fff;
+    }
+    .cancel-button:hover{
+background-color: #ca6262;
     }
 
 @media(max-width:768px) {
@@ -146,13 +196,13 @@ button[type="submit"] {
         <li>
           <a href="#">
             <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Analytics</span>
+            <span class="links_name">Làm 1 gậy</span>
           </a>
         </li>
         <li>
           <a href="#">
             <i class="bx bx-coin-stack"></i>
-            <span class="links_name">Stock</span>
+            <span class="links_name">18+</span>
           </a>
         </li>
         <li>

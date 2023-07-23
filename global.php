@@ -26,6 +26,10 @@ $viewURL = "$baseURL/app/views/admin";
 // Đường dẫn tới controller admin
 $controller = "$baseURL/app/controller";
 
+// Đường dẫn tới view admin
+
+$viewAdmin = "$baseURL/app/views/admin/view";
+
 // Đường dẫn tới modesls/DAO
 $models = "$baseURL/app/models/DAO";
 

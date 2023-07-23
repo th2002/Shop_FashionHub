@@ -3,14 +3,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connec
 
 
 // Hàm thêm danh mục sản phẩm
-function addCategory($cate_name, $cate_slug, $cate_banner){
+function addCategory($cate_name, $has_size){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO category_product (cate_name, cate_slug, cate_banner, create_at, update_at) VALUES (?, ?, ?, ?, ?)");
-    $query->execute([$cate_name, $cate_slug, $cate_banner, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO category_product (cate_name, create_at, update_at, has_size) VALUES (?, ?, ?, ?)");
+    $query->execute([$cate_name, $create_at, $update_at, $has_size]);
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 
@@ -32,14 +32,14 @@ function getCategoryById($id) {
 }
 
 // Hàm thêm sản phẩm
-function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id){
+function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, cate_id, cartitem_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, cate_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $create_at, $update_at]);
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
@@ -64,6 +64,19 @@ function deleteProduct($productId){
     return $query->rowCount();
 }
 
+// HÀm xóa tất cả sản phẩm
+function deleteAllProduct(){
+    global $db;
+    try {
+        $query = $db->prepare("DELETE FROM products");
+        return $query->execute();
+    } catch (PDOException $e) {
+        // xử lý lỗi
+        error_log("Lỗi trong quá trình xóa!" . $e->getMessage());
+        return false;
+    }
+}
+
 
 // Hàm lấy danh sách sản phẩm
 function getAllProducts() {
@@ -84,22 +97,34 @@ function getProductById($productId) {
 
 
 // Hàm cập nhật danh mục sản phẩm
-function updateCategory($id, $cate_name, $cate_slug, $cate_banner) {
+function updateCategory($id, $cate_name, $has_size) {
     global $db;
      
     $update_at = date("Y-m-d");
-    $query = $db->prepare("UPDATE category_product SET cate_name = ?, cate_slug = ?, cate_banner = ?, update_at = ? WHERE id = ?");
-    return $query->execute([$cate_name, $cate_slug, $cate_banner, $update_at, $id]);
+    $query = $db->prepare("UPDATE category_product SET cate_name = ?, has_size = ?, update_at = ? WHERE id = ?");
+    return $query->execute([$cate_name, $has_size, $update_at, $id]);
 }
+
+
+
 
 // Hàm xoá danh mục
 function deleteCategory($cate_id){
     global $db;
 
-    $query = $db->prepare("DELETE FROM category_product WHERE id = ?");
+    $query = $db->prepare("SELECT * FROM category_product where id=?");
+    $query->execute([$cate_id]);
+    $cate = $query->fetch(PDO::FETCH_ASSOC);
+
+    if(!$cate){
+        return false;
+    }
+
+    // CẬp nhật danh mục
+    $query = $db->prepare("DELETE from category_product WHERE id=?");
     $query->execute([$cate_id]);
 
-    return $query->rowCount();
+    return true; // XÓa thành công
 }
 
 
@@ -226,10 +251,18 @@ function updateUser($id, $user_name, $email, $role) {
 function deleteUser($id){
     global $db;
 
-    $query = $db->prepare("DELETE FROM users where id =?");
-    $query-execute([$id]);
+    $query = $db->prepare("SELECT * FROM users WHERE id=?");
+    $query->execute([$id]);
+    $user= $query->fetch(PDO::FETCH_ASSOC);
 
-    return $query->rowCount() >=0; // hàm trả về nếu dòng bị ảnh hưởng, ngượic lại false
+    if(!$user){
+        return false; // người dùng không tồn tại
+    }
+
+    $query = $db->prepare("DELETE FROM users where id =?");
+    $query->execute([$id]);
+
+    return true; // xó thành công
 }
 // Hàm kiểm tra đăng nhập
 

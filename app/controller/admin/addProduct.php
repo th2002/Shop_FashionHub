@@ -13,8 +13,6 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lấy dữ liệu từ form
     $productName = $_POST['product_name'];
-    $thumbnail = $_POST['thumbnail'];
-    $slug = $_POST['slug'];
     $description = $_POST['description'];
     $quantity = $_POST['quantity'];
     $price = $_POST['price'];
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Thêm sản phẩm với cartitem_id đã lấy được
     $createAt = date("Y-m-d");
     $updateAt = date("Y-m-d");
-    $result = addProduct($productName, $thumbnail, $slug, $description, $quantity, $price, $salePrice, $featured, $bestSeller, $categoryId, $cartItemId, $createAt, $updateAt);
+    $result = addProduct($productName, $description, $quantity, $price, $salePrice, $featured, $bestSeller, $categoryId, $cartItemId, $createAt, $updateAt);
 
     if ($result) {
         // Thêm sản phẩm thành công, hiển thị thông báo hoặc chuyển hướng

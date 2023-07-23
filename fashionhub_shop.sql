@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th7 19, 2023 lúc 04:37 PM
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th7 23, 2023 lúc 07:45 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -47,6 +47,25 @@ CREATE TABLE `cartitems` (
   `quantity` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `cartitems`
+--
+
+INSERT INTO `cartitems` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
+(1, NULL, NULL, '55559'),
+(2, NULL, NULL, '55559'),
+(3, NULL, NULL, '55559'),
+(4, NULL, NULL, '55559'),
+(5, NULL, NULL, '999'),
+(6, NULL, NULL, '1000'),
+(7, NULL, NULL, '20000'),
+(8, NULL, NULL, '50000'),
+(9, NULL, NULL, '55559'),
+(10, NULL, NULL, '6000'),
+(11, NULL, NULL, '55'),
+(12, NULL, NULL, '2222222'),
+(13, NULL, NULL, '69999');
+
 -- --------------------------------------------------------
 
 --
@@ -66,11 +85,13 @@ CREATE TABLE `category_product` (
 --
 
 INSERT INTO `category_product` (`id`, `cate_name`, `has_size`, `create_at`, `update_at`) VALUES
-(1, 'Quần áo', 1, NULL, NULL),
-(2, 'Giày dép', 1, NULL, NULL),
-(3, 'Túi ví', 0, NULL, NULL),
-(4, 'Mắt kính', 0, NULL, NULL),
-(5, 'Phụ kiện', 0, NULL, NULL);
+(6, 'Quần Không áo', 0, '2023-07-23', '2023-07-23'),
+(16, 'Quần rách gucci', 1, '2023-07-23', '2023-07-23'),
+(17, 'Áo rách gucci', 1, '2023-07-23', '2023-07-23'),
+(18, 'Quần tặng áo', 1, '2023-07-23', '2023-07-23'),
+(19, 'Áo khoác mùa hè', 1, '2023-07-23', '2023-07-23'),
+(20, 'Áo thun cá tính', 1, '2023-07-23', '2023-07-23'),
+(21, 'Rolex real', 1, '2023-07-23', '2023-07-23');
 
 -- --------------------------------------------------------
 
@@ -82,6 +103,44 @@ CREATE TABLE `cate_size` (
   `cate_id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chat_content`
+--
+
+CREATE TABLE `chat_content` (
+  `id_content` int(11) NOT NULL,
+  `id_sender` int(11) NOT NULL COMMENT 'người gửi',
+  `id_receiver` int(11) NOT NULL COMMENT 'người nhận',
+  `content` varchar(5000) NOT NULL COMMENT 'nội dung',
+  `chat_times` date DEFAULT NULL COMMENT 'thời gian',
+  `id_conversations` int(11) NOT NULL COMMENT 'thuộc cuộc trò chuyện\r\n'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chat_toppics`
+--
+
+CREATE TABLE `chat_toppics` (
+  `chat_toppic_id` int(100) NOT NULL,
+  `chat_toppic_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chat_toppics`
+--
+
+INSERT INTO `chat_toppics` (`chat_toppic_id`, `chat_toppic_name`) VALUES
+(1, 'Sản Phẩm Và Dịch Vụ'),
+(2, 'Đơn Hàng Và Thanh Toán'),
+(3, 'Bảo Hành Và Hỗ Trợ Kỹ Thuât'),
+(4, 'Góp ý Và Phản Hồi'),
+(5, 'Khuyến Mãi Và Thông Tin Sản Phẩm'),
+(6, 'Tư Vấn Mua Hàng');
 
 -- --------------------------------------------------------
 
@@ -101,6 +160,17 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `id` int(11) NOT NULL,
+  `id_chat_toppics` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `coupon`
 --
 
@@ -114,6 +184,29 @@ CREATE TABLE `coupon` (
   `create_at` date DEFAULT NULL,
   `update_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `coupon`
+--
+
+INSERT INTO `coupon` (`id`, `code`, `type`, `value`, `status`, `date_end`, `create_at`, `update_at`) VALUES
+(1, '27372771', 'amount', NULL, 0, '2023-07-29', '2023-07-21', '2023-07-21'),
+(2, '27372771', 'amount', NULL, 0, '2023-07-29', '2023-07-21', '2023-07-21'),
+(3, '27372771', 'amount', NULL, 0, '2023-07-29', '2023-07-21', '2023-07-21'),
+(4, '27372771', 'percent', 2423, 0, '2023-07-29', '2023-07-21', '2023-07-21'),
+(5, '3jwcz4', 'percent', 80, 1, '2023-08-10', '2023-07-21', '2023-07-21'),
+(6, '3jwcz4', 'percent', 80, 1, '2023-08-10', '2023-07-21', '2023-07-21'),
+(7, 'w9vt7s', 'percent', 6799, 0, '2023-08-11', '2023-07-21', '2023-07-21'),
+(8, '', 'amount', 0, 0, '0000-00-00', '2023-07-21', '2023-07-21'),
+(9, '', 'amount', 0, 0, '0000-00-00', '2023-07-21', '2023-07-21'),
+(10, '27372771', 'amount', 2423, 1, '2023-07-29', '2023-07-21', '2023-07-21'),
+(11, '3jwcz4', 'amount', 1, 0, '2023-07-30', '2023-07-21', '2023-07-21'),
+(12, '27372771', 'amount', 432, 1, '2023-07-28', '2023-07-21', '2023-07-21'),
+(13, '3jrfj2', 'percent', 5, 0, '2023-08-05', '2023-07-21', '2023-07-21'),
+(14, '6ythdg', 'amount', 9, 0, '2023-07-05', '2023-07-21', '2023-07-21'),
+(15, '07300541', 'amount', 3, 0, '2023-08-06', '2023-07-21', '2023-07-21'),
+(16, '27372771', 'amount', 23424, 0, '2023-09-04', '2023-07-21', '2023-07-21'),
+(17, '07300541', 'amount', 88888, 0, '2023-08-09', '2023-07-21', '2023-07-21');
 
 -- --------------------------------------------------------
 
@@ -903,26 +996,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `decsription`, `quantity`, `price`, `sale_price`, `featured`, `best_seller`, `cate_id`, `create_at`, `update_at`) VALUES
-(1, 'Áo thun nữ cổ tròn tay ngắn Basic Boxy Fit', 'Tự do mix&match với chiếc áo thun Basic Boxy Fit này! Chiếc áo thun cơ bản với logo thương hiệu B tinh tế, đơn giản để kết hợp với nhiều loại trang phục, mang lại cho bạn vẻ ngoài năng động, cá tính.\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Nữ\r\nKiểu dáng: Áo thun\r\nMàu sắc: L.Purple, S.Cream, Black\r\nChất liệu: 100% Cotton\r\nCổ tròn, tay ngắn\r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\nBo viền cổ áo\r\nChất vải mềm mịn, thấm hút tốt\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nLogo: Chi tiết logo bóng chày nổi bật ở ngực trái\r\nPhom áo: Suông vừa vặn\r\nTúi áo: Không\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1090000, NULL, 1, 1, 1, '2023-07-14', NULL),
-(2, 'Quần short ngắn nữ Logo 4In', 'Hè đến với tinh thần thể thao tràn đầy, MLB lên kệ ngay chiếc quần short đáp ứng đúng nhu cầu vận động thoải mái và cực kỳ cá tính cho MLB Fans đây. Bạn có thể kết hợp chiếc quần short này với chiếc áo polo cùng set “tông xoẹt tông” chắc chắn sẽ đem đến cho bạn một diện mạo đủ trendy và thoải mái, “chinh chiến\" mọi hoạt động ngày hè!\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Nữ\r\nKiểu dáng: Quần shorts\r\nMàu sắc: Navy, Pink, Cream, Green\r\nChất liệu: Nhung\r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\nLưng cao tôn dáng\r\nChất vải nhung mềm mại\r\nGam màu hiên đại dễ dàng phối với nhiều trang phục và phụ kiện khác\r\nLogo: Được thêu nổi bật ở mặt trước\r\nTúi xéo hai bên\r\nPhom quần: Suông thoải mái\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi du lịch....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1399000, NULL, 1, 1, 1, '2023-07-14', NULL),
-(3, 'Giày sneakers unisex cổ thấp Chunky Liner', 'Chất liệu: Da cao cấp\r\nKiểu dáng giày thể thao cổ thấp thời trang \r\nĐế cao chunky hiện đại\r\nThiết kế lấy cảm hứng từ hiệp hội bóng chày MLB\r\nLogo bóng chày in nổi bật ở má ngoài\r\nLớp lót êm ái, nâng dáng bước chân\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nXuất xứ thương hiệu: Hàn quốc', '100', 3199000, 4199000, 1, 1, 2, '2023-07-14', NULL),
-(4, 'Giày sneakers unisex cổ thấp CA Pro Glitch', 'Chất liệu: Da tổng hợp, Cao su \r\nKiểu dáng giày thể thao cổ thấp thời trang\r\nPhom ôm chân, dễ dàng di chuyển\r\nDây mảnh đan chéo đơn giản\r\nLogo Puma Cat nổi bật\r\nĐế ngoài cao su có độ bám tốt\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện\r\nXuất xứ thương hiệu: Đức', '100', 3590000, 4590000, 1, 1, 2, '2023-07-14', NULL),
-(5, 'Dép unisex quai ngang bản rộng Chunky Bouncer', 'Đôi dép quai ngang đơn giản nhưng hiện đại với phom đế cao chunky cùng phần quai dép cách điệu độc đáo. Không cần cầu kì, đôi dép này hoàn hảo để phối với nhiều loại trang phục, mang đến cho bạn vẻ ngoài năng động, cá tính.\r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Unisex\r\nKiểu dáng: Dép quai ngang\r\nMàu sắc: White, Red, Black,Green\r\nChất liệu: Upper Injection EVA\r\nThiết kế:\r\nQuai ngang bản rộng cá tính\r\nĐế có rãnh chống trơn trượt, tăng độ bám\r\nPhong cách phóng khoáng, hiện đại, đa năng\r\nLogo: Chi tiết logo bóng chày được in trên quai dép\r\nMũi dép tròn, đế thấp\r\nDây quai: Mềm mại, dễ dàng thao tác xỏ/tháo\r\nThích hợp dùng trong các dịp: Đi biển, đi chơi, hoạt động ngoài trời.....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1790000, 2790000, 1, 1, 2, '2023-07-14', NULL),
-(6, 'Dép nữ quai ngang bản rộng phối logo in nổi thời trang', 'Chất liệu: Rubber/ Fabric\r\nĐộ cao: 2.5cm\r\nKiểu dáng dép nữ mũi tròn hiện đại\r\nThiết kế quai ngang bản rộng cá tính\r\nPhối logo in chạm nổi độc đáo\r\nMàu sắc hiện đại, dễ dàng kết hợp với nhiều phong cách khác nhau\r\nXuất xứ thương hiệu: Singapore', '100', 1990000, NULL, 1, 1, 2, '2023-07-14', NULL),
-(7, 'Áo sơ mi unisex cổ bẻ tay ngắn Mega Dia Monogram', 'Bỏ qua những chiếc áo sơ mi basic vốn có, cùng làm mới tủ đồ MLB với họa tiết monogram độc đáo mùa hè này. Hãy \"biến hóa\" phong cách tươi mới cho bản thân bằng sơ mi họa tiết mang vẻ phóng khoáng nhưng không kém phần năng động cho giới trẻ.\r\n\r\n \r\nThương hiệu: MLB\r\nXuất xứ: Hàn Quốc\r\nGiới tính: Unisex\r\nKiểu dáng: Áo sơ mi\r\nMàu sắc: Sky Blue, White\r\nChất liệu: 100% cotton\r\nCổ bẻ chữ V, tay ngắn\r\nHoạ tiết: Monogram\r\nThiết kế:\r\nNút cài tròn cùng tone màu\r\nChất vải mềm mại, thoáng mát\r\nGam màu hiện đại dễ dàng kết hợp với nhiều loại trang phục khác nhau\r\nLogo: Chi tiết logo bóng chày thêu nổi bật ở ngực trái\r\nPhom áo: Rộng thoải mái\r\nTúi áo: Không\r\nKhoá kéo: Không\r\nThích hợp mặc trong các dịp: Đi chơi, đi làm,...\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 3590000, 4590000, 1, 1, 1, '2023-07-14', NULL),
-(8, 'Quần short ngắn nữ lưng thun Dolphin', 'Màu sắc: Light Purple/ Navy/ Red\r\nThành phần vải: 65% cotton, 35% polyester\r\nKiểu dáng quần shorts trên gối trẻ trung\r\nLưng thun co giãn thoải mái, đi kèm dây rút dễ dàng điều chỉnh\r\nPhối logo thương hiệu ở góc trái quần\r\nThiết kế bo viền màu tương phản, phối túi xéo hai bên\r\nChất vải mềm mịn, thoáng mát\r\nGam màu hiện đại dễ dàng phối với nhiều phụ kiện khác nhau \r\nXuất xứ thương hiệu: Hàn Quốc', '100', 1090000, NULL, 1, 1, 1, '2023-07-14', NULL),
-(9, 'Ví nữ dáng ngắn gập Studio Leather Tri Fold', 'Sở hữu phom dáng ngắn cổ điển, chất liệu da cao cấp cùng logo PEDRO kim loại ấn tượng ở mặt trước, chiếc ví dáng ngắn Studio Leather Tri Fold sẽ là nơi lưu trữ an toàn cho các loại thẻ cùng tiền mặt. \r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Ví dáng ngắn\r\nMàu sắc: Black, Cream, Blush\r\nChất liệu: Calf Leather\r\nLớp lót: Calf Leather & Fabric\r\nKích thước: H9.2 x W11 x D3 (cm)\r\nThiết kế:\r\nNắp gập cổ điển\r\nNhiều ngăn đựng tiền và ngăn đựng thẻ tín dụng\r\nChất liệu da mềm mại, đường may tỉ mỉ\r\nDây đeo: Không\r\nSức chứa: Có thể đựng vừa thẻ tín dụng, tiền,...\r\nChống thấm nước: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm, đi học....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1339000, NULL, 1, 1, 3, '2023-07-14', NULL),
-(10, 'Ví nữ dáng dài chữ nhật Studio Leather Bi Fold', 'Với chất liệu da cao cấp cùng logo kim loại đem đến nét hiện đại, trẻ trung, chiếc ví dáng dài Studio Leather Bi Fold trở thành một vật dụng hữu ích tô điểm thêm phong cách riêng của các nàng. \r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Ví dáng dài\r\nMàu sắc: Black, Cream, Navy\r\nChất liệu: Calf Leather\r\nLớp lót: Calf Leather & Fabric\r\nKích thước: H10 x W19.5 x D3.5 (cm)\r\nThiết kế:\r\nNắp gập cổ điển\r\nNhiều ngăn đựng tiền và ngăn đựng thẻ tín dụng\r\nChất liệu da mềm mại, đường may tỉ mỉ\r\nDây đeo: Không\r\nSức chứa: Có thể đựng vừa thẻ tín dụng, tiền,...\r\nChống thấm nước: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm, đi học....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 1999000, 2999000, 1, 1, 3, '2023-07-14', NULL),
-(11, 'Túi xách nữ hình thang Sammy 21 In Signature', 'Chiếc túi xách xuất hiện nổi bật với thiết kế sang trọng sẽ giúp hoàn thiện cho vẻ ngoài bạn. Với phần khóa tông màu vàng tuyệt đẹp tạo sự tương phản đầy thú vị, chiếc túi này giúp bạn dễ dàng phối với mọi loại trang phục của mình. Túi có đi kèm dây đeo có thể tháo rời, bạn có thể xách tay hoặc đeo chéo tùy theo sở thích. Kết hợp chiếc túi này với một chiếc váy xếp li da và chiếc áo khoác bomber để có vẻ ngoài chuẩn streetstyle.\r\n \r\nThương hiệu: COACH\r\nXuất xứ: New York\r\nGiới tính: Nữ\r\nKiểu dáng: Túi xách\r\nMàu sắc: Brown\r\nChất liệu: Da\r\nKích thước: L21.5 x H15.5 x W10 (cm)\r\nThiết kế:\r\nKiểu dáng túi xách phom hình thang thời trang\r\nNắp gập, tay cầm da cố định\r\nLogo chữ C được đính sang trọng ở nắp túi\r\nĐóng mở bằng khóa bấm\r\nDây đeo: Có thể tháo rời\r\nSức chứa: Có thể đựng vừa chìa khoá, điện thoại, ví tiền, các phụ kiện nhỏ khác...\r\nChống thấm nước: Không\r\nThân thiện với môi trường: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 14760000, NULL, 1, 1, 3, '2023-07-14', NULL),
-(12, 'Túi đeo vai nữ phom chữ nhật Studio Rift Leather', 'Chiếc túi đeo vai Studio Rift Leather sở hữu vẻ ngoài trang nhã với gam màu hiện đại và thiết kế tối giản, tinh tế với logo dập nổi, lại có sức chứa rộng rãi. Items này vừa hữu dụng, lại vừa mang đến cho bạn một phong cách hiện đại, gọn gàng.\r\n \r\nThương hiệu: Pedro\r\nXuất xứ: Singapore\r\nGiới tính: Nữ\r\nKiểu dáng: Túi đeo vai\r\nMàu sắc: Black, Cream\r\nChất liệu: Calf Leather\r\nLớp lót: Suede Microfiber\r\nKích thước: H25 x W32 x D10.3 (cm)\r\nThiết kế:\r\nKiểu dáng túi nữ phom hình chữ nhật thời trang\r\nNgăn chứa rộng rãi giúp đựng được nhiều vật dụng\r\nGam màu hiện đại, phù hợp với nhiều trang phục \r\nLogo: Chi tiết logo in nhỏ ở mặt túi trước\r\nĐóng mở bằng nút đóng nhanh\r\nDây đeo: Dây đeo vai đôi bản mảnh\r\nSức chứa: Có thể đựng vừa chìa khoá, điện thoại, ví tiền, các phụ kiện nhỏ khác...\r\nChống thấm nước: Không\r\nThân thiện với môi trường: Không\r\nThích hợp dùng trong các dịp: Đi chơi, đi làm....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 3399000, NULL, 1, 1, 3, '2023-07-14', NULL),
-(13, 'Kính mát unisex phom vuông thời trang', 'Chất liệu: Nhựa và im loại cao cấp \r\nKiểu dáng: Phom dáng vuông thời thượng\r\nThiết kế gọng bản dày hiện đại\r\nTròng kính tráng màu nổi bật\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 146 x 48 x 150 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2990000, 3990000, 1, 1, 4, '2023-07-14', NULL),
-(14, 'Kính mát unisex phom vuông hiện đại', 'Chất liệu: Nhựa và im loại cao cấp \r\nKiểu dáng: Phom dáng vuông thời thượng\r\nThiết kế gọng bản mỏng hiện đại\r\nTròng kính tráng màu nổi bật\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 147.5 x 50 x 150 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2590000, NULL, 1, 1, 4, '2023-07-14', NULL),
-(15, 'Kính mát unisex gọng phi công bản mảnh thời trang', 'Chất liệu: Kim loại cao cấp  \r\nKiểu dáng kính phi công cá tính\r\nThiết kế gọng kính đa giác thời trang\r\nKhung kính bản mảnh hiện đại, thanh lịch\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 145 x 50 x 148 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 1999000, NULL, 1, 1, 4, '2023-07-14', NULL),
-(16, 'Kính mát nữ gọng oval hiện đại', 'Chất liệu: Nhựa và kim loại cao cấp \r\nKiểu dáng: Gọng kính oval hiện đại\r\nMàu sắc thời trang, cá tính\r\nKhung kính dày dặn, chắc chắn\r\nKhả năng chống nắng: Chống tia UVA/UVB\r\nKích thước: 145 x 47 x 147 (mm)\r\nXuất xứ thương hiệu: Hong Kong', '100', 2590000, 3590000, 1, 1, 4, '2023-07-14', NULL),
-(17, 'Nón bóng chày unisex Pac-Man', 'Thương hiệu: DSQUARED2\r\nXuất xứ: Ý\r\nGiới tính: Unisex\r\nKiểu dáng: Nón bóng chày\r\nMàu sắc: Black\r\nChất liệu: 100% Cotton \r\nHoạ tiết: Trơn một màu\r\nThiết kế:\r\n\r\nWebbing điều chỉnh kích thước ở phía sau\r\nChi tiết chữ “PAC-MAN” in nổi bật ở phía sau\r\nChất vải cao cấp thoáng mát và co giãn tạo cảm giác thoải mái\r\nGam màu hiện đại dễ dàng phối với nhiều trang phục và phụ kiện khác\r\nLogo: Được in ở mặt trước của nón\r\nThích hợp đội trong các dịp: Đi chơi, hoạt động ngoài trời....\r\nXu hướng theo mùa: Sử dụng được tất cả các mùa trong năm', '100', 7800000, NULL, 1, 1, 5, '2023-07-14', NULL),
-(18, 'Móc khóa nữ hình chú chó đáng yêu', 'Chiếc móc khóa hình chú chó đáng yêu này là một sản phẩm đáng chú ý cho những người yêu thích các \"bé cún cưng\" và muốn thể hiện phong cách dễ thương của mình. Với thiết kế tinh xảo, hình dáng chú chó đáng yêu cùng màu sắc nổi bật, chiếc móc khóa sẽ làm cho phong cách thời trang của bạn trở nên nên độc đáo và thu hút mọi ánh nhìn. Sản phẩm này không chỉ là một phụ kiện trang trí, mà còn là biểu tượng cho tình yêu và sự gắn bó với những chú chó.\r\n \r\nThương hiệu: Ceci\r\nXuất xứ: Việt Nam\r\nGiới tính: Nữ\r\nKiểu dáng: Phụ kiện\r\nMàu sắc: Black, Blue, Red, Pink\r\nChất liệu: Resin\r\nThiết kế:\r\nGồm 1 móc hình chú chó dễ thương và 1 thẻ treo chữ nhật\r\nKhoe tròn kim loại chắc chắn\r\nGam màu hiện đại, trẻ trung dễ dàng phối với nhiều loại túi', '100', 179000, NULL, 1, 1, 5, '2023-07-14', NULL),
-(19, 'Thắt lưng nữ bản vừa Statement', 'Một chiếc thắt lưng có thể khiến vẻ ngoài của bạn thêm phần hoàn hảo. Chiếc thắt lưng bản vừa này đơn giản nhưng tinh tế với phần khóa chốt logo thương hiệu màu bạc sang trọng, chắc chắn sẽ làm nổi bật vòng eo của bạn. Phối cùng với chiếc áo vest thời thượng, bạn sẽ mang phong cách của những người phụ nữ bận rộn quyến rũ.\r\n \r\nThương hiệu: DSQUARED2\r\nXuất xứ: Ý\r\nGiới tính: Nữ\r\nKiểu dáng: Thắt lưng bản vừa\r\nMàu sắc: Black\r\nChất liệu: 100% Leather\r\nKhóa: 100% Brass\r\nThiết kế:\r\nĐộ dài linh hoạt, phù hợp với nhiều thể trạng cơ thể\r\nKhóa cài chốt xỏ\r\nMàu sắc hiện đại dễ dàng kết hợp với nhiều loại trang phục khác nhau\r\nLogo: Khoá cài logo thương hiệu đẳng cấp', '100', 12500000, 13500000, 1, 1, 5, '2023-07-14', NULL),
-(20, 'Vớ cổ cao unisex thời trang', 'Màu sắc: Black, White \r\nChất liệu: 70% Cotton, 28% Polyester, 2% Polyurethane \r\nKiểu dáng vớ cổ cao phong cách unisex thời trang \r\nPhối tên thương hiệu nổi bật \r\nMàu sắc dễ phối với nhiều mẫu giày sneakers\r\nThấm hút mồ hôi tốt, không gây hầm, bí\r\nXuất xứ thương hiệu: Hàn Quốc', '100', 295000, NULL, 1, 1, 5, '2023-07-14', '2023-07-14');
+(23, 'Áo ngắn dài tay', 'Chất liệu: cotton.\r\nCông nghệ in chuyển nhiệt.\r\nForm: oversize.\r\nMàu sắc: đen, trắng, xám, hồng, cam, xanh dương.\r\n\r\nÁo thun nữ với họa tiết graphic tinh nghịch được ứng dụng công nghệ in chuyển nhiệt hiện đại trên nền chất liệu cotton thoáng mát, thích hợp cho các bạn nữ yêu thích phong cách năng động, cá tính và trẻ trung.', '1000', 10000000, 1, 1, 1, 6, '2023-07-23', '2023-07-23'),
+(24, 'Áo rách gucci', 'The House of Gucci, hay được biết đến ngắn gọn là Gucci, là một biểu tượng thời trang sở hữu bởi Ý và Pháp, một nhãn hiệu đồ da nổi tiếng. Gucci được thành lập vào năm 1921 bởi', '20000', 10000, 10000000, 1, 1, 17, '2023-07-23', '2023-07-23'),
+(25, 'Quần rách gucci', 'The House of Gucci, hay được biết đến ngắn gọn là Gucci, là một biểu tượng thời trang sở hữu bởi Ý và Pháp, một nhãn hiệu đồ da nổi tiếng. Gucci được thành lập vào năm 1921 bởi', '50000', 500000, 60000000, 1, 0, 16, '2023-07-23', '2023-07-23'),
+(26, 'Áo thun FA', 'The House of Gucci, hay được biết đến ngắn gọn là Gucci, là một biểu tượng thời trang sở hữu bởi Ý và Pháp, một nhãn hiệu đồ da nổi tiếng. Gucci được thành lập vào năm 1921 bởi', '55559', 22222200, 333333000, 1, 1, 17, '2023-07-23', '2023-07-23'),
+(27, 'Túi sách da cá xấu', 'The House of Gucci, hay được biết đến ngắn gọn là Gucci, là một biểu tượng thời trang sở hữu bởi Ý và Pháp, một nhãn hiệu đồ da nổi tiếng. Gucci được thành lập vào năm 1921 bởi', '6000', 6333, 3666670, 1, 1, 6, '2023-07-23', '2023-07-23'),
+(28, 'ÁO THUN NỮ - TOTODAY - FAVORITE PERSON', 'Chất liệu: Cotton\r\nKiểu dáng: Oversize\r\nMàu sắc: Cam, Hồng, Xám, Kem, Xanh\r\n\r\nLàm mới outfit của bạn với kiểu áo thun họa tiết \"Favorite Person\" đầy cá tính và năng động, sở hữu chất liệu cotton thoáng mát, kiểu dáng oversize phù hợp với mọi dáng người. Thiết kế với họa tiết nổi bật hứa hẹn sẽ tôn lên gu thời trang chuẩn sành điệu và nổi bật khi xuống phố. ', '55', 55555, 666666, 1, 1, 18, '2023-07-23', '2023-07-23'),
+(29, 'Áo cặp FA', 'Làm mới outfit của bạn với kiểu áo Cặp FA mùa hè \"Favorite Person\" đầy cá tính và năng động, sở hữu chất liệu cotton thoáng mát, kiểu dáng oversize phù hợp với mọi dáng người. Thiết kế với họa tiết nổi bật hứa hẹn sẽ tôn lên gu thời trang chuẩn sành điệu và nổi bật khi xuống phố. ', '2222222', 22222200, 222222, 0, 1, 20, '2023-07-23', '2023-07-23'),
+(30, 'Quần nữ kiểu nam', 'Làm mới outfit của bạn với kiểu áo thun họa tiết \"Favorite Person\" đầy cá tính và năng động, sở hữu chất liệu cotton thoáng mát, kiểu dáng oversize phù hợp với mọi dáng người. Thiết kế với họa tiết nổi bật hứa hẹn sẽ tôn lên gu thời trang chuẩn sành điệu và nổi bật khi xuống phố. ', '69999', 96666, 65888, 1, 1, 16, '2023-07-23', '2023-07-23');
 
 -- --------------------------------------------------------
 
@@ -941,26 +1022,14 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_url`) VALUES
-(1, 17, 'https://product.hstatic.net/1000284478/product/1062_bcw0750_1_39d53343a4124f62a69394e309460b4a_large.jpg'),
-(2, 18, 'https://product.hstatic.net/1000284478/product/13_cc9-03000009_1_18608cc3c29442e69d95648e245af869_large.jpg'),
-(3, 19, 'https://product.hstatic.net/1000284478/product/m802_bew0360_1_cc62b6622a2c4aac8843e80170c0e28d_large.jpg'),
-(4, 20, 'https://product.hstatic.net/1000284478/product/owh_fs3scf5354x_2_4261c72edd1b4dc4b7c791a2e3f2160c_grande.jpg'),
-(5, 16, 'https://product.hstatic.net/1000284478/product/whc2_mj102sj535_2_1546957de5e4434db8d88c0761538c53_grande.jpg'),
-(6, 15, 'https://product.hstatic.net/1000284478/product/bkc1_mj101sj545_2_f3ee495b1f144637b06567054f104dd7_grande.jpg'),
-(7, 14, 'https://product.hstatic.net/1000284478/product/mtc2_mj101sj537_2_3646fecf13a14d5a89ef3f1be6823317_grande.jpg'),
-(8, 13, 'https://product.hstatic.net/1000284478/product/bkc1_mj101sj538_2_979035748e0940b3bcb5041dc471a15e_grande.jpg'),
-(9, 12, 'https://product.hstatic.net/1000284478/product/09_pw2-46390021_2_0382e14cb9c64ef0a257e515dadbbae6_grande.jpg'),
-(10, 11, 'https://product.hstatic.net/1000284478/product/b4nq4_cj831_1_2c001e1f610c4075a6d9869fe60449af_large.jpg'),
-(11, 10, 'https://product.hstatic.net/1000284478/product/01_pw4-15940084-1_1_1d2b751b3d35487982f95f073255f1ba_large.jpg'),
-(12, 9, 'https://product.hstatic.net/1000284478/product/83_pw4-15940085-1_1_d393a70004a6465aa7b685535cdafecd_large.jpg'),
-(13, 8, 'https://product.hstatic.net/1000284478/product/07_pneu23ks09_2_f92190730f6c4f5b84c4f821247dc8fb_grande.jpg'),
-(14, 7, 'https://product.hstatic.net/1000284478/product/50whs_3awsm0533_2_1c814d4400434ae893d32b0c4cab6de1_grande.jpg'),
-(15, 6, 'https://product.hstatic.net/1000284478/product/13_pw1-66380013_2_b9d7874712084a9b819efe62d89ba88b_grande.jpg'),
-(16, 5, 'https://product.hstatic.net/1000284478/product/07whs_3alpfbs33_2_7948cc3a4f604ea587ceaaec075d5e41_grande.jpg'),
-(17, 4, 'https://product.hstatic.net/1000284478/product/02_390681_1_7037793dd622419cb2cd67a1e22da171_large.jpg'),
-(18, 3, 'https://product.hstatic.net/1000284478/product/50gns_3asxclb3n_1_1c3a2975cee14f4b9e71fe6b7da7d61d_large.jpg'),
-(19, 2, 'https://product.hstatic.net/1000284478/product/50crs_3fspb0533_1_6e50de55ef5547dabf8630d0bfc38563_large.jpg'),
-(20, 1, 'https://product.hstatic.net/1000284478/product/50bks_3ftsb1233_1_0af1ef8a58c0411585278247011cea74_large.jpg');
+(29, 24, 'nike-min.jpg'),
+(30, 25, 'quan-ngan-ong-dai.jpeg'),
+(33, 27, 'sunglasses.jpg'),
+(36, 26, 'ao-cap-fa.jpeg'),
+(37, 29, 'ao-thun-1doi.jpeg'),
+(38, 30, 'luu_duoc_phi.webp'),
+(39, 28, 'luu-diec-phi-06.webp'),
+(40, 23, 'ao-hoodie-nu.jpeg');
 
 -- --------------------------------------------------------
 
@@ -1106,26 +1175,26 @@ CREATE TABLE `users` (
   `user_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `register_date` date DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL COMMENT 'họ tên',
   `phone_number` int(11) DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
   `role` tinyint(4) DEFAULT 0 COMMENT '0: khách hàng; 1: admin',
-  `position` tinyint(4) DEFAULT 0 COMMENT '0: thành viên; 1: quản lý'
+  `position` tinyint(4) DEFAULT 0 COMMENT '0: thành viên; 1: quản lý',
+  `position_incharge` int(11) NOT NULL,
+  `ip_address` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `user_name`, `email`, `password`, `full_name`, `phone_number`, `images`, `role`, `position`) VALUES
-(1, 'trunghieu123', 'hieu@gmnail.com', '123456', 'Đinh Lê Trung Hiếu', 906757332, NULL, 1, 0),
-(2, 'duc123', 'duc@gmail.com', '123456', 'Đức', 123456789, NULL, 1, 0),
-(3, 'hoa123', 'hoa@gmail.com', '123456', 'Lưu Việt Hòa', 123456789, NULL, 1, 0),
-(4, 'tuan123', 'tuan@gmail.com', '123456', 'Tuấn', 123456789, NULL, 1, 0),
-(5, 'toan123', 'toan@gmail.com', '123456', 'Văn Toàn', 123456789, NULL, 1, 0),
-(6, 'customer1', 'customer1@gmail.com', '123456', 'khách hàng 1', 123456789, NULL, 0, 0),
-(7, 'customer2', 'customer2@gmail.com', '123456', 'Khách hàng 2', 123456789, NULL, 0, 0),
-(8, 'quanly123', 'quanly@gmail.com', '123456', 'quản lý', 123456789, NULL, 1, 1);
+INSERT INTO `users` (`id`, `user_name`, `email`, `password`, `register_date`, `full_name`, `phone_number`, `images`, `role`, `position`, `position_incharge`, `ip_address`) VALUES
+(4, 'tuan123', 'tuan@gmail.com', '123456', NULL, 'Tuấn', 123456789, NULL, 1, 0, 0, NULL),
+(5, 'toan123', 'toan@gmail.com', '123456', NULL, 'Văn Toàn', 123456789, NULL, 1, 0, 0, NULL),
+(16, 'phuong', 'phuong@gmail.com', '$2y$10$azELUta9Uf6tAkBiqp8eXOLCGi8gT.qLnWcbu/d1KDGVPn0Zbklji', NULL, 'wqfqf', 2147483647, NULL, 0, 0, 0, NULL),
+(18, 'lancave', 'lan1@gmail.com', '$2y$10$TothOzu239Sdy/uxebq72.mGcyWi6ig30jFQyxHlS5SDXyfAdsFYy', NULL, 'lan0009', 2147483647, NULL, 1, 0, 0, NULL),
+(19, 'lan092', 'lan092@gmail.com', '$2y$10$vdo/yqqm5oXFfELudPnRgu.c1mmLzf4qNPOJlxwUQJmwWM0eCfFEG', NULL, 'lan0982', 51351454, NULL, 0, 0, 0, '::1');
 
 -- --------------------------------------------------------
 
@@ -12470,10 +12539,30 @@ ALTER TABLE `cate_size`
   ADD KEY `id_size` (`size_id`);
 
 --
+-- Chỉ mục cho bảng `chat_content`
+--
+ALTER TABLE `chat_content`
+  ADD PRIMARY KEY (`id_content`),
+  ADD KEY `id_sender` (`id_sender`,`id_receiver`,`id_conversations`);
+
+--
+-- Chỉ mục cho bảng `chat_toppics`
+--
+ALTER TABLE `chat_toppics`
+  ADD PRIMARY KEY (`chat_toppic_id`);
+
+--
 -- Chỉ mục cho bảng `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_chat_toppics` (`id_chat_toppics`);
 
 --
 -- Chỉ mục cho bảng `coupon`
@@ -12542,7 +12631,8 @@ ALTER TABLE `submit_contact`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `position_incharge` (`position_incharge`);
 
 --
 -- Chỉ mục cho bảng `ward`
@@ -12565,13 +12655,25 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT cho bảng `cartitems`
 --
 ALTER TABLE `cartitems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT cho bảng `chat_content`
+--
+ALTER TABLE `chat_content`
+  MODIFY `id_content` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `chat_toppics`
+--
+ALTER TABLE `chat_toppics`
+  MODIFY `chat_toppic_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `comment`
@@ -12580,10 +12682,16 @@ ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `district`
@@ -12607,13 +12715,13 @@ ALTER TABLE `oders`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT cho bảng `province`
@@ -12637,7 +12745,7 @@ ALTER TABLE `submit_contact`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `ward`

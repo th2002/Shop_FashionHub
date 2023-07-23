@@ -62,14 +62,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="../images/profile.jpg" alt="" class="drop-btn"/>
+          <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn"/>
           <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>
           <i class="bx bx-chevron-down" ></i>
           <div class="drop-menu">
-            <a href="#">Menu 1</a>
-            <a href="#">Menu 1</a>
-            <a href="#">Menu 1</a>
-            <a href="#">Menu 1</a>
+            <a href="#">Làm 1 gậy</a>
+            <a href="#">Làm 2 gậy</a>
+            <a href="#">Làm 3 gậy</a>
+            <a href="#">Ngất</a>
 
           </div>
         </div>
