@@ -210,21 +210,28 @@ $users = getAllUsers();
             <th>Tên người dùng</th>
             <th>Email</th>
             <th>Ngày đăng ký</th>
+            <th>Địa chỉ Ip</th>
             <th>Vai trò</th>
             <th>Thao tác</th>
+
+
 
 
 
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($users as $user) { ?>
+    <?php foreach( $users as $user){ ?>
+
                 <tr>
-                    <td><?php echo $user['id']; ?></td>
-                    <td><?php echo $user['user_name']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['register_date']; ?></td>
-                    <td><?php echo $user['role'] ? 'Admin' : 'Khách hàng'; ?></td>
+                    <td><?= $user['id']; ?></td>
+                    <td><?= $user['user_name'];?></td>
+                    <td><?= $user['email'];?></td>
+                    <td><?= $user['register_date'];?></td>
+                    <td><?= $user['ip_address'];?></td>
+                    <td><?= $user['role'] ? 'admin' : 'người dùng';?></td>
+
+
                     <td class="action-links">
                         <a href="editUsers.php?id=<?php echo $user['id']; ?>"  class="btn-sua">Sửa</a>
                         <a href="deleteUsers.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>

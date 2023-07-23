@@ -124,6 +124,17 @@ function getProductImages($productId) {
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+// hàm lấy địa chỉ ip người dùng
+function getUserIP(){
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 
 // hàm đăng ký tài khoản
 function registerUser($user_name, $email, $password, $full_name, $phone_number){
@@ -140,8 +151,9 @@ function registerUser($user_name, $email, $password, $full_name, $phone_number){
     // Thêm dữ liệu vào database users
 
     $hashePssword = password_hash($password, PASSWORD_DEFAULT);
-    $query = $db->prepare("INSERT INTO users (user_name, email, password, full_name, phone_number) VALUE (?, ?, ?, ?, ?)");
-    $query->execute([$user_name, $email, $hashePssword, $full_name, $phone_number]);
+    $ip = getUserIP();
+    $query = $db->prepare("INSERT INTO users (user_name, email, password, full_name, phone_number, ip_address) VALUE (?, ?, ?, ?, ?, ?)");
+    $query->execute([$user_name, $email, $hashePssword, $full_name, $phone_number, $ip]);
 
     return $query->rowCount();
 }
