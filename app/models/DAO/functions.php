@@ -65,7 +65,7 @@ function deleteProduct($productId){
 }
 
 // HÀm xóa tất cả sản phẩm
-function deleteAllProduct(){
+function deleteAllProducts(){
     global $db;
     try {
         $query = $db->prepare("DELETE FROM products");
@@ -303,6 +303,57 @@ function addCoupon($code, $type, $value, $status, $date_end){
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
+
+// functions.php
+
+// Include TCPDF library
+// require_once('tcpdf/tcpdf.php');
+
+// Include the main TCPDF library (search for installation path).
+require_once('tcpdf_include.php');
+
+// extend TCPF with custom functions
+class MYPDF extends TCPDF {
+    // Tùy chỉnh và định nghĩa các phương thức khác nếu cần thiết...
+
+    // Colored table
+    public function ColoredTable($header, $data) {
+        // Mã để tạo bảng màu
+        // Ví dụ:
+        // ...
+    }
+}
+// Xóa dữ liệu đệm và đảm bảo không có dữ liệu tiêu đề hoặc nội dung HTML nào đã được gửi từ trước
+ob_end_clean();
+// Hàm xử lý yêu cầu xuất PDF
+function exportPDF($products) {
+    // Tạo mới tệp PDF với lớp con MYPDF
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // Tiêu đề cần đặt cho tệp PDF
+    $pdfTitle = 'Danh sách sản phẩm';
+
+    // Đặt tiêu đề và kiểu nội dung của tệp PDF bằng hàm header() của PHP
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="' . $pdfTitle . '.pdf"');
+
+
+    // Thêm một trang
+    $pdf->AddPage();
+
+    // Tiêu đề cột
+    $header = array('ID', 'Tên sản phẩm', 'Giá', 'Hình ảnh');
+    $pdf->ColoredTable($header, $products);
+
+    // Lưu tệp PDF vào thư mục tạm thời
+    $pdfFilePath = dirname(__FILE__) . '/pdf_exports/san-pham.pdf';
+    $pdf->Output($pdfFilePath, 'F');
+
+    return $pdfFilePath;
+}
+
+// ... Các hàm và mã khác liên quan đến ứng dụng của bạn ...
+
 
 
 

@@ -7,9 +7,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 <!-- slidebar -->
 <style>
-    .sidebar {
+    /* .sidebar {
         background-image: linear-gradient(to right, <?php echo isset($color1) ? $color1 : '#333'; ?>, <?php echo isset($color2) ? $color2 : '#555'; ?>, <?php echo isset($color3) ? $color3 : '#777'; ?>);
-    }
+    } */
     .profile-details{
       position: relative;
       display: inline-block;
@@ -63,7 +63,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
         </div>
         <div class="profile-details">
           <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn"/>
-          <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>
+          <!-- <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span> -->
           <i class="bx bx-chevron-down" ></i>
           <div class="drop-menu">
             <a href="#">Làm 1 gậy</a>
