@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" href="../../../assets/css/grid.css">
-    <link rel="stylesheet" href="../css/app.css">
-    <link rel="shortcut icon" href="../../../assets/images/logos/Main Logo.png">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
+    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -158,7 +158,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="../../../assets/js/slider.js"></script>
+    <script src="<?=$ASSET_URL?>/js/slider.js"></script>
 </body>
 
 </html>
