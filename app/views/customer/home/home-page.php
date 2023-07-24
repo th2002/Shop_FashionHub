@@ -74,7 +74,7 @@
         background-color: aliceblue;
     }
 
-    .container__page-item li {
+    .container__page-list li {
         padding: 0 10px;
         border: 1px salmonblue solid;
         width: 40px;
