@@ -121,7 +121,6 @@
                     <i class="container__page-icon fa-solid fa-chevron-right"></i>
                 </a>
             </li>
-
         </ul>
     </div>
     <div class="container__grid_img">
