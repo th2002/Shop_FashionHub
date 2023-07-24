@@ -1,7 +1,6 @@
 <?php
 // Kết nối đến CSDL sử dụng PDO
-function pdo_get_connection(){
-    // Thông tin cấu hình kết nối
+// Thông tin cấu hình kết nối
     $host = 'localhost';
     $dbname = 'fashionhub_shop';
     $username = 'root';
@@ -24,7 +23,6 @@ function pdo_get_connection(){
     }
     // Đóng kết nối
     $db = null;
-}
 /**
  * Chạy câu lệnh sql để (INSERT, UPDATE, DELETE)
  * @param array $args mảng giá trị cung cấp cho các tham số của $sql
@@ -32,7 +30,7 @@ function pdo_get_connection(){
 function pdo_execute($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $db = pdo_get_connection();
+        global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
     }
@@ -52,7 +50,7 @@ function pdo_execute($sql){
 function pdo_query($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $db = pdo_get_connection();
+        global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $rows = $stmt->fetchAll();
@@ -73,7 +71,7 @@ function pdo_query($sql){
 function pdo_query_one($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $db = pdo_get_connection();
+        global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -94,7 +92,7 @@ function pdo_query_one($sql){
 function pdo_query_value($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $db = pdo_get_connection();
+        global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
