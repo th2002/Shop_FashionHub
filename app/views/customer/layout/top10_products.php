@@ -18,7 +18,6 @@
         <div class="product_price product_price-new">
             <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
         </div>
-
     </div>
 </div>
 <?php endforeach ?>
