@@ -1,6 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
 
+// Đường dẫn tới tệp PHPMailerAutoload.php, tuỳ thuộc vào cấu trúc của dự án của bạn
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
 
 // Hàm thêm danh mục sản phẩm
 function addCategory($cate_name, $has_size){
@@ -236,6 +240,84 @@ function login($username, $password)
         return false; // Trả về false nếu xác thực không thành công
     }
 }
+
+// Hàm tạo mật khẩu ngẫu nhiên
+function randomPassword($length = 10){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $kytu = strlen($characters);
+    $randomPassword = '';
+    for($i = 0; $i <= $length; $i++){
+        $randomPassword .= $characters[rand(0, $kytu - 1)];
+    }
+    return $randomPassword;
+}
+
+function sendPassword($email, $newPassword){
+    // gửi email chức mật khẩu cho user
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+    // cấu hình SMTP để gửi email
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'duc7sao@gmail.com'; // Thay thế bằng địa chỉ email Gmail của bạn
+    $mail->Password = 'gjmixhwpegpunuiy'; // Thay thế bằng mật khẩu Gmail của bạn
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+     // Cấu hình email
+     $mail->setFrom('duc7sao@gmail.com', '中国话 中國話 華文/华文'); // Thay thế bằng địa chỉ email và tên của bạn
+     $mail->addAddress($email); // Địa chỉ email người nhận
+ 
+     $mail->isHTML(true);
+     $mail->Subject = 'LẤy lại mật khẩu!!!'; // Tiêu đề email
+     $mail->Body = 'Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
+ 
+     // Gửi email
+     if (!$mail->send()) {
+         // Có lỗi xảy ra khi gửi email, bạn có thể xử lý lỗi ở đây
+          echo 'Mailer Error: ' . $mail->ErrorInfo;
+         return false;
+     } else {
+         return true;
+     }
+}
+// Hàm cập nhật mật khẩu mới vào cơ sở dữ liệu
+function updatePasswordInDatabase($email, $newPassword) {
+    // Gọi biến kết nối PDO đã được tạo trước đó
+    global $db;
+
+    try {
+        // Tạo truy vấn SQL để cập nhật mật khẩu mới
+        $sql = "UPDATE users SET password = :newPassword WHERE email = :email";
+
+        // Chuẩn bị truy vấn
+        $stmt = $db->prepare($sql);
+
+        // Gán giá trị cho các tham số của truy vấn
+        $stmt->bindParam(':newPassword', $newPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+        // Thực thi truy vấn
+        $stmt->execute();
+
+        // Kiểm tra xem có bất kỳ dòng nào bị ảnh hưởng bởi truy vấn hay không
+        if ($stmt->rowCount() > 0) {
+            // Truy vấn đã thành công, mật khẩu mới đã được cập nhật vào cơ sở dữ liệu
+            return true;
+        } else {
+            // Truy vấn không thành công, không có dòng nào bị ảnh hưởng
+            // Bạn có thể xử lý lỗi ở đây (nếu cần)
+            return false;
+        }
+    } catch (PDOException $e) {
+        // Xử lý lỗi nếu có
+        // Ví dụ: echo "Lỗi khi cập nhật mật khẩu: " . $e->getMessage();
+        return false;
+    }
+}
+
 // Hàm cập nhật thông tin người dùng
 function updateUser($id, $user_name, $email, $role) {
     global $db;

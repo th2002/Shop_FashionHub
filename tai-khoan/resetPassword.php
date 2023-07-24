@@ -31,9 +31,6 @@ require_once $modelPath;
     <title>Mã giảm giá Shopee nhanh nhất|</title>
 </head>
 <style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 #error-message {
     color: red;
@@ -52,50 +49,42 @@ body {
 
 }
 
-
-
-
-.quen-mat-khau {
-    margin-top: 10px;
-    text-align: end;
-    width: 80%;
-}
 </style>
 
 <body>
 
+<?php
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
 
-    <div class="form">
-        <?php
-        // Xử lý yêu cầu từ người dùng
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Gọi hàm tạo mật khẩu ngẫu nhiên
+    $newPassword = randomPassword();
 
-    // Hàm đăng nhập trong functions.php
-    $user = login($username, $password);
+    // Gọi hàm gửi email chứa mật khẩu mới
+    $isSent = sendPassword($email, $newPassword);
 
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_fullname'] = $user['full_name'];
-        $_SESSION['user_role'] = $user['role'];
+    if ($isSent) {
+        // Mật khẩu đã được gửi thành công
 
-        // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
-        echo '<script>';
-        echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
-        echo '   window.location.href = "' . ($user['role'] == 1 ? '../admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang
-        echo '});';
-        echo '</script>';
+        // Cập nhật mật khẩu mới vào cơ sở dữ liệu
+        // Gọi hàm cập nhật mật khẩu mới trong file kết nối PDO đã gọi trước đó
+        updatePasswordInDatabase($email, $newPassword);
 
-        // Dừng mã tiếp theo khỏi thực thi
+        // Thực hiện các bước khác nếu cần thiết
+
+        // Chuyển hướng người dùng tới trang thông báo thành công
+        // header('Location: reset_password_success.php');
         exit();
     } else {
-        $errors = ['Tên đăng nhập hoặc mật khẩu không đúng.'];
+        // Có lỗi xảy ra khi gửi email, bạn có thể xử lý lỗi ở đây
+        echo 'Lỗi khi gửi email.';
     }
 }
-        ?>
+?>
+
+    <div class="form">
         <form action="" class="singin" method="post">
-            <h1>ĐĂNG NHẬP</h1>
+            <h1>Lấy lại mật khẩu</h1>
             <?php if (!empty($errors)) { ?>
             <ul class="error">
                 <?php foreach ($errors as $error) { ?>
@@ -107,18 +96,14 @@ if (isset($_POST['login'])) {
                     <p class="error">Thông báo lỗi</p>
                 </div> -->
             <span>
-                <input type="text" placeholder="Tên tài khoản" name="username"
-                    value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
+                <input type="text" placeholder="Email" name="email">
             </span>
-            <span>
-                <input type="password" placeholder="Mật khẩu" name="password">
-            </span>
-
-            <h5 class="quen-mat-khau"><a href="resetPassword.php">Quên mật khẩu?</a></h5>
+            
+            
 
 
 
-            <button class="btn" name="login">Đăng nhập</button>
+            <button class="btn" name="login">Gửi</button>
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
         </form>
     </div>
