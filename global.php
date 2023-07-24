@@ -1,12 +1,6 @@
 <?php 
 
 // 2 biến toàn cục để chia sẻ giữa controller và view
-$VIEW_NAME = "index.php";
-$VIEW_PRODUCT = "";
-$VIEW_PRODUCT_SALE = "";
-$VIEW_PRODUCT_FEATURED = "";
-$MESSAGE = "";
-
 
 $ROOT_URL = "/Shop_FashionHub"; //đường dẫn gốc của website
 $ASSET_URL = "$ROOT_URL/assets"; //link to assets

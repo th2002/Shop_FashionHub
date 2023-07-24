@@ -7,9 +7,7 @@
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    if(!empty($VIEW_PRODUCT_FEATURED)) {
-                                    require_once $VIEW_PRODUCT_FEATURED;
-                                }
+                    require_once '../layout/top10_products.php';
                 ?>
             </div>
         </div>
@@ -23,9 +21,7 @@
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    if(!empty($VIEW_PRODUCT_SALE)) {
-                                    require_once $VIEW_PRODUCT_SALE;
-                                }
+                    require_once '../layout/sale_products.php';
                 ?>
             </div>
         </div>
@@ -39,7 +35,7 @@
 
     <div class="container__banner">
         <img class="container__banner-img"
-            src="../../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
+            src="<?=$ASSET_URL?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
     </div>
 
     <div class="container__product">
@@ -50,10 +46,8 @@
             <div class="grid wide">
                 <div class="row">
                     <?php
-                                if(!empty($VIEW_PRODUCT)) {
-                                    require_once $VIEW_PRODUCT;
-                                }
-                            ?>
+                        require_once '../layout/products.php';            
+                    ?>
                 </div>
             </div>
         </div>
