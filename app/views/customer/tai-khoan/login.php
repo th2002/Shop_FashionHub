@@ -21,7 +21,7 @@ require_once $modelPath;
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="../assets/css/singin.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/singin.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +74,7 @@ if (isset($_POST['login'])) {
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';
         echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
-        echo '   window.location.href = "' . ($user['role'] == 1 ? '../app/views/admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang
+        echo '   window.location.href = "' . ($user['role'] == 1 ? '../../admin/index.php' : $ROOT_URL) . '";'; // Chuyển hướng trang
         echo '});';
         echo '</script>';
 

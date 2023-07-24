@@ -12,7 +12,7 @@ require_once $modelPath;
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
 if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
   // nếu chưa login thì chuyển về trang login
-  header('Location:' . $baseURL . '/tai-khoan/login.php');
+  header('Location:' . $baseURL . '/app/views/customer/tai-khoan/login.php');
   exit();
 }
 
