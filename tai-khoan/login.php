@@ -31,22 +31,26 @@ require_once $modelPath;
     <title>Mã giảm giá Shopee nhanh nhất|</title>
 </head>
 <style>
-    body{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    #error-message {
-        color: red;
-    }
-    .error {
-        color: red;
-    }
-    .swal2-popup {
-        font-family: Arial, Helvetica, sans-serif;
-            }
-            .swal2-title {
-            font-size: 16px;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-            }
+#error-message {
+    color: red;
+}
+
+.error {
+    color: red;
+}
+
+.swal2-popup {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.swal2-title {
+    font-size: 16px;
+
+}
 </style>
 
 <body>
@@ -70,7 +74,7 @@ if (isset($_POST['login'])) {
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';
         echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
-        echo '   window.location.href = "' . ($user['role'] == 1 ? '../admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang
+        echo '   window.location.href = "' . ($user['role'] == 1 ? '../app/views/admin/index.php' : '../index.php') . '";'; // Chuyển hướng trang
         echo '});';
         echo '</script>';
 
@@ -84,22 +88,23 @@ if (isset($_POST['login'])) {
         <form action="" class="singin" method="post">
             <h1>ĐĂNG NHẬP</h1>
             <?php if (!empty($errors)) { ?>
-                <ul class="error">
-                    <?php foreach ($errors as $error) { ?>
-                        <li><?php echo $error; ?></li>
-                    <?php } ?>
-                </ul>
+            <ul class="error">
+                <?php foreach ($errors as $error) { ?>
+                <li><?php echo $error; ?></li>
+                <?php } ?>
+            </ul>
             <?php } ?>
             <!-- <div id="error-message" style="display: none;">
                 <p class="error">Thông báo lỗi</p>
             </div> -->
             <span>
-                <input type="text" placeholder="Tên tài khoản" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
+                <input type="text" placeholder="Tên tài khoản" name="username"
+                    value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
             </span>
             <span>
                 <input type="password" placeholder="Mật khẩu" name="password">
             </span>
-            
+
 
             <button class="btn" name="login">Đăng nhập</button>
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
