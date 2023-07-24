@@ -1,12 +1,29 @@
 <?php
 // Kết nối đến CSDL sử dụng PDO
 function pdo_get_connection(){
-    $dburl = "mysql:host=localhost;dbname=fashionhub_shop;charset=utf8";
+    // Thông tin cấu hình kết nối
+    $host = 'localhost';
+    $dbname = 'fashionhub_shop';
     $username = 'root';
     $password = '';
-    $conn = new PDO($dburl, $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $conn;
+
+    try {
+        // Tạo kết nối PDO
+        $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+
+        // Thiết lập các thuộc tính kết nối (tuỳ chọn)
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+        // Trả về đối tượng kết nối để sử dụng trong các chức năng khác
+        return $db;
+    } catch (PDOException $e) {
+        // Xử lý lỗi nếu không thể kết nối đến cơ sở dữ liệu
+        echo "Lỗi kết nối cơ sở dữ liệu: " . $e->getMessage();
+        die();
+    }
+    // Đóng kết nối
+    $db = null;
 }
 /**
  * Chạy câu lệnh sql để (INSERT, UPDATE, DELETE)
@@ -15,8 +32,8 @@ function pdo_get_connection(){
 function pdo_execute($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $conn = pdo_get_connection();
-        $stmt = $conn->prepare($sql);
+        $db = pdo_get_connection();
+        $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
     }
     catch(PDOException $e){
@@ -35,8 +52,8 @@ function pdo_execute($sql){
 function pdo_query($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $conn = pdo_get_connection();
-        $stmt = $conn->prepare($sql);
+        $db = pdo_get_connection();
+        $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $rows = $stmt->fetchAll();
         return $rows;
@@ -45,7 +62,7 @@ function pdo_query($sql){
         throw $e;
     }
     finally{
-        unset($conn);
+        unset($db);
     }
 }
 /**
@@ -56,8 +73,8 @@ function pdo_query($sql){
 function pdo_query_one($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $conn = pdo_get_connection();
-        $stmt = $conn->prepare($sql);
+        $db = pdo_get_connection();
+        $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
@@ -66,7 +83,7 @@ function pdo_query_one($sql){
         throw $e;
     }
     finally{
-        unset($conn);
+        unset($db);
     }
 }
 /**
@@ -77,8 +94,8 @@ function pdo_query_one($sql){
 function pdo_query_value($sql){
     $sql_args = array_slice(func_get_args(), 1);
     try{
-        $conn = pdo_get_connection();
-        $stmt = $conn->prepare($sql);
+        $db = pdo_get_connection();
+        $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return array_values($row)[0];
@@ -87,6 +104,6 @@ function pdo_query_value($sql){
         throw $e;
     }
     finally{
-        unset($conn);
+        unset($db);
     }
 }
