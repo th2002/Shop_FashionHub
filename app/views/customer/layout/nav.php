@@ -25,114 +25,33 @@
         <div class="nav__seach">
             <i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i>
             <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm">
-
         </div>
         <div class="nav__cart">
             <a class="nav__cart-link" href=""><i class="nav__cart-icon fa-solid fa-cart-shopping fa-bounce">
                     <div class="nav__cart-quantity">
-                        <span>1</span>
+                        <span>
+                            <?php 
+                                                session_start();
+                                              // session_destroy();
+                                                 if(isset($_SESSION['data-cart'])){
+                                                    $arr = $_SESSION['data-cart'];
+                                                    $lastElement = end($arr);
+                                                    echo $lastElement['quantity_cart'];
+                                                }else{
+                                                    echo "0";
+                                                }
+                                            ?>
+                        </span>
                     </div>
                 </i></a>
             <div class="nav_cart-box">
-                <h4 class="nav_cart-heading">Sản Phẩm Đã Thêm</h4>
+                <h4 class="nav_cart-heading">Sản Phẩm Đã Thêm
+                    <a href=""></a>
+                </h4>
                 <ul class="nav_cart-list">
-                    <li class="nav_cart-item">
-                        <div class="nav_cart-item-left">
-                            <img src="../../assets/images/products/sp1.webp" alt="" class="nav_cart-item-img">
-                        </div>
-                        <div class="nav_cart-item-center">
-                            <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                            <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                        </div>
-                        <div class="nav_cart-item-right">
-                            <div class="nav_cart-item-price">
-                                <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                <span class="nav_cart-item-quantity">3</span>
-                            </div>
-                            <div class="nav_cart-item-delete">
-                                <a href="">xóa</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav_cart-item">
-                        <div class="nav_cart-item-left">
-                            <img src="../../assets/images/products/sp3-removebg-preview 1.png" alt=""
-                                class="nav_cart-item-img">
-                        </div>
-                        <div class="nav_cart-item-center">
-                            <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                            <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                        </div>
-                        <div class="nav_cart-item-right">
-                            <div class="nav_cart-item-price">
-                                <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                <span class="nav_cart-item-quantity">3</span>
-                            </div>
-                            <div class="nav_cart-item-delete">
-                                <a href="">xóa</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav_cart-item">
-                        <div class="nav_cart-item-left">
-                            <img src="../../assets/images/products/sp3.webp" alt="" class="nav_cart-item-img">
-                        </div>
-                        <div class="nav_cart-item-center">
-                            <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                            <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                        </div>
-                        <div class="nav_cart-item-right">
-                            <div class="nav_cart-item-price">
-                                <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                <span class="nav_cart-item-quantity">3</span>
-                            </div>
-                            <div class="nav_cart-item-delete">
-                                <a href="">xóa</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav_cart-item">
-                        <div class="nav_cart-item-left">
-                            <img src="../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
-                        </div>
-                        <div class="nav_cart-item-center">
-                            <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                            <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                        </div>
-                        <div class="nav_cart-item-right">
-                            <div class="nav_cart-item-price">
-                                <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                <span class="nav_cart-item-quantity">3</span>
-                            </div>
-                            <div class="nav_cart-item-delete">
-                                <a href="">xóa</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav_cart-item">
-                        <div class="nav_cart-item-left">
-                            <img src="../../assets/images/products/sp1 2.png" alt="" class="nav_cart-item-img">
-                        </div>
-                        <div class="nav_cart-item-center">
-                            <h4 class="nav_cart-item-info">ao Len Nam Nữ Cổ Lọ Faviti Tay Dài Chất Len Lông
-                                Cừu Cao Cấp Dày Dặn Mềm Mịn Cực Ấm Kiểu Dáng Hàn Quốc Form Rộng AL83</h4>
-                            <div class="nav_cart-item-cate">Danh Mục: <span>áo</span></div>
-                        </div>
-                        <div class="nav_cart-item-right">
-                            <div class="nav_cart-item-price">
-                                <span class="nav_cart-item-text">3.000.000 <span>đ</span> </span>x
-                                <span class="nav_cart-item-quantity">3</span>
-                            </div>
-                            <div class="nav_cart-item-delete">
-                                <a href="">xóa</a>
-                            </div>
-                        </div>
-                    </li>
-
+                    <?php 
+                                    require_once '../../../models/DAO/view_cart.php';
+                                ?>
                 </ul>
                 <button class="nav_cart-btn">Xem Giỏ Hàng</button>
             </div>
