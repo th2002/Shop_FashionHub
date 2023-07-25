@@ -227,6 +227,7 @@ nav{
   .nav_cart-item-left{
     width: 100px;
     height: auto;
+    min-width: 30px;
     overflow: hidden;
     border: 1px solid #dbd9d9;
     margin-right: 10px;
@@ -238,7 +239,7 @@ nav{
 
   }
   .nav_cart-item-center{
-
+    min-width: 210px;
   }
   .nav_cart-item-info{
     margin: 0;
@@ -822,3 +823,12 @@ footer > p {
 li.slick-active button {
     background-color: red;
 }
+.button-click-animation {
+    animation-name: buttonClickAnimation;
+    animation-duration: 0.5s;
+}
+@keyframes buttonClickAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
