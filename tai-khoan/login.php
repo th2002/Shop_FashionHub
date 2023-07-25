@@ -25,6 +25,7 @@ require_once $modelPath;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -60,11 +61,34 @@ body {
     text-align: end;
     width: 80%;
 }
+
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(50vh);
+    }
+}
 </style>
 
 <body>
 
-
+    <div class="snow-container">
+        <div class="snowflakes"></div>
+    </div>
     <div class="form">
         <?php
         // Xử lý yêu cầu từ người dùng
@@ -110,8 +134,9 @@ if (isset($_POST['login'])) {
                 <input type="text" placeholder="Tên tài khoản" name="username"
                     value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
             </span>
-            <span>
-                <input type="password" placeholder="Mật khẩu" name="password">
+            <span class="password-wrapper">
+                <input type="password" placeholder="Mật khẩu" name="password" id="passwordInput">
+                <i class="password-toggle-icon fas fa-eye" onclick="togglePasswordVisibility()"></i>
             </span>
 
             <h5 class="quen-mat-khau"><a href="resetPassword.php">Quên mật khẩu?</a></h5>
@@ -122,6 +147,8 @@ if (isset($_POST['login'])) {
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
         </form>
     </div>
+    <script src="../assets/js/script.js"></script>
+
 </body>
 
 </html>
