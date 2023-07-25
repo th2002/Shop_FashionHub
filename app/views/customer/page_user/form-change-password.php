@@ -51,11 +51,11 @@
   </div>
   <div class="mb-3">
     <label for="matkhaucu" class="form-label">Mật khẩu cũ</label>
-    <input value="<?php if(isset($matkhaucu)==true) { echo $matkhaucu; }?>" type="password" class="form-control" id="matkhaucu" name="matkhaucu">
+    <input type="password" class="form-control" id="matkhaucu" name="matkhaucu">
   </div>
   <div class="mb-3">
     <label for="matkhaumoi_1" class="form-label">Mật khẩu mới</label>
-    <input value="<?php if(isset($matkhaumoi_1)==true) { echo $matkhaumoi_1; }?>" type="password" class="form-control" id="matkhaumoi_1" name="matkhaumoi_1">
+    <input type="password" class="form-control" id="matkhaumoi_1" name="matkhaumoi_1">
   </div>
   <div class="mb-3">
     <label for="matkhaumoi_2" class="form-label">Nhập lại mật khẩu mới</label>
