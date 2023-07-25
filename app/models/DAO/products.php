@@ -1,6 +1,5 @@
 <?php 
     
-
 // Truy vấn tất cả các hàng hóa
 function hang_hoa_select_all(){
     $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id";
