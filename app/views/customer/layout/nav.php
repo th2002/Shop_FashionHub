@@ -144,8 +144,8 @@
             </div>
 
             <div class="nav__acounted display-item">
-                <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
-                <h4 class="nav_acounted-name">Hi,hoa luu</h4>
+                <a href=" <?php echo $SITE_URL; ?>/page_user/index.php " style="color: black;"><i class="nav_acounted-icon fa-regular fa-user fa-beat"></i></a>
+                <h4 class="nav_acounted-name">Hi,<?php echo $_SESSION['user_fullname'] ?></h4>
                 <a href="">Đăng xuất</a>
             </div>
         </div>
