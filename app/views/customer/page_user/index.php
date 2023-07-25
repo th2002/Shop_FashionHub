@@ -1,5 +1,5 @@
 <?php require_once '../page_user/header.php' ?>
-<div class="sidebar">
+<div class="sidebar" style="height: 552px;">
       <div class="logo-details">
         <a href="./index.php">
             <i class="bx bxl-c-plus-plus"></i>
