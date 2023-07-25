@@ -16,5 +16,12 @@ $loi="";
         if($matkhaumoi_1 != $matkhaumoi_2){
             $loi.="Mật khẩu mới không giống nhau<br>";
         }
+
+        if($loi==""){
+            $sql = "UPDATE users SET password = ? WHERE user_name = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$matkhaumoi_1, $_SESSION['user_name']]);
+            // header('Location:' . $SITE_URL . '/page_user/index.php');
+        }
     }
 ?>

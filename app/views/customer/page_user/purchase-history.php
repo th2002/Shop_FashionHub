@@ -1,4 +1,5 @@
 <?php require_once '../page_user/header.php' ?>
+<header>
 <div class="sidebar">
       <div class="logo-details">
         <a href="./index.php">
@@ -40,3 +41,4 @@
           <span class="dashboard">Lịch Sử Mua Hàng</span>
         </div>
     </section>
+</header>

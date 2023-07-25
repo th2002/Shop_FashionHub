@@ -1,6 +1,10 @@
+header{
+    display: flex;
+    flex-direction: row;
+}
 .sidebar{
-    position: fixed;
-    height: 100%;
+    /* position: fixed; */
+    max-height: 100%;
     width: 240px;
     background-image: linear-gradient(to bottom, #d25e5e, #1ec01e);
     transition: all 0.5s ease;
@@ -58,22 +62,18 @@
     white-space: nowrap;
 }
 .home-section{
-    position: absolute;
     background: #f5f5f5;
-    min-height: 74vh;
+    min-height: 100vh;
     width: calc(100% - 240px);
     left: 240px;
     transition: all 0.5s ease;
 }
 .home-section nav{
-    display: flex;
-    justify-content: space-between;
     height: 80px;
     background: #F8F8FF;
     display: flex;
     align-items: center;
-    position: fixed;
-    width: calc(100% - 240px);
+    width: 100%;
     left: 240px;
     z-index: 1;
     padding: 0 20px;
@@ -87,7 +87,7 @@
 }
 .home-section form{
     position: absolute;
-    top: 160%;
+    top: 45%;
     left: 40%;
 }
 .banner_top__right-year{
