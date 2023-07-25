@@ -822,3 +822,19 @@ footer > p {
 li.slick-active button {
     background-color: red;
 }
+
+.container_oders {
+    width: 100%;
+}
+
+.container_oders .title {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 5px;
+}
+
+.container_oders h6 {
+    display: flex;
+    justify-content: center;
+}
