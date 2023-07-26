@@ -6,7 +6,7 @@ header{
     /* position: fixed; */
     max-height: 100%;
     width: 240px;
-    background-image: linear-gradient(to bottom, #d25e5e, #1ec01e);
+    background-image: linear-gradient(to right, #d25e5e, #1ec01e);
     transition: all 0.5s ease;
 }
 .sidebar.active{

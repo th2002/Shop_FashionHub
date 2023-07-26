@@ -47,7 +47,7 @@ $imageDir = "$rootDir/app/views/admin/images";
 // Các hàm và code khác
 
 // 2 biến toàn cục để chia sẻ giữa controller và view
-
+$ROOT_URL_2 = "Shop_FashionHub";
 $ROOT_URL = "/Shop_FashionHub"; //đường dẫn gốc của website
 $ASSET_URL = "$ROOT_URL/assets"; //link to assets
 $ADMIN_URL = "$ROOT_URL/app/views/admin"; //link to admin

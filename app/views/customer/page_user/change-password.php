@@ -25,7 +25,7 @@ $loi="";
             $sql = "UPDATE users SET password = ? WHERE user_name = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([password_hash($matkhaumoi_1, PASSWORD_BCRYPT), $username]);
-            // header('Location:' . $SITE_URL . '/page_user/index.php');
+            header('Location: Shop_FashionHub/tai-khoan/login.php');
         }
     }
 ?>
