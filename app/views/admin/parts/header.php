@@ -1,9 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
-$color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#623f64';
-$color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#0f0d10';
-$color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#6398c9';
+
 
 $modelPath = "$rootDir/app/models/DAO/functions.php";
 
@@ -40,7 +38,12 @@ if($_SESSION['user_role'] != 1){
 </head>
 <style>
 .sidebar {
-    background-image: linear-gradient(to left, <?php echo $color1; ?>, <?php echo $color2; ?>, <?php echo $color3; ?>);
+    <?php
+                $start_color = isset($_COOKIE['start_color']) ? $_COOKIE['start_color'] : '#ff0000';
+                $mid_color = isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color'] : '#00ff00';
+                $end_color = isset($_COOKIE['end_color']) ? $_COOKIE['end_color'] : '#0000ff';
+            ?>
+            background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
 }
 
 form {

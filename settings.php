@@ -1,17 +1,13 @@
-
-
-<!-- header -->
-<?php include_once("../parts/header.php"); ?>
-<!-- end header -->
-
-<!-- slidebar -->
-<?php include_once("../parts/slidebar.php"); ?>
-<!-- slidebar -->
-
-<h2 class="title">Cài đặt</h2>
-
-<form method="POST" action="">
-<label>Chọn màu đầu: <input type="color" id="startColorPicker"></label><br>
+<!-- settings.php -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Settings</title>
+</head>
+<body>
+    <h1>Cài đặt màu</h1>
+    <!-- Input color để chọn màu -->
+    <label>Chọn màu đầu: <input type="color" id="startColorPicker"></label><br>
     <label>Chọn màu giữa: <input type="color" id="midColorPicker"></label><br>
     <label>Chọn màu cuối: <input type="color" id="endColorPicker"></label><br>
 
@@ -31,8 +27,5 @@
             document.cookie = "end_color=" + endColorPicker.value;
         }
     </script>
-</form>
-
-<!-- footer -->
-<?php include_once("../parts/footer.php"); ?>
-<!-- end footer -->
+</body>
+</html>
