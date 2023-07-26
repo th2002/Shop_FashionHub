@@ -16,12 +16,6 @@
           </a>
         </li>
         <li>
-          <a href="./form-forgot-pasword.php" class="">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Quên Mật Khẩu</span>
-          </a>
-        </li>
-        <li>
           <a href="./form-change-password.php" class="active">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Đổi Mật Khẩu</span>
