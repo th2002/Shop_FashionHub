@@ -69,7 +69,19 @@
     header > .header-right > .pro-gia {
         font-size: 1.875rem;
         font-weight: 500;
-        color: #ee4d21d;
+        color: red;
+        display: flex;
+        flex-wrap: wrap;
+        width: 625px;
+        align-items: center;
+        visibility: visible;
+    }
+    header > .header-right > .pro-gia > .product_price {
+        font-size: 1rem;
+        text-decoration: line-through;
+        color: #929292;
+        margin-right: 10px;
+        visibility: visible;
     }
     header > .header-right >.pro-giua > .pro-giua-giua {
         position: relative;
@@ -94,11 +106,43 @@
         visibility: visible;
         margin-top: 10px ;
     }
+    header > .header-right > .pro-giua > .pro-giua-giua > .pro-loai > .name-loai{
+        margin-right: 10px;
+        width: 110px;
+        text-transform: capitalize;
+        flex-shrink: 0;
+    }
+    header > .header-right > .pro-giua > .pro-giua-giua > .pro-loai > .pro-loai-main {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    header > .header-right > .pro-giua > .pro-giua-giua > .pro-loai > .pro-loai-main > .product-variation{
+        overflow: visible;
+        cursor: pointer;
+        min-width: 5rem;
+        min-height: 2.125rem;
+        box-sizing: border-box;
+        padding: 0.25rem 0.75rem;
+        margin: 0 8px 8px 0;
+        color: rgba(0,0,0,.8);
+        text-align: left;
+        border-radius: 2px;
+        border: 1px solid rgba(0,0,0,.09);
+        position: relative;
+        background: #fff;
+        outline: 0;
+        word-break: break-word;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
     header > .header-right > .pro-giua > .pro-giua-giua > .pro-giam_gia  > .mini-vouchers-laurel{
         color: green;
         width: 110px;
         text-transform: capitalize;
         flex-shrink: 0;
+        margin-right: 10px;
     }
     header > .header-right > .pro-giua > .pro-giua-giua > .pro-giam_gia  > .mini-vouchers{
         position: relative;
@@ -385,10 +429,10 @@
                 <span><?php echo $row['name']; ?></span>
             </div>
             <div class="pro-gia">
-                <h4> GIÁ :<?php echo $row['price']; ?>  </h4>
                 <div class="product_price product_price-old">
-                         <h4> <?php echo $row['sale_price']; ?>  </h4>
+                         <h4> <?php echo $row['sale_price']; ?>  </h4> 
                 </div>
+                <h4> <?php echo $row['price']; ?> đ </h4>
             </div>
             <div class="pro-giua" >
                 <div class="pro-giua-giua" >
@@ -400,12 +444,38 @@
                             <div class="mini-vouchers">giam 10k</div>
                     </div>
                     <div class="pro-loai" style="margin-bottom: 8px; align-items: baseline;">
-                        <label >Phân loại</label>
+                        <label class="name-loai">Phân loại</label>
                         <div class="pro-loai-main" >
-                        <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M">Màu Xanh Nhạt - P47M</button>
-                        <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M">Màu Xanh Nhạt - P47M</button>
-                        <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M">Màu Xanh Nhạt - P47M</button>
-                        <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M">Màu Xanh Nhạt - P47M</button>
+                            <?php $cate_id = $row['cate_id']; ?>
+                            <?php 
+                                $sql = "SELECT * FROM category_product INNER JOIN products ON category_product.id = products.cate_id where category_product.id=$cate_id ;";
+                                // $sql = "SELECT  h.*, s.id  FROM  size h join cate_size k join category_product s 
+                                // on  k.cate_id = s.id and k.size_id = h.id where s.id=$cate_id ";
+                                $sizes = mysqli_query($conn,$sql);
+                            ?>
+                            <?php
+                                foreach ($sizes as $size) {
+                                    if ($size['has_size']==1 && $cate_id==1){
+                                        $sql = "SELECT * FROM size where size_cate = 0";
+                                        $ss = mysqli_query($conn,$sql);
+                                            foreach ($ss as $s) {?>
+                                                <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M"><?php echo $s['name_size'];?></button>
+                                        <?php
+                                        }
+                                    }else if ($size['has_size']==1 && $cate_id==2){
+                                        $sql = "SELECT * FROM size where size_cate = 1";
+                                        $aa = mysqli_query($conn,$sql);
+                                            foreach ($aa as $a) {?>
+                                                <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M"><?php echo $a['name_size'];?></button>
+                                        <?php
+                                        }
+                                    }
+                            ?> 
+                                
+                            <?php
+                            break;
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="pro-so_luong">
