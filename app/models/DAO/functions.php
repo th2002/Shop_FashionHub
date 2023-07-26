@@ -80,7 +80,17 @@ function deleteAllProducts(){
         return false;
     }
 }
-
+// hàm xoá all người dùng
+function deleteAllUser(){
+    global $db;
+    try {
+        $query = $db->prepare("DELETE FROM users");
+        return $query->execute();
+    } catch (PDOException $e) {
+        error_log("có lổi khi thực hiện!");
+        return false;
+    }
+}
 
 // Hàm lấy danh sách sản phẩm
 function getAllProducts() {
