@@ -109,6 +109,7 @@ if (isset($_POST['login'])) {
 
             <button class="btn" name="login">Đăng nhập</button>
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
+            <h4>Bạn quên mật khẩu? <a href="#">Quên mật khẩu</a></h4>
         </form>
     </div>
 </body>
