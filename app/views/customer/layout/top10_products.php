@@ -1,22 +1,20 @@
 <!-- Day la top 10 san pham ban chay -->
 <?php 
-<<<<<<< HEAD
+
     $result = hang_hoa_select_outstanding();
-=======
+
  require_once($_SERVER['DOCUMENT_ROOT'] . ':3000/Shop_FashionHub/global.php');
  
  $modelPath = "$rootDir/app/models/DAO/functions.php";
  
  // Gọi tệp functions
  require_once $modelPath;
-
     // Truy vấn lấy top 10 sản phẩm bán chạy nhất
     $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id WHERE featured = 1 ORDER BY quantity_sold DESC LIMIT 10;";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
 
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
->>>>>>> 835d6a8bcb724943d4d3604cde0f68cb877d9601
 ?>
 
 <?php foreach($products as $product): ?>
@@ -39,14 +37,13 @@
                 <h4><?php echo $product['sale_price']; ?></h4>
             </div>
         </div>
-<<<<<<< HEAD
+
         <div class="product_name">
             <h4><?php echo $value['name']; ?></h4>
         </div>
         <div class="product_price product_price-new">
             <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
         </div>
-=======
->>>>>>> 835d6a8bcb724943d4d3604cde0f68cb877d9601
+
     </div>
 <?php endforeach ?>

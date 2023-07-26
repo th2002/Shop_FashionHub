@@ -1,5 +1,6 @@
 <?php
     require_once "../../../app/models/DAO/connect.php";
+    require_once "../../../app/models/DAO/products.php";
     
 ?>
 <!DOCTYPE html>
@@ -183,7 +184,6 @@
                                 background-color: aliceblue;
                             }
 
-<<<<<<< HEAD
                             .container__page-item {
                                 padding: 0 10px;
                                 border: 1px salmonblue solid;
@@ -198,23 +198,21 @@
                             .container__page-item.active {
                                 background-color: aqua;
                             }
-=======
-                        .container__page-list li {
-                            padding: 0 10px;
-                            border: 1px salmonblue solid;
-                            width: 40px;
-                            height: 30px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin: 0 5px;
-                        }
 
-                        .active {
-                            background-color: aqua;
-                        }
->>>>>>> Tuan
+                            .container__page-list li {
+                                padding: 0 10px;
+                                border: 1px salmonblue solid;
+                                width: 40px;
+                                height: 30px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin: 0 5px;
+                            }
 
+                            .active {
+                                background-color: aqua;
+                            }
                             .container__page-link {
                                 text-decoration: none;
                                 font-size: 18px;
@@ -223,7 +221,6 @@
                         <div class="container__page">
                             <ul class="container__page-list"></ul>
                         </div>
-
                     </div>
                              
                 </div>
@@ -233,13 +230,12 @@
                 <script type="text/javascript"
                     src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
                 <script src="../../../assets/js/slider.js"></script>
-<<<<<<< HEAD
                 <script src="../../models/js/toast.js"></script>
                 <script src="../../models/js/cart.js"></script>
             
-=======
+
                 <script src="../../../assets/js/page.js"></script>
->>>>>>> Tuan
+
 </body>
 
 </html>
