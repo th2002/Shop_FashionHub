@@ -2,11 +2,11 @@
     require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
 
-    // if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
-    //     // nếu chưa login thì chuyển về trang login
-    //     header('Location:' . $baseURL . '/tai-khoan/login.php');
-    //     exit();
-    //   }
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        // nếu chưa login thì chuyển về trang login
+        header('Location:' . $baseURL . '/tai-khoan/login.php');
+        exit();
+      }
 ?>
 <!DOCTYPE html>
 <html lang="vi">

@@ -146,7 +146,7 @@
             <div class="nav__acounted display-item">
                 <a href=" <?php echo $SITE_URL; ?>/page_user/index.php " style="color: black;"><i class="nav_acounted-icon fa-regular fa-user fa-beat"></i></a>
                 <h4 class="nav_acounted-name">Hi,<?php echo $_SESSION['user_fullname'] ?></h4>
-                <a href="<?php echo $baseURL; ?>/tai-khoan/login.php">Đăng xuất</a>
+                <a href="<?php echo $baseURL; ?>/tai-khoan/logout.php">Đăng xuất</a>
             </div>
         </div>
     </div>

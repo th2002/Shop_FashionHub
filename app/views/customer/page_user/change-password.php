@@ -9,7 +9,6 @@ $loi="";
         $stmt = $db->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        // echo $user['password'];
         if(isset($matkhaucu)==true){
             if ( password_verify($matkhaucu, $user['password'])==0){
                 $loi.="Mật khẩu cũ không đúng<br>";
