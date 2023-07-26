@@ -8,169 +8,194 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
-    .menu-chucnang {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
+.menu-chucnang {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 
 
-    }
+}
 
-    .menu-left {
-        display: flex;
+.menu-left {
+    display: flex;
 
-    }
-
-
-    .add-category {
-        margin-right: 10px;
-
-    }
-
-    .add-links {
-        background-color: #007bff;
-        color: #fff;
-        font-weight: 500;
-        padding: 8px 12px;
-        border-radius: 4px;
-
-    }
-
-    #xuat-excel {
-        background-color: #642de9;
-        transition: background-color 0.9s;
-
-    }
-
-    #xuat-excel:hover {
-        background-color: #34225f;
-        /* Màu nền hover mờ hơn */
-
-    }
-
-    #xuat-pdf {
-        background-color: #e58782;
-        transition: background-color 0.9s;
-    }
-
-    #xuat-pdf:hover {
-        background-color: #915652;
-        /* Màu nền hover mờ hơn */
-    }
-
-    #In {
-        background-color: #128f89;
-        transition: background-color 0.9s;
-    }
-
-    #In:hover {
-        background-color: #2b514f;
-        /* Màu nền hover mờ hơn */
-    }
-
-    .add-links:hover {
-        background-color: #0056b3;
+}
 
 
-    }
+.add-category {
+    margin-right: 10px;
 
-    .fas {
-        margin-right: 5px;
-        /* Khoảng cách giữa biểu tượng và chữ "Thêm" */
-        color: #1ee124;
-    }
+}
 
-    h5 {
-        font-size: 18px;
-        color: #333;
-    }
+.add-links {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
 
-    #current-time {
-        font-size: 16px;
-        color: #007bff;
-        font-weight: bold;
-    }
+}
 
-    .table {
-        padding: 20px;
-    }
+#xuat-excel {
+    background-color: #642de9;
+    transition: background-color 0.9s;
 
+}
+
+#xuat-excel:hover {
+    background-color: #34225f;
+    /* Màu nền hover mờ hơn */
+
+}
+
+#xuat-pdf {
+    background-color: #e58782;
+    transition: background-color 0.9s;
+}
+
+#xuat-pdf:hover {
+    background-color: #915652;
+    /* Màu nền hover mờ hơn */
+}
+
+#In {
+    background-color: #128f89;
+    transition: background-color 0.9s;
+}
+
+#In:hover {
+    background-color: #2b514f;
+    /* Màu nền hover mờ hơn */
+}
+
+.add-links:hover {
+    background-color: #0056b3;
+
+
+}
+
+.fas {
+    margin-right: 5px;
+    /* Khoảng cách giữa biểu tượng và chữ "Thêm" */
+    color: #1ee124;
+}
+
+h5 {
+    font-size: 18px;
+    color: #333;
+}
+
+#current-time {
+    font-size: 16px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.table {
+    padding: 20px;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    background: #f7f7f7;
+    /* Màu nền bảng */
+    box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8);
+    /* Đổ bóng */
+}
+
+.category-table th,
+.category-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.category-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+.category-table td {
+    background-color: #fff;
+}
+
+.category-table .action-links a {
+    display: inline-block;
+    margin-right: 5px;
+    color: #fff;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+
+
+.product-image img {
+    width: 100px;
+    /* Đặt kích thước hình ảnh */
+    height: 100px;
+    /* Căn chỉnh chiều cao tự động */
+    display: block;
+    /* Hiển thị hình ảnh dạng khối */
+    margin: 0 auto;
+    /* Căn giữa hình ảnh */
+}
+
+.action-links .btn-sua {
+    background-color: #007bff;
+
+}
+
+.action-links .btn-xoa {
+    background-color: #dc3545;
+
+}
+
+
+.action-links .btn-sua:hover {
+    background-color: #0056b3;
+}
+
+
+.action-links .btn-xoa:hover {
+    background-color: #c82333;
+
+}
+
+@media (max-width: 768px) {
     .category-table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow-x: auto;
-        background: #f7f7f7;
-        /* Màu nền bảng */
-        box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8);
-        /* Đổ bóng */
+        overflow-x: scroll;
     }
+}
 
-    .category-table th,
-    .category-table td {
-        padding: 12px 15px;
-        text-align: left;
-        border: 1px solid #ccc;
-        font-size: 14px;
-    }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-    .category-table th {
-        background-color: #f8f8f8;
-        font-weight: bold;
-    }
+.pagination a,
+.pagination .current {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+}
 
-    .category-table td {
-        background-color: #fff;
-    }
+.pagination a:hover {
+    background-color: #ddd;
+}
 
-    .category-table .action-links a {
-        display: inline-block;
-        margin-right: 5px;
-        color: #fff;
-        padding: 8px 12px;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 12px;
-    }
-
-
-
-    .product-image img {
-        width: 100px;
-        /* Đặt kích thước hình ảnh */
-        height: 100px;
-        /* Căn chỉnh chiều cao tự động */
-        display: block;
-        /* Hiển thị hình ảnh dạng khối */
-        margin: 0 auto;
-        /* Căn giữa hình ảnh */
-    }
-
-    .action-links .btn-sua {
-        background-color: #007bff;
-
-    }
-
-    .action-links .btn-xoa {
-        background-color: #dc3545;
-
-    }
-
-
-    .action-links .btn-sua:hover {
-        background-color: #0056b3;
-    }
-
-
-    .action-links .btn-xoa:hover {
-        background-color: #c82333;
-
-    }
-
-    @media (max-width: 768px) {
-        .category-table {
-            overflow-x: scroll;
-        }
-    }
+.pagination .current {
+    background-color: #007bff;
+    color: #fff;
+}
 </style>
 
 
@@ -183,7 +208,14 @@ require_once $modelPath;
 
 $products = getAllProducts();
 
+$perPage = 1; // Số lượng sản phẩm hiển thị trên mỗi trang
+$totalProducts = getTotalProducts();
+$totalPages = ceil($totalProducts / $perPage);
 
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$page = min($page, $totalPages);
+
+$products = getProductsByPage($page, $perPage);
 ?>
 
 <h2 class="title">Danh sách sản phẩm</h2>
@@ -194,12 +226,14 @@ $products = getAllProducts();
         <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
                     class="fas fa-file-excel"></i>
                 Xuất Excel</a></h4>
-                <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
+        <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i
+                    class="fas fa-file-pdf"></i>
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
-        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i class="fas fa-print"></i>Xóa All</a></h4>
-       
+        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i
+                    class="fas fa-print"></i>Xóa All</a></h4>
+
 
 
     </div>
@@ -252,25 +286,68 @@ $products = getAllProducts();
         </tbody>
     </table>
 </div>
+<!-- Hiển thị nút phân trang -->
+<div class="pagination">
+    <?php
+    // Hàm tạo các liên kết phân trang
+    function generatePaginationLinks($currentPage, $totalPages, $adjacentLinks) {
+        // Kiểm tra nếu tổng số trang nhỏ hơn hoặc bằng 1 thì không cần hiển thị nút phân trang
+        if ($totalPages <= 1) {
+            return;
+        }
 
-<script>
-    function deleteAllProducts() {
-        if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo $controller;?>/admin/deleteAllProducts.php',
-                success: function (response) {
-                    if (response === 'success') {
-                        alert('Xóa tất cả sản phẩm thành công!');
-                        // Chuyển hướng trang sau khi xóa thành công (nếu cần)
-                        window.location.href = '<?php echo $controller;?>/admin/productList.php';
-                    } else {
-                        alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
-                    }
-                }
-            });
+        $startPage = max(1, $currentPage - $adjacentLinks);
+        $endPage = min($totalPages, $currentPage + $adjacentLinks);
+
+        // Hiển thị "..." nếu không phải là trang đầu tiên
+        if ($startPage > 1) {
+            echo '<a href="?page=1">1</a>';
+            if ($startPage > 1) {
+                echo '<span>...</span>';
+            }
+        }
+
+        // Hiển thị các trang nằm giữa "..." và "..."
+        for ($i = $startPage; $i <= $endPage; $i++) {
+            if ($i == $currentPage) {
+                echo '<span class="current">' . $i . '</span>';
+            } else {
+                echo '<a href="?page=' . $i . '">' . $i . '</a>';
+            }
+        }
+
+        // Hiển thị "..." nếu không phải là trang cuối cùng
+        if ($endPage < $totalPages) {
+            if ($endPage < $totalPages - 1) {
+                echo '<span>...</span>';
+            }
+            echo '<a href="?page=' . $totalPages . '">' . $totalPages . '</a>';
         }
     }
+
+    $adjacentLinks = 2; // Số trang hiển thị trước và sau trang hiện tại
+    echo generatePaginationLinks($page, $totalPages, $adjacentLinks);
+    ?>
+</div>
+
+<script>
+function deleteAllProducts() {
+    if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo $controller;?>/admin/deleteAllProducts.php',
+            success: function(response) {
+                if (response === 'success') {
+                    alert('Xóa tất cả sản phẩm thành công!');
+                    // Chuyển hướng trang sau khi xóa thành công (nếu cần)
+                    window.location.href = '<?php echo $controller;?>/admin/productList.php';
+                } else {
+                    alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
+                }
+            }
+        });
+    }
+}
 </script>
 
 

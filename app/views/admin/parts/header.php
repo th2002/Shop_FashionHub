@@ -32,22 +32,20 @@ if($_SESSION['user_role'] != 1){
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Tải thư viện jquery từ CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
 .sidebar {
-    <?php
-                $start_color = isset($_COOKIE['start_color']) ? $_COOKIE['start_color'] : '#ff0000';
-                $mid_color = isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color'] : '#00ff00';
-                $end_color = isset($_COOKIE['end_color']) ? $_COOKIE['end_color'] : '#0000ff';
-            ?>
-            background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
+    <?php $start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#ff0000';
+    $mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#00ff00';
+    $end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#0000ff';
+    ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
 }
 
 form {

@@ -447,6 +447,38 @@ function exportPDF($products) {
 // ... Các hàm và mã khác liên quan đến ứng dụng của bạn ...
 
 
+// Hàm phân trang sản phẩm
+// Hàm lấy tổng số sản phẩm
+function getTotalProducts() {
+    global $db;
+
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total FROM products");
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn CSDL: " . $e->getMessage());
+        return 0;
+    }
+}
+
+// Hàm lấy danh sách sản phẩm phân trang
+function getProductsByPage($page, $perPage) {
+    global $db;
+
+    try {
+        $offset = ($page - 1) * $perPage;
+        $query = $db->prepare("SELECT * FROM products LIMIT :offset, :perPage");
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->bindParam(':perPage', $perPage, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn CSDL: " . $e->getMessage());
+        return array();
+    }
+}
 
 
 ?>
