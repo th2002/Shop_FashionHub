@@ -3,10 +3,10 @@ header{
     flex-direction: row;
 }
 .sidebar{
-    /* position: fixed; */
+    position: relative;
     max-height: 100%;
     width: 240px;
-    background-image: linear-gradient(to right, #d25e5e, #1ec01e);
+    background-color: #f5f5f5;
     transition: all 0.5s ease;
 }
 .sidebar.active{
@@ -14,17 +14,28 @@ header{
 }
 .sidebar .logo-details{
     height: 80px;
+    width: 100%;
     display: flex;
     align-items: center;
-    padding-left: 60px;
 }   
 .sidebar .logo-details a{
     text-decoration: none;
+    margin-top: 20px;
+}
+
+.sidebar .logo-details  p {
+    margin-top: 20px;
+    margin-left: 42px;
 }
 .sidebar .logo-details .logo_name{
-    color: #fff;
-    font-size: 40px;
+    margin-left: 42px;
+    color: #333;
+    font-size: 18px;
     font-weight: 500;
+}
+
+.sidebar .logo-details .logo_name i {
+    margin-right: 10px;
 }
 .sidebar .nav-links{
     margin-top: 10px;
@@ -34,6 +45,7 @@ header{
     position: relative;
     list-style: none;
     height: 50px;
+    margin-left: 42px;
 }
 .sidebar .nav-links li a{
     height: 100%;
@@ -44,22 +56,21 @@ header{
     transition: all 0.4s ease;
 }
 .sidebar .nav-links li a.active{
-    background-color: #081D45;    
+    background-color: #b3b2b2;    
 }
 .sidebar .nav-links li a:hover{
-    background: #081D45;
+    background: #b3b2b2;
 }
 .sidebar .nav-links li i{
     min-width: 40px;
-    text-align: center;
     font-size: 18px;
-    color: #fff;
+    color: #333;
+    margin-right: -10px;
 }
 .sidebar .nav-links li a .links_name{
-    color: #fff;
-    font-size: 20px;
+    color: #333;
+    font-size: 14px;
     font-weight: 500;
-    white-space: nowrap;
 }
 .home-section{
     background: #f5f5f5;
@@ -111,10 +122,16 @@ header{
 }
 .nav__acounted h4{
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: bold;
 }
 .nav__acounted a{
     color: black;
-    font-weight: 300;
+    font-weight: bold;
+}
+
+.nav__acount .btn_login {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
 }
 

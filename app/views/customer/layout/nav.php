@@ -18,7 +18,7 @@
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-            <img src="<?=$ASSET_URL?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
+            <img src="<?= $ASSET_URL ?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
         </div>
     </div>
     <div class="nav__right">
@@ -143,11 +143,18 @@
                 <a href="">Đăng Nhập</a>
             </div>
 
+            <?php if (isset($_SESSION['user_fullname'])) : ?>
             <div class="nav__acounted display-item">
-                <a href=" <?php echo $SITE_URL; ?>/page_user/index.php " style="color: black;"><i class="nav_acounted-icon fa-regular fa-user fa-beat"></i></a>
-                <h4 class="nav_acounted-name">Hi,<?php echo $_SESSION['user_fullname'] ?></h4>
+                <a href="<?php echo $SITE_URL; ?>/page_user/index.php" style="color: black;">
+                    <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
+                </a>
+                <h4 class="nav_acounted-name">Hi, <?php echo $_SESSION['user_fullname']; ?></h4>
                 <a href="<?php echo $baseURL; ?>/tai-khoan/logout.php">Đăng xuất</a>
             </div>
+            <?php else : ?>
+            <a class="btn_login" href="<?php echo $SITE_URL; ?>/tai-khoan/login.php">Đăng nhập</a>
+            <?php endif; ?>
+
         </div>
     </div>
 </nav>

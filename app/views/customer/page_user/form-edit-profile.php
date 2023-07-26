@@ -4,29 +4,31 @@
       <div class="logo-details">
         <a href="./index.php">
             <i class="bx bxl-c-plus-plus"></i>
-            <span class="logo_name">User</span>
+            <span class="logo_name"><i class="fa-solid fa-id-card"></i>Tài khoản <br>
+                <p>Hello <?php echo $_SESSION['user_fullname']; ?>!</p>
+            </span>
         </a>
-      </div>
-      <ul class="nav-links">
+    </div>
+    <ul class="nav-links">
         <li>
-          <a href="./form-edit-profile.php" class="active">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Sửa Thông Tin</span>
-          </a>
+            <a href="./form-edit-profile.php" class="">
+
+                <span class="links_name"><i class="fa-solid fa-circle-info"></i>Sửa Thông Tin</span>
+            </a>
         </li>
         <li>
-          <a href="./form-change-password.php" class="">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Đổi Mật Khẩu</span>
-          </a>
+            <a href="./form-change-password.php" class="">
+
+                <span class="links_name"><i class="fa-solid fa-unlock"></i>Đổi Mật Khẩu</span>
+            </a>
         </li>
         <li>
-          <a href="./purchase-history.php" class="">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Lịch Sử Mua Hàng</span>
-          </a>
+            <a href="./purchase-history.php" class="">
+
+                <span class="links_name"><i class="fa-solid fa-receipt"></i>Lịch Sử Mua Hàng</span>
+            </a>
         </li>
-      </ul>
+    </ul>
 </div>
 <section class="home-section">
       <nav class="header">
