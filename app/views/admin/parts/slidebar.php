@@ -7,9 +7,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 <!-- slidebar -->
 <style>
-    .sidebar {
+    /* .sidebar {
         background-image: linear-gradient(to right, <?php echo isset($color1) ? $color1 : '#333'; ?>, <?php echo isset($color2) ? $color2 : '#555'; ?>, <?php echo isset($color3) ? $color3 : '#777'; ?>);
-    }
+    } */
     .profile-details{
       position: relative;
       display: inline-block;

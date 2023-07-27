@@ -1,6 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
 
+// Đường dẫn tới tệp PHPMailerAutoload.php, tuỳ thuộc vào cấu trúc của dự án của bạn
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
 
 // Hàm thêm danh mục sản phẩm
 function addCategory($cate_name, $has_size){
@@ -65,7 +69,7 @@ function deleteProduct($productId){
 }
 
 // HÀm xóa tất cả sản phẩm
-function deleteAllProduct(){
+function deleteAllProducts(){
     global $db;
     try {
         $query = $db->prepare("DELETE FROM products");
@@ -76,7 +80,17 @@ function deleteAllProduct(){
         return false;
     }
 }
-
+// hàm xoá all người dùng
+function deleteAllUser(){
+    global $db;
+    try {
+        $query = $db->prepare("DELETE FROM users");
+        return $query->execute();
+    } catch (PDOException $e) {
+        error_log("có lổi khi thực hiện!");
+        return false;
+    }
+}
 
 // Hàm lấy danh sách sản phẩm
 function getAllProducts() {
@@ -236,6 +250,86 @@ function login($username, $password)
         return false; // Trả về false nếu xác thực không thành công
     }
 }
+
+// Hàm tạo mật khẩu ngẫu nhiên
+function randomPassword($length = 10){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $kytu = strlen($characters);
+    $randomPassword = '';
+    for($i = 0; $i <= $length; $i++){
+        $randomPassword .= $characters[rand(0, $kytu - 1)];
+    }
+    return $randomPassword;
+}
+
+function sendPassword($email, $newPassword){
+    // gửi email chức mật khẩu cho user
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+    // cấu hình SMTP để gửi email
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'duc7sao@gmail.com'; // Thay thế bằng địa chỉ email Gmail của bạn
+    $mail->Password = 'gjmixhwpegpunuiy'; // Thay thế bằng mật khẩu Gmail của bạn
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+     // Cấu hình email
+     $mail->setFrom('duc7sao@gmail.com', '中国话 中國話 華文/华文'); // Thay thế bằng địa chỉ email và tên của bạn
+     $mail->addAddress($email); // Địa chỉ email người nhận
+ 
+     $mail->isHTML(true);
+     $mail->Subject = 'Email cấp lại mật khẩu'; // Tiêu đề email
+     $mail->Body = ''; // Nội dung email
+
+     $mail->Body = 'Vui lòng đổi mật khẩu ngay khi có thể! Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
+ 
+     // Gửi email
+     if (!$mail->send()) {
+         // Có lỗi xảy ra khi gửi email, bạn có thể xử lý lỗi ở đây
+          echo 'Mailer Error: ' . $mail->ErrorInfo;
+         return false;
+     } else {
+         return true;
+     }
+}
+// Hàm cập nhật mật khẩu mới vào cơ sở dữ liệu
+function updatePasswordInDatabase($email, $newPassword) {
+    // Gọi biến kết nối PDO đã được tạo trước đó
+    global $db;
+
+    try {
+        // Tạo truy vấn SQL để cập nhật mật khẩu mới
+        $sql = "UPDATE users SET password = :newPassword WHERE email = :email";
+
+        // Chuẩn bị truy vấn
+        $stmt = $db->prepare($sql);
+
+        // Gán giá trị cho các tham số của truy vấn
+        $stmt->bindParam(':newPassword', $newPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+        // Thực thi truy vấn
+        $stmt->execute();
+
+        // Kiểm tra xem có bất kỳ dòng nào bị ảnh hưởng bởi truy vấn hay không
+        if ($stmt->rowCount() > 0) {
+            // Truy vấn đã thành công, mật khẩu mới đã được cập nhật vào cơ sở dữ liệu
+            return true;
+        } else {
+            // Truy vấn không thành công, không có dòng nào bị ảnh hưởng
+            // Bạn có thể xử lý lỗi ở đây (nếu cần)
+            return false;
+        }
+    } catch (PDOException $e) {
+        // Xử lý lỗi nếu có
+        // Ví dụ: echo "Lỗi khi cập nhật mật khẩu: " . $e->getMessage();
+        return false;
+    }
+}
+
 // Hàm cập nhật thông tin người dùng
 function updateUser($id, $user_name, $email, $role) {
     global $db;
@@ -303,6 +397,57 @@ function addCoupon($code, $type, $value, $status, $date_end){
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
+
+// functions.php
+
+// Include TCPDF library
+// require_once('tcpdf/tcpdf.php');
+
+// Include the main TCPDF library (search for installation path).
+require_once('tcpdf_include.php');
+
+// extend TCPF with custom functions
+class MYPDF extends TCPDF {
+    // Tùy chỉnh và định nghĩa các phương thức khác nếu cần thiết...
+
+    // Colored table
+    public function ColoredTable($header, $data) {
+        // Mã để tạo bảng màu
+        // Ví dụ:
+        // ...
+    }
+}
+// Xóa dữ liệu đệm và đảm bảo không có dữ liệu tiêu đề hoặc nội dung HTML nào đã được gửi từ trước
+ob_end_clean();
+// Hàm xử lý yêu cầu xuất PDF
+function exportPDF($products) {
+    // Tạo mới tệp PDF với lớp con MYPDF
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // Tiêu đề cần đặt cho tệp PDF
+    $pdfTitle = 'Danh sách sản phẩm';
+
+    // Đặt tiêu đề và kiểu nội dung của tệp PDF bằng hàm header() của PHP
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="' . $pdfTitle . '.pdf"');
+
+
+    // Thêm một trang
+    $pdf->AddPage();
+
+    // Tiêu đề cột
+    $header = array('ID', 'Tên sản phẩm', 'Giá', 'Hình ảnh');
+    $pdf->ColoredTable($header, $products);
+
+    // Lưu tệp PDF vào thư mục tạm thời
+    $pdfFilePath = dirname(__FILE__) . '/pdf_exports/san-pham.pdf';
+    $pdf->Output($pdfFilePath, 'F');
+
+    return $pdfFilePath;
+}
+
+// ... Các hàm và mã khác liên quan đến ứng dụng của bạn ...
+
 
 
 

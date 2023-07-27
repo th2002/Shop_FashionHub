@@ -14,68 +14,18 @@ require_once $modelPath;
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/singin.css">
+    <link rel="stylesheet" href="<?php echo $assets_css; ?>/singin.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <title>Đăng ký</title>
 </head>
 <style>
-.snowflake {
-    position: absolute;
-    top: -10px;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    clip-path: polygon(50% 0%, 61.8% 38.2%, 100% 45.1%, 73.2% 76.8%, 82.6% 100%, 50% 87.4%, 17.4% 100%, 26.8% 76.8%, 0% 45.1%, 38.2% 38.2%);
-    /* Điều chỉnh clip-path cho hình tuyết */
 
-    opacity: 0.7;
-    pointer-events: none;
-    animation: snowfall linear infinite;
-}
-
-@keyframes snowfall {
-    70% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    10% {
-        transform: translateY(100vh) rotate(360deg);
-    }
-
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    90% {
-        transform: translateY(90vh) rotate(360deg);
-    }
-}
-
-#error-message {
-    color: red;
-}
-
-.error {
-    border-radius: 4px;
-    padding: 5px;
-    color: red;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3)
-}
-
-.error li {}
-
-@media(max-width:354px) {
-    .error {
-        width: 80%;
-
-    }
-}
 </style>
 
 <body>
@@ -106,7 +56,6 @@ require_once $modelPath;
         }elseif($password !== $confirmPassword){
             $errors[] = "Nhập lại mật khẩu sai!";
         }
-
       
         // Nếu không có lỗi, thực hiện đăng ký
         if (empty($errors)) {
@@ -114,12 +63,10 @@ require_once $modelPath;
             if ($register === "false") {
                 $errors[] ="Tên đăng nhập hoặc email đã tồn tại!";
             } elseif($register) {
-                // Đăng ký thành công lưu vào session
-                $_SESSION['user_name'] = $user_name;
                 echo '<script>
                     Swal.fire({
                       icon: "success",
-                      title: "Đăng ký thành công",
+                      title: "Sủa danh mục thành công",
                       showCancelButton: false,
                       confirmButtonText: "OK",
                       timer: 1000, // 5 giây
@@ -155,11 +102,14 @@ require_once $modelPath;
             <span>
                 <input type="text" placeholder="Email" name="email">
             </span>
-            <span>
-                <input type="password" placeholder="Mật khẩu" name="password">
+            <span class="password-wrapper">
+                <input type="password" placeholder="Mật khẩu" name="password" id="passwordInput">
+                <i class="password-toggle-icon fas fa-eye" onclick="togglePasswordVisibility()"></i>
             </span>
-            <span>
-                <input type="password" placeholder="Nhập lại Mật khẩu" name="confirm_password">
+            <span class="password-wrapper">
+                <input type="password" placeholder="Nhập lại mật khẩu" name="confirm_password"
+                    id="confirmPasswordInput">
+                <i class="password-toggle-icon fas fa-eye" onclick="togglePasswordConfirm()"></i>
             </span>
 
             <!-- Thêm các trường thông tin khách hàng -->
@@ -176,23 +126,8 @@ require_once $modelPath;
             <h4>Bạn đã có tài khoản? <a href="login.php">Đăng nhập</a></h4>
         </form>
     </div>
-    <script>
-    function createSnowflakes() {
-        const numFlakes = 100;
-        const body = document.querySelector('body');
+    <script src="<?php echo $assets_js; ?>/script.js"></script>
 
-        for (let i = 0; i < numFlakes; i++) {
-            const flake = document.createElement('div');
-            flake.className = 'snowflake';
-            flake.style.left = `${Math.random() * 98}%`;
-            flake.style.animationDuration = `${Math.random() * 0 + 8}s`;
-            flake.style.animationDelay = `${Math.random()}s`;
-            body.appendChild(flake);
-        }
-    }
-
-    createSnowflakes();
-    </script>
 </body>
 
 </html>
