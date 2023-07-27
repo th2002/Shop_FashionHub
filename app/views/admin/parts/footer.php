@@ -31,9 +31,12 @@ customLinks.forEach(link => {
 
         // Hiển thị thông báo SweetAlert2 tùy chỉnh
         Swal.fire({
-            icon: "custom-icon.png",
+            imageUrl: "../images/icon.gif",
+            imageWidth: 200, // Chiều rộng hình ảnh tùy chỉnh
+            imageHeight: 200, // Chiều cao hình ảnh tùy chỉnh
+            imageAlt: "Hình ảnh tùy chỉnh",
             title: "Thông báo",
-            text: "Đây là thông báo với icon tùy chỉnh.",
+            text: "Chức năng đang cập nhật.",
         });
     });
 });
