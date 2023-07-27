@@ -1,4 +1,5 @@
 <!-- Day la chi tiet san pham -->
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -409,6 +410,7 @@
     ?>
 <body>
     <header>
+        
     <?php 
     require_once "../../../models/DAO/connect.php";
     require_once "../../../models/DAO/products.php";
@@ -540,26 +542,25 @@
             </div>
             <div class="comment-section">
                 <?php
-                function exist_param($fieldname){
-                    return array_key_exists($fieldname, $_REQUEST);
-                }
                 $id=$_GET['id'];
                 if(exist_param("content")){
                     $content=$_POST['content'];    
-                    // $customer_id = $_SESSION['']['customer_id'];
+                    $customer_id = $_SESSION['user_id'];
                     $create_at = date_format(date_create(), 'Y-m-d');
                     // comment_insert($content, $create_at);
-                    $sql = "INSERT INTO comment(product_id, content, create_at) VALUES ( '$id','$content', '$create_at')";
+                    $sql = "INSERT INTO comment(customer_id , product_id, content, create_at) VALUES ( '$customer_id', '$id','$content', '$create_at')";
                     $conn->query($sql);
                 }
-                $sql = "SELECT b.* , h.name FROM comment b JOIN products h ON h.id=b.product_id WHERE b.product_id=$id ORDER BY create_at DESC";
+                $sql = "SELECT b.* , h.name , u.full_name FROM comment b JOIN products h ON h.id=b.product_id 
+                                                                            JOIN users u ON u.id=b.customer_id
+                                                                WHERE b.product_id=$id ORDER BY create_at DESC";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     echo "<ul>";
                     foreach ($result as $bl) {
                     echo "
-                    <li>$bl[content] <i class='pull-right'><b></b>, $bl[create_at]</i></li>;
-                        
+                    <li>$bl[content] <i class='pull-right'><b>$bl[full_name]</b>, $bl[create_at]</i></li>;
+                    
                     ";
                     }
                     echo "</ul>";
@@ -567,11 +568,19 @@
                     echo "Không có bình luận nào.";
                 }
                 ?>
+                <?php
+                    if(!isset($_SESSION['user_id'])){
+                    echo '<b class="text-danger">Đăng nhập để bình luận về sản phẩm này</b>';
+                    }else{
+                ?>
                     <h2>Bình luận</h2>
                     <form action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
                         <textarea name="content" id="comment"></textarea>
                         <button type="submit" class="btn btn-default">Gửi</button>
                     </form>
+                <?php 
+                    } 
+                ?>
             </div>
             <div class="them">
             <h4>Sản phẩm bán chạy</h4>
