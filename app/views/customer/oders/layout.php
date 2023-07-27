@@ -10,6 +10,8 @@ require_once '../../../../global.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="<?= $ASSET_URL ?>/images/logos/Main Logo.png">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/app.css">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/page-user.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
