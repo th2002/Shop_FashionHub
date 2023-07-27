@@ -246,7 +246,7 @@ select {
                 </a>
             </li>
             <li class="log_out">
-                <a href="<?php echo $baseURL; ?>/tai-khoan/logout.php">
+                <a href="<?php echo $SITE_URL ?>/tai-khoan/logout.php">
                     <i class="bx bx-log-out"></i>
                     <span class="links_name">Log out</span>
                 </a>

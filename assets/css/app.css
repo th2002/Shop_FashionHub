@@ -149,20 +149,20 @@ nav{
     left: 60%;
     display: flex;
     align-items: center;
-    width: 500px;
+    width: 633px;
     margin-left: 50px;
 }
 .nav__seach{
+    margin-right: 20px;
     border-radius: 10px;
     width: 260px;
     height: 35px;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow: hidden;
     border: 1px solid #E4E7EB;
     background-color: #E4E7EB;
-    margin-left: 40px;
+    
 }
 .navbar_seach-input{
     padding-left: 6px;
@@ -324,9 +324,8 @@ nav{
     display: none;
 }
 .nav__acount{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 0;
 }
 .nav_no-acount{
     display: flex;
@@ -341,16 +340,19 @@ nav{
 }
 .nav__acounted{
     display: flex;
-    justify-content: center;
-    align-items: center;    
     margin-left: 5px;
-    display: none;
+    width: 200px;
 }
 .nav__acounted h4{
     margin: 0 16px 0 10px;
+    font-weight: bold;
+    font-size: 18px;
 }
 .nav__acounted a{
     text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
 }
 .nav_no-acount a:hover{
     color: #d42a2a;
@@ -361,9 +363,6 @@ nav{
     color: #d42a2a;
     text-decoration: underline;
     transition: 0.15s all linear;
-}
-.display-item{
-    display: flex;
 }
 /*slider*/
 .slider{

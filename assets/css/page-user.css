@@ -118,15 +118,6 @@ header{
     font-weight: 500;
 }
 
-.nav__acounted h4{
-    font-size: 1rem;
-    font-weight: bold;
-}
-.nav__acounted a{
-    color: black;
-    font-weight: bold;
-}
-
 .nav__acount .btn_login {
     text-decoration: none;
     color: #333;
