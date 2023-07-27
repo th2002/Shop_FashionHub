@@ -290,16 +290,18 @@
     }
     main > .main-left {
         flex : 2 ; 
-        height: 500px;
         margin-left:50px;
         margin-right:10px;
         border: 1px solid #ee4d2d;
+        border-radius : 5px ;
+    }
+    main > .main-left > .mo_ta{
+        margin: 10px;
     }
     main > .main-right {
         flex : 0.5 ;
         height: 500px;
         margin-right:50px;
-        border: 1px solid #ee4d2d;
     }
     main > .main-right > h3 {
         text-align: center;
@@ -313,6 +315,7 @@
     background-color: #f2f2f2;
     padding: 20px;
     border: 1px solid #ddd;
+    margin:10px;
     }
 
     .comment-section h2 {
@@ -388,6 +391,18 @@
     .increase-btn {
     margin-right: 10px;
     }
+    main > .main-left > .them > .sp_noi_bat{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin : 10px ;
+    }
+    main > .main-left > .them > .sp_noi_bat > .col > .product_item{
+        width: 220px;
+        margin : 10px ;
+        padding: auto;
+        border: 1px solid black;
+    }
 </style>
 <?php
         require '../layout/nav.php';
@@ -396,12 +411,14 @@
     <header>
     <?php 
     require_once "../../../models/DAO/connect.php";
+    require_once "../../../models/DAO/products.php";
     $id=$_GET['id'];
-    $conn = connect();
+    // $conn = connect();
     // $sql = "SELECT * FROM products where id = $id";
     // $sql = "SELECT b.* , h.image_url FROM products b JOIN product_images h ON h.product_id=b.id WHERE b.id=$id ";
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where products.id=$id ;";
-    $rows = mysqli_query($conn,$sql);
+    // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where products.id=$id ;";
+    // $rows = mysqli_query($conn,$sql);
+    $rows= hang_hoa_select_by_img_id($id);
     ?>
     <?php
         foreach ($rows as $row) {
@@ -448,25 +465,25 @@
                         <div class="pro-loai-main" >
                             <?php $cate_id = $row['cate_id']; ?>
                             <?php 
-                                $sql = "SELECT * FROM category_product INNER JOIN products ON category_product.id = products.cate_id where category_product.id=$cate_id ;";
+                                // $sql = "SELECT * FROM category_product INNER JOIN products ON category_product.id = products.cate_id where category_product.id=$cate_id ;";
                                 // $sql = "SELECT  h.*, s.id  FROM  size h join cate_size k join category_product s 
                                 // on  k.cate_id = s.id and k.size_id = h.id where s.id=$cate_id ";
-                                $sizes = mysqli_query($conn,$sql);
+                                $sizes = hang_hoa_select_by_loai($cate_id);
                             ?>
                             <?php
                                 foreach ($sizes as $size) {
                                     if ($size['has_size']==1 && $cate_id==1){
-                                        $sql = "SELECT * FROM size where size_cate = 0";
-                                        $ss = mysqli_query($conn,$sql);
+                                        // $sql = "SELECT * FROM size where size_cate = 0";
+                                        $ss = hang_hoa_select_by_name_loai_1();
                                             foreach ($ss as $s) {?>
-                                                <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M"><?php echo $s['name_size'];?></button>
+                                                <button class="product-variation" ><?php echo $s['name_size'];?></button>
                                         <?php
                                         }
                                     }else if ($size['has_size']==1 && $cate_id==2){
-                                        $sql = "SELECT * FROM size where size_cate = 1";
-                                        $aa = mysqli_query($conn,$sql);
+                                        // $sql = "SELECT * FROM size where size_cate = 1";
+                                        $aa = hang_hoa_select_by_name_loai_2();
                                             foreach ($aa as $a) {?>
-                                                <button class="product-variation" aria-label="Màu Xanh Nhạt - P47M"><?php echo $a['name_size'];?></button>
+                                                <button class="product-variation" ><?php echo $a['name_size'];?></button>
                                         <?php
                                         }
                                     }
@@ -487,19 +504,6 @@
                                     <input type="number" min="1" value="1" class="quantity-input">
                                     <button class="increase-btn">+</button>
                                 </div>
-                                <!-- <div class="pro-so_luong-main-2">
-                                    <button class="pro-so_luong-main-3">
-                                        <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" >
-                                            <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
-                                        </svg>
-                                    </button>
-                                    <input type="text" value="1" role="spinbutton" aria-valuenow="1" class="pro-so_luong-main-4" >
-                                    <button class="pro-so_luong-main-5" >
-                                        <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0">
-                                            <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
-                                        </svg>
-                                    </button>
-                                </div> -->
                             </div>
                             <div>
                                 <p><?php echo $row['quantity']?> sẩn phẩm có sẵn </p> 
@@ -530,66 +534,113 @@
             }
             
             ?>
+            <div class="mo_ta"> 
             <h3>Mô tả : </h3>
-            <i> <?php echo $row['decsription']?> </i>
-            <div class="comment-section">
-            <?php
-            function exist_param($fieldname){
-                return array_key_exists($fieldname, $_REQUEST);
-            }
-            $id=$_GET['id'];
-            if(exist_param("content")){
-                $content=$_POST['content'];    
-                // $customer_id = $_SESSION['']['customer_id'];
-                $create_at = date_format(date_create(), 'Y-m-d');
-                // comment_insert($content, $create_at);
-                $sql = "INSERT INTO comment(product_id, content, create_at) VALUES ( '$id','$content', '$create_at')";
-                $conn->query($sql);
-            }
-            $sql = "SELECT b.* , h.name FROM comment b JOIN products h ON h.id=b.product_id WHERE b.product_id=$id ORDER BY create_at DESC";
-            $result = $conn->query($sql);
-             if ($result->num_rows > 0) {
-                echo "<ul>";
-                foreach ($result as $bl) {
-                echo "
-                <li>$bl[content] <i class='pull-right'><b></b>, $bl[create_at]</i></li>;
-                    
-                ";
-                }
-                echo "</ul>";
-            } else {
-                echo "Không có bình luận nào.";
-            }
-            ?>
-                <h2>Bình luận</h2>
-                <form action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
-                    <textarea name="content" id="comment"></textarea>
-                    <button type="submit" class="btn btn-default">Gửi</button>
-                </form>
+            <i > <?php echo $row['decsription']?> </i>
             </div>
-            <?php
-            // Kiểm tra xem biểu mẫu đã được gửi chưa
-            // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            //     // Lấy thông tin từ biểu mẫu
-            //     $content = $_POST["comment"];
-            //     // Thêm nội dung bình luận vào CSDL
-            //     $sql = "INSERT INTO `comment`(`content`) VALUES ('$content')";
-            //     $conn->query($sql);
-            // }
-            // $sql = "SELECT  content FROM comment";
-            // $result = $conn->query($sql);
-            // Hiển thị nội dung bình luận
-            ?>
+            <div class="comment-section">
+                <?php
+                function exist_param($fieldname){
+                    return array_key_exists($fieldname, $_REQUEST);
+                }
+                $id=$_GET['id'];
+                if(exist_param("content")){
+                    $content=$_POST['content'];    
+                    // $customer_id = $_SESSION['']['customer_id'];
+                    $create_at = date_format(date_create(), 'Y-m-d');
+                    // comment_insert($content, $create_at);
+                    $sql = "INSERT INTO comment(product_id, content, create_at) VALUES ( '$id','$content', '$create_at')";
+                    $conn->query($sql);
+                }
+                $sql = "SELECT b.* , h.name FROM comment b JOIN products h ON h.id=b.product_id WHERE b.product_id=$id ORDER BY create_at DESC";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    echo "<ul>";
+                    foreach ($result as $bl) {
+                    echo "
+                    <li>$bl[content] <i class='pull-right'><b></b>, $bl[create_at]</i></li>;
+                        
+                    ";
+                    }
+                    echo "</ul>";
+                } else {
+                    echo "Không có bình luận nào.";
+                }
+                ?>
+                    <h2>Bình luận</h2>
+                    <form action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
+                        <textarea name="content" id="comment"></textarea>
+                        <button type="submit" class="btn btn-default">Gửi</button>
+                    </form>
+            </div>
+            <div class="them">
+            <h4>Sản phẩm bán chạy</h4>
+        <div class="sp_noi_bat">
+        <?php 
+            $result = hang_hoa_select_outstanding();
+        ?>
+        <?php foreach($result as $key => $value){
+                if ($value['product_id']!=$id){
+        ?>
+        <div class="col l-3">
+            <div class="product_item">
+                <div class="product_img">
+                <a href="../products/detail.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
+                    <div class="product_cart">
+                        <button class="product_btn product_btn-buy">Mua Ngay </button>
+                        <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                    </div>
+                </div>
+                <div class="product_name">
+                    <h4><?php echo $value['name']; ?></h4>
+                </div>
+                <div class="product_price product_price-new">
+                    <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
+                </div>
+
+            </div>
+        </div>
+        <?php }
+
+        } ?>
+        </div>
+    </div>
         </div>
         <div class="main-right" >
             <h3> Top sản phẩm bán chạy </h3>
             <div class="main-right-top10" > 
-                <?php
-                    require '../layout/top10_products.php';
+                
+                <?php $cate_id = $row['cate_id'];$id=$_GET['id']; ?>
+                <?php 
+                    $result = hang_hoa_select_by_cung_loai($cate_id);
                 ?>
+                <?php foreach($result as $key => $value){
+                    if ($value['product_id']!=$id){
+                    ?>
+                <div class="col l-3">
+                    <div class="product_item">
+                        <div class="product_img">
+                        <a href="../products/detail.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
+                            <div class="product_cart">
+                                <button class="product_btn product_btn-buy">Mua Ngay </button>
+                                <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                            </div>
+                        </div>
+                        <div class="product_name">
+                            <h4><?php echo $value['name']; ?></h4>
+                        </div>
+                        <div class="product_price product_price-new">
+                            <h4><?php echo number_format($value['price']) . " " . "₫"; ?></h4>
+                        </div>
+
+                    </div>
+                </div>
+                <?php }
+                }?>
             </div>
         </div>
     </main>
+    
     <script>
         const decreaseBtn = document.querySelector('.decrease-btn');
         const increaseBtn = document.querySelector('.increase-btn');
