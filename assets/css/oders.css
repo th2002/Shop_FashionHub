@@ -1,0 +1,16 @@
+.container_oders {
+    width: 100%;
+    position: relative;
+}
+
+.container_oders .title {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.container_oders h6 {
+    display: flex;
+    justify-content: center;
+}
