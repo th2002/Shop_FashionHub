@@ -8,7 +8,7 @@ require_once '../../../../global.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/app.css">
+
     <link rel="shortcut icon" href="<?= $ASSET_URL ?>/images/logos/Main Logo.png">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/bootstrap.min.css">
@@ -16,6 +16,7 @@ require_once '../../../../global.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/oders.css">
     <title>Thanh toán</title>
 </head>
 
@@ -43,7 +44,8 @@ require_once '../../../../global.php';
     ?>
 
     <div class="container_oders">
-        <i style="display: flex; justify-content: center;" class="fa-solid fa-money-check-dollar icon"></i>
+        <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;"
+            class="fa-solid fa-money-check-dollar icon"></i>
         <h3 class="title">THANH TOÁN</h3>
         <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt hàng</h6>
 
