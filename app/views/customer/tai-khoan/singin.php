@@ -106,6 +106,7 @@ require_once $modelPath;
         }elseif($password !== $confirmPassword){
             $errors[] = "Nhập lại mật khẩu sai!";
         }
+
       
         // Nếu không có lỗi, thực hiện đăng ký
         if (empty($errors)) {
@@ -113,6 +114,8 @@ require_once $modelPath;
             if ($register === "false") {
                 $errors[] ="Tên đăng nhập hoặc email đã tồn tại!";
             } elseif($register) {
+                // Đăng ký thành công lưu vào session
+                $_SESSION['user_name'] = $user_name;
                 echo '<script>
                     Swal.fire({
                       icon: "success",

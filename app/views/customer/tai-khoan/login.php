@@ -100,7 +100,7 @@ if (isset($_POST['login'])) {
             </div> -->
             <span>
                 <input type="text" placeholder="Tên tài khoản" name="username"
-                    value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>">
+                    value="<?php echo isset($_POST['username']) ? $_POST['username'] : (isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''); ?>">
             </span>
             <span>
                 <input type="password" placeholder="Mật khẩu" name="password">

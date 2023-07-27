@@ -149,7 +149,7 @@
                     <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
                 </a>
                 <h4 class="nav_acounted-name">Hi, <?php echo $_SESSION['user_fullname']; ?></h4>
-                <a href="<?php echo $baseURL; ?>/tai-khoan/logout.php">Đăng xuất</a>
+                <a href="<?php echo $SITE_URL; ?>/tai-khoan/logout.php">Đăng xuất</a>
             </div>
             <?php else : ?>
             <a class="btn_login" href="<?php echo $SITE_URL; ?>/tai-khoan/login.php">Đăng nhập</a>
