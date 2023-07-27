@@ -1,9 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
-$color1 = isset($_SESSION['color1']) ? $_SESSION['color1'] : '#623f64';
-$color2 = isset($_SESSION['color2']) ? $_SESSION['color2'] : '#0f0d10';
-$color3 = isset($_SESSION['color3']) ? $_SESSION['color3'] : '#6398c9';
+
 
 $modelPath = "$rootDir/app/models/DAO/functions.php";
 
@@ -12,12 +10,12 @@ require_once $modelPath;
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
 if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
   // nếu chưa login thì chuyển về trang login
-  header('Location:' . $baseURL . '/app/views/customer/tai-khoan/login.php');
+  header('Location:' . $SITE_URL . '/tai-khoan/login.php');
   exit();
 }
 
 if($_SESSION['user_role'] != 1){
-  //nếu người dùng ko là admin thì chuyển  về trang người dùng
+  //nếu người dùng ko là admin thì chuyển  về trangngười dùng
   header('Location:' .$baseURL . '/index.php');
   exit();
 }
@@ -34,13 +32,22 @@ if($_SESSION['user_role'] != 1){
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Tải thư viện jquery từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
 .sidebar {
-    background-image: linear-gradient(to left, <?php echo $color1; ?>, <?php echo $color2; ?>, <?php echo $color3; ?>);
+    <?php
+                $start_color = isset($_COOKIE['start_color']) ? $_COOKIE['start_color'] : '#ff0000';
+                $mid_color = isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color'] : '#00ff00';
+                $end_color = isset($_COOKIE['end_color']) ? $_COOKIE['end_color'] : '#0000ff';
+            ?>
+            background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
 }
 
 form {
@@ -186,7 +193,7 @@ select {
         </div>
         <ul class="nav-links">
             <li>
-                <a href="../index.php" class="">
+                <a href="../index.php" class="custom-link" id="link1">
                     <i class="bx bx-grid-alt"></i>
                     <span class="links_name">Dashboard</span>
                 </a>
@@ -198,25 +205,25 @@ select {
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-list-ul"></i>
                     <span class="links_name">Đơn hàng</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-pie-chart-alt-2"></i>
                     <span class="links_name">Làm 1 gậy</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-coin-stack"></i>
                     <span class="links_name">18+</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-book-alt"></i>
                     <span class="links_name">Tổng đơn hàng</span>
                 </a>
@@ -228,13 +235,13 @@ select {
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-message"></i>
                     <span class="links_name">Bình luận</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-heart"></i>
                     <span class="links_name">Favrorites</span>
                 </a>
@@ -246,7 +253,7 @@ select {
                 </a>
             </li>
             <li class="log_out">
-                <a href="<?php echo $SITE_URL ?>/tai-khoan/logout.php">
+                <a href="<?php echo $SITE_URL; ?>/tai-khoan/logout.php">
                     <i class="bx bx-log-out"></i>
                     <span class="links_name">Log out</span>
                 </a>

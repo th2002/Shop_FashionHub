@@ -1,5 +1,16 @@
-<?php
-$baseURL = "http://localhost/Shop_FashionHub";
 
-header("Location: $baseURL/app/views/admin/view/index.php");
-?>
+
+<!-- header -->
+<?php include_once("./parts/header.php"); ?>
+<!-- end header -->
+
+<!-- slidebar -->
+<?php include_once("./parts/slidebar.php"); ?>
+<!-- slidebar -->
+
+<?php include_once("./parts/content.php") ?>
+
+
+<!-- footer -->
+<?php include_once("./parts/footer.php"); ?>
+<!-- end footer -->
