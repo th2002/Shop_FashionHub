@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
     <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -41,15 +42,20 @@
         require_once '../layout/nav.php';
     ?>
 
-    <?php
-        require_once '../layout/slider.php';
-    ?>
+
     </header>
 
+    <div>
+        <?php
+        require_once '../layout/slider.php';
+        ?>
+    </div>
 
-    <?php
+    <div>
+        <?php
         require_once '../home/home-page.php';
-    ?>
+        ?>
+    </div>
 
     <footer>
         <div class="row">

@@ -67,7 +67,7 @@ html{
 }
 .banner_top__right-year h4{
     line-height: var(--banner__top-height);
-    padding: 0 15px 0 10px;
+    padding: 0 14px 0 10px;
     font-weight: 700;
     letter-spacing: 4px;
     font-size: 15px;
@@ -149,20 +149,20 @@ nav{
     left: 60%;
     display: flex;
     align-items: center;
-    width: 500px;
+    width: 633px;
     margin-left: 50px;
 }
 .nav__seach{
+    margin-right: 20px;
     border-radius: 10px;
     width: 260px;
     height: 35px;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow: hidden;
     border: 1px solid #E4E7EB;
     background-color: #E4E7EB;
-    margin-left: 40px;
+    
 }
 .navbar_seach-input{
     padding-left: 6px;
@@ -324,9 +324,8 @@ nav{
     display: none;
 }
 .nav__acount{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 0;
 }
 .nav_no-acount{
     display: flex;
@@ -341,16 +340,21 @@ nav{
 }
 .nav__acounted{
     display: flex;
-    justify-content: center;
-    align-items: center;    
     margin-left: 5px;
-    display: none;
+    width: 200px;
 }
 .nav__acounted h4{
+    display: flex;
+    align-items: center;
     margin: 0 16px 0 10px;
+    font-weight: bold;
+    font-size: 18px;
 }
 .nav__acounted a{
     text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
 }
 .nav_no-acount a:hover{
     color: #d42a2a;
@@ -362,15 +366,13 @@ nav{
     text-decoration: underline;
     transition: 0.15s all linear;
 }
-.display-item{
-    display: flex;
-}
 /*slider*/
 .slider{
     margin-top: 20px;
     width: 100%;
     height: 400px;
     object-fit: cover;
+    margin-bottom: 350px;
 }
 .slider__img-item{
     width: 100%;
@@ -379,7 +381,7 @@ nav{
 }
 /*container*/
 .container{
-    margin-top: 220px;
+
 }
 .container__popular{
     display: flex;
@@ -392,7 +394,7 @@ nav{
 }
 .container__popular-list{
     margin-top: 50px;
-
+    margin-bottom: 30px;
 }
 .container__handpicked{
     position: relative;
@@ -825,12 +827,13 @@ li.slick-active button {
 
 .container_oders {
     width: 100%;
+    position: relative;
 }
 
 .container_oders .title {
     display: flex;
     justify-content: center;
-    margin-top: 70px;
+    margin-top: 20px;
     margin-bottom: 5px;
 }
 
