@@ -19,6 +19,10 @@ $imageURL = "$contentURL/images";
 $cssURL = "$contentURL/css";
 $jsURL = "$contentURL/js";
 
+// Đường dẫn đến assets
+$assets_css = "$baseURL/assets/css";
+$assets_js = "$baseURL/assets/js";
+
 
 // Đường dẫn tới các file trong thư mục views/admin
 

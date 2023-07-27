@@ -187,14 +187,14 @@ $users = getAllUsers();
     <div class="menu-left">
         <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
-        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
-                    class="fas fa-file-excel"></i>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i class="fas fa-file-excel"></i>
                 Xuất Excel</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
-
+        <h4 class="add-category"><a href="#" onclick="deleteAllUser()" class="add-links" id="In"><i class="fas fa-print"></i>
+                Xoá All</a></h4>
 
     </div>
     <div class="menu-right">
@@ -203,45 +203,62 @@ $users = getAllUsers();
     </div>
 </div>
 <div class="table">
-<table class="category-table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên người dùng</th>
-            <th>Email</th>
-            <th>Ngày đăng ký</th>
-            <th>Địa chỉ Ip</th>
-            <th>Vai trò</th>
-            <th>Thao tác</th>
+    <table class="category-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên người dùng</th>
+                <th>Email</th>
+                <th>Ngày đăng ký</th>
+                <th>Địa chỉ Ip</th>
+                <th>Vai trò</th>
+                <th>Thao tác</th>
 
 
 
 
 
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach( $users as $user){ ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $user) { ?>
 
                 <tr>
                     <td><?= $user['id']; ?></td>
-                    <td><?= $user['user_name'];?></td>
-                    <td><?= $user['email'];?></td>
-                    <td><?= $user['register_date'];?></td>
-                    <td><?= $user['ip_address'];?></td>
-                    <td><?= $user['role'] ? 'admin' : 'người dùng';?></td>
+                    <td><?= $user['user_name']; ?></td>
+                    <td><?= $user['email']; ?></td>
+                    <td><?= $user['register_date']; ?></td>
+                    <td><?= $user['ip_address']; ?></td>
+                    <td><?= $user['role'] ? 'admin' : 'người dùng'; ?></td>
 
 
                     <td class="action-links">
-                        <a href="editUsers.php?id=<?php echo $user['id']; ?>"  class="btn-sua">Sửa</a>
-                        <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>
+                        <a href="editUsers.php?id=<?php echo $user['id']; ?>" class="btn-sua">Sửa</a>
+                        <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')" class="btn-xoa">Xóa</a>
                     </td>
                 </tr>
             <?php } ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>
-
+<script>
+    function deleteAllUser(){
+        if(confirm('Bạn có chắc muốn xoá all ngời dùng?')){
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $controller; ?>/admin/deleteAllUser.php',
+                success: function(response){
+                    if(response === 'success'){
+                        alert("Xoá tất cả nguòi dùng thành công!");
+                        window.location.href = "<?php echo $controller; ?>/admin/users.php";
+                    }else{
+                        alert("Xoá all user thất bại!");
+                    }
+                }
+            });
+        }
+    }
+</script>
 
 
 <!-- footer -->
