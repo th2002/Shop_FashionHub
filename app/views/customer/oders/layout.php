@@ -129,7 +129,8 @@ require_once '../../../../global.php';
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary" style="width: 100%;" type="button" id="liveToastBtn">ĐẶT
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        style="width: 100%;" type="button">ĐẶT
                         HÀNG</button>
                 </div>
             </form>
@@ -141,6 +142,26 @@ require_once '../../../../global.php';
             // Định dạng giờ/phút
             $previous_time_formatted = date("H:i", $current_time);
             ?>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Xin chào !</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn xác nhận mua hàng ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary" id="liveToastBtn">Đồng ý</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Toast -->
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -206,6 +227,7 @@ require_once '../../../../global.php';
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="<?= $ASSET_URL ?>/js/bootstrap.bundle.min.js"></script>
     <script src="<?= $ASSET_URL ?>/js/snippets.js"></script>
+    <script src="<?= $ASSET_URL ?>/js/modal.js"></script>
 </body>
 
 </html>
