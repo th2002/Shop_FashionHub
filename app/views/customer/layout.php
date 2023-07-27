@@ -42,15 +42,20 @@
         require_once '../layout/nav.php';
     ?>
 
-    <?php
-        require_once '../layout/slider.php';
-    ?>
+
     </header>
 
+    <div>
+        <?php
+        require_once '../layout/slider.php';
+        ?>
+    </div>
 
-    <?php
+    <div>
+        <?php
         require_once '../home/home-page.php';
-    ?>
+        ?>
+    </div>
 
     <footer>
         <div class="row">

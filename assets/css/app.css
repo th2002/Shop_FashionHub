@@ -67,7 +67,7 @@ html{
 }
 .banner_top__right-year h4{
     line-height: var(--banner__top-height);
-    padding: 0 15px 0 10px;
+    padding: 0 14px 0 10px;
     font-weight: 700;
     letter-spacing: 4px;
     font-size: 15px;
@@ -371,6 +371,7 @@ nav{
     width: 100%;
     height: 400px;
     object-fit: cover;
+    margin-bottom: 350px;
 }
 .slider__img-item{
     width: 100%;
@@ -379,7 +380,7 @@ nav{
 }
 /*container*/
 .container{
-    margin-top: 220px;
+
 }
 .container__popular{
     display: flex;
@@ -392,7 +393,7 @@ nav{
 }
 .container__popular-list{
     margin-top: 50px;
-
+    margin-bottom: 30px;
 }
 .container__handpicked{
     position: relative;
