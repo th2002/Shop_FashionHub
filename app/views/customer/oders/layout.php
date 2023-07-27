@@ -1,5 +1,7 @@
 <?php
-require_once '../../../../global.php';
+
+
+$provinces = thanh_pho_select_all();
 ?>
 
 <!DOCTYPE html>
@@ -74,29 +76,63 @@ require_once '../../../../global.php';
                         <input type="text" class="form-control" id="validationCustomUsername"
                             aria-describedby="inputGroupPrepend" required>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Please choose a address.
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-12">
-                    <label for="validationCustom03" class="form-label">Thành phố</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <label class="form-label">Thành phố</label>
+                    <select id="city" class="form-select" aria-label="Default select example" name="city" id="city">
                         <option selected>...</option>
-                        <option value="1">Hồ Chí Minh</option>
-                        <option value="2">Hà Nội</option>
-                        <option value="3">Huế</option>
+                        <!-- Lặp qua mảng $provinces để tạo các option -->
+                        <?php
+                        foreach ($provinces as $province) {
+                            echo '<option value="' . $province["id"] . '">' . $province["_name"] . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
 
+                <script>
+                // Lắng nghe sự kiện khi người dùng thay đổi giá trị của select "Thành phố"
+                document.getElementById("city").addEventListener("change", function() {
+                    // Lấy giá trị đã chọn trong select "Thành phố"
+                    var selectedCityId = this.value;
+
+                    // Lưu id của thành phố vào session storage
+                    sessionStorage.setItem("selectedCityId", selectedCityId);
+
+                });
+                </script>
+                <?php
+
+
+                // Kiểm tra xem session "selectedCityId" đã tồn tại chưa
+                if (isset($_SESSION['selectedCityId'])) {
+                    $selectedCityId = $_SESSION['selectedCityId'];
+                } else {
+                    // Nếu chưa có session, gán giá trị mặc định hoặc xử lý tùy ý
+                    $selectedCityId = "1";
+                }
+
+                // Truy vấn SQL để lấy danh sách các quận/huyện dựa vào id thành phố đã chọn
+
+                $districts = quan_select_by_id_thanh_pho($selectedCityId);
+                ?>
                 <div class="col-md-12">
                     <label for="validationCustom03" class="form-label">Quận / Huyện</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select id="district" class="form-select" aria-label="Default select example">
                         <option selected>...</option>
-                        <option value="1">Quận 12</option>
-                        <option value="2">Quận 6</option>
-                        <option value="3">Gò Vấp</option>
+                        <?php
+                        foreach ($districts as $district) {
+                            echo '<option value="' . $district["id"] . '">' . $district["_name"] . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
+
+
 
                 <div class="col-md-12">
                     <label for="validationCustom03" class="form-label">Phường / Xã</label>
