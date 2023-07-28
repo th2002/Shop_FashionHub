@@ -195,6 +195,7 @@
     <script src="<?=$ASSET_URL?>/js/slider.js"></script>
     <script src="<?=$ASSET_URL?>/js/page.js"></script>
 
+    <!-- Scroll trang web về đầu trang -->
     <script>
     function scrollToTop() {
         // Cuộn trang web về đầu trang với hiệu ứng mượt mà
@@ -215,6 +216,7 @@
     });
     </script>
 
+    <!-- Scroll trang web đến phần danh mục khi click <a>Danh mục</a> -->
     <script>
     function scrollToDiv(event) {
         event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
