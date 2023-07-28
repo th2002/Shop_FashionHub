@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="../../../../../assets/css/grid.css">
     <link rel="stylesheet" href="../../css/app.css">
-
+    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,14 +21,19 @@
 </head>
 <style>
     header {
-        width: 100%;
         display: flex;
         margin-top: 30px ;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
+        margin-right: auto;
+        margin-left: auto;
+        width: 1200px;
     }
     header > .header-left {
         flex : 1 ; 
         height: 500px;
-        margin-left:100px;
+        margin-left:10px;
     }
     header > .header-left > .header-left-img > .header-left-img-pro > .header-left-img-main > img  {
         width: 400px;
@@ -42,7 +47,7 @@
         width: 100%;
         flex : 2 ;
         height: 500px;
-        margin-right:100px;
+        margin-right:10px;
         padding-left: 30px ;
         display: flex;
         flex: 1 1 auto ;
@@ -313,12 +318,30 @@
         flex-direction: column
     }
     .comment-section {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin:10px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin:10px;
     }
-
+    .comment-section > .nav__acounted{
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 1rem 0 1rem 1.25rem;
+    }
+    .comment-section > .nav__acounted > .noi_dung{
+        display:flex ;
+        align-items: baseline;
+        flex-direction: column;
+        
+    }
+    .comment-section > .nav__acounted > .noi_dung > .content {
+        margin-top: 0.75rem;
+        font-size: 20px;
+        line-height: 1.25rem;
+        color: black;
+        word-break: break-word;
+        visibility: visible;
+    }
     .comment-section h2 {
     font-size: 24px;
     margin-bottom: 10px;
@@ -457,10 +480,16 @@
                 <div class="pro-giua-giua" >
                     <div class="pro-giam_gia">
                             <div class="mini-vouchers-laurel">Mã giảm giá của shop</div>
-                            <div class="mini-vouchers">giam 5k</div>
-                            <div class="mini-vouchers">giam 10k</div>
-                            <div class="mini-vouchers">giam 15k</div>
-                            <div class="mini-vouchers">giam 10k</div>
+                            <?php
+                                $coupons = hang_hoa_select_coupon();
+                            ?>
+                            <?php
+                                foreach($coupons as $coupon){
+                            ?>
+                            <div class="mini-vouchers"><?php echo $coupon['code']; ?>:<?php echo $coupon['value']; ?><?php echo $coupon['type']; ?></div>
+                            <?php
+                                }
+                            ?>
                     </div>
                     <div class="pro-loai" style="margin-bottom: 8px; align-items: baseline;">
                         <label class="name-loai">Phân loại</label>
@@ -556,14 +585,25 @@
                                                                 WHERE b.product_id=$id ORDER BY create_at DESC";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    echo "<ul>";
-                    foreach ($result as $bl) {
-                    echo "
-                    <li>$bl[content] <i class='pull-right'><b>$bl[full_name]</b>, $bl[create_at]</i></li>;
                     
-                    ";
+                    foreach ($result as $bl) {
+                    ?>
+                    <!-- <li> <b>$bl[full_name]</b> Nội dung : $bl[content] <i class='pull-right'>, $bl[create_at]</i> </li> -->
+                    <div class="nav__acounted display-item">
+                        <a href="<?php echo $SITE_URL; ?>/page_user/index.php" style="color: black;">
+                            <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
+                        </a>
+                        <div class="noi_dung">
+                            <h4 class="nav_acounted-name"><?php echo $_SESSION['user_fullname']; ?></h4>
+                            <i class='pull-right'><?php echo $bl['create_at'] ?></i>
+                            <div class="content">
+                                <?php echo $bl['content'] ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
                     }
-                    echo "</ul>";
+                    
                 } else {
                     echo "Không có bình luận nào.";
                 }
@@ -616,7 +656,7 @@
     </div>
         </div>
         <div class="main-right" >
-            <h3> Top sản phẩm bán chạy </h3>
+            <h3> Top sản phẩm cùng loại </h3>
             <div class="main-right-top10" > 
                 
                 <?php $cate_id = $row['cate_id'];$id=$_GET['id']; ?>
@@ -667,4 +707,5 @@
         quantityInput.value = currentValue + 1;
         });
     </script>
+    
 </body>

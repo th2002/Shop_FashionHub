@@ -71,9 +71,9 @@
             </div>
             <div class="panel-footer">
             <?php
-                // if(!isset($_SESSION['user'])){
-                //     echo '<b class="text-danger">Đăng nhập để bình luận về sản phẩm này</b>';
-                // }else{
+                if(!isset($_SESSION['user'])){
+                    echo '<b class="text-danger">Đăng nhập để bình luận về sản phẩm này</b>';
+                }else{
             ?>
                 <form action="" method="post">
                     <div class="form-group">
@@ -88,8 +88,7 @@
                     </div>
                 </form>                
             <?php 
-                // } 
-                
+                } 
             ?>
             
             

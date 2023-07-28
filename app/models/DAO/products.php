@@ -6,6 +6,10 @@ function hang_hoa_select_all(){
     $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id";
     return  pdo_query($sql);
 }
+function hang_hoa_select_coupon(){
+    $sql = "SELECT * FROM coupon WHERE 1";
+    return  pdo_query($sql);
+}
 //Truy vấn một hàng hóa theo mã
 function hang_hoa_select_by_id($id){
     $sql = "SELECT * FROM products WHERE id=?";
