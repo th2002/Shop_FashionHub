@@ -81,32 +81,12 @@ $provinces = thanh_pho_select_all();
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <label name="calc_shipping_provinces" class="form-label">Thành phố</label>
-                    <select id="city" class="form-select" aria-label="Default select example" name="city" id="city">
-                        <option selected>...</option>
-                        <!-- Lặp qua mảng $provinces để tạo các option -->
-                        <?php
-                        foreach ($provinces as $province) {
-                            echo '<option value="' . $province["id"] . '">' . $province["_name"] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-
-                <div class="col-md-12">
-                    <label name="calc_shipping_district" for="validationCustom03" class="form-label">Quận /
-                        Huyện</label>
-                    <select id="district" class="form-select" aria-label="Default select example">
-                        <option selected>...</option>
-                        <?php
-                        foreach ($districts as $district) {
-                            echo '<option value="' . $district["id"] . '">' . $district["_name"] . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-
+                <select name="calc_shipping_provinces" required="">
+                    <option value="">Tỉnh / Thành phố</option>
+                </select>
+                <select name="calc_shipping_district" required="">
+                    <option value="">Quận / Huyện</option>
+                </select>
                 <input class="billing_address_1" name="" type="hidden" value="">
                 <input class="billing_address_2" name="" type="hidden" value="">
 
@@ -311,7 +291,6 @@ $provinces = thanh_pho_select_all();
     //]]>
     </script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="<?= $ASSET_URL ?>/js/bootstrap.bundle.min.js"></script>
     <script src="<?= $ASSET_URL ?>/js/snippets.js"></script>
     <script src="<?= $ASSET_URL ?>/js/modal.js"></script>
