@@ -10,9 +10,9 @@ $loi="";
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if(isset($matkhaucu)==true){
-            if ( password_verify($matkhaucu, $user['password'])==0){
-                $loi.="Mật khẩu cũ không đúng<br>";
-            }
+           $loi.="Không được bỏ trống mật khẩu cũ<br>"; 
+        }else if ( password_verify($matkhaucu, $user['password'])==0){
+            $loi.="Mật khẩu cũ không đúng<br>";
         }
         if(strlen($matkhaumoi_1)<6){
             $loi.="Mật khẩu mới quá ngắn<br>";
