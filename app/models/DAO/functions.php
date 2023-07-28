@@ -385,17 +385,55 @@ function getCategoriesWithPagination($limit, $offset) {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Thêm mã giảm giá
+
+
+// Hàm  thê mã giảm giá
 function addCoupon($code, $type, $value, $status, $date_end){
     global $db;
-    $create_at = date("Y-m-d");
+
+    $create_at = date("y-m-d");
     $update_at = date("Y-m-d");
-    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) values(?, ?, ?, ?, ?, ?, ?)");
     $query->execute([$code, $type, $value, $status, $date_end, $create_at, $update_at]);
 
-    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+    return $query->rowCount() > 0; 
+
 }
 
+// Hàm update mã giảm giá
+
+function updateCoupon($id, $code, $type, $value, $status, $date_end){
+    global $db;
+
+    $update_at = date("Y-m-d");
+
+    $query = $db->prepare("UPDATE coupon set code = ?, type = ?, value = ?, status = ?, date_end = ?, update_at = ? where id = ?");
+    $query->execute([$code, $type, $value, $status, $date_end, $update_at, $id]);
+
+    return $query->rowCount() > 0;
+}
+
+// Hàm lấy mã giảm giá theo id
+
+function getCouponId($id){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM coupon where id = ?");
+    $query->execute([$id]);
+    return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+
+// Hàm lấy danh sách mã giảm giá
+function couponList(){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM coupon");
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 // functions.php
 
 // Include TCPDF library

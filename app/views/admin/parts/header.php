@@ -203,9 +203,9 @@ select {
                 </a>
             </li>
             <li>
-                <a href="#" class="custom-link" id="link1">
+                <a href="<?= $viewURL; ?>/view/categoryList.php" >
                     <i class="bx bx-list-ul"></i>
-                    <span class="links_name">Đơn hàng</span>
+                    <span class="links_name">Danh mục</span>
                 </a>
             </li>
             <li>
@@ -223,7 +223,7 @@ select {
             <li>
                 <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-book-alt"></i>
-                    <span class="links_name">Tổng đơn hàng</span>
+                    <span class="links_name">Đơn hàng</span>
                 </a>
             </li>
             <li>
