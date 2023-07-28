@@ -34,7 +34,7 @@
 
 
     <div class="container__banner">
-        <img class="container__banner-img"
+        <img loading="lazy" class="container__banner-img"
             src="<?=$ASSET_URL?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
     </div>
 
@@ -99,7 +99,7 @@
 
         </ul>
     </div>
-    <div class="container__grid_img">
+    <div class="container__grid_img" id="container__grid_img">
         <div class="container__grid_img-row-1">
             <div class="container__grid_img-1">
                 <div class="container__grid_img-content-1">

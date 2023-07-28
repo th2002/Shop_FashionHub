@@ -17,6 +17,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
     <title>Shop FashionHub</title>
+
+    <style>
+    /* CSS cho nút cuộn lên đầu */
+    .scroll-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+        cursor: pointer;
+        background-color: gray;
+        z-index: 999;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+    }
+
+    .scroll-to-top i {
+        display: flex !important;
+        line-height: 60px;
+        justify-content: center;
+    }
+    </style>
 </head>
 
 <body>
@@ -57,6 +81,10 @@
         ?>
     </div>
 
+    <div class="scroll-to-top" onclick="scrollToTop()">
+        <i class="fa-solid fa-arrow-up fa-2xl"></i>
+    </div>
+
     <footer>
         <div class="row">
             <div class="col l-3">
@@ -77,7 +105,7 @@
                                 <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
                             </li>
                             <li class="footer_item-des">
-                                <img class="footer_item-logo" src="../../content/images/logos/image0.png" alt="">
+                                <img class="footer_item-logo" src="<?=$ASSET_URL?>/images/logos/image0.png" alt="">
                             </li>
                         </ul>
                     </div>
@@ -166,6 +194,42 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="<?=$ASSET_URL?>/js/slider.js"></script>
     <script src="<?=$ASSET_URL?>/js/page.js"></script>
+
+    <script>
+    function scrollToTop() {
+        // Cuộn trang web về đầu trang với hiệu ứng mượt mà
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // Thêm hiệu ứng cuộn mượt
+        });
+    }
+
+    // Hiển thị hoặc ẩn nút cuộn lên đầu dựa vào vị trí cuộn của trang
+    window.addEventListener("scroll", function() {
+        const scrollToTopButton = document.querySelector(".scroll-to-top");
+        if (window.pageYOffset > 100) {
+            scrollToTopButton.style.display = "block";
+        } else {
+            scrollToTopButton.style.display = "none";
+        }
+    });
+    </script>
+
+    <script>
+    function scrollToDiv(event) {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+        const divToScroll = document.getElementById("container__grid_img");
+        const offsetTop = divToScroll.getBoundingClientRect().top;
+        const navHeight = 0; // Thay đổi giá trị này tùy thuộc vào chiều cao của menu navigation (nếu có)
+
+        // Cuộn đến vị trí của divToScroll với hiệu ứng mượt mà
+        window.scrollTo({
+            top: offsetTop + window.scrollY - navHeight,
+            behavior: "smooth" // Thêm hiệu ứng cuộn mượt
+        });
+    }
+    </script>
 </body>
 
 </html>

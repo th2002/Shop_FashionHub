@@ -7,7 +7,7 @@
     <div class="list">
         <div class="product_item">
             <div class="product_img">
-                <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
+                <img loading="lazy" src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
                 <div class="product_cart">
                     <button class="product_btn product_btn-buy">Mua Ngay </button>
                     <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>

@@ -51,7 +51,7 @@ $provinces = thanh_pho_select_all();
         <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;"
             class="fa-solid fa-money-check-dollar icon"></i>
         <h3 class="title">THANH TOÁN</h3>
-        <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt hàng</h6>
+        <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt Hàng</h6>
 
         <div class="row">
             <form class="row g-3 needs-validation col-md-6" style="margin: 30px 0 0 40px;" novalidate>

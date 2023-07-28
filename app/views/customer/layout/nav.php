@@ -3,16 +3,16 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="../home?index" class="nav__page-link">Trang Chủ</a>
+                <a href="../home" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?contact" class="nav__page-link">Liên Hệ</a>
+                <a href="home" class="nav__page-link">Liên Hệ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?about" class="nav__page-link">Giới Thiệu</a>
+                <a href="home" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?category" class="nav__page-link">Danh mục</a>
+                <a href="#container__grid_img" onclick="scrollToDiv(event)" class="nav__page-link">Danh mục</a>
             </li>
         </ul>
     </div>
