@@ -1,4 +1,7 @@
 <div class="container">
+    <div id="toast">
+
+    </div>
     <div class="container__popular">
         <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
     </div>
