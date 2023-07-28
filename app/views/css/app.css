@@ -223,9 +223,10 @@ nav{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 5px;
   }
   .nav_cart-item-left{
-    width: 100px;
+    max-width: 35px;
     height: auto;
     overflow: hidden;
     border: 1px solid #dbd9d9;
@@ -269,7 +270,7 @@ nav{
   
   .nav_cart-item-text{
     color: red;
-
+    margin-right: 5px;
   }
   .nav_cart-item-quantity{
     color: #333;
