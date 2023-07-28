@@ -180,11 +180,11 @@ $provinces = thanh_pho_select_all();
                 </div>
             </form>
 
-            <!-- Thời gian thực giờ/phút -->
+            <!-- real time -->
             <?php
-            // Lấy thời gian hiện tại
+            // take time now
             $current_time = time();
-            // Định dạng giờ/phút
+            // format 
             $previous_time_formatted = date("H:i", $current_time);
             ?>
 
@@ -235,31 +235,65 @@ $provinces = thanh_pho_select_all();
                             <th style="text-align: center;" scope="col">Giá</th>
                         </tr>
                     </thead>
+
                     <tbody style="margin-top: 30px">
+                        <?php
+                        $count = 0;
+                        $totalPrice = 0; // total money
+                        $itemPrice = 0; // price product now
+                        ?>
+                        <?php
+                        if (isset($_SESSION['data-cart'])) {
+                            $data = $_SESSION['data-cart'];
+                        }
+                        foreach ($data as $key => $item) {
+                            if ($key === 'totalQuantity') {
+                                continue;
+                            }
+
+                            $count++;
+                            
+                            if (!empty($item['price'])) {
+                                $itemPrice = (int)str_replace(',', '', $item['price']); // remove ',' from price string and => integer
+                                $totalPrice += $itemPrice; // plus price product => total money
+                            }
+                        ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td style="text-align: center;">Áo hoodie</td>
-                            <td style="text-align: center;" colspan="">1</td>
-                            <td style="text-align: center;" colspan="2">3,000,000</td>
+                            <th scope="row"><?php echo $count ?></th>
+                            <td style="text-align: center;">
+                                <span><?= $item['name'] ?></span>
+                            </td>
+                            <td style="text-align: center;" colspan="">
+                                <?php
+                                    echo $item['quantity']; 
+                                ?>
+                            </td>
+                            <td style="text-align: center;" colspan="2">
+                                <?php                                   
+                                    $amount_vnd = $item['price']; // "12,000,000"
+                                    $amount_vnd = str_replace(",", "", $amount_vnd); // "12 000 000 đ"
+                                    $amount_vnd = str_replace("₫", "", $amount_vnd); // "12 000 000"
+                                    $amount_integer = (int)$amount_vnd; // 12 000 000
+                                    $total = (int)$item['quantity'] * $amount_integer; // chưa lấy được số lượng 
+                                    $amount_vnd = number_format($total, 0, ',', ',') . " ₫"; // 12,000,000 đ
+                                    echo $amount_vnd;                                   
+                                ?>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td style="text-align: center;">Áo hoodie</td>
-                            <td style="text-align: center;" colspan="">2</td>
-                            <td style="text-align: center;" colspan="2">3,000,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td style="text-align: center;">Áo hoodie</td>
-                            <td style="text-align: center;" colspan="">3</td>
-                            <td style="text-align: center;" colspan="2">3,000,000</td>
-                        </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td style="text-align: center;" colspan="3">Tổng tiền</td>
-                            <td style="text-align: center;" colspan="2">9,000,000</td>
+                            <td style="text-align: center;" colspan="2">
+                                <?php
+                                    echo number_format($totalPrice, 0, ',', ',') . ' đ'; // print total money
+                                ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+
             </div>
         </div>
 

@@ -1,21 +1,22 @@
 <?php
-session_start();
+include '../../../../global.php';
 include '../../../models/DAO/connect.php';
 include '../../../models/DAO/products.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Giỏ hàng</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" href="../../../../assets/css/grid.css">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/grid.css">
     <link rel="stylesheet" href="../../css/app.css">
     <link rel="stylesheet" href="../../css/toast.css">
-    <link rel="stylesheet" href="../../../../assets/css/app.css">
-    <link rel="stylesheet" href="../../../../assets/css/page-user.css">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/app.css">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/page-user.css">
+    <link rel="shortcut icon" href="<?= $ASSET_URL ?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -237,7 +238,7 @@ include '../../../models/DAO/products.php';
         <div class="header_logo">
             <div class="grid wide">
                 <div class="header_logo-box">
-                    <img src="../../../../assets/images/logos/FhashionHub2-removebg-preview.png" alt=""
+                    <img src="<?= $ASSET_URL ?>/images/logos/FhashionHub2-removebg-preview.png" alt=""
                         class="header_logo-item">
                     <div class="header_title-box">
                         <h2 class="header_logo-title">Giỏ Hàng</h2>
@@ -267,8 +268,8 @@ include '../../../models/DAO/products.php';
                             } ?>
 
                         <tr class="cart-item">
-                            <?php 
-                                        $id = $item['id'];
+                            <?php
+                                $id = $item['id'];
                                 ?>
                             <td>
                                 <input class="cart-item__checkbox" type="checkbox">
@@ -284,45 +285,45 @@ include '../../../models/DAO/products.php';
                                     </div>
                                     <div class="product-cate">
                                         <h4>Danh Mục:</h4>
-                                        <?php 
-                                                $cate = select_category_by_id($id);
+                                        <?php
+                                            $cate = select_category_by_id($id);
                                             ?>
-                                        <span><?=$cate[0]['cate_name']?></span>
+                                        <span><?= $cate[0]['cate_name'] ?></span>
                                     </div>
                                 </div>
                             </td>
                             <td class="cart-item__price--old">
                                 <?php
-                                        $priceSale = select_price_sale_by_id($id);
-                                        if(!empty($priceSale)){
-                                            if(!empty($priceSale[0]['sale_price'])){
-                                                $price = number_format($priceSale[0]['sale_price'], 0, ',', ',');
-                                                echo $price .' '.'đ';
-                                            }else{
-                                                echo '';
-                                            }
+                                    $priceSale = select_price_sale_by_id($id);
+                                    if (!empty($priceSale)) {
+                                        if (!empty($priceSale[0]['sale_price'])) {
+                                            $price = number_format($priceSale[0]['sale_price'], 0, ',', ',');
+                                            echo $price . ' ' . 'đ';
+                                        } else {
+                                            echo '';
                                         }
+                                    }
                                     ?>
 
                             </td>
                             <td class="cart-item__price"><?= $item['price'] ?></td>
                             <td>
                                 <?php
-                                        $sizeId = select_size_hang_hoa_by_id($id);
-                                        $sizeAll = select_size_by_id($sizeId);
-                                        if (!empty($sizeAll)) {?>
+                                    $sizeId = select_size_hang_hoa_by_id($id);
+                                    $sizeAll = select_size_by_id($sizeId);
+                                    if (!empty($sizeAll)) { ?>
                                 <select class="cart-item__size">
                                     <?php
                                             foreach ($sizeAll as $size) { ?>
                                     <option value=""><?= $size['name_size'] ?></option>
                                     <?php
-                                            }?>
+                                            } ?>
                                 </select>
                                 <?php
-                                        } else {
-                                            echo '<span>No size</span>';
-                                        }
-                                        ?>
+                                    } else {
+                                        echo '<span>No size</span>';
+                                    }
+                                    ?>
 
 
                             </td>
@@ -351,7 +352,7 @@ include '../../../models/DAO/products.php';
                             </td>
                             <td>
                                 <div class="product_delete">
-                                    <a href="../../../models/DAO/delete_cart_page.php?id_product=<?=$item['id_price']?>"
+                                    <a href="<?= $DAO_URL ?>/delete_cart_page.php?id_product=<?= $item['id_price'] ?>"
                                         class="product_delete-link">Xóa</a>
                                 </div>
                             </td>
@@ -373,7 +374,7 @@ include '../../../models/DAO/products.php';
                         <div style="display: flex;" class="product_pay-all">
                             <p>Tổng Thanh Toán(0 sản phẩm):</p>
                             <span class="product_pay-all-price">0đ</span>
-                            <button style="padding: 0 5px;">Mua Hàng</button>
+                            <a href="<?= $SITE_URL ?>/oders"><button style="padding: 0 5px;">Mua Hàng</button></a>
                         </div>
                     </div>
                 </div>
