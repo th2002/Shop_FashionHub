@@ -81,21 +81,82 @@ $provinces = thanh_pho_select_all();
                     </div>
                 </div>
                 <!-- code select -->
-                <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn tỉnh thành</option>
-                </select>
-
-                <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn quận huyện</option>
-                </select>
-
-                <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-                    <option value="" selected>Chọn phường xã</option>
-                </select>
                 <div class="col-md-12">
-                    <label for="validationCustom03" class="form-label">Phương thức thanh toán</label>
+                    <select style="margin-bottom: 20px;" class="form-select" aria-label="Default select example"
+                        id="city">
+                        <option value="" selected>Chọn tỉnh thành</option>
+                    </select>
+
+                    <select style="margin-bottom: 20px;" class="form-select" aria-label="Default select example"
+                        id="district">
+                        <option value="" selected>Chọn quận huyện</option>
+                    </select>
+
+                    <select class="form-select" aria-label="Default select example" id="ward">
+                        <option value="" selected>Chọn phường xã</option>
+                    </select>
+                </div>
+
+                <!-- code js -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                <script>
+                var citis = document.getElementById("city");
+                var districts = document.getElementById("district");
+                var wards = document.getElementById("ward");
+                var Parameter = {
+                    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", // data source
+                    method: "GET",
+                    responseType: "application/json",
+                };
+                var promise = axios(Parameter);
+                promise.then(function(result) {
+                    renderCity(result.data);
+                });
+
+                function renderCity(data) {
+                    for (const x of data) {
+                        var opt = document.createElement('option');
+                        opt.value = x.Name;
+                        opt.text = x.Name;
+                        opt.setAttribute('data-id', x.Id);
+                        citis.options.add(opt);
+                    }
+                    citis.onchange = function() {
+                        district.length = 1;
+                        ward.length = 1;
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                            for (const k of result[0].Districts) {
+                                var opt = document.createElement('option');
+                                opt.value = k.Name;
+                                opt.text = k.Name;
+                                opt.setAttribute('data-id', k.Id);
+                                district.options.add(opt);
+                            }
+                        }
+                    };
+                    district.onchange = function() {
+                        ward.length = 1;
+                        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
+                                .selectedIndex].dataset.id)[0].Wards;
+
+                            for (const w of dataWards) {
+                                var opt = document.createElement('option');
+                                opt.value = w.Name;
+                                opt.text = w.Name;
+                                opt.setAttribute('data-id', w.Id);
+                                wards.options.add(opt);
+                            }
+                        }
+                    };
+                }
+                </script>
+                <div class="col-md-12">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>...</option>
+                        <option selected>Phương thức thanh toán</option>
                         <option value="1">COD</option>
                         <option value="2">Bank</option>
                     </select>
@@ -164,7 +225,7 @@ $provinces = thanh_pho_select_all();
             </div>
 
             <div style="margin: 45px 0 0 40px;" class="col-md-5 cart">
-                <table style="margin-top: 55px;" class="table table-bordered table-striped table-hover">
+                <table style="margin-top: 55px;" class="table table-striped table-hover">
                     <h5 class="title_cart">Giỏ hàng</h5>
                     <thead>
                         <tr>
@@ -205,8 +266,9 @@ $provinces = thanh_pho_select_all();
     </div>
 
 
+
+
     <script type="text/javascript" src="<?= $ASSET_URL ?>/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="<?= $ASSET_URL ?>/js/snippets.js"></script>
     <script src="<?= $ASSET_URL ?>/js/modal.js"></script>
     <script src="<?= $ASSET_URL ?>/js/app.js"></script>
