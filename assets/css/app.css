@@ -869,6 +869,9 @@ li.slick-active button {
     height: 100%;
     transition: scale 200ms linear;
 }
+.category_img:hover {
+    cursor: pointer;
+}
 .category_img:hover .category_img-item{
     scale: 110%;
-  }
+}
