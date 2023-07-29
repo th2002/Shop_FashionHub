@@ -20,7 +20,7 @@ html{
     position: relative;
     width: 100%;
     height: var(--banner__top-height);
-    background-color: #E76161;
+    background-color: #f394b4;
     display: flex;
     align-items: center;
 }
@@ -59,7 +59,7 @@ html{
     font-size: 18px;
 }
 .banner_top__right-year{
-    background-color:#F99B7D;
+    background-color: #acdbdc;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,7 +146,9 @@ nav{
 }
 .nav_logo-img{
     width: 100%;
-    
+    object-fit: cover;
+    height: 100%;
+    scale: 2;
 }
 .nav__right{
     position: absolute;
@@ -615,7 +617,7 @@ nav{
 .container__grid_img .container__grid_img-content-3 .btn-bottom,
 .container__grid_img .container__grid_img-content-4 .btn-bottom {
     position: relative;
-    margin-top: 30px;
+    margin-top: 15px;
     background-color: white;
     width: 160px;
     height: 50px;

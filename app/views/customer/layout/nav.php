@@ -18,7 +18,7 @@
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-            <img src="<?= $ASSET_URL ?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
+            <img src="<?= $ASSET_URL ?>/images/logos/FashionHub-removebg-preview.png" alt="" class="nav_logo-img">
         </div>
     </div>
     <div class="nav__right">
@@ -50,7 +50,8 @@
                     ?>
 
                 </ul>
-               <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ Hàng</a>
+                <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ
+                    Hàng</a>
             </div>
         </div>
         <div class="nav__acount">
