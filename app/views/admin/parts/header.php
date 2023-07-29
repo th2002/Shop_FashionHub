@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 
@@ -8,16 +8,16 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
-if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
-  // nếu chưa login thì chuyển về trang login
-  header('Location:' . $baseURL . '/tai-khoan/login.php');
-  exit();
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    // nếu chưa login thì chuyển về trang login
+    header('Location:' . $baseURL . '/tai-khoan/login.php');
+    exit();
 }
 
-if($_SESSION['user_role'] != 1){
-  //nếu người dùng ko là admin thì chuyển  về trangngười dùng
-  header('Location:' .$baseURL . '/index.php');
-  exit();
+if ($_SESSION['user_role'] != 1) {
+    //nếu người dùng ko là admin thì chuyển  về trangngười dùng
+    header('Location:' . $baseURL . '/index.php');
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -41,54 +41,54 @@ if($_SESSION['user_role'] != 1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
-.sidebar {
-    <?php $start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#ff0000';
-    $mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#00ff00';
-    $end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#0000ff';
-    ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
-}
+    .sidebar {
+        <?php $start_color = isset($_COOKIE['start_color']) ? $_COOKIE['start_color'] : '#ff0000';
+        $mid_color = isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color'] : '#00ff00';
+        $end_color = isset($_COOKIE['end_color']) ? $_COOKIE['end_color'] : '#0000ff';
+        ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
+    }
 
-form {
-    width: 50%;
-    margin: auto;
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
-}
+    form {
+        width: 50%;
+        margin: auto;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+    }
 
-.title {
-    text-align: center;
-}
+    .title {
+        text-align: center;
+    }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-}
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 3px;
-    border: none;
-    margin-bottom: 20px;
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
-    border: none;
-    outline: 1px solid #fff;
-}
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 3px;
+        border: none;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+        border: none;
+        outline: 1px solid #fff;
+    }
 
-input.vertical-bar {
-    border-left: 2px solid #ccc;
-    padding-left: 8px;
-    /* Tạo khoảng cách giữa gạch đứng và nội dung input */
-}
+    input.vertical-bar {
+        border-left: 2px solid #ccc;
+        padding-left: 8px;
+        /* Tạo khoảng cách giữa gạch đứng và nội dung input */
+    }
 
-/* Tùy chỉnh kích thước và khoảng cách của input */
-/* input {
+    /* Tùy chỉnh kích thước và khoảng cách của input */
+    /* input {
       width: 300px;
       height: 30px;
       padding: 5px;
@@ -97,90 +97,297 @@ input.vertical-bar {
       border-radius: 4px;
     } */
 
-/* Hiệu ứng nhấp nháy */
-.blink {
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% {
-        border-color: transparent;
+    /* Hiệu ứng nhấp nháy */
+    .blink {
+        animation: blink 1s infinite;
     }
-}
+
+    @keyframes blink {
+        50% {
+            border-color: transparent;
+        }
+    }
 
 
-textarea {
-    height: 100px;
-}
+    textarea {
+        height: 100px;
+    }
 
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
 
-input[type="submit"]:hover {
-    background-color: #3e8e41;
-}
+    input[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
 
-button[type="submit"] {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: none;
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-}
+    button[type="submit"] {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+    }
 
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
 
-.button-container {
-    display: flex;
-    justify-content: space-between;
-}
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
 
-select {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.category_id option {
-    text-shadow: 1px 10px 10px rgba(0, 0, 0, 0.5);
-    /* Đổ bóng với độ mờ */
-    /* Hoặc bạn có thể thay đổi màu sắc của bóng */
-    /* text-shadow: 1px 1px 1px #000; */
-}
-
-.cancel-button {
-    padding: 10px;
-    background-color: red;
-    border-radius: 5px;
-    color: #fff;
-}
-
-.cancel-button:hover {
-    background-color: #ca6262;
-}
-
-@media(max-width:768px) {
-    form {
-        width: 90%;
-        margin: auto;
-        background-color: #f2f2f2;
-        padding: 20px;
+    select {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 5px;
         border-radius: 5px;
-        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
     }
-}
+
+    .category_id option {
+        text-shadow: 1px 10px 10px rgba(0, 0, 0, 0.5);
+        /* Đổ bóng với độ mờ */
+        /* Hoặc bạn có thể thay đổi màu sắc của bóng */
+        /* text-shadow: 1px 1px 1px #000; */
+    }
+
+    .cancel-button {
+        padding: 10px;
+        background-color: red;
+        border-radius: 5px;
+        color: #fff;
+    }
+
+    .cancel-button:hover {
+        background-color: #ca6262;
+    }
+
+    @media(max-width:768px) {
+        form {
+            width: 90%;
+            margin: auto;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    /* table view admin */
+    .menu-chucnang {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+
+
+    }
+
+    .menu-left {
+        display: flex;
+
+    }
+
+
+    .add-category {
+        margin-right: 10px;
+
+    }
+
+    .add-links {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 4px;
+
+    }
+
+    #xuat-excel {
+        background-color: #642de9;
+        transition: background-color 0.9s;
+
+    }
+
+    #xuat-excel:hover {
+        background-color: #34225f;
+        /* Màu nền hover mờ hơn */
+
+    }
+
+    #xuat-pdf {
+        background-color: #e58782;
+        transition: background-color 0.9s;
+    }
+
+    #xuat-pdf:hover {
+        background-color: #915652;
+        /* Màu nền hover mờ hơn */
+    }
+
+    #In {
+        background-color: #128f89;
+        transition: background-color 0.9s;
+    }
+
+    #In:hover {
+        background-color: #2b514f;
+        /* Màu nền hover mờ hơn */
+    }
+
+    .add-links:hover {
+        background-color: #0056b3;
+
+
+    }
+
+    .fas {
+        margin-right: 5px;
+        /* Khoảng cách giữa biểu tượng và chữ "Thêm" */
+        color: #1ee124;
+    }
+
+    h5 {
+        font-size: 18px;
+        color: #333;
+    }
+
+    #current-time {
+        font-size: 16px;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .table {
+        padding: 20px;
+    }
+
+    .category-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: auto;
+        background: #f7f7f7;
+        /* Màu nền bảng */
+        box-shadow: 0 4px 8px 5px rgba(0, 0, 24, 0.8);
+        /* Đổ bóng */
+    }
+
+    .category-table th,
+    .category-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    /* CSS cho các dòng chẵn */
+    .category-table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* CSS cho các dòng khi hover */
+    .category-table tbody tr:hover {
+        background-color: #e6e6e6;
+    }
+
+    .category-table th {
+        background-color: #e1e1e1;
+        font-weight: bold;
+    }
+
+
+
+
+
+    .category-table .action-links a {
+        display: inline-block;
+        margin-right: 5px;
+        color: #fff;
+        padding: 8px 12px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+
+
+    .product-image img {
+        width: 100px;
+        /* Đặt kích thước hình ảnh */
+        height: 100px;
+        /* Căn chỉnh chiều cao tự động */
+        display: block;
+        /* Hiển thị hình ảnh dạng khối */
+        margin: 0 auto;
+        /* Căn giữa hình ảnh */
+    }
+
+    .action-links .btn-sua {
+        background-color: #007bff;
+
+    }
+
+    .action-links .btn-xoa {
+        background-color: #dc3545;
+
+    }
+
+
+    .action-links .btn-sua:hover {
+        background-color: #0056b3;
+    }
+
+
+    .action-links .btn-xoa:hover {
+        background-color: #c82333;
+
+    }
+
+    /* CSS cho trạng thái "Chưa kích hoạt" */
+    .status-inactive {
+        color: red;
+        font-weight: 600;
+    }
+
+    /* CSS cho trạng thái "Đã kích hoạt" */
+    .status-active {
+        color: green;
+
+        font-weight: 600;
+
+    }
+
+    /* CSS cho trạng thái không hợp lệ (nếu có) */
+    .status-invalid {
+        color: orange;
+    }
+
+    /* CSS cho vai trò "admin" */
+    .role-admin {
+        font-weight: 500;
+    }
+
+    /* CSS cho vai trò "người dùng" */
+    .role-user {
+        font-weight: 200;
+
+    }
+
+    @media (max-width: 768px) {
+        .category-table {
+            overflow-x: scroll;
+        }
+    }
+
+    /* end table view admin */
 </style>
 
 <body>
@@ -203,7 +410,7 @@ select {
                 </a>
             </li>
             <li>
-                <a href="<?= $viewURL; ?>/view/categoryList.php" >
+                <a href="<?= $viewURL; ?>/view/categoryList.php">
                     <i class="bx bx-list-ul"></i>
                     <span class="links_name">Danh mục</span>
                 </a>

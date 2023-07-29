@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bảng đẹp hơn</title>
+  <style>
+    /* CSS cho bảng */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* CSS cho lớp status-inactive */
+    .status-inactive {
+      background-color: #f9e1e1;
+      color: #c0392b;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* CSS cho lớp status-active */
+    .status-active {
+      background-color: #d5f7da;
+      color: #27ae60;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* CSS cho lớp status-invalid */
+    .status-invalid {
+      background-color: #f2f2f2;
+      color: #666666;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* CSS cho lớp role-admin */
+    .role-admin {
+      background-color: #3498db;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* CSS cho lớp role-user */
+    .role-user {
+      background-color: #f1c40f;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* Hiệu chỉnh CSS cho bảng */
+    .table-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .table-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .table-container table {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table-container thead {
+      background-color: #f5f5f5;
+    }
+
+    .table-container th,
+    .table-container td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .table-container th {
+      text-transform: uppercase;
+    }
+
+    .table-container tbody tr:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+
+    .table-container tbody tr:hover {
+      background-color: #e6e6e6;
+    }
+
+    .table-container td a {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .table-container td a.btn-sua {
+      background-color: #2980b9;
+    }
+
+    .table-container td a.btn-xoa {
+      background-color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+    <h1>Bảng đẹp hơn</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Ngày tạo</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>User1</td>
+          <td>user1@example.com</td>
+          <td class="role-user">Người dùng</td>
+          <td>2023-07-28</td>
+          <td>
+            <a href="#" class="btn-sua">Sửa</a>
+            <a href="#" class="btn-xoa">Xóa</a>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Admin1</td>
+          <td>admin1@example.com</td>
+          <td class="role-admin">Admin</td>
+          <td>2023-07-28</td>
+          <td>
+            <a href="#" class="btn-sua">Sửa</a>
+            <a href="#" class="btn-xoa">Xóa</a>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>User2</td>
+          <td>user2@example.com</td>
+          <td class="role-user">Người dùng</td>
+          <td>2023-07-28</td>
+          <td>
+            <a href="#" class="btn-sua">Sửa</a>
+            <a href="#" class="btn-xoa">Xóa</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -30,9 +30,30 @@ if(isset($_GET['id'])){
             // thực hiện cập nhật mã giảm giá vào database
             $themma = updateCoupon($id, $code, $type, $value, $status, $date_end);
             if($themma){
-                $error = "Cập nhật mã thành công";
+                echo '<script>
+                Swal.fire({
+                  icon: "success",
+                  title: "Cập nhật voucher thành công",
+                  showCancelButton: false,
+                  confirmButtonText: "OK",
+                  timer: 3000, // 5 giây
+                  timerProgressBar: true,
+                  willClose: function() {
+                    window.location.href = "couponList.php";
+                  }
+                });
+                </script>';
             }else{
-                $error = "Cập nhật mã thất bại!";
+                echo '<script>
+                        window.onload = function() {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Thông báo",
+                                text: "Cập nhật voucher thất bại!",
+                                confirmButtonText: "OK"
+                            });
+                        }
+                      </script>';
             }
         }
 ?>
