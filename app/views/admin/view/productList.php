@@ -8,8 +8,6 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
-
-
 .pagination {
     display: flex;
     justify-content: center;
@@ -33,6 +31,49 @@ include_once("../parts/header.php");
 .pagination .current {
     background-color: #007bff;
     color: #fff;
+}
+
+.menu-chucnang {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.menu-left {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-right {
+    text-align: end;
+}
+
+.add-category {
+    margin: 0;
+}
+
+
+
+
+
+/* Responsive styles */
+@media (max-width: 1050px) {
+    .menu-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 1050px) {
+    .menu-left {
+        margin-bottom: 10px;
+    }
+
+    h5 {
+        font-size: 14px;
+    }
 }
 </style>
 
@@ -106,11 +147,11 @@ $products = getProductsByPage($page, $perPage);
                 <td>
                     <div class="product-image">
                         <?php
-                    $images = getProductImages($product['id']);
-                    foreach ($images as $image) {
-                        echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
-                    }
-                    ?>
+                            $images = getProductImages($product['id']);
+                            foreach ($images as $image) {
+                                echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                            }
+                            ?>
                     </div>
                 </td>
                 <td class="action-links">
@@ -128,7 +169,8 @@ $products = getProductsByPage($page, $perPage);
 <div class="pagination">
     <?php
     // Hàm tạo các liên kết phân trang
-    function generatePaginationLinks($currentPage, $totalPages, $adjacentLinks) {
+    function generatePaginationLinks($currentPage, $totalPages, $adjacentLinks)
+    {
         // Kiểm tra nếu tổng số trang nhỏ hơn hoặc bằng 1 thì không cần hiển thị nút phân trang
         if ($totalPages <= 1) {
             return;
@@ -173,12 +215,12 @@ function deleteAllProducts() {
     if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
         $.ajax({
             type: 'POST',
-            url: '<?php echo $controller;?>/admin/deleteAllProducts.php',
+            url: '<?php echo $controller; ?>/admin/deleteAllProducts.php',
             success: function(response) {
                 if (response === 'success') {
                     alert('Xóa tất cả sản phẩm thành công!');
                     // Chuyển hướng trang sau khi xóa thành công (nếu cần)
-                    window.location.href = '<?php echo $controller;?>/admin/productList.php';
+                    window.location.href = '<?php echo $controller; ?>/admin/productList.php';
                 } else {
                     alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
                 }
