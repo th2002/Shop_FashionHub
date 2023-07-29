@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
     margin: 0;
@@ -9,7 +9,7 @@
     --banner__top-height:48px;
 }
 html{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Bellota';
 }
 
 .wrapper {
@@ -111,7 +111,7 @@ nav{
 .nav__page-item{
     padding: 0 15px;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: bold;
 }
 .nav__page-list:first-child{
     padding-left: 30px;
@@ -120,8 +120,12 @@ nav{
     padding-left: 20px;
 }
 .nav__page-link{
+    display: flex;
+    justify-content: center;
+    width: 110px;
     text-decoration: none;
     color: #000;
+    font-weight: bold;
 }
 .nav__page-item:hover .nav__page-link{
     color: #d42a2a;
@@ -326,7 +330,7 @@ nav{
 }
 .nav__acount{
     position: absolute;
-    right: 0;
+    right: 32px;
 }
 .nav_no-acount{
     display: flex;
