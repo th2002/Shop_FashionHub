@@ -15,19 +15,20 @@ if(isset($_GET['id'])){
 
     // lấy mã giảm theo id
     $coupon = getCouponId($id);
+    $error = "";
 
     if(!empty($coupon) && isset($coupon['id'])){
         // Hiển thị form chỉ khi có mã giảm giá được tìm thấy
         if($_SERVER['REQUEST_METHOD'] === "POST"){
             $code = $_POST['code'];
             $type = $_POST['type'];
-            $status = $_POST['status'];
             $value = $_POST['value'];
+            $status = $_POST['status'];
             $date_end = $_POST['date_end'];
             $update_at = date("Y-m-d");
 
             // thực hiện cập nhật mã giảm giá vào database
-            $themma = updateCoupon($id, $code, $type, $status, $value, $date_end);
+            $themma = updateCoupon($id, $code, $type, $value, $status, $date_end);
             if($themma){
                 $error = "Cập nhật mã thành công";
             }else{
@@ -37,10 +38,14 @@ if(isset($_GET['id'])){
 ?>
         <!-- Mã HTML cho form nhập dữ liệu -->
         <form method="POST" action="">
+            <?php if(!empty($error)) {?>
+                <p><?php echo $error ;?></p>
+
+                <?php } ?>
             <label for="code">Mã</label>
             <input type="text" name="code" value="<?= $coupon['code'];?>"> <br>
 
-            <label for="type">type</label>
+            <label for="type">Kiểu</label>
             <select name="type" id="">
                 <option value="">Chọn Kiểu</option>
                 <option value="amount" <?php if ($coupon['type'] === 'amount') echo 'selected'; ?>>Giảm theo số tiền</option>
@@ -60,7 +65,8 @@ if(isset($_GET['id'])){
             <label for="date_end">Ngày hết hạn</label>
             <input type="date" name="date_end" value="<?= $coupon['date_end'] ;?>"><br>
 
-            <input type="submit" value="Sửa">
+            <button type="submit">Sửa</button>
+
         </form>
 <?php 
     } else { 

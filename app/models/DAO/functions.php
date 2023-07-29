@@ -68,6 +68,29 @@ function deleteProduct($productId){
     return $query->rowCount();
 }
 
+// Hàm xoá mã giảm giá
+function deleteCoupon($id){
+    global $db;
+
+    $query = $db->prepare("DELETE FROM coupon WHERE id = ?");
+    $query->execute([$id]);
+
+    return $query->rowCount();
+}
+
+// hàm xoá tất cả sản phẩm
+function deleteAllCoupon(){
+    global $db;
+
+    try {
+        $query = $db->prepare("DELETE FROM coupon");
+        return $query->execute();
+    } catch (PDOException $e) {
+        error_log("Lổi trong quá trình xoá!" .$e->getMessage());
+        return false;
+    }
+}
+
 // HÀm xóa tất cả sản phẩm
 function deleteAllProducts(){
     global $db;
@@ -402,17 +425,18 @@ function addCoupon($code, $type, $value, $status, $date_end){
 }
 
 // Hàm update mã giảm giá
-
-function updateCoupon($id, $code, $type, $value, $status, $date_end){
+function updateCoupon($id, $code, $type, $value, $status, $date_end) {
     global $db;
 
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("UPDATE coupon set code = ?, type = ?, value = ?, status = ?, date_end = ?, update_at = ? where id = ?");
+    $query = $db->prepare("UPDATE coupon SET code = ?, type = ?, value = ?, status = ?, date_end = ?, update_at = ? WHERE id = ?");
     $query->execute([$code, $type, $value, $status, $date_end, $update_at, $id]);
 
     return $query->rowCount() > 0;
 }
+
+
 
 // Hàm lấy mã giảm giá theo id
 

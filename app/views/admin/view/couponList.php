@@ -196,6 +196,23 @@ h5 {
     background-color: #007bff;
     color: #fff;
 }
+/* CSS cho trạng thái "Chưa kích hoạt" */
+.status-inactive {
+    color: red;
+}
+
+/* CSS cho trạng thái "Đã kích hoạt" */
+.status-active {
+    color: green;
+    background-color: #f0f0f0;
+
+}
+
+/* CSS cho trạng thái không hợp lệ (nếu có) */
+.status-invalid {
+    color: orange;
+}
+
 </style>
 
 
@@ -224,7 +241,7 @@ $coupons = couponList();
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
-        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i
+        <h4 class="add-category"><a href="#" onclick="deleteAllCoupon()" class="add-links" id="In"><i
                     class="fas fa-print"></i>Xóa All</a></h4>
 
 
@@ -248,43 +265,50 @@ $coupons = couponList();
             </tr>
         </thead>
         <tbody>
-            <?php  foreach ($coupons as $coupon){ ?>
-                <tr>
-                    <td><?= $coupon['id']; ?></td>
-                    <td><?= $coupon['code']; ?></td>
-                    <td><?= $coupon['value']; ?></td>
-                    <td><?= $coupon['status']; ?></td>
-                    <td><?= $coupon['update_at']; ?></td>
+    <?php foreach ($coupons as $coupon) { ?>
+        <tr>
+            <td><?= $coupon['id']; ?></td>
+            <td><?= $coupon['code']; ?></td>
+            <td><?= $coupon['value']; ?></td>
+            <td>
+                <?php
+                // Kiểm tra giá trị của trạng thái và áp dụng lớp CSS tương ứng
+                if ($coupon['status'] == '0') {
+                    echo '<span class="status-inactive">Chưa kích hoạt</span>';
+                } elseif ($coupon['status'] == '1') {
+                    echo '<span class="status-active">Đã kích hoạt</span>';
+                } else {
+                    echo '<span class="status-invalid">Trạng thái không hợp lệ</span>';
+                }
+                ?>
+            </td>
+            <td><?= $coupon['update_at']; ?></td>
+            <td class="action-links">
+                <a href="editCoupon.php?id=<?php echo $coupon['id']; ?>" class="btn-sua">Sửa</a>
+                <a href="<?php echo $controller; ?>/admin/deleteCoupon.php?id=<?php echo $coupon['id']; ?>"
+                    onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')"
+                    class="btn-xoa">Xóa</a>
+            </td>
+        </tr>
+    <?php } ?>
+</tbody>
 
-                    <td class="action-links">
-                    <a href="editCoupon.php?id=<?php echo $coupon['id']; ?>" class="btn-sua">Sửa</a>
-                    <!-- <a href="../controller/deleteProduct.php?id=<?php echo $product['id']; ?>"
-                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')"
-                        class="btn-xoa">Xóa</a> -->
-                </td>
-                </tr>
-
-
-           <?php } ?> 
-            
-        </tbody>
     </table>
 </div>
 
 
 <script>
-function deleteAllProducts() {
-    if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
+function deleteAllCoupon(){
+    if(confirm('bạn có chắc muốn xoá tất cả sản phẩm')){
         $.ajax({
-            type: 'POST',
-            url: '<?php echo $controller;?>/admin/deleteAllProducts.php',
-            success: function(response) {
-                if (response === 'success') {
-                    alert('Xóa tất cả sản phẩm thành công!');
-                    // Chuyển hướng trang sau khi xóa thành công (nếu cần)
-                    window.location.href = '<?php echo $controller;?>/admin/productList.php';
-                } else {
-                    alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
+            type: 'GET',
+            url: '<?php echo $controller;?>/admin/deleteAllCoupon.php',
+            success: function(response){
+                if(response === 'success'){
+                    alert('Xoá tất cả mã giảm giá thành công!');
+                    window.location.href = '<?php echo $controller; ?>/admin/couponLits.php';
+                }else{
+                    alert('Xoá tất cả mã giảm giá không thành công, vui lòng thử lại!');
                 }
             }
         });
