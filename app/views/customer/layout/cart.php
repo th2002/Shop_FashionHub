@@ -331,10 +331,12 @@ include '../../../models/DAO/products.php';
                             <td>
                                 <div class="cart-item">
                                     <div class="quantity">
-                                        <button class="quantity-btn decrease">-</button>
+                                        <button onclick="handleDecreaseClick(event)"
+                                            class="quantity-btn decrease">-</button>
                                         <input type="number" class="quantity-input" value="<?= $item['quantity'] ?>"
                                             min="1">
-                                        <button class="quantity-btn increase">+</button>
+                                        <button onclick="handleIncreaseClick(event)"
+                                            class="quantity-btn increase">+</button>
                                     </div>
                                 </div>
                             </td>
@@ -374,7 +376,8 @@ include '../../../models/DAO/products.php';
                         <div style="display: flex;" class="product_pay-all">
                             <p>Tổng Thanh Toán(0 sản phẩm):</p>
                             <span class="product_pay-all-price">0đ</span>
-                            <a href="<?= $SITE_URL ?>/oders"><button style="padding: 0 5px;">Mua Hàng</button></a>
+                            <button id="paymentButton" onclick="handlePaymentClick()" style="padding: 0 5px;">Mua
+                                Hàng</button>
                         </div>
                     </div>
                 </div>
@@ -493,6 +496,8 @@ function totalPriceItem(item, quantity) {
     }
 
 }
+
+
 document.addEventListener('click', (event) => {
     if (event.target.matches('.decrease')) {
         const item = event.target.closest('.cart-item');
@@ -513,6 +518,38 @@ document.addEventListener('click', (event) => {
         totalPriceItem(item, quantity);
     }
 });
+
+function handlePaymentClick() {
+    // Lấy tất cả các phần tử input chứa số lượng sản phẩm
+    const inputElements = document.querySelectorAll(".quantity-input");
+
+    // Tạo một đối tượng chứa số lượng của từng sản phẩm
+    const quantities = {};
+    inputElements.forEach((inputElement, index) => {
+        quantities[`product_${index + 1}`] = parseInt(inputElement.value);
+    });
+
+    // Gửi số lượng của các sản phẩm lên máy chủ bằng Ajax
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "save_quantities_to_session.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            // Xử lý phản hồi từ máy chủ nếu cần
+            console.log("Số lượng của các sản phẩm đã được lưu vào session server.");
+            // Chuyển hướng tới trang xác nhận đơn hàng (hoặc trang thanh toán)
+            window.location.href = "/Shop_FashionHub/app/views/customer/oders/index.php";
+        }
+    };
+    xhr.send(JSON.stringify(quantities));
+}
+
+// Gọi hàm restoreFromServer để đặt lại giá trị cho input khi trang web được tải
+restoreFromServer();
+
+// Lắng nghe sự kiện click nút thanh toán và gọi hàm xử lý sự kiện tương ứng
+const paymentButton = document.getElementById("paymentButton");
+paymentButton.addEventListener("click", handlePaymentClick);
 
 document.addEventListener('input', (event) => {
     if (event.target.matches('.quantity-input')) {
