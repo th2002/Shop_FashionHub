@@ -109,56 +109,21 @@
         <div class="container__category-list container__popular-list">
             <div class="grid wide">
                 <div class="row">
-                    <div class="col l-3" style="max-width: 20%;">
+                    <?php
+                        $result = danh_muc_select_all();
+                    ?>
+                    <?php foreach($result as $key => $value): ?>
+                        <div class="col l-3" style="max-width: 20%;">
                         <div class="category_item">
                             <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/quan_ao.php"><img src="<?=$ASSET_URL?>/images/category/cate_ao.webp" alt="" class="category_img-item"></a>
+                                <a href="<?php echo $SITE_URL?>/cate_products/index.php?id=<?php echo $value['id'] ?>"><img src=" <?php echo $value['image_url'] ?> " alt="" class="category_img-item"></a>
                             </div>
                             <div class="product_name">
-                                <h4>Quần Áo</h4>
+                                <h4><?php echo $value['cate_name'] ?></h4>
                             </div>
                         </div>
                     </div>
-                    <div class="col l-3" style="max-width: 20%;">
-                        <div class="category_item">
-                            <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/giay_dep.php"><img src="<?=$ASSET_URL?>/images/category/cate_giay.webp" alt="" class="category_img-item"></a>
-                            </div>
-                            <div class="product_name">
-                                <h4>Giày Dép</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-3" style="max-width: 20%;">
-                        <div class="category_item">
-                            <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/tui_vi.php"><img src="<?=$ASSET_URL?>/images/category/cate_tui.webp" alt="" class="category_img-item"></a>
-                            </div>
-                            <div class="product_name">
-                                <h4>Túi Ví</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-3" style="max-width: 20%;">
-                        <div class="category_item">
-                            <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/mat_kinh.php"><img src="<?=$ASSET_URL?>/images/category/cate_kinh.webp" alt="" class="category_img-item"></a>
-                            </div>
-                            <div class="product_name">
-                                <h4>Mắt Kính</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-3" style="max-width: 20%;">
-                        <div class="category_item">
-                            <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/phu_kien.php"><img src="<?=$ASSET_URL?>/images/category/cate_pk.webp" alt="" class="category_img-item"></a>
-                            </div>
-                            <div class="product_name">
-                                <h4>Phụ Kiện</h4>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>
