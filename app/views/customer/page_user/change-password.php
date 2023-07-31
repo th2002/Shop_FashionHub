@@ -23,7 +23,9 @@ $loi="";
             $sql = "UPDATE users SET password = ? WHERE user_name = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([password_hash($matkhaumoi_1, PASSWORD_BCRYPT), $username]);
-            header("Localhost: ".$SITE_URL_2." /tai-khoan/login.php");
+            echo ' <script>
+                window.location.href = " '.$baseURL.'/app/views/customer/tai-khoan/login.php";        
+            </script> ';
         }
     }
 ?>

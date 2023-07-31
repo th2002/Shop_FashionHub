@@ -19,7 +19,7 @@
     <div class="nav__center">
         <div class="nav_logo">
             <img src="<?= $ASSET_URL ?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
-        </div>
+        </div> 
     </div>
     <div class="nav__right">
         <div class="nav__seach">
