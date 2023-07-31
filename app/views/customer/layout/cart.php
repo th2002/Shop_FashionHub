@@ -23,6 +23,28 @@ include '../../../models/DAO/products.php';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <script lang="javascript">
+    const update_quantity = './save_quantities_to_session.php';
+
+    function load_ajax() {
+        $.ajax({
+                url: update_quantity,
+                type: "post",
+                dataType: "text",
+                data: {
+                    total_quantity: $('#total_quantity').val()
+                }
+            })
+            .done(function(result) {
+                // Thành công: Chuyển hướng trang sau khi cập nhật session thành công
+                window.location.href = "/Shop_FashionHub/app/views/customer/oders/index.php";
+            })
+            .fail(function(xhr, status, error) {
+                // Xử lý trường hợp có lỗi nếu cần
+                console.error("Có lỗi trong quá trình cập nhật session quantity:", error);
+            });
+    }
+    </script>
 </head>
 <a href="../../../models/DAO/delete_cart.php"></a>
 
@@ -331,12 +353,10 @@ include '../../../models/DAO/products.php';
                             <td>
                                 <div class="cart-item">
                                     <div class="quantity">
-                                        <button onclick="handleDecreaseClick(event)"
-                                            class="quantity-btn decrease">-</button>
-                                        <input type="number" class="quantity-input" value="<?= $item['quantity'] ?>"
-                                            min="1">
-                                        <button onclick="handleIncreaseClick(event)"
-                                            class="quantity-btn increase">+</button>
+                                        <button class="quantity-btn decrease">-</button>
+                                        <input type="number" id="total_quantity" class="quantity-input"
+                                            value="<?= $item['quantity'] ?>" min="1">
+                                        <button class="quantity-btn increase">+</button>
                                     </div>
                                 </div>
                             </td>
@@ -376,7 +396,7 @@ include '../../../models/DAO/products.php';
                         <div style="display: flex;" class="product_pay-all">
                             <p>Tổng Thanh Toán(0 sản phẩm):</p>
                             <span class="product_pay-all-price">0đ</span>
-                            <button id="paymentButton" onclick="handlePaymentClick()" style="padding: 0 5px;">Mua
+                            <button id="paymentButton" onclick="load_ajax()" style="padding: 0 5px;">Mua
                                 Hàng</button>
                         </div>
                     </div>
