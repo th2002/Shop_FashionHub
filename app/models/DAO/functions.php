@@ -68,29 +68,6 @@ function deleteProduct($productId){
     return $query->rowCount();
 }
 
-// Hàm xoá mã giảm giá
-function deleteCoupon($id){
-    global $db;
-
-    $query = $db->prepare("DELETE FROM coupon WHERE id = ?");
-    $query->execute([$id]);
-
-    return $query->rowCount();
-}
-
-// hàm xoá tất cả sản phẩm
-function deleteAllCoupon(){
-    global $db;
-
-    try {
-        $query = $db->prepare("DELETE FROM coupon");
-        return $query->execute();
-    } catch (PDOException $e) {
-        error_log("Lổi trong quá trình xoá!" .$e->getMessage());
-        return false;
-    }
-}
-
 // HÀm xóa tất cả sản phẩm
 function deleteAllProducts(){
     global $db;
@@ -103,6 +80,25 @@ function deleteAllProducts(){
         return false;
     }
 }
+function getSortedProducts($sortOrder)
+{
+    // Lấy danh sách sản phẩm từ cơ sở dữ liệu
+    global $db;
+    $query = $db->query("SELECT * FROM products");
+
+    // Sắp xếp danh sách sản phẩm dựa vào giá trị của $sortOrder
+    if ($sortOrder === 'desc') {
+        $query = $db->query("SELECT * FROM products ORDER BY create_at DESC");
+    } else {
+        $query = $db->query("SELECT * FROM products ORDER BY create_at ASC");
+    }
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+// Các hàm khác trong functions.php vẫn giữ nguyên.
+
 // hàm xoá all người dùng
 function deleteAllUser(){
     global $db;
@@ -304,8 +300,10 @@ function sendPassword($email, $newPassword){
      $mail->addAddress($email); // Địa chỉ email người nhận
  
      $mail->isHTML(true);
-     $mail->Subject = 'LẤy lại mật khẩu!!!'; // Tiêu đề email
-     $mail->Body = 'Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
+     $mail->Subject = 'Email cấp lại mật khẩu'; // Tiêu đề email
+     $mail->Body = ''; // Nội dung email
+
+     $mail->Body = 'Vui lòng đổi mật khẩu ngay khi có thể! Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
  
      // Gửi email
      if (!$mail->send()) {
@@ -408,56 +406,17 @@ function getCategoriesWithPagination($limit, $offset) {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-
-// Hàm  thê mã giảm giá
+// Thêm mã giảm giá
 function addCoupon($code, $type, $value, $status, $date_end){
     global $db;
-
-    $create_at = date("y-m-d");
+    $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
-
-    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) values(?, ?, ?, ?, ?, ?, ?)");
+    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $query->execute([$code, $type, $value, $status, $date_end, $create_at, $update_at]);
 
-    return $query->rowCount() > 0; 
-
+    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
 
-// Hàm update mã giảm giá
-function updateCoupon($id, $code, $type, $value, $status, $date_end) {
-    global $db;
-
-    $update_at = date("Y-m-d");
-
-    $query = $db->prepare("UPDATE coupon SET code = ?, type = ?, value = ?, status = ?, date_end = ?, update_at = ? WHERE id = ?");
-    $query->execute([$code, $type, $value, $status, $date_end, $update_at, $id]);
-
-    return $query->rowCount() > 0;
-}
-
-
-
-// Hàm lấy mã giảm giá theo id
-
-function getCouponId($id){
-    global $db;
-
-    $query = $db->prepare("SELECT * FROM coupon where id = ?");
-    $query->execute([$id]);
-    return $query->fetch(PDO::FETCH_ASSOC);
-}
-
-
-// Hàm lấy danh sách mã giảm giá
-function couponList(){
-    global $db;
-
-    $query = $db->prepare("SELECT * FROM coupon");
-    $query->execute();
-
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-}
 // functions.php
 
 // Include TCPDF library
@@ -509,6 +468,7 @@ function exportPDF($products) {
 // ... Các hàm và mã khác liên quan đến ứng dụng của bạn ...
 
 
+
 // Hàm phân trang sản phẩm
 // Hàm lấy tổng số sản phẩm
 function getTotalProducts() {
@@ -541,6 +501,4 @@ function getProductsByPage($page, $perPage) {
         return array();
     }
 }
-
-
 ?>
