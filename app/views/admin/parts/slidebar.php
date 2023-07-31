@@ -60,8 +60,31 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+  .thong-bao1{
+    display: inline-block;
     position: relative;
   }
+  .menu-thong{
+    display: none;
+    background-color: #081D45;
+    min-width: 190px;
+    right:0;
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    margin-top: 50px;
+    
+  }
+  .thong-bao1.active .menu-thong{
+    display: block;
+    opacity: 1;
+  }
+  .menu-thong a{
+    display: block;
+    padding: 10px;
+  }
+
   .thong-bao .fa-bell{
     margin-right: 30px;
     font-size: 20px;
@@ -93,6 +116,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
   background-color: red;
   color: white;
   border-radius: 80%;
+  font-size: 10px;
 }
 </style>
 <section class="home-section">
@@ -106,8 +130,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
       <i class="bx bx-search"></i>
     </div>
     <div class="thong-bao">
-      <i class="fa-regular fa-bell"></i>
+      <div class="thong-bao1">
+      <i class="fa-regular fa-bell thongbao-btn"></i>
       <span class="badge">1</span>
+      <div class="menu-thong">
+        <a href="#">Thông báo 1 </a>
+        <a href="#">Thông báo 1</a>
+        <a href="#">Thông báo 1</a>
+        <a href="#">Thông báo 1</a>
+        <a href="#">Thông báo 1</a>
+
+      </div>
+      </div>
 
 
       <div class="profile-details">
@@ -158,6 +192,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
           setTimeout(() => {
             dropmenu.style.display = "none";
           }, 9000);
+        }
+      });
+      const thongbaoBtn = document.querySelector(".thongbao-btn");
+      const dropthong = document.querySelector(".thong-bao1");
+
+      thongbaoBtn.addEventListener("click", ()=>{
+        dropthong.classList.toggle("active");
+      });
+      document.addEventListener("click", (event)=>{
+        const targetElement = event.target;
+        if(!dropthong.contains(targetElement)){
+          dropthong.classList.remove("active");
         }
       });
     </script>
