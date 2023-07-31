@@ -107,7 +107,7 @@ if (isset($_POST['login'])) {
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';
         echo 'Swal.fire({ title: "Đăng nhập thành công!", icon: "success" }).then(function() {';
-        echo '   window.location.href = "' . ($user['role'] == 1 ? '../../admin/index.php' : '../../../../index.php') . '";'; // Chuyển hướng trang
+        echo '   window.location.href = "' . ($user['role'] == 1 ? '../../admin/index.php' : (isset($_SESSION['data-cart']) ? '../layout/cart.php' : '../../../../index.php')) . '";'; // Chuyển hướng trang
         echo '});';
         echo '</script>';
 

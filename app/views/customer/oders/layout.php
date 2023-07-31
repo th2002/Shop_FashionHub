@@ -22,6 +22,7 @@ $provinces = thanh_pho_select_all();
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/oders.css">
     <title>Thanh toán</title>
+    
 </head>
 
 <body>
@@ -265,7 +266,7 @@ $provinces = thanh_pho_select_all();
                             </td>
                             <td class="quantity-input" style="text-align: center;" colspan="">
                                 <?php
-                                    echo $item['quantity']; 
+                                    echo $item['quantity'];
                                 ?>
                             </td>
                             <td style="text-align: center;" colspan="2">
