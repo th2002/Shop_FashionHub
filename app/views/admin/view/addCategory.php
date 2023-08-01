@@ -20,7 +20,10 @@ include_once("../parts/header.php");
         <option value="1">Có size</option>
     </select>
 
-    <button type="submit">Thêm danh mục</button>
+    <div class="button-container">
+        <button type="submit">Thêm sản phẩm</button>
+        <a href="categoryList.php" class="cancel-button">Hủy</a>
+    </div>
     <?php if (!empty($message)) { ?>
     <script>
         Swal.fire({
