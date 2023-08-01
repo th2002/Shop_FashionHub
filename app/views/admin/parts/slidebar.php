@@ -1,15 +1,16 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
+$modelPath = "$rootDir/app/models/DAO/functions.php";
 
+// Gọi tệp functions
+require_once $modelPath;
 
 ?>
 
 <!-- slidebar -->
 <style>
-/* .sidebar {
-        background-image: linear-gradient(to right, <?php echo isset($color1) ? $color1 : '#333'; ?>, <?php echo isset($color2) ? $color2 : '#555'; ?>, <?php echo isset($color3) ? $color3 : '#777'; ?>);
-    } */
+
 .profile-details {
     position: relative;
     display: inline-block;
@@ -66,15 +67,47 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 }
 </style>
 <section class="home-section">
-    <nav class="header">
-        <div class="sidebar-button">
-            <i class="bx bx-menu sidebarBtn"></i>
-            <span class="dashboard">Dashboard</span>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Tìm kiếm..." />
-            <i class="bx bx-search"></i>
-        </div>
+  <nav class="header">
+    <div class="sidebar-button">
+      <i class="bx bx-menu sidebarBtn" ></i>
+      <span class="dashboard">Dashboard</span>
+    </div>
+    <div class="search-box">
+      <input type="text" placeholder="Tìm kiếm..." />
+      <i class="bx bx-search" title="Tìm kiếm"></i>
+    </div>
+    <div class="thong-bao">
+    <div class="thong-bao1">
+    <i class="fa-regular fa-bell thongbao-btn icon " title="Thông báo"></i>
+    <span class="badge" id="badge"><?php echo countNotifications(); ?></span>
+    <div class="menu-thong">
+      <h4 class="title-thongbao">Thông báo mới nhất</h4>
+        <ul>
+        <?php
+    $notifications = getAllNotifications(); // Gọi hàm để lấy danh sách thông báo
+    if (empty($notifications)) {
+        echo "<p>Không có thông báo</p>";
+    } else {
+        foreach ($notifications as $notification) {
+    ?>
+    
+            <li class="notification">
+            <img src="../images/gif-new.gif" alt="">
+
+                <a href="#">
+                    <p><?php echo $notification['notification_content']; ?></p>
+                </a>
+            </li>
+            <em>Ngày cập nhật: <?php echo $notification['created_at']; ?></em>
+    <?php
+        }
+    }
+    ?>
+
+        </ul>
+        <a href="#" class="all-thongbao">Xem tất</a>
+    </div>
+</div>
         <div class="profile-details">
             <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn" />
             <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>

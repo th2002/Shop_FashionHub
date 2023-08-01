@@ -53,3 +53,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Header
+const dropdown = document.querySelector(".profile-details");
+const dropbtn = document.querySelector(".drop-btn");
+const dropmenu = document.querySelector(".drop-menu");
+
+dropbtn.addEventListener("click", () => {
+  dropdown.classList.toggle("active");
+  if (dropdown.classList.contains("active")) {
+    dropmenu.style.display = "block";
+    setTimeout(() => {
+      dropmenu.style.opacity = "1";
+      dropmenu.style.transform = "translateY(100)";
+    }, 50);
+  } else {
+    dropmenu.style.opacity = "0";
+    dropmenu.style.transform = "translateY(60%)";
+    setTimeout(() => {
+      dropmenu.style.display = "none";
+    }, 300);
+  }
+});
+
+document.addEventListener("click", (event) => {
+  const targetElement = event.target;
+  if (!dropdown.contains(targetElement)) {
+    dropdown.classList.remove("active");
+    dropmenu.style.opacity = "0";
+    dropmenu.style.transform = "translateY(60%)";
+    setTimeout(() => {
+      dropmenu.style.display = "none";
+    }, 9000);
+  }
+});
+const thongbaoBtn = document.querySelector(".thongbao-btn");
+const dropthong = document.querySelector(".thong-bao1");
+
+thongbaoBtn.addEventListener("click", () => {
+  dropthong.classList.toggle("active");
+});
+document.addEventListener("click", (event) => {
+  const targetElement = event.target;
+  if (!dropthong.contains(targetElement)) {
+    dropthong.classList.remove("active");
+  }
+});
+// JavaScript để thêm/loại bỏ class "shake" cho icon khi trang được tải
+document.addEventListener("DOMContentLoaded", function() {
+var bellIcon = document.querySelector(".thongbao-btn");
+bellIcon.classList.add("shake");
+
+// Thêm class "shake" cho icon sau 3 giây
+setTimeout(function() {
+bellIcon.classList.remove("shake");
+}, 10000);
+});
+// Lấy tất cả các thẻ span chứa số lượng thông báo
+var badges = document.querySelectorAll(".badge");
+
+// Lấy thẻ icon thông báo
+var bellIcon = document.querySelector(".thongbao-btn");
+
+// Thêm sự kiện click cho icon thông báo
+bellIcon.addEventListener("click", function() {
+  // Khi người dùng ấn vào icon, ẩn hẳn tất cả số lượng thông báo bằng cách đặt thuộc tính CSS display thành "none"
+  badges.forEach(function(badge) {
+      badge.style.display = "none";
+  });
+});
+
+// End header
+
