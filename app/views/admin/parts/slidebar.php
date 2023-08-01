@@ -3,13 +3,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
 
 
+$modelPath = "$rootDir/app/models/DAO/functions.php";
+
+// Gọi tệp functions
+require_once $modelPath;
+
+
+
+
 ?>
 
 <!-- slidebar -->
 <style>
-  /* .sidebar {
-        background-image: linear-gradient(to right, <?php echo isset($color1) ? $color1 : '#333'; ?>, <?php echo isset($color2) ? $color2 : '#555'; ?>, <?php echo isset($color3) ? $color3 : '#777'; ?>);
-    } */
   .profile-details {
     position: relative;
     display: inline-block;
@@ -61,63 +66,117 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
     align-items: center;
     justify-content: flex-end;
   }
-  .thong-bao1{
+
+  .thong-bao1 {
     display: inline-block;
     position: relative;
   }
-  .menu-thong{
+
+  .menu-thong {
     display: none;
-    background-color: #081D45;
-    min-width: 190px;
-    right:0;
+    background-color: #e9e9e9;
+    min-width: 290px;
+    right: 0;
     top: 0;
     position: absolute;
     z-index: 2;
     margin-top: 50px;
-    
+    box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.2);
+
+
   }
-  .thong-bao1.active .menu-thong{
+
+  .thong-bao1.active .menu-thong {
     display: block;
     opacity: 1;
   }
-  .menu-thong a{
+
+  .menu-thong ul li a {
     display: block;
     padding: 10px;
+    color: black;
   }
 
-  .thong-bao .fa-bell{
+  .thong-bao .fa-bell {
     margin-right: 30px;
     font-size: 20px;
     cursor: pointer;
     color: #081D45;
 
   }
+
+  .menu-thong em {
+    color: black;
+    font-weight: 200;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .notification img {
+    width: 30px;
+    height: 30px;
+  }
+
   @keyframes shake {
-  0% { transform: translateX(0); }
-  10%, 90% { transform: translateX(-2px); }
-  20%, 80% { transform: translateX(2px); }
-  30%, 70% { transform: translateX(-2px); }
-  40%, 60% { transform: translateX(2px); }
-  50% { transform: translateX(0); }
-}
+    0% {
+      transform: translateX(0);
+    }
 
-.thong-bao .fa-bell {
-  transition: all 0.3s;
-}
+    10%,
+    90% {
+      transform: translateX(-2px);
+    }
 
-.thong-bao:hover .fa-bell {
-  animation: shake 0.6s;
-}
-.thong-bao .badge {
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  padding: 1px 4px;
-  background-color: red;
-  color: white;
-  border-radius: 80%;
-  font-size: 10px;
-}
+    20%,
+    80% {
+      transform: translateX(2px);
+    }
+
+    30%,
+    70% {
+      transform: translateX(-2px);
+    }
+
+    40%,
+    60% {
+      transform: translateX(2px);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+  }
+
+  .thong-bao .fa-bell {
+    transition: all 0.3s;
+  }
+
+  .thong-bao:hover .fa-bell {
+    animation: shake 0.6s;
+  }
+
+  .thong-bao .badge {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 1px 4px;
+    background-color: red;
+    color: white;
+    border-radius: 80%;
+    font-size: 10px;
+  }
+
+  .all-thongbao {
+    float: right;
+    padding: 10px;
+    color: #081D45;
+  }
 </style>
 <section class="home-section">
   <nav class="header">
@@ -130,18 +189,31 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
       <i class="bx bx-search"></i>
     </div>
     <div class="thong-bao">
-      <div class="thong-bao1">
-      <i class="fa-regular fa-bell thongbao-btn"></i>
-      <span class="badge">1</span>
-      <div class="menu-thong">
-        <a href="#">Thông báo 1 </a>
-        <a href="#">Thông báo 1</a>
-        <a href="#">Thông báo 1</a>
-        <a href="#">Thông báo 1</a>
-        <a href="#">Thông báo 1</a>
+    <div class="thong-bao1">
+    <i class="fa-regular fa-bell thongbao-btn"></i>
+    <span class="badge" id="badge"><?php echo countNotifications(); ?></span>
+    <div class="menu-thong">
+        <ul>
+            <?php
+            $notifications = getAllNotifications(); // Gọi hàm để lấy danh sách thông báo
+            foreach ($notifications as $notification) {
+            ?>
+                <li class="notification">
+                    <!-- <img src="./images/gif-new.gif" alt=""> -->
+                    <a href="#">
+                        <p><?php echo $notification['notification_content']; ?></p>
+                    </a>
+                </li>
+                <em>Ngày cập nhật: <?php echo $notification['created_at']; ?></em>
+            <?php
+            }
+            ?>
 
-      </div>
-      </div>
+        </ul>
+        <a href="#" class="all-thongbao">Xem tất</a>
+    </div>
+</div>
+
 
 
       <div class="profile-details">
@@ -197,13 +269,30 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
       const thongbaoBtn = document.querySelector(".thongbao-btn");
       const dropthong = document.querySelector(".thong-bao1");
 
-      thongbaoBtn.addEventListener("click", ()=>{
+      thongbaoBtn.addEventListener("click", () => {
         dropthong.classList.toggle("active");
       });
-      document.addEventListener("click", (event)=>{
+      document.addEventListener("click", (event) => {
         const targetElement = event.target;
-        if(!dropthong.contains(targetElement)){
+        if (!dropthong.contains(targetElement)) {
           dropthong.classList.remove("active");
         }
       });
+    // Lấy thẻ span chứa số lượng thông báo
+    var badge = document.querySelector(".badge");
+
+    // Lấy thẻ icon thông báo
+    var bellIcon = document.querySelector(".thongbao-btn");
+
+    // Thêm sự kiện click cho icon thông báo
+    bellIcon.addEventListener("click", function() {
+        // Ẩn hẳn số lượng thông báo bằng cách đặt thuộc tính CSS display thành "none"
+        badge.style.display = "none";
+    });
+
+    // Ẩn hẳn số lượng thông báo khi trang đã được tải hoàn tất
+    window.addEventListener("load", function() {
+        badge.style.display = "none";
+    });
+
     </script>

@@ -47,6 +47,36 @@ function addProduct($name, $decsription, $quantity, $price, $sale_price, $featur
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
+// hàm thêm thông báo
+function addnotification($notification_type, $notification_content, $pinned){
+    global $db;
+
+    $created_at = date('Y-m-d');
+    $query = $db->prepare("INSERT INTO notifications (notification_type, notification_content, pinned, created_at ) VALUES (?, ?, ?, ?)");
+    $query->execute([$notification_type, $notification_content, $pinned, $created_at]);
+
+    return $query->rowCount();
+}
+
+// Hàm lấy danh sách thông báo
+function getAllNotifications(){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM notifications  ORDER BY pinned DESC, created_at DESC");
+    $query->execute(); // Thực thi truy vấn
+    return $query->fetchAll(PDO::FETCH_ASSOC); // Trả về kết quả
+}
+// Hàm đếm số lượng thông báo
+function countNotifications() {
+    global $db;
+
+    $query = $db->prepare("SELECT COUNT(*) AS total FROM notifications");
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $result['total'];
+}
+
 // Hàm cập nhật thông tin sản phẩm
 function updateProduct($productId, $productName, $decsription, $quantity, $price) {
     global $db;
