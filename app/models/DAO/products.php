@@ -37,3 +37,8 @@ function select_price_sale_by_id($id) {
     $sql ="SELECT sale_price FROM products WHERE id =?";
     return pdo_query($sql,$id);
 }
+
+function select_price_by_id($id) {
+    $sql ="SELECT price FROM products WHERE id =?";
+    return pdo_query($sql,$id);
+}

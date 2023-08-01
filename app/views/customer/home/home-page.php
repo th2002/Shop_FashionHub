@@ -2,15 +2,47 @@
     <div id="toast">
 
     </div>
+
+    <div class="container__this_week">
+        <b class="container__this_week-text">This week's</b>
+        <strong class="container__hightlight">Hightlight</strong>
+    </div>
+
+    <div style="width: 100%; display: flex; justify-content:center;" class="hightlight_img">
+        <div style="margin: 60px 0 0 0 ; width: 90%; display:flex; justify-content:space-between"
+            class="hightlight_img_body">
+            <div>
+                <img style="width: 510px; height: 510px"
+                    src="https://file.hstatic.net/1000284478/file/ht_nu_2_fc0bea2f32f143689b5a6219cc083123.jpg" alt="">
+            </div>
+
+            <img style="width: 510px; height: 510px"
+                src="https://file.hstatic.net/1000284478/file/ht_nu_1_9b3a0fa71548477caed8afeaa1fd6dcf.jpg" alt="">
+
+            <img style="width: 510px; height: 510px"
+                src="https://file.hstatic.net/1000284478/file/ht_nu_3_68c6cd1c78434d4088c511eca1613eba.jpg" alt="">
+
+        </div>
+    </div>
+    <div style="width: 100%; display: flex; justify-content:center; align-items: center; ;margin: 20px 0 40px 0;">
+        <div style="width: 77%; display:flex; justify-content: center">
+            <div style=" width: 90%; display:flex; justify-content:space-between; font-weight:bold">
+                <p>NEW BALANCE</p>
+                <p>MLB BRAND</p>
+                <p>MARHEN J</p>
+            </div>
+        </div>
+    </div>
+
     <div class="container__popular">
-        <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
+        <p class="container__popular-text">SẢN PHẨM NỔI BẬT</p>
     </div>
 
     <div class="container__popular-list">
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    require_once '../layout/top10_products.php';
+                require_once '../layout/top10_products.php';
                 ?>
             </div>
         </div>
@@ -24,7 +56,7 @@
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    require_once '../layout/sale_products.php';
+                require_once '../layout/sale_products.php';
                 ?>
             </div>
         </div>
@@ -37,8 +69,8 @@
 
 
     <div class="container__banner">
-        <img class="container__banner-img"
-            src="<?=$ASSET_URL?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
+        <img loading="lazy" class="container__banner-img"
+            src="<?= $ASSET_URL ?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
     </div>
 
     <div class="container__product">
@@ -49,7 +81,7 @@
             <div class="grid wide">
                 <div class="row">
                     <?php
-                        require_once '../layout/products.php';            
+                    require_once '../layout/products.php';
                     ?>
                 </div>
             </div>
@@ -102,7 +134,7 @@
 
         </ul>
     </div>
-    <div class="container__grid_img">
+    <div class="container__grid_img" id="container__grid_img">
         <div class="container__grid_img-row-1">
             <div class="container__grid_img-1">
                 <div class="container__grid_img-content-1">

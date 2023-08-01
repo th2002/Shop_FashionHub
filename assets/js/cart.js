@@ -48,7 +48,31 @@ $(document).ready(function() {
                 }
                 document.querySelector('.nav__cart-quantity span').innerHTML = response[1];
 
-                
+              // update quantity
+          //     function updateQuantityOnServer(item, quantity) {
+          //     const id_price = item.dataset.id_price;
+          //     const formData = new FormData();
+          //     formData.append('id_price', id_price);
+          //     formData.append('quantity', quantity);
+
+          //     fetch(updateCartUrl, {
+          //         method: 'POST',
+          //         body: formData,
+          //     })
+          //     .then(response => response.json())
+          //     .then(data => {
+          //         // Cập nhật số lượng mới nhận được từ máy chủ vào quantityItem
+          //         const quantityItem = document.querySelector(`.nav_cart-item-quantity[data-id_price="${data[0]}"]`);
+          //         quantityItem.innerHTML = data[1];
+
+          //         // Xử lý phản hồi từ server nếu cần
+          //         console.log('Số lượng đã cập nhật thành công:', data[1]);
+          //     })
+          //     .catch(error => {
+          //         console.error('Lỗi khi cập nhật số lượng:', error);
+          //     });
+          // }
+
              
                   
                 // }
