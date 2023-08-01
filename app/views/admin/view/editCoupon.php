@@ -86,7 +86,10 @@ if(isset($_GET['id'])){
             <label for="date_end">Ngày hết hạn</label>
             <input type="date" name="date_end" value="<?= $coupon['date_end'] ;?>"><br>
 
-            <button type="submit">Sửa</button>
+            <div class="button-container">
+        <button type="submit">Thêm</button>
+        <a href="couponList.php" class="cancel-button">Hủy</a>
+    </div>
 
         </form>
 <?php 

@@ -21,7 +21,7 @@ $categories = getAllCategories();
 <h2 class="title">Danh mục</h2>
 <div class="menu-chucnang">
     <div class="menu-left">
-        <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
+        <h4 class="add-category"><a href="addCategory.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
                     class="fas fa-file-excel"></i>

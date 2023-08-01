@@ -59,6 +59,7 @@ if ($_SESSION['user_role'] != 1) {
 
     .title {
         text-align: center;
+        margin: 10px 0;
     }
 
     label {
@@ -88,14 +89,7 @@ if ($_SESSION['user_role'] != 1) {
     }
 
     /* Tùy chỉnh kích thước và khoảng cách của input */
-    /* input {
-      width: 300px;
-      height: 30px;
-      padding: 5px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    } */
+    
 
     /* Hiệu ứng nhấp nháy */
     .blink {
@@ -134,16 +128,14 @@ if ($_SESSION['user_role'] != 1) {
         background-color: #4caf50;
         color: white;
         cursor: pointer;
+        margin-top: 10px;
     }
 
     button[type="submit"]:hover {
         background-color: #45a049;
     }
 
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-    }
+    
 
     select {
         width: 100%;
@@ -161,10 +153,12 @@ if ($_SESSION['user_role'] != 1) {
     }
 
     .cancel-button {
-        padding: 10px;
+        padding: 0.5rem 1rem;
+        float: right;
         background-color: red;
         border-radius: 5px;
         color: #fff;
+        margin-top: 10px;
     }
 
     .cancel-button:hover {
@@ -283,7 +277,7 @@ if ($_SESSION['user_role'] != 1) {
     .category-table th,
     .category-table td {
         padding: 12px 15px;
-        text-align: left;
+        text-align:center;
         border: 1px solid #ccc;
         font-size: 14px;
     }

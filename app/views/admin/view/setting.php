@@ -5,13 +5,21 @@
 <!-- slidebar -->
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
-
+<style>
+  .setting-color form{
+    display: flex;
+    align-items: center;
+  }  
+  .setting-color form input{
+    margin: 0 10px;
+  }
+</style>
 <h2 class="title">Cài đặt</h2>
-
+<div class="setting-color">
 <form method="POST" action="">
-    <label>Chọn màu đầu: <input type="color" id="startColorPicker"></label><br>
-    <label>Chọn màu giữa: <input type="color" id="midColorPicker"></label><br>
-    <label>Chọn màu cuối: <input type="color" id="endColorPicker"></label><br>
+    <label> <input type="color" id="startColorPicker"></label><br>
+    <label><input type="color" id="midColorPicker"></label><br>
+    <label> <input type="color" id="endColorPicker"></label><br>
 
     <script>
         var startColorPicker = document.getElementById("startColorPicker");
@@ -30,6 +38,7 @@
         }
     </script>
 </form>
+</div>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $notification_type = $_POST['notification_type'];

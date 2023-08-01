@@ -100,6 +100,9 @@ include_once("../parts/header.php");
         font-size: 14px;
         font-weight: 500;
     }
+    .name-product{
+        text-align: end;
+    }
 </style>
 
 
@@ -172,7 +175,7 @@ $products = getSortedProducts($sortOrder);
                     <td>
                         <?php echo $product['id']; ?>
                     </td>
-                    <td>
+                    <td class="name-product">
                         <?php echo $product['name']; ?>
                     </td>
                     <td>

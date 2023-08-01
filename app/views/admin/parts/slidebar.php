@@ -90,6 +90,12 @@ require_once $modelPath;
     display: block;
     opacity: 1;
   }
+  .title-thongbao{
+    padding: 10px;
+    /* border-bottom: 1px solid darkcyan; */
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
+    opacity: 0.4;
+  }
 
   .menu-thong ul li a {
     display: block;
@@ -99,7 +105,7 @@ require_once $modelPath;
 
   .thong-bao .fa-bell {
     margin-right: 30px;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
     color: #081D45;
 
@@ -107,9 +113,12 @@ require_once $modelPath;
 
   .menu-thong em {
     color: black;
-    font-weight: 200;
+    opacity: 0.4;
     padding: 10px;
     font-size: 14px;
+  }
+  .menu-thong ul:hover{
+    background-color: antiquewhite;
   }
 
   .notification {
@@ -119,8 +128,8 @@ require_once $modelPath;
   }
 
   .notification img {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
   }
 
   @keyframes shake {
@@ -135,12 +144,12 @@ require_once $modelPath;
 
     20%,
     80% {
-      transform: translateX(2px);
+      transform: translateX(4px);
     }
 
     30%,
     70% {
-      transform: translateX(-2px);
+      transform: translateX(-4px);
     }
 
     40%,
@@ -151,6 +160,24 @@ require_once $modelPath;
     50% {
       transform: translateX(0);
     }
+  }
+  @keyframes shake {
+    10%, 90% {
+      transform: translateX(-1px) rotate(-1deg);
+    }
+    20%, 80% {
+      transform: translateX(2px) rotate(2deg);
+    }
+    70%, 50%, 40% {
+      transform: translateX(-4px) rotate(-4deg);
+    }
+    40%, 60% {
+      transform: translateX(4px) rotate(4deg);
+    }
+  }
+
+  .thongbao-btn.shake {
+    animation: shake 0.5s infinite;
   }
 
   .thong-bao .fa-bell {
@@ -177,37 +204,46 @@ require_once $modelPath;
     padding: 10px;
     color: #081D45;
   }
+  
+  
 </style>
 <section class="home-section">
   <nav class="header">
     <div class="sidebar-button">
-      <i class="bx bx-menu sidebarBtn"></i>
+      <i class="bx bx-menu sidebarBtn" ></i>
       <span class="dashboard">Dashboard</span>
     </div>
     <div class="search-box">
       <input type="text" placeholder="Tìm kiếm..." />
-      <i class="bx bx-search"></i>
+      <i class="bx bx-search" title="Tìm kiếm"></i>
     </div>
     <div class="thong-bao">
     <div class="thong-bao1">
-    <i class="fa-regular fa-bell thongbao-btn"></i>
+    <i class="fa-regular fa-bell thongbao-btn icon " title="Thông báo"></i>
     <span class="badge" id="badge"><?php echo countNotifications(); ?></span>
     <div class="menu-thong">
+      <h4 class="title-thongbao">Thông báo mới nhất</h4>
         <ul>
-            <?php
-            $notifications = getAllNotifications(); // Gọi hàm để lấy danh sách thông báo
-            foreach ($notifications as $notification) {
-            ?>
-                <li class="notification">
-                    <!-- <img src="./images/gif-new.gif" alt=""> -->
-                    <a href="#">
-                        <p><?php echo $notification['notification_content']; ?></p>
-                    </a>
-                </li>
-                <em>Ngày cập nhật: <?php echo $notification['created_at']; ?></em>
-            <?php
-            }
-            ?>
+        <?php
+    $notifications = getAllNotifications(); // Gọi hàm để lấy danh sách thông báo
+    if (empty($notifications)) {
+        echo "<p>Không có thông báo</p>";
+    } else {
+        foreach ($notifications as $notification) {
+    ?>
+    
+            <li class="notification">
+            <img src="../images/gif-new.gif" alt="">
+
+                <a href="#">
+                    <p><?php echo $notification['notification_content']; ?></p>
+                </a>
+            </li>
+            <em>Ngày cập nhật: <?php echo $notification['created_at']; ?></em>
+    <?php
+        }
+    }
+    ?>
 
         </ul>
         <a href="#" class="all-thongbao">Xem tất</a>
@@ -217,8 +253,8 @@ require_once $modelPath;
 
 
       <div class="profile-details">
-        <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn" />
-        <!-- <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span> -->
+        <img src="../images/trieu-le-dinh-1.jpg" alt="" class="drop-btn" />
+        <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>
         <i class="bx bx-chevron-down"></i>
         <div class="drop-menu">
           <a href="#">Làm 1 gậy</a>
@@ -232,6 +268,9 @@ require_once $modelPath;
   </nav>
 
   <div class="home-content">
+  
+</div>
+
     <!-- end slidebar -->
     <script>
       const dropdown = document.querySelector(".profile-details");
@@ -278,21 +317,33 @@ require_once $modelPath;
           dropthong.classList.remove("active");
         }
       });
-    // Lấy thẻ span chứa số lượng thông báo
-    var badge = document.querySelector(".badge");
+      // JavaScript để thêm/loại bỏ class "shake" cho icon khi trang được tải
+  document.addEventListener("DOMContentLoaded", function() {
+    var bellIcon = document.querySelector(".thongbao-btn");
+    bellIcon.classList.add("shake");
+
+    // Thêm class "shake" cho icon sau 3 giây
+    setTimeout(function() {
+      bellIcon.classList.remove("shake");
+    }, 10000);
+  });
+    // Lấy tất cả các thẻ span chứa số lượng thông báo
+    var badges = document.querySelectorAll(".badge");
 
     // Lấy thẻ icon thông báo
     var bellIcon = document.querySelector(".thongbao-btn");
 
     // Thêm sự kiện click cho icon thông báo
     bellIcon.addEventListener("click", function() {
-        // Ẩn hẳn số lượng thông báo bằng cách đặt thuộc tính CSS display thành "none"
-        badge.style.display = "none";
+        // Khi người dùng ấn vào icon, ẩn hẳn tất cả số lượng thông báo bằng cách đặt thuộc tính CSS display thành "none"
+        badges.forEach(function(badge) {
+            badge.style.display = "none";
+        });
     });
+ 
 
-    // Ẩn hẳn số lượng thông báo khi trang đã được tải hoàn tất
-    window.addEventListener("load", function() {
-        badge.style.display = "none";
-    });
+
+
+
 
     </script>

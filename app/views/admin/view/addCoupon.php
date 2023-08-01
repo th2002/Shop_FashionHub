@@ -91,7 +91,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     </select>
     <label for="date_end">Ngày kết thúc:</label>
     <input type="date" name="date_end" require><br>
-    <button type="submit">Thêm mã giảm giá</button>
+    <div class="button-container">
+        <button type="submit">Thêm</button>
+        <a href="couponList.php" class="cancel-button">Hủy</a>
+    </div>
 </form>
 
 <!-- footer -->
