@@ -51,9 +51,9 @@
         $recipient_name = $_POST['cus_name'];
         $phone_number = $_POST['cus_phone'];
         $address_detail = $_POST['cus_detail_address'];
-        $province_id = $_POST['city'];
-        $district_id = $_POST['district'];
-        $ward_id = $_POST['ward'];
+        $province_id = $_POST['province_name'];
+        $district_id = $_POST['district_name'];
+        $ward_id = $_POST['ward_name'];
         $coupon_code_id = $_POST['coupon'];
         $payment_method = ($_POST['method_payment'] === '1') ? 0 : 1;
         $created_at = $_POST['toDay'];
@@ -129,6 +129,10 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="province_name" id="province_name">
+                <input type="hidden" name="district_name" id="district_name">
+                <input type="hidden" name="ward_name" id="ward_name">
+
                 <!-- code select -->
                 <div class="col-md-12">
                     <select name="city" style="margin-bottom: 20px;" class="form-select"
@@ -158,6 +162,27 @@
                 </div>
 
                 <!-- code js -->
+                <!-- code js -->
+                <script>
+                // Đảm bảo toàn bộ DOM đã được load
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById("city").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("province_name").value = selectedOption.text;
+                    });
+
+                    document.getElementById("district").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("district_name").value = selectedOption.text;
+                    });
+
+                    document.getElementById("ward").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("ward_name").value = selectedOption.text;
+                    });
+                });
+                </script>
+
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                 <script>
                 var citis = document.getElementById("city");
