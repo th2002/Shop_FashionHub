@@ -3,7 +3,7 @@
 // insert info user to table oder 
 function insert_info_users( $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at) {
     $sql = "INSERT INTO oders(recipient_name, phone_number, address_detail, province_id, district_id, ward_id, coupon_code_id, payment_method, created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?')";
+    VALUES (?,?,?,?,?,?,?,?,?,?)";
     pdo_execute($sql, $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at);
 }
 

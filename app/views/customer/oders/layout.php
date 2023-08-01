@@ -60,18 +60,15 @@
 
         $errors = [];
         // Kiểm tra rỗng
-        if(empty($recipient_name) || empty($phone_number) || empty($address_detail) || empty($province_id) || empty($district_id) || empty($ward_id) || empty($coupon_code_id) || empty($payment_method)){
-            $errors[] ="Vui lòng nhập đầy đủ thông tin!";
-        }
-    
-      
+        // if(empty($recipient_name) || empty($phone_number) || empty($address_detail) || empty($province_id) || empty($district_id) || empty($ward_id) || empty($payment_method)){
+        //     $errors[] ="Vui lòng nhập đầy đủ thông tin!";
+        // }
+
+
         // Nếu không có lỗi, thực hiện đặt hàng
         if (empty($errors)) {
-            $oder = insert_info_users( $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at);
-            if ($oder === "false") {
-                $errors[] ="Tên đăng nhập hoặc email đã tồn tại!";
-            } elseif($oder) {
-                echo '<script>
+            $oder = insert_info_users($recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at);
+            echo '<script>
                     Swal.fire({
                       icon: "success",
                       title: "Đặt hàng thành công",
@@ -84,9 +81,8 @@
                       }
                     });
                     </script>';
-            }else{
-                echo "<script>alert('Đặt hàng thất bại');</script>";
-            }
+        } else {
+            echo "<script>alert('Đặt hàng thất bại');</script>";
         }
     }
     ?>
@@ -95,13 +91,21 @@
             class="fa-solid fa-money-check-dollar icon"></i>
         <h3 class="title">THANH TOÁN</h3>
         <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt Hàng</h6>
-
+        <?php if (!empty($errors)) { ?>
+        <ul class="error">
+            <?php foreach ($errors as $error) { ?>
+            <li>
+                <?php echo $error; ?>
+            </li>
+            <?php } ?>
+        </ul>
+        <?php } ?>
         <div class="row">
             <form method="post" class="row g-3 needs-validation col-md-6" style="margin: 30px 0 0 40px;" novalidate>
                 <h5>Thông tin khách hàng</h5>
                 <div class="col-md-12">
                     <label for="validationCustom01" class="form-label">Khách hàng</label>
-                    <input name="cus_name" value="<?= $_SESSION['user_fullname']?>" type="text" class="form-control"
+                    <input name="cus_name" value="<?= $_SESSION['user_fullname'] ?>" type="text" class="form-control"
                         id="validationCustom01" readonly>
                     <div class="valid-feedback">
                         Looks good!
@@ -237,8 +241,8 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button name="btn_buy" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        style="width: 100%;" type="button">ĐẶT
+                    <button name="btn_buy" class="btn btn-primary" data-bs-target="#exampleModal" style="width: 100%;"
+                        type="submit">ĐẶT
                         HÀNG</button>
                 </div>
             </form>
@@ -338,8 +342,8 @@
                                             ?>
                             </td>
                         </tr>
-                        <?php 
-                                        unset($_SESSION['data-cart'][$key]['order']);
+                        <?php
+                                    unset($_SESSION['data-cart'][$key]['order']);
                                     ?>
                         <?php
                                 } else {
