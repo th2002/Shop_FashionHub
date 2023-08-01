@@ -1,7 +1,5 @@
 <?php
 
-
-$provinces = thanh_pho_select_all();
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +15,9 @@ $provinces = thanh_pho_select_all();
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/oders.css">
     <title>Thanh toán</title>
 
@@ -46,24 +46,71 @@ $provinces = thanh_pho_select_all();
     require_once '../layout/nav.php';
     ?>
 
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $recipient_name = $_POST['cus_name'];
+        $phone_number = $_POST['cus_phone'];
+        $address_detail = $_POST['cus_detail_address'];
+        $province_id = $_POST['city'];
+        $district_id = $_POST['district'];
+        $ward_id = $_POST['ward'];
+        $coupon_code_id = $_POST['coupon'];
+        $payment_method = ($_POST['method_payment'] === '1') ? 0 : 1;
+        $created_at = $_POST['toDay'];
+
+        $errors = [];
+        // Kiểm tra rỗng
+        if(empty($recipient_name) || empty($phone_number) || empty($address_detail) || empty($province_id) || empty($district_id) || empty($ward_id) || empty($coupon_code_id) || empty($payment_method)){
+            $errors[] ="Vui lòng nhập đầy đủ thông tin!";
+        }
+    
+      
+        // Nếu không có lỗi, thực hiện đặt hàng
+        if (empty($errors)) {
+            $oder = insert_info_users( $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at);
+            if ($oder === "false") {
+                $errors[] ="Tên đăng nhập hoặc email đã tồn tại!";
+            } elseif($oder) {
+                echo '<script>
+                    Swal.fire({
+                      icon: "success",
+                      title: "Đặt hàng thành công",
+                      showCancelButton: false,
+                      confirmButtonText: "OK",
+                      timer: 1000, // 5 giây
+                      timerProgressBar: true,
+                      willClose: function() {
+                        window.location.href = "login.php";
+                      }
+                    });
+                    </script>';
+            }else{
+                echo "<script>alert('Đặt hàng thất bại');</script>";
+            }
+        }
+    }
+    ?>
     <div class="container_oders">
-        <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;" class="fa-solid fa-money-check-dollar icon"></i>
+        <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;"
+            class="fa-solid fa-money-check-dollar icon"></i>
         <h3 class="title">THANH TOÁN</h3>
         <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt Hàng</h6>
 
         <div class="row">
-            <form class="row g-3 needs-validation col-md-6" style="margin: 30px 0 0 40px;" novalidate>
+            <form method="post" class="row g-3 needs-validation col-md-6" style="margin: 30px 0 0 40px;" novalidate>
                 <h5>Thông tin khách hàng</h5>
                 <div class="col-md-12">
-                    <label for="validationCustom01" class="form-label">Họ tên người nhận</label>
-                    <input type="text" class="form-control" id="validationCustom01" required>
+                    <label for="validationCustom01" class="form-label">Khách hàng</label>
+                    <input name="cus_name" value="<?= $_SESSION['user_fullname']?>" type="text" class="form-control"
+                        id="validationCustom01" readonly>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="col-md-12">
                     <label for="validationCustom02" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="validationCustom02" required>
+                    <input name="cus_phone" value="<?= $_SESSION['user_phone'] ?>" type="text" class="form-control"
+                        id="validationCustom02" readonly>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -71,7 +118,8 @@ $provinces = thanh_pho_select_all();
                 <div class="col-md-12">
                     <label for="validationCustomUsername" class="form-label">Tên đường / Số nhà</label>
                     <div class="input-group has-validation">
-                        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                        <input name="cus_detail_address" type="text" class="form-control" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend" required>
                         <div class="invalid-feedback">
                             Please choose a address.
                         </div>
@@ -79,84 +127,104 @@ $provinces = thanh_pho_select_all();
                 </div>
                 <!-- code select -->
                 <div class="col-md-12">
-                    <select style="margin-bottom: 20px;" class="form-select" aria-label="Default select example" id="city">
+                    <select name="city" style="margin-bottom: 20px;" class="form-select"
+                        aria-label="Default select example" id="city">
                         <option value="" selected>Chọn tỉnh thành</option>
                     </select>
 
-                    <select style="margin-bottom: 20px;" class="form-select" aria-label="Default select example" id="district">
+                    <select name="district" style="margin-bottom: 20px;" class="form-select"
+                        aria-label="Default select example" id="district">
                         <option value="" selected>Chọn quận huyện</option>
                     </select>
 
-                    <select class="form-select" aria-label="Default select example" id="ward">
+                    <select name="ward" class="form-select" aria-label="Default select example" id="ward">
                         <option value="" selected>Chọn phường xã</option>
                     </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="validationCustomUsername" class="form-label">Coupon</label>
+                    <div class="input-group has-validation">
+                        <input name="coupon" type="text" class="form-control" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend" required>
+                        <div class="invalid-feedback">
+                            Please choose a address.
+                        </div>
+                    </div>
                 </div>
 
                 <!-- code js -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                 <script>
-                    var citis = document.getElementById("city");
-                    var districts = document.getElementById("district");
-                    var wards = document.getElementById("ward");
-                    var Parameter = {
-                        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", // data source
-                        method: "GET",
-                        responseType: "application/json",
-                    };
-                    var promise = axios(Parameter);
-                    promise.then(function(result) {
-                        renderCity(result.data);
-                    });
+                var citis = document.getElementById("city");
+                var districts = document.getElementById("district");
+                var wards = document.getElementById("ward");
+                var Parameter = {
+                    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", // data source
+                    method: "GET",
+                    responseType: "application/json",
+                };
+                var promise = axios(Parameter);
+                promise.then(function(result) {
+                    renderCity(result.data);
+                });
 
-                    function renderCity(data) {
-                        for (const x of data) {
-                            var opt = document.createElement('option');
-                            opt.value = x.Name;
-                            opt.text = x.Name;
-                            opt.setAttribute('data-id', x.Id);
-                            citis.options.add(opt);
-                        }
-                        citis.onchange = function() {
-                            district.length = 1;
-                            ward.length = 1;
-                            if (this.options[this.selectedIndex].dataset.id != "") {
-                                const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
-
-                                for (const k of result[0].Districts) {
-                                    var opt = document.createElement('option');
-                                    opt.value = k.Name;
-                                    opt.text = k.Name;
-                                    opt.setAttribute('data-id', k.Id);
-                                    district.options.add(opt);
-                                }
-                            }
-                        };
-                        district.onchange = function() {
-                            ward.length = 1;
-                            const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
-                            if (this.options[this.selectedIndex].dataset.id != "") {
-                                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
-                                    .selectedIndex].dataset.id)[0].Wards;
-
-                                for (const w of dataWards) {
-                                    var opt = document.createElement('option');
-                                    opt.value = w.Name;
-                                    opt.text = w.Name;
-                                    opt.setAttribute('data-id', w.Id);
-                                    wards.options.add(opt);
-                                }
-                            }
-                        };
+                function renderCity(data) {
+                    for (const x of data) {
+                        var opt = document.createElement('option');
+                        opt.value = x.Name;
+                        opt.text = x.Name;
+                        opt.setAttribute('data-id', x.Id);
+                        citis.options.add(opt);
                     }
+                    citis.onchange = function() {
+                        district.length = 1;
+                        ward.length = 1;
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                            for (const k of result[0].Districts) {
+                                var opt = document.createElement('option');
+                                opt.value = k.Name;
+                                opt.text = k.Name;
+                                opt.setAttribute('data-id', k.Id);
+                                district.options.add(opt);
+                            }
+                        }
+                    };
+                    district.onchange = function() {
+                        ward.length = 1;
+                        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
+                                .selectedIndex].dataset.id)[0].Wards;
+
+                            for (const w of dataWards) {
+                                var opt = document.createElement('option');
+                                opt.value = w.Name;
+                                opt.text = w.Name;
+                                opt.setAttribute('data-id', w.Id);
+                                wards.options.add(opt);
+                            }
+                        }
+                    };
+                }
                 </script>
                 <div class="col-md-12">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Phương thức thanh toán</option>
+                    <select name="method_payment" class="form-select" aria-label="Default select example">
+                        <option value="" disabled selected>Phương thức thanh toán</option>
                         <option value="1">COD</option>
                         <option value="2">Bank</option>
                     </select>
                 </div>
-
+                <div class="col-md-12">
+                    <label for="validationCustom02" class="form-label">Ngày đặt hàng</label>
+                    <input type="date" name="toDay" id="todayDate" value="<?php echo date('Y-m-d'); ?>" readonly
+                        class="form-control" id="validationCustom02" readonly>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
@@ -169,7 +237,8 @@ $provinces = thanh_pho_select_all();
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 100%;" type="button">ĐẶT
+                    <button name="btn_buy" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        style="width: 100%;" type="button">ĐẶT
                         HÀNG</button>
                 </div>
             </form>
@@ -183,7 +252,8 @@ $provinces = thanh_pho_select_all();
             ?>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -205,7 +275,8 @@ $provinces = thanh_pho_select_all();
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
-                        <img style="width: 20px; height: 20px;" src="<?= $ASSET_URL ?>/images/logos/Main Logo.png" class="rounded me-2" alt="...">
+                        <img style="width: 20px; height: 20px;" src="<?= $ASSET_URL ?>/images/logos/Main Logo.png"
+                            class="rounded me-2" alt="...">
                         <strong class="me-auto">Cám ơn quý khách</strong>
                         <small><?= $previous_time_formatted ?></small>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -244,18 +315,18 @@ $provinces = thanh_pho_select_all();
                             } else {
                                 if (isset($data[$key]['order'])) {
                                     $count++; ?>
-                                    <tr>
-                                        <th scope="row"><?php echo $count ?></th>
-                                        <td style="text-align: center;">
-                                            <span><?= $item['name'] ?></span>
-                                        </td>
-                                        <td class="quantity-input" style="text-align: center;" colspan="">
-                                            <?php
+                        <tr>
+                            <th scope="row"><?php echo $count ?></th>
+                            <td style="text-align: center;">
+                                <span><?= $item['name'] ?></span>
+                            </td>
+                            <td class="quantity-input" style="text-align: center;" colspan="">
+                                <?php
                                             echo $item['quantity'];
                                             ?>
-                                        </td>
-                                        <td style="text-align: center;" colspan="2">
-                                            <?php
+                            </td>
+                            <td style="text-align: center;" colspan="2">
+                                <?php
                                             $amount_vnd = $item['price']; // "12,000,000"
                                             $amount_vnd = str_replace(",", "", $amount_vnd); // "12 000 000 đ"
                                             $amount_vnd = str_replace("₫", "", $amount_vnd); // "12 000 000"
@@ -265,12 +336,12 @@ $provinces = thanh_pho_select_all();
                                             $amount_vnd = number_format($total, 0, ',', ',') . " ₫"; // 12,000,000 đ
                                             echo $amount_vnd;
                                             ?>
-                                        </td>
-                                    </tr>
-                                    <?php 
+                            </td>
+                        </tr>
+                        <?php 
                                         unset($_SESSION['data-cart'][$key]['order']);
                                     ?>
-                            <?php
+                        <?php
                                 } else {
                                     break;
                                 }

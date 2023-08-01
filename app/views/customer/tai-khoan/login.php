@@ -103,6 +103,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_fullname'] = $user['full_name'];
         $_SESSION['user_role'] = $user['role'];
+        $_SESSION['user_phone'] = $user['phone_number'];
 
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';
