@@ -6,14 +6,14 @@
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <?php
-require_once  ("../models/CategoryModel.php");
+// require_once  ("../models/CategoryModel.php");
 $productList = getAllProducts();
 ?>
 <!-- Mã HTML cho form thêm hình ảnh sản phẩm -->
 <h2 class="title">Thêm hình ảnh cho sản phẩm</h2>
 
 <!-- Mã HTML cho form nhập dữ liệu -->
-<form method="POST" action="../controller/addProductImage.php" enctype="multipart/form-data">
+<form method="POST" action="<?php echo $controller ?>/admin/addProductImage.php" enctype="multipart/form-data">
     <label for="product_id">Chọn sản phẩm:</label>
     <select name="product_id" id="product_id" required>
         <?php foreach ($productList as $product) { ?>
@@ -21,7 +21,7 @@ $productList = getAllProducts();
         <?php } ?>
     </select><br>
     <label for="image_file">Chọn hình ảnh:</label>
-    <input type="file" name="image_file" id="image_file" required><br>
+    <input type="file" name="image_file" id="image_file"><br>
     <button type="submit">Tải lên</button>
 </form>
 

@@ -206,8 +206,7 @@ $categories = getAllCategories();
         <tr>
             <th>Id</th>
             <th>Tên danh mục</th>
-            <th>Slug</th>
-            <th>Banner</th>
+            <th>Size</th>
             <th>Ngày tạo</th>
             <th>Ngày cập nhật</th>
             <th>Thao tác</th>
@@ -215,15 +214,18 @@ $categories = getAllCategories();
     </thead>
     <?php foreach ($categories as $category) { ?>
         <tr>
-            <td><?php echo $category['id']; ?></td>
-            <td><?php echo $category['cate_name']; ?></td>
-            <td><?php echo $category['cate_slug']; ?></td>
-            <td><?php echo $category['cate_banner']; ?></td>
-            <td><?php echo $category['create_at']; ?></td>
-            <td><?php echo $category['update_at']; ?></td>
+            <td><?= $category['id']; ?></td>
+            <td><?= $category['cate_name']; ?></td>
+            <td><?= $category['has_size']; ?></td>
+            <td><?= $category['create_at']; ?></td>
+            <td><?= $category['update_at']; ?></td>
+
+
+
             <td class="action-links">
                 <a href="editCategory.php?id=<?php echo $category['id']; ?>" class="btn-sua">Sửa</a>
-                <a href="deleteCategory.php?id=<?php echo $category['id']; ?>" class="btn-xoa">Xoá</a>
+                <a href="<?php echo $controller; ?>/admin/deleteCate.php?id=<?php echo $category['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"  class="btn-xoa">Xóa</a>
+
             </td>
         </tr>
     <?php } ?>

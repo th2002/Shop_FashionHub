@@ -1,4 +1,7 @@
 <div class="container">
+    <div id="toast">
+
+    </div>
     <div class="container__popular">
         <h1 class="container__popular-text">SẢN PHẨM NỔI BẬT</h1>
     </div>
@@ -7,9 +10,7 @@
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    if(!empty($VIEW_PRODUCT_FEATURED)) {
-                                    require_once $VIEW_PRODUCT_FEATURED;
-                                }
+                    require_once '../layout/top10_products.php';
                 ?>
             </div>
         </div>
@@ -23,9 +24,7 @@
         <div class="grid wide">
             <div class="row slider-popular">
                 <?php
-                    if(!empty($VIEW_PRODUCT_SALE)) {
-                                    require_once $VIEW_PRODUCT_SALE;
-                                }
+                    require_once '../layout/sale_products.php';
                 ?>
             </div>
         </div>
@@ -39,7 +38,7 @@
 
     <div class="container__banner">
         <img class="container__banner-img"
-            src="../../../.././assets/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
+            src="<?=$ASSET_URL?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
     </div>
 
     <div class="container__product">
@@ -50,10 +49,8 @@
             <div class="grid wide">
                 <div class="row">
                     <?php
-                                if(!empty($VIEW_PRODUCT)) {
-                                    require_once $VIEW_PRODUCT;
-                                }
-                            ?>
+                        require_once '../layout/products.php';            
+                    ?>
                 </div>
             </div>
         </div>
@@ -80,7 +77,7 @@
         background-color: aliceblue;
     }
 
-    .container__page-item {
+    .container__page-list li {
         padding: 0 10px;
         border: 1px salmonblue solid;
         width: 40px;
@@ -91,7 +88,7 @@
         margin: 0 5px;
     }
 
-    .container__page-item.active {
+    .active {
         background-color: aqua;
     }
 
@@ -102,31 +99,6 @@
     </style>
     <div class="container__page">
         <ul class="container__page-list">
-            <li class="container__page-item">
-                <a class="container__page-link" href="">
-                    <i class="container__page-icon fa-solid fa-chevron-left"></i>
-                </a>
-            </li>
-            <li class="container__page-item active">
-                <a class="container__page-link" href="">1</a>
-            </li>
-            <li class="container__page-item">
-                <a class="container__page-link" href="">2</a>
-            </li>
-            <li class="container__page-item">
-                <a class="container__page-link" href="">3</a>
-            </li>
-            <li class="container__page-item">
-                <a class="container__page-link" href="">4</a>
-            </li>
-            <li class="container__page-item">
-                <a class="container__page-link" href="">5</a>
-            </li>
-            <li class="container__page-item">
-                <a class="container__page-link" href="">
-                    <i class="container__page-icon fa-solid fa-chevron-right"></i>
-                </a>
-            </li>
 
         </ul>
     </div>

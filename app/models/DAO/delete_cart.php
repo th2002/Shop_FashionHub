@@ -1,15 +1,12 @@
 <?php 
     session_start();
-    if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id_cart'])){
-        $id_cart = $_GET['id_cart'];
-    }
-    if(isset($_SESSION['data-cart'])){
-        $data =$_SESSION['data-cart'];
-        foreach($data as $key => $item){
-            if($item["id_price"] == $id_cart){
-                $k++;
-            }
-            echo $k;
+    if (isset($_GET["id_product"])) {
+        $id = $_GET["id_product"];
+        if (isset($_SESSION['data-cart'][$id])) {
+            $_SESSION['data-cart']['totalQuantity'] -= $_SESSION['data-cart'][$id]['quantity'];
+            unset($_SESSION['data-cart'][$id]);
         }
+        header('Location: ../../../index.php');
+        exit();
     }
 ?>

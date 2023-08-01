@@ -1,15 +1,16 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
 
+
 // Hàm thêm danh mục sản phẩm
-function addCategory($cate_name, $cate_slug, $cate_banner){
+function addCategory($cate_name, $has_size){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO category_product (cate_name, cate_slug, cate_banner, create_at, update_at) VALUES (?, ?, ?, ?, ?)");
-    $query->execute([$cate_name, $cate_slug, $cate_banner, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO category_product (cate_name, create_at, update_at, has_size) VALUES (?, ?, ?, ?)");
+    $query->execute([$cate_name, $create_at, $update_at, $has_size]);
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 
@@ -31,25 +32,25 @@ function getCategoryById($id) {
 }
 
 // Hàm thêm sản phẩm
-function addProduct($name, $thumbnail, $slug, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id){
+function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO products (name, thumbnail, slug, decsription, quantity, price, sale_price, featured, best_seller, cate_id, cartitem_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $query->execute([$name, $thumbnail, $slug, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $cartitem_id, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, cate_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $create_at, $update_at]);
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 // Hàm cập nhật thông tin sản phẩm
-function updateProduct($productId, $productName, $thumbnail, $slug, $decsription, $quantity, $price) {
+function updateProduct($productId, $productName, $decsription, $quantity, $price) {
     global $db;
 
     $updateAt = date("Y-m-d");
 
-    $query = $db->prepare("UPDATE products SET name = ?, thumbnail = ?, slug = ?, decsription = ?, quantity = ?, price = ?, update_at = ? WHERE id = ?");
-    return $query->execute([$productName, $thumbnail, $slug, $decsription, $quantity, $price, $updateAt, $productId]);
+    $query = $db->prepare("UPDATE products SET name = ?, decsription = ?, quantity = ?, price = ?, update_at = ? WHERE id = ?");
+    return $query->execute([$productName, $decsription, $quantity, $price, $updateAt, $productId]);
 }
 
 // Hàm xóa sản phẩm
@@ -61,6 +62,19 @@ function deleteProduct($productId){
     $query->execute([$productId]);
 
     return $query->rowCount();
+}
+
+// HÀm xóa tất cả sản phẩm
+function deleteAllProduct(){
+    global $db;
+    try {
+        $query = $db->prepare("DELETE FROM products");
+        return $query->execute();
+    } catch (PDOException $e) {
+        // xử lý lỗi
+        error_log("Lỗi trong quá trình xóa!" . $e->getMessage());
+        return false;
+    }
 }
 
 
@@ -83,22 +97,34 @@ function getProductById($productId) {
 
 
 // Hàm cập nhật danh mục sản phẩm
-function updateCategory($id, $cate_name, $cate_slug, $cate_banner) {
+function updateCategory($id, $cate_name, $has_size) {
     global $db;
      
     $update_at = date("Y-m-d");
-    $query = $db->prepare("UPDATE category_product SET cate_name = ?, cate_slug = ?, cate_banner = ?, update_at = ? WHERE id = ?");
-    return $query->execute([$cate_name, $cate_slug, $cate_banner, $update_at, $id]);
+    $query = $db->prepare("UPDATE category_product SET cate_name = ?, has_size = ?, update_at = ? WHERE id = ?");
+    return $query->execute([$cate_name, $has_size, $update_at, $id]);
 }
+
+
+
 
 // Hàm xoá danh mục
 function deleteCategory($cate_id){
     global $db;
 
-    $query = $db->prepare("DELETE FROM category_product WHERE id = ?");
+    $query = $db->prepare("SELECT * FROM category_product where id=?");
+    $query->execute([$cate_id]);
+    $cate = $query->fetch(PDO::FETCH_ASSOC);
+
+    if(!$cate){
+        return false;
+    }
+
+    // CẬp nhật danh mục
+    $query = $db->prepare("DELETE from category_product WHERE id=?");
     $query->execute([$cate_id]);
 
-    return $query->rowCount();
+    return true; // XÓa thành công
 }
 
 
@@ -123,6 +149,17 @@ function getProductImages($productId) {
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+// hàm lấy địa chỉ ip người dùng
+function getUserIP(){
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 
 // hàm đăng ký tài khoản
 function registerUser($user_name, $email, $password, $full_name, $phone_number){
@@ -139,8 +176,9 @@ function registerUser($user_name, $email, $password, $full_name, $phone_number){
     // Thêm dữ liệu vào database users
 
     $hashePssword = password_hash($password, PASSWORD_DEFAULT);
-    $query = $db->prepare("INSERT INTO users (user_name, email, password, full_name, phone_number) VALUE (?, ?, ?, ?, ?)");
-    $query->execute([$user_name, $email, $hashePssword, $full_name, $phone_number]);
+    $ip = getUserIP();
+    $query = $db->prepare("INSERT INTO users (user_name, email, password, full_name, phone_number, ip_address) VALUE (?, ?, ?, ?, ?, ?)");
+    $query->execute([$user_name, $email, $hashePssword, $full_name, $phone_number, $ip]);
 
     return $query->rowCount();
 }
@@ -181,6 +219,23 @@ function getUserById($id) {
     return $query->fetch(PDO::FETCH_ASSOC);
 }
 
+// Hàm đăng nhập và kiểm tra mật khẩu
+function login($username, $password)
+{
+    global $db;
+
+    $stmt = $db->prepare('SELECT * FROM users WHERE user_name = :username');
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Kiểm tra xem đã tìm thấy người dùng với tên đăng nhập cụ thể hay chưa
+    if ($user && password_verify($password, $user['password'])) {
+        return $user; // Trả về thông tin người dùng nếu xác thực thành công
+    } else {
+        return false; // Trả về false nếu xác thực không thành công
+    }
+}
 // Hàm cập nhật thông tin người dùng
 function updateUser($id, $user_name, $email, $role) {
     global $db;
@@ -189,6 +244,25 @@ function updateUser($id, $user_name, $email, $role) {
     $query->execute([$user_name, $email, $role, $id]);
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+}
+
+// hàm xoá người dùng
+
+function deleteUser($id){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM users WHERE id=?");
+    $query->execute([$id]);
+    $user= $query->fetch(PDO::FETCH_ASSOC);
+
+    if(!$user){
+        return false; // người dùng không tồn tại
+    }
+
+    $query = $db->prepare("DELETE FROM users where id =?");
+    $query->execute([$id]);
+
+    return true; // xó thành công
 }
 // Hàm kiểm tra đăng nhập
 
@@ -217,6 +291,17 @@ function getCategoriesWithPagination($limit, $offset) {
     $query->execute();
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Thêm mã giảm giá
+function addCoupon($code, $type, $value, $status, $date_end){
+    global $db;
+    $create_at = date("Y-m-d");
+    $update_at = date("Y-m-d");
+    $query = $db->prepare("INSERT INTO coupon (code, type, value, status, date_end, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$code, $type, $value, $status, $date_end, $create_at, $update_at]);
+
+    return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
 
 

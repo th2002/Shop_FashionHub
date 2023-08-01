@@ -27,15 +27,14 @@ if (isset($_GET['id'])) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Lấy dữ liệu từ form sửa danh mục
             $cate_name = $_POST['cate_name'];
-            $cate_slug = $_POST['cate_slug'];
-            $cate_banner = $_POST['cate_banner'];
+            $has_size = $_POST['has_size'];
             
             $update_at = date("Y-m-d");
             
             // Thực hiện cập nhật danh mục
-            $result = updateCategory($categoryId, $cate_name, $cate_slug, $cate_banner);
+            $sua = updateCategory($categoryId, $cate_name, $has_size);
 
-            if ($result) {
+            if ($sua) {
                 // Đặt thông báo thành công
                 echo '<script>
                 Swal.fire({
@@ -59,17 +58,17 @@ if (isset($_GET['id'])) {
 }
 ?>
 <!-- Mã HTML cho form nhập dữ liệu -->
-<form method="POST" action="editCategory.php?id=<?php echo $categoryId; ?>">
+<form method="POST" action="">
     <?php if (!empty($category) && isset($category['id'])) { ?>
         <label for="cate_name">Tên danh mục:</label>
         <input type="text" name="cate_name" id="cate_name" value="<?php echo $category['cate_name']; ?>" required><br>
 
-        <label for="cate_slug">Slug danh mục:</label>
-        <input type="text" name="cate_slug" id="cate_slug" value="<?php echo $category['cate_slug']; ?>" required><br>
-
-        <label for="cate_banner">Banner danh mục:</label>
-        <input type="text" name="cate_banner" id="cate_banner" value="<?php echo $category['cate_banner']; ?>" required><br>
-
+        <label for="has_size">Size </label>
+        <p><?= ($category['has_size'] == 1) ? 'Có size' : 'không có size'; ?></p>
+        <select name="has_size" id="">
+            <option value="0" <?php echo ($category['has_size'] == 0) ? 'selected' : ''; ?>>Không có size</option>
+            <option value="1" <?php echo ($category['has_size'] == 1) ? 'selected' : ''; ?>>Có size</option>
+        </select>
         <button type="submit">Sửa danh mục</button>
     <?php } else { ?>
         <p>Không tìm thấy danh mục!</p>

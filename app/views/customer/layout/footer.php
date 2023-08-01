@@ -11,7 +11,9 @@
             bottom: 10px;
             right: 10px;
             border-radius: 60px;
+            z-index: 1000;
         }
+
         .chat__box-icon {
             position: relative;
             cursor: pointer;
@@ -25,24 +27,30 @@
             height: 306px;
             background-color: #fff;
             box-shadow: 0px 1px 5px 1px #9b9b9b;
-            display: none;
             animation: hide-item .3s linear;
+            display: none;
         }
-        .box__chat-message.box__chat-message--active{
+
+        .box__chat-message.box__chat-message--active {
             display: block;
         }
-        @keyframes hide-item{
-            0%{
+
+        @keyframes hide-item {
+            0% {
                 opacity: .2;
             }
-            50%{
+
+            50% {
                 opacity: .6;
             }
-            100%{
+
+            100% {
                 opacity: 1;
             }
         }
-        .box__chat-info{
+
+        .box__chat-toppic,
+        .box__chat-info {
             width: 100%;
             height: 60px;
             background-color: #0A7CFF;
@@ -50,77 +58,138 @@
             justify-content: flex-start;
             align-items: center;
         }
-        .info__avatar{
+
+        .box__chat-info {
+            display: none;
+        }
+
+        .box__chat-info.box__chat-info--active {
+            display: flex;
+        }
+
+        .box__chat-toppic h4 {
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .info__avatar {
             width: 50px;
             height: 50px;
             background-color: #9b9b9b;
             object-fit: cover;
             border-radius: 50%;
             overflow: hidden;
-            margin:0 10px;
-            
+            margin: 0 10px;
+
         }
-        .info__avatar-img{
+
+        .info__avatar-img {
             width: 100%;
             height: 100%;
         }
-        .info__contact{
+
+        .info__contact {
             color: #fff;
-            
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
         }
-        .info__contact-name{
+
+        .info__contact-name {
             font-weight: 600;
-            font-size: 18px;
+            font-size: 15px;
         }
-        .info__contact-status{
-            font-size: 14px;
+
+        .info__contact-status {
+            font-size: 13px;
             font-weight: 400;
+            padding-right: 15px;
         }
-        .box__chat-detail{
+
+        .box__chat-detail {
             width: 100%;
             height: 66%;
-            background-color: #9b9b9b;
+            background-color: #cecece;
             padding: 10px;
             color: #fff;
             overflow-y: auto;
+            display: none;
         }
-        
-        .detail__mess-send{
+
+        .box__chat-toppic-detail {
+            width: 100%;
+            height: 66%;
+            background-color: #cecece;
+            padding: 5px 10px;
+            color: #fff;
+            flex-wrap: wrap;
+            overflow-y: auto;
+        }
+
+        .box__chat-toppic-detail button {
+            height: 30px;
+            padding: 0 10px;
+            border: none;
+            outline: none;
+            border-radius: 30px;
+            color: #333;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .box__chat-toppic-detail button:hover {
+            color: #fff;
+            opacity: .9;
+            transition: all .1s linear;
+            background-color: dodgerblue;
+            border: 1px solid #fff;
+
+        }
+
+        .box__chat-toppic-detail button.box__chat-toppic-detail--active {
+            border: 1px solid #fff;
+            color: #fff;
+            background-color: #1d3653;
+        }
+
+        .detail__mess-send {
             width: 85%;
             float: right;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 5px;
         }
-        .detail__mess-send span{
+
+        .detail__mess-send span {
             background-color: #0A7CFF;
             padding: 10px;
             border-radius: 15px 10px 0 10px;
         }
-        .detail__mess-send.detail__mess-reseive{
+
+        .detail__mess-send.detail__mess-reseive {
             float: left;
             display: flex;
             justify-content: flex-start;
         }
-        
-        .detail__mess-reseive{
-            
-        }
-        .box__chat-send{
+
+        .box__chat-send {
             width: 100%;
             height: 14%;
         }
-        .detail__mess-info{
+
+        .detail__mess-info {
             display: flex;
         }
-       
-        span.detail__mess-text{
+
+        span.detail__mess-text {
             border-radius: 0 10px 15px 10px;
             margin: 6px 0 0 8px;
             background-color: #333;
             padding: 6px;
         }
-        .detail__mess-avt{
+
+        .detail__mess-avt {
             min-width: 30px;
             max-height: 30px;
             object-fit: cover;
@@ -130,25 +199,34 @@
             justify-content: center;
             align-items: center;
         }
-        .detail__mess-avt-img{
+
+        .detail__mess-avt-img {
             width: 100%;
             height: 100%;
         }
-        .detail__mess-avt{
-        
+        .info__contact-left{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
-      
     </style>
     <div class="box__chat">
         <div class="box__chat-message">
+            <div class="box__chat-toppic">
+                <h4>Chủ Đề</h4>
+            </div>
             <div class="box__chat-info">
                 <div class="info__avatar">
-                    <img src="../../../assets/images/users/th (1).jpg" alt="" class="info__avatar-img">
-                </div>      
+                    <img src="../../../../assets/images/users/th (1).jpg" alt="" class="info__avatar-img">
+                </div>
                 <div class="info__contact">
-                    <h2 class="info__contact-name">admin</h2>
-                    <span class="info__contact-status">online now</span>
+                    <div class="info__contact-left">
+                        <h2 class="info__contact-name">admin</h2>
+                        <span class="info__contact-status">online now</span>
+                    </div>
+                    <div class="info__contact-right">
+                        <span class="info__contact-status info__contact-toppic">Sản Phẩm Và Dịch Vụ</span>
+                    </div>
                 </div>
             </div>
             <div class="box__chat-detail">
@@ -160,7 +238,7 @@
                 <div class="detail__mess-send detail__mess-reseive">
                     <div class="detail__mess-info">
                         <div class="detail__mess-avt">
-                            <img src="../../../assets/images/users/th (1).jpg" alt="" class="detail__mess-avt-img">
+                            <img src="../../../../assets/images/users/th (1).jpg" alt="" class="detail__mess-avt-img">
                         </div>
                         <span class="detail__mess-text">chào bạn chào bạn bạn khỏe không chúc bạn 1 ngày tốt</span>
                     </div>
@@ -203,55 +281,97 @@
                     <span>chào bạn bạn khỏe không chúc bạn 1 ngày tốt</span>
                 </div>
             </div>
+
+            <div class="box__chat-toppic-detail">
+                <?php
+                $toppics = select_toppics_all();
+                foreach ($toppics as $toppic) { ?>
+                    <button data-id="<?= $toppic['chat_toppic_id'] ?>"><?= $toppic['chat_toppic_name'] ?></button>
+                <?php
+                }
+                ?>
+            </div>
             <style>
-                .box__chat-send{
+                .box__chat-send {
+                    display: none;
+                }
+
+                .box__chat-send.box__chat-send--active {
                     display: flex;
                 }
-                .chat__send-input{
+
+                .chat__send-input {
                     height: 44px;
                     width: 85%;
                 }
-                .chat__send-input input{
+
+                .box__chat-chat {
+                    height: 44px;
+                }
+
+                .box__chat-chat button {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #0A7CFF;
+                    border: none;
+                    outline: none;
+                    color: #fff;
+                    font-size: 18px;
+                    opacity: .2;
+                    cursor: default;
+                }
+
+                .chat__send-input input {
                     padding-left: 10px;
                     width: 100%;
                     height: 100%;
                     border: none;
                     outline: none;
                 }
-                .chat__send-img{
-                    
-                }
-                .chat__send-btn{
+
+                .chat__send-btn {
                     width: 15%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                 }
-                .chat__send-btn i{
+
+                .chat__send-btn i {
                     color: #9b9b9b;
-                    opacity: .3;
+                    opacity: .2;
                 }
-                .chat__send-btn.chat__send-btn-active{
+
+                .chat__send-btn.chat__send-btn-active {
                     cursor: pointer;
                 }
-                .chat__send-btn.chat__send-btn-active i{
+
+                .chat__send-btn.chat__send-btn-active i {
                     color: #0A7CFF;
                     opacity: 1;
                 }
             </style>
-            <div class="box__chat-send">
+            <form method="post" class="box__chat-send">
                 <div class="chat__send-input">
                     <input type="text" placeholder="Nhập tin nhắn ...">
                 </div>
-              
+
                 <div class="chat__send-btn">
-                  <i class="fa-sharp fa-solid fa-paper-plane"></i>
+                    <i class="fa-sharp fa-solid fa-paper-plane"></i>
                 </div>
+            </form>
+            <div class="box__chat-chat">
+                <button data-id="<?php if (isset($_SESSION['user_id'])) {
+                                        echo $_SESSION['user_id'];
+                                    } ?>">Chat Ngay Bây Giờ</button>
+                <?php
+
+                ?>
             </div>
         </div>
         <div class="chat__box-icon">
             <svg width="36" height="36" viewBox="0 0 36 36">
-                <path fill="white" d="M1 17.99C1 8.51488 8.42339 1.5 18 1.5C27.5766 1.5 35 8.51488 35 17.99C35 27.4651 27.5766 34.48 18 34.48C16.2799 34.48 14.6296 34.2528 13.079 33.8264C12.7776 33.7435 12.4571 33.767 12.171 33.8933L8.79679 35.3828C7.91415 35.7724 6.91779 35.1446 6.88821 34.1803L6.79564 31.156C6.78425 30.7836 6.61663 30.4352 6.33893 30.1868C3.03116 27.2287 1 22.9461 1 17.99ZM12.7854 14.8897L7.79161 22.8124C7.31238 23.5727 8.24695 24.4295 8.96291 23.8862L14.327 19.8152C14.6899 19.5398 15.1913 19.5384 15.5557 19.8116L19.5276 22.7905C20.7193 23.6845 22.4204 23.3706 23.2148 22.1103L28.2085 14.1875C28.6877 13.4272 27.7531 12.5704 27.0371 13.1137L21.673 17.1847C21.3102 17.4601 20.8088 17.4616 20.4444 17.1882L16.4726 14.2094C15.2807 13.3155 13.5797 13.6293 12.7854 14.8897Z"></path>
+                <path fill="white" d="M1 17.99C1 8.51488 8.42339 1.5 18 1.5C27.5766 1.5 35 8.51488 35 17.99C35 27.4651 27.5766 34.48 18 34.48C16.2799 34.48 14.6296 34.2528 13.079 33.8264C12.7776 33.7435 12.4571 33.767 12.171 33.8933L8.79679 35.3828C7.91415 35.7724 6.91779 35.1446 6.88821 34.1803L6.79564 31.156C6.78425 30.7836 6.61663 30.4352 6.33893 30.1868C3.03116 27.2287 1 22.9461 1 17.99ZM12.7854 14.8897L7.79161 22.8124C7.31238 23.5727 8.24695 24.4295 8.96291 23.8862L14.327 19.8152C14.6899 19.5398 15.1913 19.5384 15.5557 19.8116L19.5276 22.7905C20.7193 23.6845 22.4204 23.3706 23.2148 22.1103L28.2085 14.1875C28.6877 13.4272 27.7531 12.5704 27.0371 13.1137L21.673 17.1847C21.3102 17.4601 20.8088 17.4616 20.4444 17.1882L16.4726 14.2094C15.2807 13.3155 13.5797 13.6293 12.7854 14.8897Z">
+                </path>
             </svg>
 
         </div>
@@ -354,9 +474,4 @@
             </div>
         </div>
     </div>
-    <script src="../../../assets/js/chat.js"></script>
-    <script src="../../models/DAO/test.js"></script>
-   
-    
-    
 </footer>

@@ -223,9 +223,10 @@ nav{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 5px;
   }
   .nav_cart-item-left{
-    width: 100px;
+    max-width: 35px;
     height: auto;
     overflow: hidden;
     border: 1px solid #dbd9d9;
@@ -249,7 +250,7 @@ nav{
     overflow: hidden;
     flex: 1;
     text-align: left;
-    padding-right: 6px;
+    padding-right: 10px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -269,7 +270,7 @@ nav{
   
   .nav_cart-item-text{
     color: red;
-
+    margin-right: 5px;
   }
   .nav_cart-item-quantity{
     color: #333;
@@ -744,7 +745,7 @@ footer > p {
     min-height: 48px;
 }
 .product_price{
-    margin: 5px 0;
+    margin: 5px 90px;
     font-size: 18px;
 }
 .product_price-new{
@@ -821,4 +822,20 @@ footer > p {
 }
 li.slick-active button {
     background-color: red;
+}
+
+.container_oders {
+    width: 100%;
+}
+
+.container_oders .title {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 5px;
+}
+
+.container_oders h6 {
+    display: flex;
+    justify-content: center;
 }
