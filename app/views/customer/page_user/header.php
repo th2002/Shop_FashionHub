@@ -1,11 +1,10 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/products.php';
 
     if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
         // nếu chưa login thì chuyển về trang login
-        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
+        header('Location:' . $baseURL . '/tai-khoan/login.php');
         exit();
       }
 ?>
@@ -25,7 +24,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 
     <title>Shop FashionHub</title>
 </head>
