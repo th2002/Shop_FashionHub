@@ -531,4 +531,75 @@ function getProductsByPage($page, $perPage) {
         return array();
     }
 }
+// Hàm lấy thông tin đơn hàng
+function getOrdersInfo(){
+    global $db;
+
+    $sql = "
+    SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        od.product_id,
+        od.quantity,
+        p.name AS product_name,
+        u.full_name AS customer_name,
+        u.email AS customer_email
+    FROM
+        oders o
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN products p ON od.product_id = p.id
+    INNER JOIN users u ON o.cus_id = u.id
+    ORDER BY o.created_at DESC
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// Hàm lấy đơn hàng theo id
+function getOrderById($order_id) {
+    global $db;
+
+    $sql = "
+    SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        od.product_id,
+        od.quantity,
+        u.full_name AS customer_name,
+        u.email AS customer_email
+    FROM
+        oders o
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN users u ON o.cus_id = u.id
+    WHERE o.id = :order_id
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':order_id', $order_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 ?>
