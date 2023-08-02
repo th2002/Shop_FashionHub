@@ -3,7 +3,7 @@
 
 // Truy vấn tất cả các hàng hóa
 function hang_hoa_select_all(){
-    $sql = "SELECT products.id,products.name,products.price,product_images.image_url FROM products INNER JOIN product_images ON products.id =product_images.product_id";
+    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id =product_images.product_id";
     return  pdo_query($sql);
 }
 //Truy vấn một hàng hóa theo mã
@@ -13,12 +13,12 @@ function hang_hoa_select_by_id($id){
 }
 
 function hang_hoa_select_outstanding(){
-    $sql = "SELECT products.id,products.name,products.price,product_images.image_url FROM products INNER JOIN product_images ON products.id =product_images.product_id WHERE featured = 1 AND sale_price IS null limit 11";
+    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id =product_images.product_id WHERE featured = 1 AND sale_price IS null limit 11";
     return  pdo_query($sql);
 }
 
 function hang_hoa_select_sale() {
-    $sql = "SELECT products.id,products.name,products.sale_price,products.price,product_images.image_url FROM products INNER JOIN product_images ON products.id =product_images.product_id where sale_price is not null";
+    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id =product_images.product_id where sale_price is not null";
     return pdo_query($sql);
 }
 function select_size_hang_hoa_by_id($id) {
