@@ -12,7 +12,17 @@
                 <a href="home" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="#container__grid_img" onclick="scrollToDiv(event)" class="nav__page-link">Danh mục</a>
+                <a href="home?category" class="nav__page-link">Danh mục</a>
+                <ul class="submenu">
+                    <?php
+                        $result = danh_muc_select_all();
+                    ?>
+                    <?php foreach($result as $key => $value): ?>
+                    <li><a
+                            href="<?php echo $SITE_URL?>/cate_products/index.php?id=<?php echo $value['id'] ?>"><?php echo $value['cate_name'] ?></a>
+                    </li>
+                    <?php endforeach ?>
+                </ul>
             </li>
         </ul>
     </div>
