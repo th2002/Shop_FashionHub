@@ -13,7 +13,7 @@ function hang_hoa_select_by_id($id){
 }
 
 function hang_hoa_select_outstanding(){
-    $sql = "SELECT products.id,products.name,products.price,product_images.image_url FROM products INNER JOIN product_images ON products.id =product_images.product_id WHERE featured = 1 AND sale_price IS null";
+    $sql = "SELECT products.id,products.name,products.price,product_images.image_url FROM products INNER JOIN product_images ON products.id =product_images.product_id WHERE featured = 1 AND sale_price IS null limit 11";
     return  pdo_query($sql);
 }
 
