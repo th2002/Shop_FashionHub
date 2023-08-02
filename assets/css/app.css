@@ -875,3 +875,35 @@ li.slick-active button {
 .category_img:hover .category_img-item{
     scale: 110%;
 }
+.submenu {
+    position: absolute;
+    top: 20%;
+    left: 27%;
+    background-color: #f9f9f9;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .submenu li {
+    display: block;
+  }
+
+  .submenu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .submenu li a:hover {
+    background-color: #ddd;
+  }
+
+  /* Hiển thị submenu khi hover vào thẻ cha */
+  .nav__page-item:hover .submenu {
+    display: block;
+  }

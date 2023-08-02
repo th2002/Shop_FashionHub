@@ -102,32 +102,6 @@
 
         </ul>
     </div>
-    <div class="container_category">
-        <div class="container_category-text">
-            <h1 class="container__popular-text">DANH MỤC SẢN PHẨM</h1>
-        </div>
-        <div class="container__category-list container__popular-list">
-            <div class="grid wide">
-                <div class="row">
-                    <?php
-                        $result = danh_muc_select_all();
-                    ?>
-                    <?php foreach($result as $key => $value): ?>
-                        <div class="col l-3" style="max-width: 20%;">
-                        <div class="category_item">
-                            <div class="category_img">
-                                <a href="<?php echo $SITE_URL?>/cate_products/index.php?id=<?php echo $value['id'] ?>"><img src=" <?php echo $value['image_url'] ?> " alt="" class="category_img-item"></a>
-                            </div>
-                            <div class="product_name">
-                                <h4><?php echo $value['cate_name'] ?></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endforeach ?>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container__grid_img" id="container__grid_img">
         <div class="container__grid_img-row-1">
             <div class="container__grid_img-1">
