@@ -279,8 +279,6 @@
         overflow: visible;
         outline: 0;
         background: rgba(255,87,34,.1);
-        background: ;
-        color: #11;
         border: 1px solid #ee4d2d;
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.03);
         min-width: 80px ;
