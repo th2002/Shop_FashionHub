@@ -40,6 +40,7 @@ customLinks.forEach(link => {
         });
     });
 });
+
 </script>
 <script src="../public/js/script.js"></script>
 </body>
