@@ -13,6 +13,11 @@
             </li>
             <li class="nav__page-item">
                 <a href="home?category" class="nav__page-link">Danh mục</a>
+                <ul class="submenu">
+                    <li><a href="#">Mục con 1</a></li>
+                    <li><a href="#">Mục con 2</a></li>
+                    <li><a href="#">Mục con 3</a></li>
+                </ul>
             </li>
         </ul>
     </div>
