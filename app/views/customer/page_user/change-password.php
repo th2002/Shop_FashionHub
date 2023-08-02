@@ -9,7 +9,12 @@ $loi="";
         $stmt = $db->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ( password_verify($matkhaucu, $user['password'])==0){
+        if(empty($matkhaucu)){
+            $loi.="Không được bỏ trống mật khẩu cũ<br>";
+        }else{
+            $loi.="";
+        }
+        if(password_verify($matkhaucu, $user['password'])==0){
             $loi.="Mật khẩu cũ không đúng<br>";
         }
         if(strlen($matkhaumoi_1)<6){

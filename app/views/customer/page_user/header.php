@@ -4,7 +4,7 @@
 
     if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
         // nếu chưa login thì chuyển về trang login
-        header('Location:' . $baseURL . '/tai-khoan/login.php');
+        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
         exit();
       }
 ?>
