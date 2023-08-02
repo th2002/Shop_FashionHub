@@ -9,10 +9,13 @@ $loi="";
         $stmt = $db->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(isset($matkhaucu)==true){
-            if ( password_verify($matkhaucu, $user['password'])==0){
-                $loi.="Mật khẩu cũ không đúng<br>";
-            }
+        if(empty($matkhaucu)){
+            $loi.="Không được bỏ trống mật khẩu cũ<br>";
+        }else{
+            $loi.="";
+        }
+        if(password_verify($matkhaucu, $user['password'])==0){
+            $loi.="Mật khẩu cũ không đúng<br>";
         }
         if(strlen($matkhaumoi_1)<6){
             $loi.="Mật khẩu mới quá ngắn<br>";
@@ -25,7 +28,11 @@ $loi="";
             $sql = "UPDATE users SET password = ? WHERE user_name = ?";
             $stmt = $db->prepare($sql);
             $stmt->execute([password_hash($matkhaumoi_1, PASSWORD_BCRYPT), $username]);
-            header('Location: Shop_FashionHub/tai-khoan/login.php');
+            echo '<script>';
+            echo 'Swal.fire({ title: "Đổi mật khẩu thành công!", icon: "success" }).then(function() {';
+            echo '   window.location.href = "' . $baseURL . '/app/views/customer/tai-khoan/login.php";';
+            echo '});';
+            echo '</script>';
         }
     }
 ?>
