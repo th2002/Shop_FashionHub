@@ -1,9 +1,9 @@
 <!-- Day la chi tiet san pham -->
-<?php 
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/products.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/products.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +12,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
-    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/grid.css">
+    <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/app.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
+    <link rel="shortcut icon" href="<?= $ASSET_URL ?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -365,39 +366,61 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
     border: 1px solid black;
 }
 </style>
-<?php
-        require '../layout/nav.php';
-    ?>
+
 
 <body>
+    <div id="wrapper">
+
+        <div class="banner_top">
+            <div class="banner_top__center">
+                <h3>Quà tặng hấp dẫn</h3>
+            </div>
+            <div class="banner_top__right">
+                <div class="banner_top__right-season">
+                    <span>Welcome</span>
+                    <h1>Summer</h1>
+                </div>
+                <div class="banner_top__right-year">
+                    <h4>2023</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+        require_once '../layout/nav.php';
+    ?>
+
+
+
     <header>
 
-        <?php 
-    $id=$_GET['id'];
-    // $conn = connect();
-    // $sql = "SELECT * FROM products where id = $id";
-    // $sql = "SELECT b.* , h.image_url FROM products b JOIN product_images h ON h.product_id=b.id WHERE b.id=$id ";
-    // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where products.id=$id ;";
-    // $rows = mysqli_query($conn,$sql);
-    $rows= hang_hoa_select_by_img_id($id);
-    ?>
+        <?php
+        $id = $_GET['id'];
+        // $conn = connect();
+        // $sql = "SELECT * FROM products where id = $id";
+        // $sql = "SELECT b.* , h.image_url FROM products b JOIN product_images h ON h.product_id=b.id WHERE b.id=$id ";
+        // $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id where products.id=$id ;";
+        // $rows = mysqli_query($conn,$sql);
+        $rows = hang_hoa_select_by_img_id($id);
+        ?>
         <?php
         foreach ($rows as $row) {
-    ?>
+        ?>
         <div class="header-left">
             <div class="header-left-img">
                 <div class="header-left-img-pro">
                     <div class="header-left-img-main">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
                     </div>
                     <div class="header-left-img-slider">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
-                        <img src="<?php echo $row['image_url']?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
+                        <img src="<?php echo $row['image_url'] ?>" alt="" class="product_img-item">
                     </div>
                 </div>
             </div>
@@ -417,51 +440,51 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
                     <div class="pro-giam_gia">
                         <div class="mini-vouchers-laurel">Mã giảm giá của shop</div>
                         <?php
-                                $coupons = hang_hoa_select_coupon();
+                            $coupons = hang_hoa_select_coupon();
                             ?>
                         <?php
-                                foreach($coupons as $coupon){
+                            foreach ($coupons as $coupon) {
                             ?>
                         <div class="mini-vouchers">
                             <?php echo $coupon['code']; ?>:<?php echo $coupon['value']; ?><?php echo $coupon['type']; ?>
                         </div>
                         <?php
-                                }
+                            }
                             ?>
                     </div>
                     <div class="pro-loai" style="margin-bottom: 8px; align-items: baseline;">
                         <label class="name-loai">Phân loại</label>
                         <div class="pro-loai-main">
                             <?php $cate_id = $row['cate_id']; ?>
-                            <?php 
+                            <?php
                                 // $sql = "SELECT * FROM category_product INNER JOIN products ON category_product.id = products.cate_id where category_product.id=$cate_id ;";
                                 // $sql = "SELECT  h.*, s.id  FROM  size h join cate_size k join category_product s 
                                 // on  k.cate_id = s.id and k.size_id = h.id where s.id=$cate_id ";
                                 $sizes = hang_hoa_select_by_loai($cate_id);
-                            ?>
+                                ?>
                             <?php
                                 foreach ($sizes as $size) {
-                                    if ($size['has_size']==1 && $cate_id==1){
+                                    if ($size['has_size'] == 1 && $cate_id == 1) {
                                         // $sql = "SELECT * FROM size where size_cate = 0";
                                         $ss = hang_hoa_select_by_name_loai_1();
-                                            foreach ($ss as $s) {?>
-                            <button class="product-variation"><?php echo $s['name_size'];?></button>
+                                        foreach ($ss as $s) { ?>
+                            <button class="product-variation"><?php echo $s['name_size']; ?></button>
                             <?php
                                         }
-                                    }else if ($size['has_size']==1 && $cate_id==2){
+                                    } else if ($size['has_size'] == 1 && $cate_id == 2) {
                                         // $sql = "SELECT * FROM size where size_cate = 1";
                                         $aa = hang_hoa_select_by_name_loai_2();
-                                            foreach ($aa as $a) {?>
-                            <button class="product-variation"><?php echo $a['name_size'];?></button>
+                                        foreach ($aa as $a) { ?>
+                            <button class="product-variation"><?php echo $a['name_size']; ?></button>
                             <?php
                                         }
                                     }
-                            ?>
+                                    ?>
 
                             <?php
-                            break;
+                                    break;
                                 }
-                            ?>
+                                ?>
                         </div>
                     </div>
                     <div class="pro-so_luong">
@@ -475,7 +498,7 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
                                 </div>
                             </div>
                             <div>
-                                <p><?php echo $row['quantity']?> sẩn phẩm có sẵn </p>
+                                <p><?php echo $row['quantity'] ?> sẩn phẩm có sẵn </p>
                             </div>
                         </div>
                     </div>
@@ -494,23 +517,23 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
 
             <div class="mo_ta">
                 <h3>Mô tả : </h3>
-                <i> <?php echo $row['decsription']?> </i>
+                <i> <?php echo $row['decsription'] ?> </i>
             </div>
             <?php require 'comment.php'; ?>
             <div class="them">
                 <h4>Sản phẩm bán chạy</h4>
                 <div class="sp_noi_bat">
-                    <?php 
-            $result = hang_hoa_select_outstanding();
-        ?>
-                    <?php foreach($result as $key => $value){
-                if ($value['product_id']!=$id){
-        ?>
+                    <?php
+                    $result = hang_hoa_select_outstanding();
+                    ?>
+                    <?php foreach ($result as $key => $value) {
+                        if ($value['product_id'] != $id) {
+                    ?>
                     <div class="col l-3">
                         <div class="product_item">
                             <div class="product_img">
-                                <a href="../products/detail.php?id=<?=$value['product_id']?>"><img
-                                        src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
+                                <a href="../products/detail.php?id=<?= $value['product_id'] ?>"><img
+                                        src="<?php echo $value['image_url'] ?>" alt="" class="product_img-item"></a>
                                 <div class="product_cart">
                                     <button class="product_btn product_btn-buy">Mua Ngay </button>
                                     <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -526,8 +549,7 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
                         </div>
                     </div>
                     <?php }
-
-        } ?>
+                    } ?>
                 </div>
             </div>
         </div>
@@ -535,18 +557,19 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
             <h3> Top sản phẩm cùng loại </h3>
             <div class="main-right-top10">
 
-                <?php $cate_id = $row['cate_id'];$id=$_GET['id']; ?>
-                <?php 
-                    $result = hang_hoa_select_by_cung_loai($cate_id);
+                <?php $cate_id = $row['cate_id'];
+                $id = $_GET['id']; ?>
+                <?php
+                $result = hang_hoa_select_by_cung_loai($cate_id);
                 ?>
-                <?php foreach($result as $key => $value){
-                    if ($value['product_id']!=$id){
-                    ?>
+                <?php foreach ($result as $key => $value) {
+                    if ($value['product_id'] != $id) {
+                ?>
                 <div class="col l-3">
                     <div class="product_item">
                         <div class="product_img">
-                            <a href="../products/detail.php?id=<?=$value['product_id']?>"><img
-                                    src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
+                            <a href="../products/detail.php?id=<?= $value['product_id'] ?>"><img
+                                    src="<?php echo $value['image_url'] ?>" alt="" class="product_img-item"></a>
                             <div class="product_cart">
                                 <button class="product_btn product_btn-buy">Mua Ngay </button>
                                 <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
@@ -562,7 +585,7 @@ main>.main-left>.them>.sp_noi_bat>.col>.product_item {
                     </div>
                 </div>
                 <?php }
-                }?>
+                } ?>
             </div>
         </div>
     </main>
