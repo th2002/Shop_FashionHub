@@ -1,3 +1,7 @@
+<?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
