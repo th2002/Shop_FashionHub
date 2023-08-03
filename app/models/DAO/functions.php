@@ -87,6 +87,44 @@ function updateProduct($productId, $productName, $decsription, $quantity, $price
     return $query->execute([$productName, $decsription, $quantity, $price, $updateAt, $productId]);
 }
 
+// Hàm cập nhật đơn hàng
+function updateOrder($order_id, $status_payment, $status_delivery) {
+    global $db;
+
+    // Lấy thời gian hiện tại
+    $created_at = date('Y-m-d');
+
+    // Câu truy vấn SQL cập nhật đơn hàng
+    $sql = "UPDATE oders SET status_payment = ?, status_delivery = ?, created_at = ? WHERE id = ?";
+
+    // Chuẩn bị câu truy vấn
+    $stmt = $db->prepare($sql);
+
+    // Thực hiện cập nhật đơn hàng
+    return $stmt->execute([$status_payment, $status_delivery, $created_at, $order_id]);
+}
+
+// Hàm chuyển đổi trạng thái đơn hàng thành chuỗi:
+function getOrderStatus($status){
+    switch ($status) {
+        case 0:
+            return 'Chưa giao';
+            break;
+        case 1:
+            return 'Đang giao';
+            break;
+        case 2:
+            return 'Đã giao';
+            break;
+        case 3:
+            return 'Hủy';
+            break;         
+        
+        default:
+            return 'Không xác định';
+            break;
+    }
+}
 // Hàm xóa sản phẩm
 
 function deleteProduct($productId){
@@ -598,7 +636,7 @@ function getOrderById($order_id) {
     $stmt->bindValue(':order_id', $order_id, PDO::PARAM_INT);
     $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 

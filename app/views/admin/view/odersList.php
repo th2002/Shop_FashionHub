@@ -103,6 +103,39 @@ include_once("../parts/header.php");
     .name-product{
         text-align: end;
     }
+ /* CSS */
+/* Màu chữ cho các trạng thái đơn hàng */
+.status-not-delivered {
+    color: red;
+}
+
+.status-in-progress {
+    color: orange;
+}
+
+.status-delivered {
+    color: green;
+}
+
+.status-huy {
+    color: red;
+    font-weight: 500;
+}
+.fa-times-circle{
+    color: red;
+    opacity: 0.4;
+}
+
+/* Màu chữ cho các trạng thái thanh toán */
+.status-not-paid {
+    color: red;
+}
+
+.status-paid {
+    color: green;
+}
+
+
 </style>
 
 
@@ -113,6 +146,26 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 
+// Hàm chuyển đổi trạng thái đơn hàng thành chuỗi có icon
+function getOrderStatusWithIcon($status){
+    switch ($status) {
+        case 0:
+            return '<span class="status-icon"><i class="fas fa-circle-notch"></i> Chưa giao</span>';
+            break;
+        case 1:
+            return '<span class="status-icon"><i class="fas fa-truck"></i> Đang giao</span>';
+            break;
+        case 2:
+            return '<span class="status-icon"><i class="fas fa-check-circle"></i> Đã giao</span>';
+            break;
+        case 3:
+            return '<span class="status-icon"><i class="fas fa-times-circle"></i> Hủy</span>';
+            break;
+        default:
+            return '<span class="status-icon">Không xác định</span>';
+            break;
+    }
+}
 
 ?>
 
@@ -143,6 +196,8 @@ require_once $modelPath;
     
 </div>
 <div class="table">
+<!-- HTML -->
+<!-- HTML -->
 <table class="category-table">
     <thead>
         <tr>
@@ -158,18 +213,53 @@ require_once $modelPath;
     <tbody>
         <?php
         $orders = getOrdersInfo(); // Lấy thông tin đơn hàng
-        
+
         foreach ($orders as $order) {
+            $statusClass = '';
+            $statusIcon = '';
+            if ($order['status_delivery'] == 0) {
+                $statusText = 'Chưa giao';
+                $statusClass = 'status-not-delivered';
+                $statusIcon = '<i class="fas fa-circle-notch"></i>';
+            } elseif ($order['status_delivery'] == 1) {
+                $statusText = 'Đang giao';
+                $statusClass = 'status-in-progress';
+                $statusIcon = '<i class="fas fa-truck"></i>';
+            } elseif ($order['status_delivery'] == 2) {
+                $statusText = 'Đã giao';
+                $statusClass = 'status-delivered';
+                $statusIcon = '<i class="fas fa-check-circle"></i>';
+            } elseif ($order['status_delivery'] == 3) {
+                $statusText = 'Đã hủy';
+                $statusClass = 'status-huy';
+                $statusIcon = '<i class="fas fa-times-circle"></i>';
+            } else {
+                $statusText = 'Không xác định';
+            }
+
+            $paymentClass = '';
+            $paymentIcon = '';
+            if ($order['status_payment'] == 0) {
+                $paymentText = 'Chưa thanh toán';
+                $paymentClass = 'status-not-paid';
+                $paymentIcon = '<i class="fas fa-times"></i>';
+            } elseif ($order['status_payment'] == 1) {
+                $paymentText = 'Đã thanh toán';
+                $paymentClass = 'status-paid';
+                $paymentIcon = '<i class="fa-solid fa-money-check-dollar"></i>';
+            } else {
+                $paymentText = 'Không xác định';
+            }
         ?>
             <tr>
                 <td><?php echo $order['order_id']; ?></td>
                 <td><?php echo $order['product_name']; ?></td>
                 <td><?php echo $order['recipient_name']; ?></td>
                 <td><?php echo $order['total_amount']; ?></td>
-                <td><?php echo $order['status_delivery']; ?></td>
-                <td><?php echo $order['status_payment']; ?></td>
+                <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
+                <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
                 <td class="action-links">
-                   <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a>
+                    <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a>
                     <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
                     <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
                 </td>
@@ -179,6 +269,9 @@ require_once $modelPath;
         ?>
     </tbody>
 </table>
+
+
+
 
 <!-- Table chi tiết -->
 <div id="orderDetailPopup" class="popup" style="display: none;">
