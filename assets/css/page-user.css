@@ -1,14 +1,17 @@
 header{
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
 }
 .sidebar{
     position: relative;
     max-height: 100%;
-    width: 240px;
+    height: 500px;
+    width: 350px;
     background-color: #f5f5f5;
     transition: all 0.5s ease;
     border-radius: 20px;
+    margin-left: 40px;
 }
 .sidebar.active{
     width: 60px;
@@ -30,7 +33,7 @@ header{
 }
 .sidebar .logo-details .logo_name{
     color: #333;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -38,14 +41,13 @@ header{
     margin-right: 10px;
 }
 .sidebar .nav-links{
-    margin-top: 40px;
     padding-left: 0;
 }
 .sidebar .nav-links li{
     position: relative;
     list-style: none;
     height: 90px;
-    width: 240px;
+    width: 100%;
 
 }
 .sidebar .nav-links li a{
@@ -66,18 +68,18 @@ header{
     min-width: 40px;
     font-size: 18px;
     color: #333;
-    margin-right: -10px;
 }
 .sidebar .nav-links li a .links_name{
     color: #333;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 .sidebar .nav-links li a i {
     margin-left: 42px;
 }
 .home-section{
-    background: #f5f5f5;
     min-height: 100vh;
     width: calc(100% - 240px);
     left: 240px;
@@ -85,14 +87,12 @@ header{
 }
 .home-section nav{
     height: 80px;
-    background: #F8F8FF;
     display: flex;
     align-items: center;
     width: 100%;
     left: 240px;
     z-index: 1;
     padding: 0 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease;
     margin: 0;
 }
@@ -102,8 +102,8 @@ header{
 }
 .home-section form{
     position: absolute;
-    top: 45%;
-    left: 40%;
+    top: 52%;
+    left: 30%;
 }
 .banner_top__right-year{
     height: 48px;
