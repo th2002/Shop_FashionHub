@@ -12,14 +12,14 @@
         <div style="margin: 60px 0 0 0 ; width: 90%; display:flex; justify-content:space-between"
             class="hightlight_img_body">
             <div>
-                <img style="width: 510px; height: 510px"
+                <img style="width: 430px; height: 430px"
                     src="https://file.hstatic.net/1000284478/file/ht_nu_2_fc0bea2f32f143689b5a6219cc083123.jpg" alt="">
             </div>
 
-            <img style="width: 510px; height: 510px"
+            <img style="width: 430px; height: 430px"
                 src="https://file.hstatic.net/1000284478/file/ht_nu_1_9b3a0fa71548477caed8afeaa1fd6dcf.jpg" alt="">
 
-            <img style="width: 510px; height: 510px"
+            <img style="width: 430px; height: 430px"
                 src="https://file.hstatic.net/1000284478/file/ht_nu_3_68c6cd1c78434d4088c511eca1613eba.jpg" alt="">
 
         </div>
@@ -70,7 +70,7 @@
 
     <div class="container__banner">
         <img loading="lazy" class="container__banner-img"
-            src="<?= $ASSET_URL ?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
+            src="https://file.hstatic.net/1000284478/file/best-seller_6de546d9cecb4663827925f05b067b40.jpg" alt="">
     </div>
 
     <div class="container__product">

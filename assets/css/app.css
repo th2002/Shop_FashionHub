@@ -67,7 +67,7 @@ html{
 }
 .banner_top__right-year h4{
     line-height: var(--banner__top-height);
-    padding: 0 14px 0 10px;
+    padding: 0 14px 0 8px;
     font-weight: 700;
     letter-spacing: 4px;
     font-size: 15px;
@@ -98,7 +98,7 @@ nav{
 }  
 .nav__left{
   flex-basis: 34%;
-  margin-left: 20px;
+  margin-left: 5px;
   text-transform: uppercase;
 }
 .nav__page-list{
@@ -126,6 +126,8 @@ nav{
     text-decoration: none;
     color: #000;
     font-weight: bold;
+    font-size: 16px;
+    font-family: 'Bellota';
 }
 .nav__page-item:hover .nav__page-link{
     color: #d42a2a;
@@ -159,10 +161,9 @@ nav{
     margin-left: 50px;
 }
 .nav__seach{
-    margin-right: 20px;
     border-radius: 10px;
-    width: 260px;
-    height: 35px;
+    width: 230px;
+    height: 30px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -297,6 +298,10 @@ nav{
 
 .nav__cart-link{
     color: #000;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .nav__cart:hover .nav_cart-box{
     display: block;
@@ -332,7 +337,7 @@ nav{
 }
 .nav__acount{
     position: absolute;
-    right: 32px;
+    right: 215px;
 }
 .nav_no-acount{
     display: flex;
@@ -349,19 +354,24 @@ nav{
     display: flex;
     margin-left: 5px;
     width: 200px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    font-family: 'Bellota';
 }
 .nav__acounted h4{
     display: flex;
     align-items: center;
     margin: 0 16px 0 10px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 }
 .nav__acounted a{
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 }
 .nav_no-acount a:hover{
     color: #d42a2a;
@@ -377,7 +387,7 @@ nav{
 .slider{
     margin-top: 20px;
     width: 100%;
-    height: 400px;
+    height: 280px;
     object-fit: cover;
     margin-bottom: 350px;
 }
@@ -712,7 +722,7 @@ footer{
     position: relative;
     margin-top: 120px;
     width: 100%;
-    height: 361px;
+    height: 372px;
     background-color: #2E2E2E;
 }
 .footer_item{
@@ -764,7 +774,7 @@ footer > p {
 }
 .product_img{
     position: relative;
-    max-height: 440px;
+    max-height: 400px;
     overflow: hidden;
     /* min-height: 275px; */
 
@@ -790,6 +800,8 @@ footer > p {
 .product_price{
     margin: 5px 90px;
     font-size: 18px;
+    display: flex;
+    justify-content: center;
 }
 .product_price-new{
     color: #000;
@@ -885,8 +897,8 @@ footer > p {
 }
 .submenu {
     position: absolute;
-    top: 20%;
-    left: 27%;
+    /* top: 19.5%; */
+    left: 32%;
     background-color: #f9f9f9;
     padding: 0;
     margin: 0;
