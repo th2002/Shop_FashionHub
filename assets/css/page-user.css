@@ -17,10 +17,10 @@ header{
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }   
 .sidebar .logo-details a{
     text-decoration: none;
-    margin-top: 40px;
 }
 
 .sidebar .logo-details  p {
@@ -28,9 +28,8 @@ header{
     margin-left: 42px;
 }
 .sidebar .logo-details .logo_name{
-    margin-left: 42px;
     color: #333;
-    font-size: 21px;
+    font-size: 26px;
     font-weight: 500;
 }
 

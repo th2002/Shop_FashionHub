@@ -1,14 +1,20 @@
 <?php 
 
-// truy vấn thành phố 
-    function thanh_pho_select_all() {
-        $sql = "SELECT id, _name FROM province";
-        return  pdo_query($sql);
-    }
-//truy vấn quận theo thành phố
-    function quan_select_by_id_thanh_pho($selectedCityId) {
-        $sql= "SELECT * FROM district WHERE _province_id = $selectedCityId";
-        return  pdo_query($sql);
-    }
+// insert info user to table oder 
+function insert_info_users( $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at) {
+    $sql = "INSERT INTO oders(recipient_name, phone_number, address_detail, province_id, district_id, ward_id, coupon_code_id, payment_method, created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?)";
+    pdo_execute($sql, $recipient_name, $phone_number, $address_detail, $province_id, $district_id, $ward_id, $coupon_code_id, $payment_method, $created_at);
+}
 
-// truy vấn xã theo quận và thành phố
+// insert product to table cart_itmes
+function insert_cart_items($cart_id, $product_id, $quantity) {
+    $sql = "INSERT INTO cartitems(cart_id, product_id, quantity) VALUES (?,?,?,?)";
+    pdo_execute($sql, $cart_id, $product_id, $quantity);
+}
+
+// insert cart_tiems to table cart 
+function inset_cart($cus_id, $total_amount, $create_at) {
+    $sql = "INSERT INTO cart(cus_id, total_amount, create_at) VALUES (?,?,?,?)";
+    pdo_execute($sql, $cus_id, $total_amount, $create_at);
+}

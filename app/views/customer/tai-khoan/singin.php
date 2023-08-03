@@ -66,7 +66,7 @@ require_once $modelPath;
                 echo '<script>
                     Swal.fire({
                       icon: "success",
-                      title: "Sủa danh mục thành công",
+                      title: "Đăng ký thành công",
                       showCancelButton: false,
                       confirmButtonText: "OK",
                       timer: 1000, // 5 giây

@@ -50,20 +50,12 @@ $imageDir = "$rootDir/app/views/admin/images";
 
 // Các hàm và code khác
 
-// 2 biến toàn cục để chia sẻ giữa controller và view
-<<<<<<< HEAD
-
-=======
 $ROOT_URL_2 = "Shop_FashionHub";
->>>>>>> sub_main2
 $ROOT_URL = "/Shop_FashionHub"; //đường dẫn gốc của website
 $ASSET_URL = "$ROOT_URL/assets"; //link to assets
 $ADMIN_URL = "$ROOT_URL/app/views/admin"; //link to admin
 $SITE_URL = "$ROOT_URL/app/views/customer"; //link to customer
-<<<<<<< HEAD
-=======
 $DAO_URL = "$ROOT_URL/app/models/DAO"; //link to DAO
->>>>>>> sub_main2
 
 //Kiểm tra sự tồn tại của 1 tham số trong request, trả về true nếu tồn tại
 function exist_param($fieldname){

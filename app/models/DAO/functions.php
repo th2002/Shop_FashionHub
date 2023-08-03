@@ -47,6 +47,36 @@ function addProduct($name, $decsription, $quantity, $price, $sale_price, $featur
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
+// hàm thêm thông báo
+function addnotification($notification_type, $notification_content, $pinned){
+    global $db;
+
+    $created_at = date('Y-m-d');
+    $query = $db->prepare("INSERT INTO notifications (notification_type, notification_content, pinned, created_at ) VALUES (?, ?, ?, ?)");
+    $query->execute([$notification_type, $notification_content, $pinned, $created_at]);
+
+    return $query->rowCount();
+}
+
+// Hàm lấy danh sách thông báo
+function getAllNotifications(){
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM notifications  ORDER BY pinned DESC, created_at DESC");
+    $query->execute(); // Thực thi truy vấn
+    return $query->fetchAll(PDO::FETCH_ASSOC); // Trả về kết quả
+}
+// Hàm đếm số lượng thông báo
+function countNotifications() {
+    global $db;
+
+    $query = $db->prepare("SELECT COUNT(*) AS total FROM notifications");
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $result['total'];
+}
+
 // Hàm cập nhật thông tin sản phẩm
 function updateProduct($productId, $productName, $decsription, $quantity, $price) {
     global $db;
@@ -69,11 +99,7 @@ function deleteProduct($productId){
 }
 
 // HÀm xóa tất cả sản phẩm
-<<<<<<< HEAD
-function deleteAllProduct(){
-=======
 function deleteAllProducts(){
->>>>>>> sub_main2
     global $db;
     try {
         $query = $db->prepare("DELETE FROM products");
@@ -84,9 +110,25 @@ function deleteAllProducts(){
         return false;
     }
 }
-<<<<<<< HEAD
+function getSortedProducts($sortOrder)
+{
+    // Lấy danh sách sản phẩm từ cơ sở dữ liệu
+    global $db;
+    $query = $db->query("SELECT * FROM products");
 
-=======
+    // Sắp xếp danh sách sản phẩm dựa vào giá trị của $sortOrder
+    if ($sortOrder === 'desc') {
+        $query = $db->query("SELECT * FROM products ORDER BY create_at DESC");
+    } else {
+        $query = $db->query("SELECT * FROM products ORDER BY create_at ASC");
+    }
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+// Các hàm khác trong functions.php vẫn giữ nguyên.
+
 // hàm xoá all người dùng
 function deleteAllUser(){
     global $db;
@@ -98,7 +140,6 @@ function deleteAllUser(){
         return false;
     }
 }
->>>>>>> sub_main2
 
 // Hàm lấy danh sách sản phẩm
 function getAllProducts() {
@@ -258,8 +299,6 @@ function login($username, $password)
         return false; // Trả về false nếu xác thực không thành công
     }
 }
-<<<<<<< HEAD
-=======
 
 // Hàm tạo mật khẩu ngẫu nhiên
 function randomPassword($length = 10){
@@ -340,7 +379,6 @@ function updatePasswordInDatabase($email, $newPassword) {
     }
 }
 
->>>>>>> sub_main2
 // Hàm cập nhật thông tin người dùng
 function updateUser($id, $user_name, $email, $role) {
     global $db;
@@ -409,8 +447,6 @@ function addCoupon($code, $type, $value, $status, $date_end){
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
 }
 
-<<<<<<< HEAD
-=======
 // functions.php
 
 // Include TCPDF library
@@ -462,7 +498,108 @@ function exportPDF($products) {
 // ... Các hàm và mã khác liên quan đến ứng dụng của bạn ...
 
 
->>>>>>> sub_main2
+
+// Hàm phân trang sản phẩm
+// Hàm lấy tổng số sản phẩm
+function getTotalProducts() {
+    global $db;
+
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total FROM products");
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn CSDL: " . $e->getMessage());
+        return 0;
+    }
+}
+
+// Hàm lấy danh sách sản phẩm phân trang
+function getProductsByPage($page, $perPage) {
+    global $db;
+
+    try {
+        $offset = ($page - 1) * $perPage;
+        $query = $db->prepare("SELECT * FROM products LIMIT :offset, :perPage");
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->bindParam(':perPage', $perPage, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn CSDL: " . $e->getMessage());
+        return array();
+    }
+}
+// Hàm lấy thông tin đơn hàng
+function getOrdersInfo(){
+    global $db;
+
+    $sql = "
+    SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        od.product_id,
+        od.quantity,
+        p.name AS product_name,
+        u.full_name AS customer_name,
+        u.email AS customer_email
+    FROM
+        oders o
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN products p ON od.product_id = p.id
+    INNER JOIN users u ON o.cus_id = u.id
+    ORDER BY o.created_at DESC
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// Hàm lấy đơn hàng theo id
+function getOrderById($order_id) {
+    global $db;
+
+    $sql = "
+    SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        od.product_id,
+        od.quantity,
+        u.full_name AS customer_name,
+        u.email AS customer_email
+    FROM
+        oders o
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN users u ON o.cus_id = u.id
+    WHERE o.id = :order_id
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':order_id', $order_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
 ?>

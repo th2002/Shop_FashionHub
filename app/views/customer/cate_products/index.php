@@ -1,65 +1,9 @@
+<?php
+    include_once "./header.php";
+?>
 <div class="container">
     <div id="toast">
 
-    </div>
-
-    <div class="container__this_week">
-        <b class="container__this_week-text">This week's</b>
-        <strong class="container__hightlight">Hightlight</strong>
-    </div>
-
-    <div style="width: 100%; display: flex; justify-content:center;" class="hightlight_img">
-        <div style="margin: 60px 0 0 0 ; width: 90%; display:flex; justify-content:space-between"
-            class="hightlight_img_body">
-            <div>
-                <img style="width: 430px; height: 430px"
-                    src="https://file.hstatic.net/1000284478/file/ht_nu_2_fc0bea2f32f143689b5a6219cc083123.jpg" alt="">
-            </div>
-
-            <img style="width: 430px; height: 430px"
-                src="https://file.hstatic.net/1000284478/file/ht_nu_1_9b3a0fa71548477caed8afeaa1fd6dcf.jpg" alt="">
-
-            <img style="width: 430px; height: 430px"
-                src="https://file.hstatic.net/1000284478/file/ht_nu_3_68c6cd1c78434d4088c511eca1613eba.jpg" alt="">
-
-        </div>
-    </div>
-    <div style="width: 100%; display: flex; justify-content:center; align-items: center; ;margin: 20px 0 40px 0;">
-        <div style="width: 77%; display:flex; justify-content: center">
-            <div style=" width: 90%; display:flex; justify-content:space-between; font-weight:bold">
-                <p>NEW BALANCE</p>
-                <p>MLB BRAND</p>
-                <p>MARHEN J</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container__popular">
-        <p class="container__popular-text">SẢN PHẨM NỔI BẬT</p>
-    </div>
-
-    <div class="container__popular-list">
-        <div class="grid wide">
-            <div class="row slider-popular">
-                <?php
-                require_once '../layout/top10_products.php';
-                ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="container__popular">
-        <h1 class="container__popular-text">SẢN PHẨM GIẢM GIÁ</h1>
-    </div>
-
-    <div class="container__popular-list">
-        <div class="grid wide">
-            <div class="row slider-popular">
-                <?php
-                require_once '../layout/sale_products.php';
-                ?>
-            </div>
-        </div>
     </div>
 
     <div class="container__handpicked">
@@ -70,7 +14,7 @@
 
     <div class="container__banner">
         <img loading="lazy" class="container__banner-img"
-            src="https://file.hstatic.net/1000284478/file/best-seller_6de546d9cecb4663827925f05b067b40.jpg" alt="">
+            src="<?=$ASSET_URL?>/images/banner/1920x480_c677982d17ad4025943fa8abdf04b184 1.png" alt="">
     </div>
 
     <div class="container__product">
@@ -81,7 +25,7 @@
             <div class="grid wide">
                 <div class="row">
                     <?php
-                    require_once '../layout/products.php';
+                        include_once "./cate_product.php";
                     ?>
                 </div>
             </div>
@@ -238,3 +182,116 @@
         </div>
     </div>
 </div>
+
+<footer>
+    <div class="row">
+        <div class="col l-3">
+            <div class="footer_item">
+                <div class="footer_item-head">
+                    <h3>THÔNG TIN</h3>
+                    <ul class="footer_item-list">
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Giới Thiệu Maison</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Hệ Thống Cửa Hàng</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Tuyển Dụng</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Thông Tin Liên Hệ</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <img class="footer_item-logo" src="../../content/images/logos/image0.png" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3">
+            <div class="footer_item">
+                <div class="footer_item-head">
+                    <h3>TRỢ GIÚP</h3>
+                    <ul class="footer_item-list">
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Phương Thức Thanh Toán</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Chính Sách Giao Hàng</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Chính Sách Mua Hàng</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Chính Sách Đổi Trả</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Chính Sách Bảo Hành</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Chính Sách Bảo Mật</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3">
+            <div class="footer_item">
+                <div class="footer_item-head">
+                    <h3>THANH TOÁN</h3>
+                    <ul class="footer_item-list">
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Visa / Mastercard / JCB</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">HATM / Internet Banking</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Quét Mã QR</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Mua Trước Trả Sau</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Ví Điện Tử</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Thanh Toán Khi Nhận Hàng</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col l-3">
+            <div class="footer_item">
+                <div class="footer_item-head">
+                    <h3>Giao Hàng</h3>
+                    <ul class="footer_item-list">
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Giao Hàng Tiêu Chuẩn</a>
+                        </li>
+                        <li class="footer_item-des">
+                            <a href="" class="footer_item-link">Maison NOW</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <p>© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights reserved</p>
+</footer>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="<?=$ASSET_URL?>/js/slider.js"></script>
+<script src="<?=$ASSET_URL?>/js/page.js"></script>
+</body>
+
+</html>

@@ -48,9 +48,6 @@ $(document).ready(function() {
                 }
                 document.querySelector('.nav__cart-quantity span').innerHTML = response[1];
 
-<<<<<<< HEAD
-                
-=======
               // update quantity
           //     function updateQuantityOnServer(item, quantity) {
           //     const id_price = item.dataset.id_price;
@@ -76,7 +73,6 @@ $(document).ready(function() {
           //     });
           // }
 
->>>>>>> sub_main2
              
                   
                 // }

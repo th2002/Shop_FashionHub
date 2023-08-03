@@ -1,17 +1,15 @@
-<!-- Day la san pham -->
 <?php 
-    $result = hang_hoa_select_all();
+    $result = hang_hoa_select_by_cate_id();
 ?>
 <?php foreach($result as $key => $value):?>
 <div class="col l-3">
     <div class="list">
-        <div data-id="<?=$value['id']?>" class="product_item">
+        <div class="product_item">
             <div class="product_img">
-                <a href="../products/detail.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>"
-                        alt="" class="product_img-item"></a>
+                <img src="<?php echo $value['image_url']?>" alt="" class="product_img-item">
                 <div class="product_cart">
                     <button class="product_btn product_btn-buy">Mua Ngay </button>
-                    <button onclick="showSuccsecToast()" class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
+                    <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
                 </div>
             </div>
             <div class="product_name">

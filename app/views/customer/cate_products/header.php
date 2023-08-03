@@ -2,11 +2,6 @@
     require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/products.php';
-    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
-        // nếu chưa login thì chuyển về trang login
-        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
-        exit();
-      }
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -19,16 +14,18 @@
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
     <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
     <title>Shop FashionHub</title>
 </head>
 
 <body>
-    <div style="font-family: 'Bellota';" id="wrapper">
+    <div id="wrapper">
         <header>
             <div class="banner_top">
                 <div class="banner_top__center">
@@ -47,11 +44,10 @@
     </div>
 
     <?php
-                require_once '../layout/nav.php';
-            ?>
+        require_once '../layout/nav.php';
+    ?>
 
-
+    <?php
+        require_once '../layout/slider.php';
+    ?>
     </header>
-</body>
-
-</html>

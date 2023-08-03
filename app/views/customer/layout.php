@@ -7,10 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
-<<<<<<< HEAD
-=======
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
->>>>>>> sub_main2
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/toast.css">
     <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -18,12 +15,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <title>Shop FashionHub</title>
-<<<<<<< HEAD
-=======
 
     <style>
     /* CSS cho nút cuộn lên đầu */
@@ -48,7 +41,6 @@
         justify-content: center;
     }
     </style>
->>>>>>> sub_main2
 </head>
 
 <body>
@@ -77,15 +69,6 @@
 
     </header>
 
-<<<<<<< HEAD
-    <?php
-        require_once '../home/home-page.php';
-    ?>
-    <?php
-        require_once '../layout/footer.php';
-    ?>
- 
-=======
     <div>
         <?php
         require_once '../layout/slider.php';
@@ -206,17 +189,12 @@
     </footer>
 
 
->>>>>>> sub_main2
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="<?=$ASSET_URL?>/js/slider.js"></script>
     <script src="<?=$ASSET_URL?>/js/page.js"></script>
     <script src="<?=$ASSET_URL?>/js/cart.js"></script>
-<<<<<<< HEAD
-    <script type="module" src="<?=$ASSET_URL?>/js/toast.js"></script>
-    <script type="module" src="<?=$ASSET_URL?>/js/chat.js"></script>
-=======
     <script src="<?=$ASSET_URL?>/js/toast.js"></script>
 
     <!-- Scroll trang web về đầu trang -->
@@ -256,7 +234,6 @@
         });
     }
     </script>
->>>>>>> sub_main2
 </body>
 
 </html>

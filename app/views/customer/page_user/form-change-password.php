@@ -6,7 +6,6 @@
         <a href="./index.php">
             <i class="bx bxl-c-plus-plus"></i>
             <span class="logo_name"><i class="fa-solid fa-id-card"></i>Tài khoản <br>
-                <p>Hello <?php echo $_SESSION['user_fullname']; ?>!</p>
             </span>
         </a>
     </div>
@@ -43,7 +42,7 @@
   <?php } ?>
   <div class="mb-3">
     <label for="tendangnhap" class="form-label">Tên đăng nhập</label>
-    <input value="<?php echo $_SESSION['user_name'] ?>" type="text" disabled class="form-control" id="tendangnhap" name="tendangnhap">
+    <input value="<?php echo $username ?>" type="text" disabled class="form-control" id="tendangnhap" name="tendangnhap">
   </div>
   <div class="mb-3">
     <label for="matkhaucu" class="form-label">Mật khẩu cũ</label>

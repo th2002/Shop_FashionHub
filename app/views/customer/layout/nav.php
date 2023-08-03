@@ -12,17 +12,23 @@
                 <a href="home" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="#container__grid_img" onclick="scrollToDiv(event)" class="nav__page-link">Danh mục</a>
+                <a href="home?category" class="nav__page-link">Danh mục</a>
+                <ul class="submenu">
+                    <?php
+                        $result = danh_muc_select_all();
+                    ?>
+                    <?php foreach($result as $key => $value): ?>
+                    <li><a
+                            href="<?php echo $SITE_URL?>/cate_products/index.php?id=<?php echo $value['id'] ?>"><?php echo $value['cate_name'] ?></a>
+                    </li>
+                    <?php endforeach ?>
+                </ul>
             </li>
         </ul>
     </div>
     <div class="nav__center">
         <div class="nav_logo">
-<<<<<<< HEAD
-            <img src="<?=$ASSET_URL?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
-=======
             <img src="<?= $ASSET_URL ?>/images/logos/FashionHub-removebg-preview.png" alt="" class="nav_logo-img">
->>>>>>> sub_main2
         </div>
     </div>
     <div class="nav__right">
@@ -54,12 +60,8 @@
                     ?>
 
                 </ul>
-<<<<<<< HEAD
-               <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ Hàng</a>
-=======
                 <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ
                     Hàng</a>
->>>>>>> sub_main2
             </div>
         </div>
         <div class="nav__acount">
