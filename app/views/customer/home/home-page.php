@@ -12,14 +12,14 @@
         <div style="margin: 60px 0 0 0 ; width: 90%; display:flex; justify-content:space-between"
             class="hightlight_img_body">
             <div>
-                <img style="width: 510px; height: 510px"
+                <img style="width: 430px; height: 430px"
                     src="https://file.hstatic.net/1000284478/file/ht_nu_2_fc0bea2f32f143689b5a6219cc083123.jpg" alt="">
             </div>
 
-            <img style="width: 510px; height: 510px"
+            <img style="width: 430px; height: 430px"
                 src="https://file.hstatic.net/1000284478/file/ht_nu_1_9b3a0fa71548477caed8afeaa1fd6dcf.jpg" alt="">
 
-            <img style="width: 510px; height: 510px"
+            <img style="width: 430px; height: 430px"
                 src="https://file.hstatic.net/1000284478/file/ht_nu_3_68c6cd1c78434d4088c511eca1613eba.jpg" alt="">
 
         </div>
