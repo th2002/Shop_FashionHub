@@ -3,22 +3,26 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="../home?index" class="nav__page-link">Trang Chủ</a>
+                <a href="../home" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?contact" class="nav__page-link">Liên Hệ</a>
+                <a href="home" class="nav__page-link">Liên Hệ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?about" class="nav__page-link">Giới Thiệu</a>
+                <a href="home" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?category" class="nav__page-link">Danh mục</a>
+                <a href="#container__grid_img" onclick="scrollToDiv(event)" class="nav__page-link">Danh mục</a>
             </li>
         </ul>
     </div>
     <div class="nav__center">
         <div class="nav_logo">
+<<<<<<< HEAD
             <img src="<?=$ASSET_URL?>/images/logos/FhashionHub2-removebg-preview.png" alt="" class="nav_logo-img">
+=======
+            <img src="<?= $ASSET_URL ?>/images/logos/FashionHub-removebg-preview.png" alt="" class="nav_logo-img">
+>>>>>>> sub_main2
         </div>
     </div>
     <div class="nav__right">
@@ -50,7 +54,12 @@
                     ?>
 
                 </ul>
+<<<<<<< HEAD
                <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ Hàng</a>
+=======
+                <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ
+                    Hàng</a>
+>>>>>>> sub_main2
             </div>
         </div>
         <div class="nav__acount">
@@ -59,11 +68,18 @@
                 <a href="">Đăng Nhập</a>
             </div>
 
+            <?php if (isset($_SESSION['user_fullname'])) : ?>
             <div class="nav__acounted display-item">
-                <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
-                <h4 class="nav_acounted-name">Hi,hoa luu</h4>
-                <a href="">Đăng xuất</a>
+                <a href="<?php echo $SITE_URL; ?>/page_user/index.php" style="color: black;">
+                    <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
+                </a>
+                <h4 class="nav_acounted-name">Hi, <?php echo $_SESSION['user_fullname']; ?></h4>
+                <a href="<?php echo $SITE_URL; ?>/tai-khoan/logout.php">Đăng xuất</a>
             </div>
+            <?php else : ?>
+            <a class="btn_login" href="<?php echo $SITE_URL; ?>/tai-khoan/login.php">Đăng nhập</a>
+            <?php endif; ?>
+
         </div>
     </div>
 </nav>

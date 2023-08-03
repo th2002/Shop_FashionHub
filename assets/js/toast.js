@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const toast = function ({
+=======
+function toast({
+>>>>>>> sub_main2
     title = '',
     message = '',
     type = 'warning',
@@ -54,7 +58,11 @@ const toast = function ({
     }
 
 }
+<<<<<<< HEAD
 function showSuccsecToast(){
+=======
+    function showSuccsecToast(){
+>>>>>>> sub_main2
         toast({
         title:'succsec',
         message:'Sản Phẩm đã được thêm giỏ hàng thành công.',
@@ -64,6 +72,7 @@ function showSuccsecToast(){
         duration: 5000,
     })
 }
+<<<<<<< HEAD
  function ShowError() {
     toast({
       title:'error',
@@ -77,4 +86,6 @@ function showSuccsecToast(){
 const test = 10;
 export {test}
 
+=======
+>>>>>>> sub_main2
 

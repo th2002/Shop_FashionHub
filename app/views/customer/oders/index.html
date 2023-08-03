@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,4 +10,97 @@
 <body>
     
 </body>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Tiny reset thingy */
+body,html{margin:0;padding:0;}
+ 
+.wrapper {
+  /* The height needs to be set to a fixed value for the effect to work.
+   * 100vh is the full height of the viewport. */
+  height: 100vh;
+  /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+  overflow-x: hidden;
+  /* Enable scrolling on the page. */
+  overflow-y: auto;
+  /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+  perspective: 2px;
+}
+ 
+.section {
+  /* Needed for children to be absolutely positioned relative to the parent. */
+  position: relative;
+  /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+  height: 100vh;
+   
+  /* For text formatting. */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 30px;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+}
+ 
+.parallax::after {
+  /* Display and position the pseudo-element */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+   
+  /* Move the pseudo-element back away from the camera,
+   * then scale it back up to fill the viewport.
+   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+  transform: translateZ(-1px) scale(1.5);
+  /* Force the background image to fill the whole element. */
+  background-size: 100%;
+  /* Keep the image from overlapping sibling elements. */
+  z-index: -1;
+}
+ 
+/* The styling for the static div. */
+.static {
+  background: red;
+}
+ 
+/* Sets the actual background images to adorable kitties. This part is crucial. */
+.bg1::after {
+  background-image: url('https://placekitten.com/g/900/700');
+}
+ 
+.bg2::after {
+  background-image: url('https://placekitten.com/g/800/600');
+}
+    </style>
+</head>
+
+<body>
+    <main class="wrapper">
+  <section class="section parallax bg1">
+    <h1>Such Adorableness</hi>
+  </section>
+  <section class="section static">
+    <h1>Funny facts about cat</h1>
+    <p>In terms of development, the first year of a cat’s life is equal to the first 15 years of a human life. 
+      <br>After its second year, a cat is 25 in human years.<br> And after that, each year of a cat’s life is equal to about 7 human years.
+Cats can rotate their ears 180 degrees.</p>
+  </section>
+  <section class="section parallax bg2">
+    <h1>SO FWUFFY AWWW</hi>
+  </section>
+</main>
+</body>
+
+>>>>>>> sub_main2
 </html>

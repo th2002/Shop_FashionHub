@@ -183,6 +183,7 @@ require_once $modelPath;
 
 $products = getAllProducts();
 
+
 ?>
 
 <h2 class="title">Danh sách sản phẩm</h2>
@@ -193,13 +194,18 @@ $products = getAllProducts();
         <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
                     class="fas fa-file-excel"></i>
                 Xuất Excel</a></h4>
-        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
+                <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
+<<<<<<< HEAD
         <h4 class="add-category"><a href="#" onclick="confirmDelete()" class="add-links" id="In"><i
                     class="fas fa-print"></i>Xóa All
             </a></h4>
+=======
+        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i class="fas fa-print"></i>Xóa All</a></h4>
+       
+>>>>>>> sub_main2
 
 
     </div>
@@ -258,12 +264,34 @@ $products = getAllProducts();
 </div>
 
 <script>
+<<<<<<< HEAD
 function confirmDelete() {
     if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
         window.location.href = '<?php echo $controller;?>/admin/deleteAllProducts.php';
     }
 }
 </script>
+=======
+    function deleteAllProducts() {
+        if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $controller;?>/admin/deleteAllProducts.php',
+                success: function (response) {
+                    if (response === 'success') {
+                        alert('Xóa tất cả sản phẩm thành công!');
+                        // Chuyển hướng trang sau khi xóa thành công (nếu cần)
+                        window.location.href = '<?php echo $controller;?>/admin/productList.php';
+                    } else {
+                        alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+>>>>>>> sub_main2
 
 
 
