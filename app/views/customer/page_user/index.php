@@ -4,7 +4,6 @@
         <a href="./index.php">
             <i class="bx bxl-c-plus-plus"></i>
             <span class="logo_name"><i class="fa-solid fa-id-card"></i>Tài khoản <br>
-                <p>Hello <?php echo $_SESSION['user_fullname']; ?>!</p>
             </span>
         </a>
     </div>
