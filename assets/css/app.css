@@ -67,7 +67,7 @@ html{
 }
 .banner_top__right-year h4{
     line-height: var(--banner__top-height);
-    padding: 0 14px 0 10px;
+    padding: 0 14px 0 8px;
     font-weight: 700;
     letter-spacing: 4px;
     font-size: 15px;
@@ -127,6 +127,7 @@ nav{
     color: #000;
     font-weight: bold;
     font-size: 16px;
+    font-family: 'Bellota';
 }
 .nav__page-item:hover .nav__page-link{
     color: #d42a2a;
@@ -357,6 +358,7 @@ nav{
     align-items: center;
     justify-content: center;
     transform: translate(-50%, -50%);
+    font-family: 'Bellota';
 }
 .nav__acounted h4{
     display: flex;
