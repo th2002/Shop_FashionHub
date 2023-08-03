@@ -1,5 +1,9 @@
 <!-- Day la chi tiet san pham -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); ?>
+<?php 
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); 
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/products.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -336,8 +340,6 @@
     <header>
         
     <?php 
-    require_once "../../../models/DAO/connect.php";
-    require_once "../../../models/DAO/products.php";
     $id=$_GET['id'];
     // $conn = connect();
     // $sql = "SELECT * FROM products where id = $id";
