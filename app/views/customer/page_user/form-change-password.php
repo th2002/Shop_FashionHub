@@ -45,7 +45,7 @@
             <nav class="header">
                 <div class="sidebar-button">
                     <i class="bx bx-menu sidebarBtn"></i>
-                    <span style="margin-left: 84px; letter-spacing: 5px;" class="dashboard">Đổi Mật Khẩu</span>
+                    <span style="margin-left: 84px; letter-spacing: 5px; text-transform:uppercase" class="dashboard">Đổi Mật Khẩu</span>
                 </div>
                 <form method="post" style="width: 600px;" class="rounded border-2 p-2">
                     <?php if ($loi != "") { ?>
@@ -79,7 +79,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button style="margin-top: 13px;" type="submit" name="btnsubmit"
-                                class="btn btn-dark col-md-12">Submit</button>
+                                class="btn btn-dark col-md-12">Xác nhận</button>
                         </div>
                     </div>
                 </form>
