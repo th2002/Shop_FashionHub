@@ -87,6 +87,28 @@ function updateProduct($productId, $productName, $decsription, $quantity, $price
     return $query->execute([$productName, $decsription, $quantity, $price, $updateAt, $productId]);
 }
 
+// Hàm lấy top 10 sản phẩm bán chạy
+function getTopSalesProducts(){
+    global $db;
+
+    // Chuẩn bị câu truy vấn SQL kết hợp hai bảng products và product_images
+    $query = $db->prepare("SELECT p.id, p.name, p.price, pi.image_url
+    FROM products p
+    JOIN product_images pi ON p.id = pi.product_id
+    WHERE p.best_seller = 1
+    ORDER BY p.id DESC
+    LIMIT 10");
+
+// Thực thi câu truy vấn
+$query->execute();
+
+// Lấy kết quả trả về thành một mảng danh sách sản phẩm
+$topSalesProducts = $query->fetchAll(PDO::FETCH_ASSOC);
+return $topSalesProducts;
+}
+
+
+
 // Hàm cập nhật đơn hàng
 function updateOrder($order_id, $status_payment, $status_delivery) {
     global $db;
@@ -638,6 +660,3 @@ function getOrderById($order_id) {
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
-
-?>
