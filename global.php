@@ -56,6 +56,7 @@ $ASSET_URL = "$ROOT_URL/assets"; //link to assets
 $ADMIN_URL = "$ROOT_URL/app/views/admin"; //link to admin
 $SITE_URL = "$ROOT_URL/app/views/customer"; //link to customer
 $DAO_URL = "$ROOT_URL/app/models/DAO"; //link to DAO
+$ADMIN_CSS_URL = "$ROOT_URL/app/views/admin/public/css"; //link to admin css
 
 //Kiểm tra sự tồn tại của 1 tham số trong request, trả về true nếu tồn tại
 function exist_param($fieldname){
