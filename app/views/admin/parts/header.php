@@ -604,7 +604,7 @@ h5 {
                     <span class="links_name">Đơn hàng</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-pie-chart-alt-2"></i>
                     <span class="links_name">Làm 1 gậy</span>
@@ -615,7 +615,7 @@ h5 {
                     <i class="bx bx-coin-stack"></i>
                     <span class="links_name">18+</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-book-alt"></i>
