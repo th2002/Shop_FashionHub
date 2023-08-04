@@ -65,10 +65,6 @@
             </div>
         </div>
         <div class="nav__acount">
-            <div class="nav_no-acount">
-                <a href="">Đăng Ký</a>
-                <a href="">Đăng Nhập</a>
-            </div>
 
             <?php if (isset($_SESSION['user_fullname'])) : ?>
             <div class="nav__acounted display-item">

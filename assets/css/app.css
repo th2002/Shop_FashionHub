@@ -339,12 +339,7 @@ nav{
     position: absolute;
     right: 215px;
 }
-.nav_no-acount{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
+
 .nav_no-acount a{
     text-decoration: none;
     padding: 0 5px;
