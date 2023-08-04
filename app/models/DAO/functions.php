@@ -36,14 +36,14 @@ function getCategoryById($id) {
 }
 
 // Hàm thêm sản phẩm
-function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id){
+function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller){
     global $db;
 
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
 
-    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, cate_id, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $cate_id, $create_at, $update_at]);
+    $query = $db->prepare("INSERT INTO products (name, decsription, quantity, price, sale_price, featured, best_seller, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query->execute([$name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller, $create_at, $update_at]);
 
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
@@ -216,6 +216,21 @@ function getProductById($productId) {
     $query = $db->prepare("SELECT * FROM products WHERE id = ?");
     $query->execute([$productId]);
     return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+// Hàm lấy tổng số sản phẩm theo ngày
+function getTotalAllProduct($date){
+    global $db;
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from products where DATE(created_at) = ?");
+    $query->execute([$date]);
+    $total = $query->fetch(PDO::FETCH_ASSOC);
+    return $total['total'];
+    } catch (PDOException $e) {
+        error_log("Có lỗi khi truy vấn:" . $e->getMessage());
+        return 0;
+    }
+
 }
 
 
@@ -574,6 +589,67 @@ function getTotalProducts() {
         return 0;
     }
 }
+
+// Hàm lấy tổng số đơn hàng
+function getTotalOders(){
+    global $db;
+
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from oders");
+        $query->execute();
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
+
+// Hàm lấy tổng số đơn hàng theo ngày
+function getTotalOrdersByDate($date){
+    global $db;
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from oders where DATE(created_at) = ?");
+        $query->execute([$date]);
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
+        
+    } catch (PDOException $e) {
+        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
+
+// Hàm lấy tổng số đơn hàng theo tuần và năm
+function getTotalOrdersByWeek($week, $year){
+    global $db;
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from oders where YEARWEEK(created_at, 1) = ?");
+        $query->execute(["$year-$week"]);
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
+        
+    } catch (PDOException $e) {
+        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
+
+// Hàm lấy tổng số đơn hàng theo tháng và năm
+function getTotalOrdersByMonth($month, $year){
+    global $db;
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from oders where YEAR(created_at) = ? AND MONTH(created_at) = ?");
+        $query->execute([$year, $month]);
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
+        
+    } catch (PDOException $e) {
+        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
+
 
 // Hàm lấy danh sách sản phẩm phân trang
 function getProductsByPage($page, $perPage) {

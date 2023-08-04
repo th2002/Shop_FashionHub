@@ -1,9 +1,22 @@
+<?php 
+// Truyền giá trị cho biến $date, $week, $year, $month từ file content.php
+$date = 'Y-m-d'; // Thay đổi giá trị ngày theo định dạng 'Y-m-d'
+$week = 29; // Tuần muốn lấy tổng số đơn hàng
+$year = 2023; // Năm muốn lấy tổng số đơn hàng
+$month = 7; // Tháng muốn lấy tổng số đơn hàng
+
+// Tiến hành lấy tổng số đơn hàng theo ngày, tuần và tháng
+$totalOrdersByDate = getTotalOrdersByDate($date);
+$totalOrdersByWeek = getTotalOrdersByWeek($week, $year);
+$totalOrdersByMonth = getTotalOrdersByMonth($month, $year);
+
+?>
 <div class="home-content">
   <div class="overview-boxes">
     <div class="box">
       <div class="right-side">
         <div class="box-topic animate__animated animate__heartBeat animate__repeat-3">Tổng đơn hàng</div>
-        <div class="number count-up" data-end-value="50000">60000</div>
+        <div class="number count-up" data-end-value="<?php echo getTotalOders(); ?>"><?php echo getTotalOders(); ?></div>
 
         <div class="indicator">
           <i class="bx bx-up-arrow-alt animate__animated animate__zoomIn animate__delay-1s animate__duration-2s animate__repeat-3"></i>
@@ -15,25 +28,24 @@
       <!-- Bảng đơn hàng -->
       <div class="order-table table-chitiet">
         <!-- Nội dung bảng đơn hàng -->
-        <!-- Thay thế phần này bằng nội dung thực tế của bảng đơn hàng -->
         <table>
-          <tr>
-            <th>Thời gian</th>
-            <th>Tổng đơn hàng</th>
-          </tr>
-          <tr>
-            <td>Ngày</td>
-            <td class=" count-up" data-end-value="50000">60,000</td>
-          </tr>
-          <tr>
-            <td>Tuần</td>
-            <td>150,000</td>
-          </tr>
-          <tr>
-            <td>Tháng</td>
-            <td>350,000</td>
-          </tr>
-        </table>
+    <tr>
+        <th>Thời gian</th>
+        <th>Tổng đơn hàng</th>
+    </tr>
+    <tr>
+        <td>Ngày</td>
+        <td class="count-up" data-end-value="<?php echo getTotalOrdersByDate($date); ?>"><?php echo getTotalOrdersByDate($date); ?></td>
+    </tr>
+    <tr>
+        <td>Tuần</td>
+        <td><?php echo getTotalOrdersByWeek($week, $year); ?></td>
+    </tr>
+    <tr>
+        <td>Tháng</td>
+        <td><?php echo getTotalOrdersByMonth($month, $year); ?></td>
+    </tr>
+</table>
       </div>
     </div>
 
@@ -55,7 +67,7 @@
           </tr>
           <tr>
             <td>Ngày</td>
-            <td>8 sản phẩm</td>
+            <td><?php echo getTotalAllProduct($date); ?></td>
           </tr>
           <tr>
             <td>Tuần</td>
@@ -79,11 +91,11 @@
           <span class="text">Tăng</span>
         </div>
       </div>
-      <i class="bx bx-money-withdraw cart three animate__animated animate__swing animate__repeat-3"></i>
+      <i class="fa-solid fa-money-check-dollar cart three animate__animated animate__swing animate__repeat-3"></i>
     </div>
     <div class="box">
       <div class="right-side">
-        <div class="box-topic">Sản phẩm </div>
+        <div class="box-topic">Sản phẩm ế </div>
         <div class="number count-up" data-end-value="11086">11,086</div>
         <div class="indicator">
           <i class="bx bx-down-arrow-alt down animate__animated animate__zoomIn animate__delay-1s animate__duration-2s animate__repeat-3"></i>
