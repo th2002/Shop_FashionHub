@@ -6,6 +6,7 @@ function toast({
     timefadeOut = 2000,
     duration = 3000
 }){
+    console.log(123);
     const main=document.getElementById('toast')
     if(main){
         const toast = document.createElement('div')
@@ -59,9 +60,9 @@ function toast({
         title:'succsec',
         message:'Sản Phẩm đã được thêm giỏ hàng thành công.',
         type:'succsec',
-        timesliderLeft:3000,
-        timefadeOut:2000,
-        duration: 5000,
+        timesliderLeft:1500,
+        timefadeOut:1000,
+        duration:2000,
     })
 }
 

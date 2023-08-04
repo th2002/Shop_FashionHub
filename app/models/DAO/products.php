@@ -68,7 +68,7 @@ function hang_hoa_select_by_cung_loai($cate_id){
 // Truy vấn tất cả hàng hóa theo quần áo
 function hang_hoa_select_by_cate_id(){
     $iddm = $_GET['id'];
-    $sql = "SELECT * FROM products INNER JOIN product_images ON products.id = product_images.product_id WHERE cate_id= ".$iddm;
+    $sql = "SELECT products.id,products.name,products.price,products.sale_price,product_images.image_url,product_images.product_id FROM products INNER JOIN product_images ON products.id = product_images.product_id WHERE cate_id= ".$iddm;
     return pdo_query($sql);
 }
 // Truy vấn tất cả các danh mục

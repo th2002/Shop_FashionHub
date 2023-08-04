@@ -9,7 +9,7 @@
             if ($key === 'totalQuantity') {
                 continue;
             }
-            $output.='<li style="margin: 5px 0;" class="nav_cart-item">
+            $output.='<li style="margin: 5px 0;padding:5px" class="nav_cart-item">
             <div class="nav_cart-item-left">
                 <img src="https://product.hstatic.net/1000284478/product/'.$item['imgName'].'" alt="" class="nav_cart-item-img">
             </div>
@@ -18,7 +18,7 @@
             </div>
             <div class="nav_cart-item-right">
                 <div class="nav_cart-item-price">
-                    <span style="margin-right:5px" class="nav_cart-item-text">'.$item['price'].'</span>x
+                    <span style="margin-right:5px" class="nav_cart-item-text">'.$item['price'].'</span>
                     <span data-id_price='.$item['id_price'].' class="nav_cart-item-quantity">'.$item['quantity'].'</span>
                 </div>
                 <div class="nav_cart-item-delete">

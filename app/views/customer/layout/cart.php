@@ -3,7 +3,25 @@ include '../../../../global.php';
 include '../../../models/DAO/connect.php';
 include '../../../models/DAO/products.php';
 // $cus_id = $_SESSION['user_id']; 
+
+if (isset($_SESSION['data-cart'])) {
+    $data = $_SESSION['data-cart'];
+}
+foreach ($data as $key => $item) {
+    if ($key === 'totalQuantity') {
+        continue;
+    } else {
+        if (isset($data[$key]['order'])) {
+            unset($_SESSION['data-cart'][$key]['order']);
+            unset($_SESSION['data-cart'][$key]['size']);
+        } else {
+            break;
+        }
+    }
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -24,6 +42,11 @@ include '../../../models/DAO/products.php';
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .nav__acount{
+            right: 70px;
+        }
+    </style>
 </head>
 <a href="../../../models/DAO/delete_cart.php"></a>
 
@@ -322,7 +345,7 @@ include '../../../models/DAO/products.php';
                                                 </select>
                                             <?php
                                             } else {
-                                                echo '<span>No size</span>';
+                                                echo '<span class="no-size">No size</span>';
                                             }
                                             ?>
 
@@ -405,7 +428,8 @@ include '../../../models/DAO/products.php';
     let total = 0;
     noClick();
 
-    checkAllButton.addEventListener('click', function() {
+    checkAllButton.addEventListener('click', function(e) {
+        e.preventDefault();
         if (checkAllButton.innerText === 'Chọn Tất Cả') {
             checkedCount = checkboxItems.length;
         } else {
@@ -530,28 +554,39 @@ include '../../../models/DAO/products.php';
         if (btnPay) {
             btnPay.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.href = '../oders/index.php';
                 const listCheck = document.querySelectorAll('.cart-item td .cart-item__checkbox');
                 var obj = {};
                 listCheck.forEach(function(check) {
                     if (check.checked) {
+                        // console.log(check);
+                        let sizeText = "No Size";
                         var productId = check.dataset.id;
                         var quantity = check.parentElement.parentElement.querySelector(
                             'td .cart-item .quantity input.quantity-input').value;
-                        var size = check.parentElement.parentElement.querySelector(
-                            'select.cart-item__size').value;
-
-                        console.log(check.parentElement.parentElement);
+                        // var size = check.parentElement.parentElement.querySelector(
+                        //     'select.cart-item__size').value ?? "NoSize";
+                        //    console.log(size);
+                        var size = check.parentElement.parentElement.querySelector('select.cart-item__size');
+                        if (noSize) {
+                            console.log(noSize.innerText + "sfds");
+                        }
+                        if (size) {
+                            sizeText = size.value;
+                        } else {
+                            var noSize = check.parentElement.parentElement.querySelector('span.no-size');
+                            sizeText = noSize.innerText;
+                        }
+                        // console.log(sizeText);
                         obj[productId] = {
                             quantity: quantity,
                             order: "order",
-                            size:size
+                            size: sizeText
                         };
-
                     }
                 });
                 const totalPrice = document.querySelector('.product_pay-all-price');
                 obj["totalPrice"] = totalPrice.innerText;
+                console.log(obj);
                 $.ajax({
                     url: '../../../models/DAO/add_order.php', // Đường dẫn đến tập tin PHP xử lý dữ liệu
                     type: 'POST', // Phương thức gửi dữ liệu (POST hoặc GET)
@@ -565,6 +600,7 @@ include '../../../models/DAO/products.php';
                         // Xử lý lỗi (nếu có)
                     }
                 });
+                window.location.href = '../oders/index.php';
             })
         }
 
@@ -577,7 +613,6 @@ include '../../../models/DAO/products.php';
         const observer = new MutationObserver(function(mutationsList) {
             mutationsList.forEach(function(mutation) {
                 if (mutation.type === 'childList') {
-
                     const abtnPayy = document.getElementById('idPay');
                     const buttonPay = document.getElementById('paymentButton');
                     if (abtnPayy && buttonPay) {

@@ -186,8 +186,8 @@ nav{
 .nav_cart-box::before{
     content: "";
     position: absolute;
-    right: 0px;
-    top: -25px;
+    right: 9px;
+    top: -20px;
     border-width: 13px 15px;
     border-style: solid;
     border-color: transparent transparent white transparent;
