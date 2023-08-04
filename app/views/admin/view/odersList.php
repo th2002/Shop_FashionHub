@@ -135,10 +135,7 @@ include_once("../parts/header.php");
     color: green;
 }
 
-
 </style>
-
-
 
 <?php
 $modelPath = "$rootDir/app/models/DAO/functions.php";
