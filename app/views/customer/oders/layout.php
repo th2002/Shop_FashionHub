@@ -406,11 +406,8 @@
 
 
 
-    <script type="text/javascript" src="<?= $ASSET_URL ?>/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/snippets.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/modal.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/app.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/cart.js"></script>
+  
+ 
 </body>
 
 </html>

@@ -405,7 +405,8 @@ include '../../../models/DAO/products.php';
     let total = 0;
     noClick();
 
-    checkAllButton.addEventListener('click', function() {
+    checkAllButton.addEventListener('click', function(e) {
+        e.preventDefault();
         if (checkAllButton.innerText === 'Chọn Tất Cả') {
             checkedCount = checkboxItems.length;
         } else {
@@ -530,24 +531,22 @@ include '../../../models/DAO/products.php';
         if (btnPay) {
             btnPay.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.href = '../oders/index.php';
                 const listCheck = document.querySelectorAll('.cart-item td .cart-item__checkbox');
                 var obj = {};
                 listCheck.forEach(function(check) {
                     if (check.checked) {
+                        let sizeText = "NoSize";
                         var productId = check.dataset.id;
                         var quantity = check.parentElement.parentElement.querySelector(
                             'td .cart-item .quantity input.quantity-input').value;
                         var size = check.parentElement.parentElement.querySelector(
-                            'select.cart-item__size').value;
-
-                        console.log(check.parentElement.parentElement);
+                            'select.cart-item__size');
+                        
                         obj[productId] = {
                             quantity: quantity,
                             order: "order",
                             size:size
                         };
-
                     }
                 });
                 const totalPrice = document.querySelector('.product_pay-all-price');
@@ -565,6 +564,7 @@ include '../../../models/DAO/products.php';
                         // Xử lý lỗi (nếu có)
                     }
                 });
+                window.location.href = '../oders/index.php';
             })
         }
 
