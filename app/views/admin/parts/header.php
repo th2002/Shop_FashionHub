@@ -41,12 +41,12 @@ if($_SESSION['user_role'] != 1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
-.sidebar {
-    <?php $start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#ff0000';
-    $mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#00ff00';
-    $end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#0000ff';
-    ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
-}
+/* .sidebar {
+    <?php //$start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#ff0000';
+    //$mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#00ff00';
+    //$end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#0000ff';
+    ?>background-image: linear-gradient(to top, <?php //echo $start_color; ?>, <?php //echo $mid_color; ?>, <?php //echo $end_color; ?>);
+} */
 
 /* drop-menu */
 .profile-details {
@@ -652,12 +652,12 @@ h5 {
                     <span class="links_name">Favrorites</span>
                 </a>
             </li>
-            <li>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+            <!-- <li>
+                <a href="<?php //echo $viewURL;//  ?>/view/setting.php">
                     <i class="bx bx-cog"></i>
                     <span class="links_name">Cài đặt</span>
                 </a>
-            </li>
+            </li> -->
             <li class="log_out">
                 <a href="<?php echo $SITE_URL; ?>/tai-khoan/logout.php">
                     <i class="bx bx-log-out"></i>
