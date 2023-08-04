@@ -8,6 +8,7 @@
             if(isset($_SESSION['data-cart'][$key])){
                 $_SESSION['data-cart'][$key]['quantity'] = $val['quantity'];
                 $_SESSION['data-cart'][$key]['order'] = $val['order'];
+                $_SESSION['data-cart'][$key]['size'] = $val['size'];
             }
         }
     }
