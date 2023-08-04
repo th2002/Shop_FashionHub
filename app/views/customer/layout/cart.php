@@ -13,8 +13,6 @@ include '../../../models/DAO/products.php';
     <title>Giỏ hàng</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/grid.css">
-    <link rel="stylesheet" href="../../css/app.css">
-    <link rel="stylesheet" href="../../css/toast.css">
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/app.css">
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/page-user.css">
     <link rel="shortcut icon" href="<?= $ASSET_URL ?>/images/logos/Main Logo.png">
@@ -30,24 +28,31 @@ include '../../../models/DAO/products.php';
 <a href="../../../models/DAO/delete_cart.php"></a>
 
 <body>
-    <div id="wrapper">
-        <div class="banner_top">
-            <div class="banner_top__center">
-                <h3>Qùa tặng hấp dẫn</h3>
-            </div>
-            <div class="banner_top__right">
-                <div class="banner_top__right-season">
-                    <span>Welcome</span>
-                    <h1>Summer</h1>
+    <div>
+        <div id="wrapper">
+            <header>
+                <div class="banner_top">
+                    <div class="banner_top__center">
+                        <h3>Quà tặng hấp dẫn</h3>
+                    </div>
+                    <div class="banner_top__right">
+                        <div class="banner_top__right-season">
+                            <span>Welcome</span>
+                            <h1>Summer</h1>
+                        </div>
+                        <div class="banner_top__right-year">
+                            <h4>2023</h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="banner_top__right-year">
-                    <h4>2023</h4>
-                </div>
-            </div>
         </div>
+
         <?php
         require_once '../layout/nav.php';
-        ?>
+    ?>
+
+
+        </header>
         <style>
         .header_logo {
             margin-top: 40px;
