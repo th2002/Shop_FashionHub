@@ -1,7 +1,6 @@
 header{
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
 }
 .sidebar{
     position: relative;
@@ -102,7 +101,7 @@ header{
 }
 .home-section form{
     position: absolute;
-    top: 52%;
+    top: 41%;
     left: 30%;
 }
 .banner_top__right-year{

@@ -189,7 +189,8 @@
 
 
         </div>
-        <p>© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights reserved</p>
+        <p style="width: 580px;">© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights
+            reserved</p>
     </footer>
 
 

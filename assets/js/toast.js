@@ -61,7 +61,7 @@ function toast({
         type:'succsec',
         timesliderLeft:3000,
         timefadeOut:2000,
-        duration: 5000,
+        duration: 1500,
     })
 }
 

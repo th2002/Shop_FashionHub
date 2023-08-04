@@ -323,6 +323,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th style="text-align: center;" scope="col">Sản phẩm</th>
+                            <th style="text-align: center;" scope="col">size</th>
                             <th style="text-align: center;" scope="col">Số lượng</th>
                             <th style="text-align: center;" scope="col">Giá</th>
                         </tr>
@@ -351,6 +352,11 @@
                             </td>
                             <td class="quantity-input" style="text-align: center;" colspan="">
                                 <?php
+                                            echo $item['size'];
+                                            ?>
+                            </td>
+                            <td class="quantity-input" style="text-align: center;" colspan="">
+                                <?php
                                             echo $item['quantity'];
                                             ?>
                             </td>
@@ -369,6 +375,7 @@
                         </tr>
                         <?php
                                     unset($_SESSION['data-cart'][$key]['order']);
+                                    unset($_SESSION['data-cart'][$key]['size']);
                                     ?>
                         <?php
                                 } else {
@@ -399,11 +406,8 @@
 
 
 
-    <script type="text/javascript" src="<?= $ASSET_URL ?>/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/snippets.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/modal.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/app.js"></script>
-    <script src="<?= $ASSET_URL ?>/js/cart.js"></script>
+  
+ 
 </body>
 
 </html>
