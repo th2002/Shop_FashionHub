@@ -1,21 +1,12 @@
 <?php require_once '../page_user/header.php' ?>
+<?php require_once './change-password.php' ?>
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
-    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
-    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-    <title>Shop FashionHub</title>
+    <title>Document</title>
 </head>
 
 <body>
@@ -24,10 +15,13 @@
             <div class="logo-details">
                 <a href="./index.php">
                     <i class="bx bxl-c-plus-plus"></i>
-                    <span class="logo_name"><i class="fa-solid fa-id-card"></i>Tài khoản <br>
+                    <span class="logo_name">
+                        <a style="font-size: 18px; color:#333; font-weight: bold;"
+                            href="<?=$SITE_URL?>/page_user/form-edit-profile.php">Xin
+                            chào,
+                            <?php echo $_SESSION['user_fullname']?></a>
                     </span>
                 </a>
-                <hr>
             </div>
             <ul class="nav-links">
                 <li>
@@ -54,11 +48,48 @@
             <nav class="header">
                 <div class="sidebar-button">
                     <i class="bx bx-menu sidebarBtn"></i>
-                    <span class="dashboard">Sửa Thông Tin</span>
+                    <span style="margin-left: 84px; letter-spacing: 5px; text-transform:uppercase"
+                        class="dashboard">Thông tin tài khoản</span>
                 </div>
+                <form method="post" style="width: 600px;" class="rounded border-2 p-2">
+                    <?php if ($loi != "") { ?>
+                    <div class="alert alert-secondary"><?php echo $loi ?></div>
+                    <?php } ?>
+                    <div class="mb-3">
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                            for="tendangnhap" class="form-label">
+                            Họ tên
+                        </label>
+                        <input value="<?=$_SESSION['user_fullname'] ?>" type="text" disabled class="form-control"
+                            id="tendangnhap" name="tendangnhap">
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                            for="matkhaucu" class="form-label">Số điện thoại
+                        </label>
+                        <input value="<?=$_SESSION['user_phone'] ?>" type="text" disabled class="form-control"
+                            id="matkhaucu" name="matkhaucu">
+                    </div>
+                    <div class="mb-3">
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                            for="matkhaumoi_1" class="form-label">
+                            Email
+                        </label>
+                        <input value="<?= $_SESSION['user_email']?>" type="text" class="form-control" id="matkhaumoi_1"
+                            disabled name="matkhaumoi_1">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button
+                                style="margin-top: 13px; font-size:14px; letter-spacing: 5px; text-transform: uppercase;"
+                                type="submit" name="btnsubmit" class="btn btn-dark col-md-12">Cập nhật thông
+                                tin</button>
+                        </div>
+                    </div>
+                </form>
+            </nav>
         </section>
     </header>
-
 </body>
 
 </html>
