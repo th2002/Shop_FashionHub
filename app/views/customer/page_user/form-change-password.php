@@ -45,33 +45,34 @@
             <nav class="header">
                 <div class="sidebar-button">
                     <i class="bx bx-menu sidebarBtn"></i>
-                    <span style="margin-left: 84px; letter-spacing: 5px; text-transform:uppercase" class="dashboard">Đổi Mật Khẩu</span>
+                    <span style="margin-left: 84px; letter-spacing: 5px; text-transform:uppercase" class="dashboard">Đổi
+                        Mật Khẩu</span>
                 </div>
                 <form method="post" style="width: 600px;" class="rounded border-2 p-2">
                     <?php if ($loi != "") { ?>
                     <div class="alert alert-secondary"><?php echo $loi ?></div>
                     <?php } ?>
                     <div class="mb-3">
-                        <label style="color: #868D95; text-transform: uppercase; font-size: 14px; letter-spacing: 5px;"
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
                             for="tendangnhap" class="form-label">Tên
                             đăng nhập</label>
                         <input value="<?php echo $username ?>" type="text" disabled class="form-control"
                             id="tendangnhap" name="tendangnhap">
                     </div>
                     <div class="mb-3">
-                        <label style="color: #868D95; text-transform: uppercase; font-size: 14px; letter-spacing: 5px;"
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
                             for="matkhaucu" class="form-label">Mật khẩu
                             cũ</label>
                         <input type="password" class="form-control" id="matkhaucu" name="matkhaucu">
                     </div>
                     <div class="mb-3">
-                        <label style="color: #868D95; text-transform: uppercase; font-size: 14px; letter-spacing: 5px;"
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
                             for="matkhaumoi_1" class="form-label">Mật
                             khẩu mới</label>
                         <input type="password" class="form-control" id="matkhaumoi_1" name="matkhaumoi_1">
                     </div>
                     <div class="mb-3">
-                        <label style="color: #868D95; text-transform: uppercase; font-size: 14px; letter-spacing: 5px;"
+                        <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
                             for="matkhaumoi_2" class="form-label">Nhập
                             lại mật khẩu mới</label>
                         <input type="password" class="form-control" id="matkhaumoi_2" name="matkhaumoi_2">
