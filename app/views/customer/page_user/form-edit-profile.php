@@ -1,5 +1,6 @@
 <?php require_once '../page_user/header.php' ?>
 <?php require_once './change-password.php' ?>
+<?php require_once './edit-profile.php' ?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -48,48 +49,92 @@
             <nav class="header">
                 <div class="sidebar-button">
                     <i class="bx bx-menu sidebarBtn"></i>
-                    <span style="margin-left: 84px; letter-spacing: 5px; text-transform:uppercase"
+                    <span style="margin-left: 84px; letter-spacing: 4px; text-transform:uppercase; font-weight: bold;"
                         class="dashboard">Thông tin tài khoản</span>
                 </div>
-                <form method="post" style="width: 600px;" class="rounded border-2 p-2">
-                    <?php if ($loi != "") { ?>
-                    <div class="alert alert-secondary"><?php echo $loi ?></div>
-                    <?php } ?>
+                <form style="width: 600px;" class="rounded border-2 p-2">
                     <div class="mb-3">
                         <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
-                            for="tendangnhap" class="form-label">
+                            for="hoten" class="form-label">
                             Họ tên
                         </label>
-                        <input value="<?=$_SESSION['user_fullname'] ?>" type="text" disabled class="form-control"
-                            id="tendangnhap" name="tendangnhap">
+                        <input value="<?=$user['full_name'] ?>" type="text" disabled class="form-control" id="hoten"
+                            name="hoten">
                     </div>
                     <div class="mb-3">
                         <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
-                            for="matkhaucu" class="form-label">Số điện thoại
+                            for="sdt" class="form-label">Số điện thoại
                         </label>
-                        <input value="<?=$_SESSION['user_phone'] ?>" type="text" disabled class="form-control"
-                            id="matkhaucu" name="matkhaucu">
+                        <input value="<?=$user['phone_number'] ?>" type="text" disabled class="form-control" name="sdt">
                     </div>
                     <div class="mb-3">
                         <label style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
-                            for="matkhaumoi_1" class="form-label">
+                            for="email" class="form-label">
                             Email
                         </label>
-                        <input value="<?= $_SESSION['user_email']?>" type="text" class="form-control" id="matkhaumoi_1"
-                            disabled name="matkhaumoi_1">
+                        <input value="<?= $user['email']?>" type="text" class="form-control" id="email" disabled
+                            name="email">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <button
                                 style="margin-top: 13px; font-size:14px; letter-spacing: 5px; text-transform: uppercase;"
-                                type="submit" name="btnsubmit" class="btn btn-dark col-md-12">Cập nhật thông
+                                type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                class="btn btn-dark col-md-12">Cập nhật thông
                                 tin</button>
                         </div>
                     </div>
                 </form>
+
+
             </nav>
         </section>
     </header>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="margin-left: 110px; letter-spacing: 3px; text-transform: uppercase;"
+                        class="modal-title fs-5" id="exampleModalLabel">
+                        Cập nhật thông tin</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label
+                                style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                                class="col-form-label">Họ tên</label>
+                            <input value="<?=$_SESSION['user_fullname']?>" type="text" class="form-control"
+                                name="fullname" id="fullname">
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                                class="col-form-label">Số điện thoại</label>
+                            <input value="<?=$_SESSION['user_phone']?>" type="text" class="form-control" name="phone"
+                                id="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                style="color: #868D95; text-transform: uppercase; font-size: 12px; letter-spacing: 5px;"
+                                class="col-form-label">Email</label>
+                            <input value="<?=$_SESSION['user_email']?>" type="text" class="form-control" name="email"
+                                id="email">
+                        </div>
+                        <div style="margin-top: 30px;" class="row">
+                            <div class="col-md-12">
+                                <button type="submit" name="btnsubmitprofile"
+                                    class="btn btn-dark col-md-12">LƯU</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

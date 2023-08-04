@@ -38,7 +38,7 @@ function pdo_execute($sql){
         throw $e;
     }
     finally{
-        unset($conn);
+        unset($stmt);
     }
 }
 /**
@@ -60,7 +60,7 @@ function pdo_query($sql){
         throw $e;
     }
     finally{
-        unset($db);
+        unset($stmt);
     }
 }
 /**
@@ -81,7 +81,7 @@ function pdo_query_one($sql){
         throw $e;
     }
     finally{
-        unset($db);
+        unset($stmt);
     }
 }
 /**
