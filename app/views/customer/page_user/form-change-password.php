@@ -15,8 +15,11 @@
             <div class="logo-details">
                 <a href="./index.php">
                     <i class="bx bxl-c-plus-plus"></i>
-                    <span class="logo_name">Xin chào,
-                        <?php echo $_SESSION['user_fullname']?> <br>
+                    <span class="logo_name">
+                        <a style="font-size: 18px; color:#333; font-weight: bold;"
+                            href="<?=$SITE_URL?>/page_user/form-edit-profile.php">Xin
+                            chào,
+                            <?php echo $_SESSION['user_fullname']?></a>
                     </span>
                 </a>
             </div>
