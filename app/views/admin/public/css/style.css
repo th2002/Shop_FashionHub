@@ -676,20 +676,23 @@ nav .search-box .bx-search{
   font-size: 22px;
   transition: all 0.4 ease;
 }
+nav .search-box .bx-search:hover{
+  background: #333;
+}
 .home-section nav .profile-details{
   display: flex;
   align-items: center;
-  background: #F5F6FA;
-  border: 2px solid #EFEEF1;
+  /* background: #F5F6FA;
+  border: 2px solid #EFEEF1; */
   border-radius: 6px;
   height: 50px;
-  min-width: 190px;
-  padding: 0 15px 0 2px;
+  /* min-width: 190px;
+  padding: 0 15px 0 2px; */
 }
 nav .profile-details img{
   height: 40px;
   width: 40px;
-  border-radius: 6px;
+  border-radius: 20px;
   object-fit: cover;
 }
 nav .profile-details .admin_name{
@@ -831,7 +834,7 @@ nav .profile-details i{
 }
 .sales-boxes .box .button a{
   color: #fff;
-  background: #0A2558;
+  background: #b3b2b2;
   padding: 4px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -840,7 +843,7 @@ nav .profile-details i{
   transition: all 0.3s ease;
 }
 .sales-boxes .box .button a:hover{
-  background:  #0d3073;
+  background:  #333;
 }
 
 /* Right box */

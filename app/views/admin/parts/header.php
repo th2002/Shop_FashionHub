@@ -28,7 +28,7 @@ if($_SESSION['user_role'] != 1){
     <title>Admin</title>
     <link rel="stylesheet" href="<?=$ADMIN_CSS_URL?>/style.css">
     <link rel="stylesheet" href="<?=$ADMIN_CSS_URL?>/singin.css">
-
+    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="top-sales box">
-            <div class="title">Snả phẩm bán chạy</div>
+            <div class="title">Sản phẩm bán chạy</div>
             <ul class="top-sales-details">
               <li>
                 <a href="#">
