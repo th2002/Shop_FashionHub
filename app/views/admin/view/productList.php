@@ -179,7 +179,7 @@ $products = getSortedProducts($sortOrder);
                         <?php echo $product['name']; ?>
                     </td>
                     <td>
-                        <?php echo $product['price']; ?>
+                        <?php echo number_format($product['price']); ?>
                     </td>
                     <td>
                         <div class="product-image">

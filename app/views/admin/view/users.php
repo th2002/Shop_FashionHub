@@ -20,8 +20,8 @@ $users = getAllUsers();
 
 ?>
 
-<h2 class="title">Danh sách sản phẩm</h2>
-<div class="menu-chucnang">
+<h2 class="title">Danh sách người dùng</h2>
+<!-- <div class="menu-chucnang">
     <div class="menu-left">
         <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
@@ -39,7 +39,7 @@ $users = getAllUsers();
         <h5>Thời gian hiện tại: <span id="current-time"></span></h5>
 
     </div>
-</div>
+</div> -->
 <div class="table">
     <table class="category-table">
         <thead>

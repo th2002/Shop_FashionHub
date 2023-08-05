@@ -111,35 +111,35 @@ require_once $modelPath;
         <div class="profile-details">
             <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn" />
             <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>
-            <i class="bx bx-chevron-down"></i>
-            <div class="drop-menu">
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+            <!-- <i class="bx bx-chevron-down"></i> -->
+            <!-- <div class="drop-menu">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-face-grin-hearts"></i>
                     <span class="links_name">Làm 1 gậy</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-headphones"></i>
                     <span class="links_name">Làm 2 gậy</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-user-astronaut"></i>
                     <span class="links_name">Làm 3 gậy</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-spider"></i>
                     <span class="links_name">Ngất</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="bx bx-cog"></i>
                     <span class="links_name">Cài đặt</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="links_name">Logout</span>
                 </a>
 
 
-            </div>
+            </div> -->
         </div>
     </nav>
 
