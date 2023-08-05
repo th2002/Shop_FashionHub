@@ -25,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ...
 
     // Tạo một bản ghi trong bảng cartitems
-    $query = $db->prepare("INSERT INTO cartitems (quantity) VALUES (?)");
-    $query->execute([$quantity]);
+    
 
     // Lấy id của bản ghi vừa tạo
     $cartItemId = $db->lastInsertId();
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Thêm sản phẩm với cartitem_id đã lấy được
     $createAt = date("Y-m-d");
     $updateAt = date("Y-m-d");
-    $result = addProduct($productName, $description, $quantity, $price, $salePrice, $featured, $bestSeller, $categoryId, $cartItemId, $createAt, $updateAt);
+    $result = addProduct($productName, $description, $quantity, $price, $salePrice, $featured, $bestSeller, $categoryId, $createAt, $updateAt);
 
     if ($result) {
         // Thêm sản phẩm thành công, hiển thị thông báo hoặc chuyển hướng

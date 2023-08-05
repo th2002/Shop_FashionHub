@@ -38,7 +38,7 @@ function pdo_execute($sql){
         throw $e;
     }
     finally{
-        unset($conn);
+        unset($stmt);
     }
 }
 /**
