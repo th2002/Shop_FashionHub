@@ -11,6 +11,7 @@
                 $_SESSION['data-cart'][$key]['size'] = $val['size'];
             }
         }
+       
     }
  
 ?>

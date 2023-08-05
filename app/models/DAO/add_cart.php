@@ -29,23 +29,23 @@
             }else{
                 $_SESSION['data-cart']['totalQuantity'] = $data['quantity'];
             }
-            $output ='<li style="margin: 5px 0;" class="nav_cart-item">
-                            <div class="nav_cart-item-left">
-                                <img src="https://product.hstatic.net/1000284478/product/'.$data['imgName'].'" alt="" class="nav_cart-item-img">
-                            </div>
-                            <div style="min-width:210px" class="nav_cart-item-center">
-                                <h4 class="nav_cart-item-info">'.$data['name'].'</h4>
-                            </div>
-                            <div class="nav_cart-item-right">
-                                <div class="nav_cart-item-price">
-                                    <span style="margin-right:5px" class="nav_cart-item-text">'.$data['price'].'</span>x
-                                    <span data-id_price='.$data['id_price'].' class="nav_cart-item-quantity">'.$data['quantity'].'</span>
-                                </div>
-                                <div class="nav_cart-item-delete">
-                                   <a href="../../../models/DAO/delete_cart.php?id_product='.$data['id_price'].'">xóa</a>
-                                </div>
-                            </div>
-                        </li>';
+            $output ='<li style="margin: 5px 0;padding:5px" class="nav_cart-item">
+            <div class="nav_cart-item-left">
+                <img src="https://product.hstatic.net/1000284478/product/'.$data['imgName'].'" alt="" class="nav_cart-item-img">
+            </div>
+            <div style="min-width:205px" class="nav_cart-item-center">
+                <h4 class="nav_cart-item-info">'.$data['name'].'</h4>
+            </div>
+            <div class="nav_cart-item-right">
+                <div class="nav_cart-item-price">
+                    <span style="margin-right:5px" class="nav_cart-item-text">'.$data['price'].'</span>
+                    <span data-id_price='.$data['id_price'].' class="nav_cart-item-quantity">'.$data['quantity'].'</span>
+                </div>
+                <div class="nav_cart-item-delete">
+                    <a href="../../../models/DAO/delete_cart.php?id_product='.$data['id_price'].'">xóa</a>
+                </div>
+            </div>
+        </li>';
             }  
             $total = $_SESSION['data-cart']['totalQuantity'];
             $arr =[
