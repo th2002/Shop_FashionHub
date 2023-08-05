@@ -22,7 +22,6 @@ $user_id = $_SESSION['user_id'];
                             href="<?= $SITE_URL ?>/page_user/form-edit-profile.php">Xin
                             chào,
                             <?php echo $_SESSION['user_fullname'] ?>
-                            <?php echo $user_id ?>
                         </a>
                     </span>
                 </a>
@@ -219,6 +218,16 @@ $user_id = $_SESSION['user_id'];
                             </div>
                             <div class="col-md-2">
                                 <p>Số lượng: <?php echo $oder_detail['quantity'] ?></p>
+                            </div>
+                            <div class="col-md-2">
+                                <?php
+                                    if ($oder_detail['size'] != "") {
+                                        echo '<p>Size: '. $oder_detail['size']. '</p>'; 
+                                    } else {
+                                        echo '<p class="fs-6">No size</p>';
+                                    }
+                                    
+                                ?>
                             </div>
                             <div class="col-md-3">
                                 <p>Giá: <?php echo number_format($oder_detail['price']) . 'đ' ?></p>

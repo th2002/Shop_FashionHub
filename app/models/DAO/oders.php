@@ -20,7 +20,7 @@ function select_all_coupon($id) {
 // select oder_detail where oders
 function select_order_details_with_product_info($order_id) {
     $sql = "
-        SELECT od.quantity, p.name AS product_name, p.price, pi.image_url
+        SELECT od.quantity, od.size ,p.name AS product_name, p.price, pi.image_url
         FROM oder_detail od
         INNER JOIN products p ON od.product_id = p.id
         INNER JOIN product_images pi ON p.id = pi.product_id
