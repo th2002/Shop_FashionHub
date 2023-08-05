@@ -608,47 +608,85 @@ function getTotalOders(){
 // Hàm lấy tổng số đơn hàng theo ngày
 function getTotalOrdersByDate($date){
     global $db;
+
     try {
-        $query = $db->prepare("SELECT COUNT(*) as total from oders where DATE(created_at) = ?");
-        $query->execute([$date]);
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE DATE(created_at) = :date";
+        $query = $db->prepare($sql);
+        $query->bindParam(':date', $date);
+        $query->execute();
         $total = $query->fetch(PDO::FETCH_ASSOC);
-        return $total['total'];
-        
+
+        return $total['total_orders'];
     } catch (PDOException $e) {
-        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
+        error_log("Có lỗi khi truy vấn: " . $e->getMessage());
         return 0;
     }
 }
 
-// Hàm lấy tổng số đơn hàng theo tuần và năm
-function getTotalOrdersByWeek($week, $year){
-    global $db;
+
+
+// Hàm lấy tổng số đơn hàng của tháng hiện tại
+function getTongSoDonHangThangHienTai($db)
+{
     try {
-        $query = $db->prepare("SELECT COUNT(*) as total from oders where YEARWEEK(created_at, 1) = ?");
-        $query->execute(["$year-$week"]);
-        $total = $query->fetch(PDO::FETCH_ASSOC);
-        return $total['total'];
-        
+        // Lấy tháng hiện tại
+        $thang_hien_tai = date("m");
+
+        // Câu truy vấn SQL để lấy tổng số đơn hàng của tháng hiện tại
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE MONTH(created_at) = :thang_hien_tai";
+
+        // Chuẩn bị và thực thi câu truy vấn
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':thang_hien_tai', $thang_hien_tai, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Lấy kết quả
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Tổng số đơn hàng của tháng hiện tại
+        $total_orders = $result['total_orders'];
+
+        return $total_orders;
     } catch (PDOException $e) {
-        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
-        return 0;
+        // Xử lý lỗi nếu có
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
+        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
     }
 }
 
-// Hàm lấy tổng số đơn hàng theo tháng và năm
-function getTotalOrdersByMonth($month, $year){
-    global $db;
+// Hàm lấy tổng số đơn hàng tuần hiện tại
+function getTongSoDonHangTuanHienTai($db)
+{
     try {
-        $query = $db->prepare("SELECT COUNT(*) as total from oders where YEAR(created_at) = ? AND MONTH(created_at) = ?");
-        $query->execute([$year, $month]);
-        $total = $query->fetch(PDO::FETCH_ASSOC);
-        return $total['total'];
-        
+        // Lấy số tuần trong năm hiện tại
+        $tuan_hien_tai = date("W");
+
+        // Câu truy vấn SQL để lấy tổng số đơn hàng của tuần hiện tại
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE WEEK(created_at) = :tuan_hien_tai";
+
+        // Chuẩn bị và thực thi câu truy vấn
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Lấy kết quả
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Tổng số đơn hàng của tuần hiện tại
+        $total_orders = $result['total_orders'];
+
+        return $total_orders;
     } catch (PDOException $e) {
-        error_log("Có lỗi trong quá trình truy vấn: " . $e->getMessage());
-        return 0;
+        // Xử lý lỗi nếu có
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
+        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
     }
 }
+
+// ngày
+$date = date('Y-m-d');
+$totalOrders = getTotalOrdersByDate($date);
+
 
 
 // Hàm lấy danh sách sản phẩm phân trang

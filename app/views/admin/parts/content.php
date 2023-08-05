@@ -1,14 +1,15 @@
-<?php 
-// Truyền giá trị cho biến $date, $week, $year, $month từ file content.php
-$date = 'Y-m-d'; // Thay đổi giá trị ngày theo định dạng 'Y-m-d'
-$week = 29; // Tuần muốn lấy tổng số đơn hàng
-$year = 2023; // Năm muốn lấy tổng số đơn hàng
-$month = 7; // Tháng muốn lấy tổng số đơn hàng
+<?php
+// Sử dụng hàm để lấy tổng số đơn hàng của tháng hiện tại
+$total_orders = getTongSoDonHangThangHienTai($db);
 
-// Tiến hành lấy tổng số đơn hàng theo ngày, tuần và tháng
-$totalOrdersByDate = getTotalOrdersByDate($date);
-$totalOrdersByWeek = getTotalOrdersByWeek($week, $year);
-$totalOrdersByMonth = getTotalOrdersByMonth($month, $year);
+// Lấy tháng hiện tại
+$month = date('m');
+
+// Sử dụng hàm để lấy tổng số đơn hàng của tuần hiện tại
+$total_orders = getTongSoDonHangTuanHienTai($db);
+
+// Lấy số tuần trong năm hiện tại
+$week = date('W');
 
 ?>
 <div class="home-content">
@@ -34,16 +35,20 @@ $totalOrdersByMonth = getTotalOrdersByMonth($month, $year);
         <th>Tổng đơn hàng</th>
     </tr>
     <tr>
-        <td>Ngày</td>
-        <td class="count-up" data-end-value="<?php echo getTotalOrdersByDate($date); ?>"><?php echo getTotalOrdersByDate($date); ?></td>
+        <td>Ngày: <?= $date;?></td>
+        <td class="count-up" data-end-value="<?= $totalOrders;?>"></td>
     </tr>
     <tr>
+    <h1>Tổng số đơn hàng tuần <?php echo $week; ?></h1>
+    <p><?php echo $total_orders; ?></p>
         <td>Tuần</td>
-        <td><?php echo getTotalOrdersByWeek($week, $year); ?></td>
+        <td></td>
     </tr>
     <tr>
+    <h1>Tổng số đơn hàng tháng <?php echo $month; ?>:</h1>
+    <p><?php echo  $total_orders; ?></p>
         <td>Tháng</td>
-        <td><?php echo getTotalOrdersByMonth($month, $year); ?></td>
+        <td></td>
     </tr>
 </table>
       </div>
