@@ -17,6 +17,10 @@ function select_all_coupon($id) {
     $sql = "SELECT * FROM coupon WHERE id = ?";
     return pdo_query_one($sql, $id);
 }
+function select_all_coupons() {
+    $sql = "SELECT * FROM coupon";
+    return pdo_query($sql);
+}
 // select oder_detail where oders
 function select_order_details_with_product_info($order_id) {
     $sql = "

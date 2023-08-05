@@ -15,7 +15,9 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= $ASSET_URL ?>/css/oders.css">
     <title>Thanh toán</title>
 
@@ -85,31 +87,33 @@
     }
     ?>
     <div class="container_oders">
-        <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;" class="fa-solid fa-money-check-dollar icon"></i>
+        <i style="display: flex; justify-content: center; margin-top: 50px; font-size: 50px;"
+            class="fa-solid fa-money-check-dollar icon"></i>
         <h3 class="title">THANH TOÁN</h3>
         <h6 style="color: gray;">Vui lòng kiểm tra thông tin Khách Hàng, thông tin Giỏ Hàng trước khi Đặt Hàng</h6>
         <?php if (!empty($errors)) { ?>
-            <ul class="error">
-                <?php foreach ($errors as $error) { ?>
-                    <li>
-                        <?php echo $error; ?>
-                    </li>
-                <?php } ?>
-            </ul>
+        <ul class="error">
+            <?php foreach ($errors as $error) { ?>
+            <li>
+                <?php echo $error; ?>
+            </li>
+            <?php } ?>
+        </ul>
         <?php } ?>
         <div class="row">
             <form method="post" class="row g-3 needs-validation col-md-6" style="margin: 30px 0 0 40px;" novalidate>
                 <h5>Thông tin khách hàng</h5>
                 <div class="col-md-12">
                     <label for="validationCustom01" class="form-label">Khách hàng</label>
-                    <input name="cus_name" value="<?= $_SESSION['user_fullname'] ?>" type="text" class="form-control" id="validationCustom01" readonly>
+                    <input name="cus_name" value="<?= $_SESSION['user_fullname'] ?>" type="text" class="form-control"
+                        id="validationCustom01" readonly>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="col-md-12">
                     <label for="validationCustom02" class="form-label">Số điện thoại</label>
-                    <input name="cus_phone" value="<?= $_SESSION['user_phone'] ?>" type="text" class="form-control" id="validationCustom02" readonly>
+                    <input name="cus_phone" type="text" class="form-control" id="validationCustom02" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -117,7 +121,8 @@
                 <div class="col-md-12">
                     <label for="validationCustomUsername" class="form-label">Tên đường / Số nhà</label>
                     <div class="input-group has-validation">
-                        <input name="cus_detail_address" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                        <input name="cus_detail_address" type="text" class="form-control" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend" required>
                         <div class="invalid-feedback">
                             Please choose a address.
                         </div>
@@ -129,11 +134,13 @@
 
                 <!-- code select -->
                 <div class="col-md-12">
-                    <select name="city" style="margin-bottom: 20px;" class="form-select" aria-label="Default select example" id="city">
+                    <select name="city" style="margin-bottom: 20px;" class="form-select"
+                        aria-label="Default select example" id="city">
                         <option value="" selected>Chọn tỉnh thành</option>
                     </select>
 
-                    <select name="district" style="margin-bottom: 20px;" class="form-select" aria-label="Default select example" id="district">
+                    <select name="district" style="margin-bottom: 20px;" class="form-select"
+                        aria-label="Default select example" id="district">
                         <option value="" selected>Chọn quận huyện</option>
                     </select>
 
@@ -142,93 +149,104 @@
                     </select>
                 </div>
 
+                <!-- select coupon -->
+                <?php
+                    $coupons = select_all_coupons();
+                ?>
                 <div class="col-md-12">
-                    <label for="validationCustomUsername" class="form-label">Coupon</label>
-                    <div class="input-group has-validation">
-                        <input name="coupon" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-                        <div class="invalid-feedback">
-                            Please choose a address.
-                        </div>
-                    </div>
+                    <select name="coupon" class="form-select" aria-label="Default select example" id="coupon">
+                        <option value="" selected>Chọn mã giảm giá</option>
+                        <?php foreach($coupons as $coupon): ?>
+                        <option value="">
+                            <?php
+                            if ($coupon['type'] == 0) {
+                                echo $coupon['code'] . ' ( ' . ' giảm ' . number_format($coupon['value']) . 'đ' . ' )';
+                            } else {
+                                echo $coupon['code'] . ' ( ' . ' giảm ' . $coupon['value'] . '%' . ' )';
+                            }                           
+                            ?>
+                        </option>
+                        <?php endforeach;?>
+                    </select>
                 </div>
 
                 <!-- code js -->
                 <!-- code js -->
                 <script>
-                    // Đảm bảo toàn bộ DOM đã được load
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById("city").addEventListener('change', function() {
-                            var selectedOption = this.options[this.selectedIndex];
-                            document.getElementById("province_name").value = selectedOption.text;
-                        });
-
-                        document.getElementById("district").addEventListener('change', function() {
-                            var selectedOption = this.options[this.selectedIndex];
-                            document.getElementById("district_name").value = selectedOption.text;
-                        });
-
-                        document.getElementById("ward").addEventListener('change', function() {
-                            var selectedOption = this.options[this.selectedIndex];
-                            document.getElementById("ward_name").value = selectedOption.text;
-                        });
+                // Đảm bảo toàn bộ DOM đã được load
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById("city").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("province_name").value = selectedOption.text;
                     });
+
+                    document.getElementById("district").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("district_name").value = selectedOption.text;
+                    });
+
+                    document.getElementById("ward").addEventListener('change', function() {
+                        var selectedOption = this.options[this.selectedIndex];
+                        document.getElementById("ward_name").value = selectedOption.text;
+                    });
+                });
                 </script>
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                 <script>
-                    var citis = document.getElementById("city");
-                    var districts = document.getElementById("district");
-                    var wards = document.getElementById("ward");
-                    var Parameter = {
-                        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", // data source
-                        method: "GET",
-                        responseType: "application/json",
-                    };
-                    var promise = axios(Parameter);
-                    promise.then(function(result) {
-                        renderCity(result.data);
-                    });
+                var citis = document.getElementById("city");
+                var districts = document.getElementById("district");
+                var wards = document.getElementById("ward");
+                var Parameter = {
+                    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", // data source
+                    method: "GET",
+                    responseType: "application/json",
+                };
+                var promise = axios(Parameter);
+                promise.then(function(result) {
+                    renderCity(result.data);
+                });
 
-                    function renderCity(data) {
-                        for (const x of data) {
-                            var opt = document.createElement('option');
-                            opt.value = x.Name;
-                            opt.text = x.Name;
-                            opt.setAttribute('data-id', x.Id);
-                            citis.options.add(opt);
-                        }
-                        citis.onchange = function() {
-                            district.length = 1;
-                            ward.length = 1;
-                            if (this.options[this.selectedIndex].dataset.id != "") {
-                                const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
-
-                                for (const k of result[0].Districts) {
-                                    var opt = document.createElement('option');
-                                    opt.value = k.Name;
-                                    opt.text = k.Name;
-                                    opt.setAttribute('data-id', k.Id);
-                                    district.options.add(opt);
-                                }
-                            }
-                        };
-                        district.onchange = function() {
-                            ward.length = 1;
-                            const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
-                            if (this.options[this.selectedIndex].dataset.id != "") {
-                                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
-                                    .selectedIndex].dataset.id)[0].Wards;
-
-                                for (const w of dataWards) {
-                                    var opt = document.createElement('option');
-                                    opt.value = w.Name;
-                                    opt.text = w.Name;
-                                    opt.setAttribute('data-id', w.Id);
-                                    wards.options.add(opt);
-                                }
-                            }
-                        };
+                function renderCity(data) {
+                    for (const x of data) {
+                        var opt = document.createElement('option');
+                        opt.value = x.Name;
+                        opt.text = x.Name;
+                        opt.setAttribute('data-id', x.Id);
+                        citis.options.add(opt);
                     }
+                    citis.onchange = function() {
+                        district.length = 1;
+                        ward.length = 1;
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+                            for (const k of result[0].Districts) {
+                                var opt = document.createElement('option');
+                                opt.value = k.Name;
+                                opt.text = k.Name;
+                                opt.setAttribute('data-id', k.Id);
+                                district.options.add(opt);
+                            }
+                        }
+                    };
+                    district.onchange = function() {
+                        ward.length = 1;
+                        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+                        if (this.options[this.selectedIndex].dataset.id != "") {
+                            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this
+                                .selectedIndex].dataset.id)[0].Wards;
+
+                            for (const w of dataWards) {
+                                var opt = document.createElement('option');
+                                opt.value = w.Name;
+                                opt.text = w.Name;
+                                opt.setAttribute('data-id', w.Id);
+                                wards.options.add(opt);
+                            }
+                        }
+                    };
+                }
                 </script>
                 <div class="col-md-12">
                     <select name="method_payment" class="form-select" aria-label="Default select example">
@@ -239,7 +257,8 @@
                 </div>
                 <div class="col-md-12">
                     <label for="validationCustom02" class="form-label">Ngày đặt hàng</label>
-                    <input type="date" name="toDay" id="todayDate" value="<?php echo date('Y-m-d'); ?>" readonly class="form-control" id="validationCustom02" readonly>
+                    <input type="date" name="toDay" id="todayDate" value="<?php echo date('Y-m-d'); ?>" readonly
+                        class="form-control" id="validationCustom02" readonly>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -256,7 +275,8 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button name="btn_buy" class="btn btn-primary" data-bs-target="#exampleModal" style="width: 100%;" type="submit">ĐẶT
+                    <button name="btn_buy" class="btn btn-primary" data-bs-target="#exampleModal" style="width: 100%;"
+                        type="submit">ĐẶT
                         HÀNG</button>
                 </div>
             </form>
@@ -270,7 +290,8 @@
             ?>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -292,7 +313,8 @@
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
-                        <img style="width: 20px; height: 20px;" src="<?= $ASSET_URL ?>/images/logos/Main Logo.png" class="rounded me-2" alt="...">
+                        <img style="width: 20px; height: 20px;" src="<?= $ASSET_URL ?>/images/logos/Main Logo.png"
+                            class="rounded me-2" alt="...">
                         <strong class="me-auto">Cám ơn quý khách</strong>
                         <small><?= $previous_time_formatted ?></small>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -310,7 +332,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th style="text-align: center;" scope="col">Sản phẩm</th>
-                            <th style="text-align: center;" scope="col">size</th>
+                            <th scope="col">size</th>
                             <th style="text-align: center;" scope="col">Số lượng</th>
                             <th style="text-align: center;" scope="col">Giá</th>
                         </tr>
@@ -335,15 +357,15 @@
                                     $count++; ?>
                         <tr>
                             <th scope="row"><?php echo $count ?></th>
-                            <td style="text-align: center;">
+                            <td>
                                 <span><?= $item['name'] ?></span>
                             </td>
-                            <td class="quantity-input" style="text-align: center;" colspan="">
+                            <td class="quantity-input">
                                 <?php
                                             echo $item['size'];
                                             ?>
                             </td>
-                            <td class="quantity-input" style="text-align: center;" colspan="">
+                            <td style="text-align: center;" class="quantity-input">
                                 <?php
                                             echo $item['quantity'];
                                             ?>
@@ -361,7 +383,7 @@
                                             ?>
                             </td>
                         </tr>
-                    
+
                         <?php
                                 } else {
                                     continue;
@@ -374,7 +396,7 @@
                         ?>
                         <tr>
                             <td style="text-align: center;" colspan="3">Tổng tiền</td>
-                            <td style="text-align: center;" colspan="2">
+                            <td style="text-align: center;" colspan="3">
                                 <?php
                                 echo number_format($totalPrice, 0, ',', ',') . ' đ'; // print total money
                                 ?>
@@ -450,7 +472,7 @@
                 console.error('Error:', error);
             });
     </script> -->
-     
+
 </body>
 
 </html>
