@@ -594,7 +594,7 @@ h5 {
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <i class="bx bxl-c-plus-plus"></i>
+            <img src="<?=$ASSET_URL?>/images/logos/Main Logo.png" alt="" />
             <span class="logo_name">Admin</span>
         </div>
         <ul class="nav-links">

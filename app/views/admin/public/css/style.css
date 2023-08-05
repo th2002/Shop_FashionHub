@@ -32,6 +32,10 @@
   min-width: 60px;
   text-align: center
 }
+.sidebar .logo-details img{
+  width: 60px;
+  text-align: center
+}
 .sidebar .logo-details .logo_name{
   color: #333;
   font-size: 24px;
