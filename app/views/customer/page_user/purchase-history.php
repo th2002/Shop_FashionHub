@@ -1,5 +1,4 @@
 <?php require_once '../page_user/header.php' ?>
-<?php require_once '../../../controller/customer/controller_oder_history.php' ?>
 <?php require_once '../../../models/DAO/oders.php'; ?>
 <?php
 $user_id = $_SESSION['user_id'];
