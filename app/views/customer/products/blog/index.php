@@ -1,7 +1,8 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); ?>
 <!doctype html>
 <html lang="vi">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head>
+    <!-- <script src="../assets/js/color-modes.js"></script> -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
