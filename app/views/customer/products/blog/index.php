@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="../../../../../../assets/css/grid.css">
     <link rel="stylesheet" href="../../../css/app.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/toast.css">
     <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -359,7 +361,7 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="../../home" class="nav__page-link">Trang Chủ</a>
+                <a href="../home" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
                 <a href="home" class="nav__page-link">Liên Hệ</a>
