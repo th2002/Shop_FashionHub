@@ -333,14 +333,33 @@
     <link href="blog.css" rel="stylesheet">
   </head>
   <body>
-  <?php
-        require '../../layout/nav.php';
+    <?php 
+      require_once "../../../../models/DAO/products.php"; 
+      require_once "../../../../models/DAO/connect.php";
+      require_once '../../../../../global.php';
     ?>
+    <div id="wrapper">
+        <header>
+            <div class="banner_top">
+                <div class="banner_top__center">
+                    <h3>Quà tặng hấp dẫn</h3>
+                </div>
+                <div class="banner_top__right">
+                    <div class="banner_top__right-season">
+                        <span>Welcome</span>
+                        <h1>Summer</h1>
+                    </div>
+                    <div class="banner_top__right-year">
+                        <h4>2023</h4>
+                    </div>
+                </div>
+            </div>
+    </div>
+  <nav>
+      <?php   require_once '../../layout/nav.php'; ?>
+  </nav>
 <main class="container">
   <?php 
-    require_once "../../../../models/DAO/connect.php";
-    require_once "../../../../models/DAO/products.php";
-    require_once '../../../../../global.php';
     $id=$_GET['id'];
     $rows= hang_hoa_select_by_img_id($id);
     ?>

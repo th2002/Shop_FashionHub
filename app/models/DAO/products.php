@@ -73,6 +73,6 @@ function hang_hoa_select_by_cate_id(){
 }
 // Truy vấn tất cả các danh mục
 function danh_muc_select_all(){
-    $sql = "SELECT * FROM category_product";
+    $sql = "SELECT * FROM category_product ";
     return  pdo_query($sql);
 }
