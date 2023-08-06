@@ -1,10 +1,43 @@
 <?php 
 
 // insert info user to table oder 
-function insert_info_users( $recipient_name, $phone_number, $address_detail, $province, $district, $ward, $coupon_code_id, $payment_method, $created_at) {
-    $sql = "INSERT INTO oders(recipient_name, phone_number, address_detail, province_id, district_id, ward_id, coupon_code_id, payment_method, created_at)
-    VALUES (?,?,?,?,?,?,?,?,?,?)";
-    pdo_execute($sql, $recipient_name, $phone_number, $address_detail, $province, $district, $ward, $coupon_code_id, $payment_method, $created_at);
+function insert_info_users( $cus_id, $recipient_name, $phone_number, $address_detail, $province,
+ $district, $ward, $coupon_code_id, $payment_method, $total_amount, $status_payment, $status_delivery,$created_at) {
+    $sql =
+    "INSERT INTO oders
+    (cus_id,
+    recipient_name,
+    phone_number, 
+    address_detail, 
+    province, 
+    district, 
+    ward, 
+    coupon_code_id, 
+    payment_method, 
+    total_amount, 
+    status_payment, 
+    status_delivery,  
+    created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Lấy id của oder vừa tạo
+    global $db;
+    if (pdo_execute(
+        $sql, $cus_id, $recipient_name, $phone_number, $address_detail, $province,
+        $district, $ward, $coupon_code_id, $payment_method, $total_amount,
+        $status_payment, $status_delivery, $created_at
+    )) {
+        // Trả về ID của order vừa thêm
+        return $db->lastInsertId();
+    } else {
+        return false;
+    }
+}
+
+
+// insert cart to oder_detail
+function inset_oder_detail($product_id, $quantity, $size, $oder_id) {
+    $sql = "INSERT INTO oder_detail (product_id, quantity, size, oder_id) VALUES (?, ?, ?, ?)";
+    pdo_execute($sql, $product_id, $quantity, $size, $oder_id);
 }
 
 // select * oder where user_id
