@@ -1,3 +1,10 @@
+<?php
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 

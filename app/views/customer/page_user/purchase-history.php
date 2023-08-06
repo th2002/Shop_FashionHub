@@ -1,6 +1,12 @@
 <?php require_once '../page_user/header.php' ?>
 <?php require_once '../../../models/DAO/oders.php'; ?>
 <?php
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
+        exit();
+    }
+?>
+<?php
 $user_id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
@@ -182,10 +188,20 @@ $user_id = $_SESSION['user_id'];
                 </div>
                 <div class="row">
                     <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Tổng tiền </p>
+                        <p>Tổng hóa đơn </p>
                     </div>
-                    <div class="col-md-4 fs-6">
+                    <div class="col-md-3 fs-6">
                         <p>: <?php echo number_format($oder['total_amount'])  . 'đ' ?></p>
+                    </div>
+                    <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
+                        <p>Tiền phải trả</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>
+                            : <?php
+                        echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
+                        ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row ms-3">
@@ -230,7 +246,9 @@ $user_id = $_SESSION['user_id'];
                                 ?>
                             </div>
                             <div class="col-md-3">
-                                <p>Giá: <?php echo number_format($oder_detail['price']) . 'đ' ?></p>
+                                <p>Giá:
+                                    <?php echo number_format($oder_detail['price'] * $oder_detail['quantity']) . 'đ' ?>
+                                </p>
                             </div>
                         </div>
                     </div>

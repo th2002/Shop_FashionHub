@@ -1,4 +1,9 @@
-<?php 
+<?php
+    require_once '../../../models/DAO/edit-profile.php';
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+            echo 'Vui lòng không truy cập bằng đường dẫn trực tiếp';
+            exit();
+        } 
 $loi="";
     $username = $_SESSION['user_name'];
     if(isset($_POST['btnsubmit']) == true){
@@ -29,9 +34,11 @@ $loi="";
             $stmt = $db->prepare($sql);
             $stmt->execute([password_hash($matkhaumoi_1, PASSWORD_BCRYPT), $username]);
             echo '<script>';
+            echo 'event.preventDefault();';
             echo 'Swal.fire({ title: "Đổi mật khẩu thành công!", icon: "success" }).then(function() {';
             echo '   window.location.href = "' . $baseURL . '/app/views/customer/tai-khoan/login.php";';
             echo '});';
+            echo 'return false;';
             echo '</script>';
         }
     }
