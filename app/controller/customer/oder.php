@@ -12,7 +12,12 @@ if (isset($_POST['btn_buy'])) {
     $province = $_POST['province_name'];
     $district = $_POST['district_name'];
     $ward = $_POST['ward_name'];
-    $coupon_code_id = $_POST['coupon'];
+    if (empty($_POST['coupon'])) {
+        $coupon_code_id = null;
+    } else {
+        $coupon_code_id = $_POST['coupon'];
+    }
+    
     if (!empty($_POST['method_payment'])) {
         $payment_method = $_POST['method_payment'] == 1 ? 0 : 1;
     }else{
@@ -22,7 +27,7 @@ if (isset($_POST['btn_buy'])) {
     if (!empty($_POST['method_payment'])) {
         $status_payment = $_POST['method_payment'] == 2 ? 1 : 0;
     } else {
-        $status_payment = "";
+        $status_payment = null;
     }
     
     $status_delivery = 0;
@@ -70,15 +75,8 @@ if (isset($_POST['btn_buy'])) {
         echo '</script>';
     }
 
-    elseif (empty($coupon_code_id)) {
-        $loi .= "Không được bỏ trống mã giảm giá / xã<br>";
-        echo '<script>';
-        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
-        echo '</script>';
-    }
-
     elseif (empty($payment_method)) {
-        $loi .= "Không được bỏ trống phương thức thanh toán / xã<br>";
+        $loi .= "Không được bỏ trống phương thức thanh toán<br>";
         echo '<script>';
         echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
         echo '</script>';

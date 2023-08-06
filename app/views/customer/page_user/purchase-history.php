@@ -172,15 +172,21 @@ $user_id = $_SESSION['user_id'];
                     </div>
                     <?php
                         $coupon = select_all_coupon($oder['coupon_code_id']);
-                        ?>
+                        
+                    ?>
                     <div class="col-md-4">
                         <p>
                             : <?php
-                                    if ($coupon['type'] == 0) {
+                                    if (!empty($coupon)) {
+                                        if ($coupon['type'] == 0) {
                                         echo $coupon['code'] . ' ( ' . 'giảm ' .  number_format($coupon['value']) . 'đ' . ' )';
                                     } else {
                                         echo $coupon['code'] . ' ( ' . 'giảm ' . $coupon['value'] . '%' . ' )';
                                     }
+                                    } else {
+                                        echo 'Không có mã giảm giá';
+                                    }
+                                    
 
                                     ?>
                         </p>
@@ -199,11 +205,16 @@ $user_id = $_SESSION['user_id'];
                     <div class="col-md-4">
                         <p>
                             : <?php
-                            if ($coupon['type'] == 0) {
+                            if (!empty($coupon)) {
+                                if ($coupon['type'] == 0) {
                                 echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
                             } else {
                                 echo  number_format($oder['total_amount'] - (($oder['total_amount'] * $coupon['value'])/100) ) . 'đ';
                             }
+                            } else {
+                                echo number_format($oder['total_amount'])  . 'đ';
+                            }
+                            
                             
                         ?>
                         </p>
