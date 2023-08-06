@@ -7,7 +7,7 @@
 <div class="col l-3">
     <div class="product_item">
         <div class="product_img">
-        <a href="../products/detail.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
+        <a href="../products/blog/index.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
             <div class="product_cart">
                 <button class="product_btn product_btn-buy">Mua Ngay </button>
                 <button class="product_btn product_btn-add_cart">Thêm Giỏ Hàng </button>
