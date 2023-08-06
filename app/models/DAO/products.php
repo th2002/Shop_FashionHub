@@ -42,11 +42,11 @@ function select_price_by_id($id) {
     return pdo_query($sql,$id);
 }
 function hang_hoa_select_by_name_loai_1(){
-    $sql = "SELECT * FROM size where cate_size = 0";
+    $sql = "SELECT * FROM size where size_cate = 0";
     return  pdo_query($sql);
 }
 function hang_hoa_select_by_name_loai_2(){
-    $sql = "SELECT * FROM size where cate_size = 1";
+    $sql = "SELECT * FROM size where size_cate = 1";
     return  pdo_query($sql);
 }
 function hang_hoa_select_by_img_id($id){
@@ -73,6 +73,6 @@ function hang_hoa_select_by_cate_id(){
 }
 // Truy vấn tất cả các danh mục
 function danh_muc_select_all(){
-    $sql = "SELECT * FROM category_product";
+    $sql = "SELECT * FROM category_product ";
     return  pdo_query($sql);
 }
