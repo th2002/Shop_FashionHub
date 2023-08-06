@@ -199,7 +199,12 @@ $user_id = $_SESSION['user_id'];
                     <div class="col-md-4">
                         <p>
                             : <?php
-                        echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
+                            if ($coupon['type'] == 0) {
+                                echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
+                            } else {
+                                echo  number_format($oder['total_amount'] - (($oder['total_amount'] * $coupon['value'])/100) ) . 'đ';
+                            }
+                            
                         ?>
                         </p>
                     </div>
