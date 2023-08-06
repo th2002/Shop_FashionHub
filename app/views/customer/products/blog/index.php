@@ -1,7 +1,8 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); ?>
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+<html lang="vi">
+  <head>
+    <!-- <script src="../assets/js/color-modes.js"></script> -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +21,8 @@
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" href="../../../../../../assets/css/grid.css">
-    <link rel="stylesheet" href="../../../css/app.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/grid.css">
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/app.css">
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/page-user.css">
     <link rel="stylesheet" href="<?=$ASSET_URL?>/css/toast.css">
     <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
@@ -33,6 +34,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      html{
+        font-family: 'Bellota';
+      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -320,11 +325,15 @@
         flex-direction: column
     }
     
-    .sp_noi_bat{
+    /* .sp_noi_bat{
         display:flex;
         flex-direction: row;
         flex-wrap: wrap;
         margin : 10px ;
+    } */
+    .sp_noi_bat{
+      display: grid;
+      grid-template-columns: auto auto;
     }
     </style>
 
@@ -572,7 +581,7 @@
         <?php foreach($result as $key => $value){
                 if ($value['product_id']!=$id){
         ?>
-        <div class="col l-3">
+        <div class="col l-3" style="max-width: 96%;">
             <div class="product_item">
                 <div class="product_img">
                 <a href="index.php?id=<?=$value['product_id']?>"><img src="<?php echo $value['image_url']?>" alt="" class="product_img-item"></a>
