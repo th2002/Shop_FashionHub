@@ -142,7 +142,7 @@
                             <h4 class="nav_acounted-name"><?php echo $bl['full_name'] ?></h4>
                             <i class='pull-right'><?php echo $bl['create_at'] ?></i>
                             <div class="content">
-                                <?php echo $bl['content'] ?>
+                                Nôi dung : <?php echo $bl['content'] ?>
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,6 @@
                     echo '<b class="text-danger">Đăng nhập để bình luận về sản phẩm này</b>';
                     }else{
                 ?>
-                    <h2>Bình luận</h2>
                     <form action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
                         <textarea name="content" id="comment"></textarea>
                         <button type="submit" class="btn btn-default">Gửi</button>
@@ -166,6 +165,6 @@
                 <?php 
                     } 
                 ?>
-            </div>        
+            </div>
     </body>
 </html>
