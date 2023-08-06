@@ -17,11 +17,9 @@ if (isset($_POST['btn_buy'])) {
     } else {
         $coupon_code_id = $_POST['coupon'];
     }
-    
+    // method_payment = 1
     if (!empty($_POST['method_payment'])) {
         $payment_method = $_POST['method_payment'] == 1 ? 0 : 1;
-    }else{
-        $payment_method = "";
     }
     $total_amount = $_POST['total_money'];
     if (!empty($_POST['method_payment'])) {
@@ -75,12 +73,9 @@ if (isset($_POST['btn_buy'])) {
         echo '</script>';
     }
 
-    elseif (empty($payment_method)) {
-        $loi .= "Không được bỏ trống phương thức thanh toán<br>";
-        echo '<script>';
-        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
-        echo '</script>';
-    }
+    
+
+
 
 
     if (empty($loi)) {
