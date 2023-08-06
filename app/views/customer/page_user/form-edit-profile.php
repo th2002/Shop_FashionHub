@@ -1,5 +1,4 @@
 <?php require_once '../page_user/header.php' ?>
-<?php require_once './change-password.php' ?>
 <?php require_once './edit-profile.php' ?>
 <!DOCTYPE html>
 <html lang="vi">

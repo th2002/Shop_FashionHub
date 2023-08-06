@@ -35,7 +35,7 @@ function insert_info_users( $cus_id, $recipient_name, $phone_number, $address_de
 
 
 // insert cart to oder_detail
-function inset_oder_detail($product_id, $quantity, $size, $oder_id) {
+function insert_oder_detail($product_id, $quantity, $size, $oder_id) {
     $sql = "INSERT INTO oder_detail (product_id, quantity, size, oder_id) VALUES (?, ?, ?, ?)";
     pdo_execute($sql, $product_id, $quantity, $size, $oder_id);
 }

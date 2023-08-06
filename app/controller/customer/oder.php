@@ -2,8 +2,6 @@
 
 <?php
 
-// $cus_id, $recipient_name, $phone_number, $address_detail, $province,
-//  $district, $ward, $coupon_code_id, $payment_method, $total_amount, $status_payment, $status_delivery,$created_at
 $loi = "";
 if (isset($_POST['btn_buy'])) {
     // oders
@@ -55,12 +53,12 @@ if (isset($_POST['btn_buy'])) {
 
         if ($oder_id !== false) {
             for ($i = 0; $i < count($product_id); $i++) {
-            inset_oder_detail($product_id[$i], $quantity[$i], $size[$i], $oder_id);
-        }
+                insert_oder_detail($product_id[$i], $quantity[$i], $size[$i], $oder_id);
+            }
 
             echo '<script>';
-            echo 'Swal.fire({ title: "Đặt hàng thành công", icon: "success" }).then(function() {';
-            echo '   window.location.href = "' . $SITE_URL . '/page-user/purchase-history.php";';
+            echo 'Swal.fire({ title: "Cập nhật thành công!", icon: "success" }).then(function() {';
+            echo '   window.location.href = "' . $SITE_URL . '/page_user/form-edit-profile.php";';
             echo '});';
             echo '</script>';
         } else {

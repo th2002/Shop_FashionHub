@@ -54,7 +54,7 @@ require_once '../../../controller/customer/oder.php';
 
 
         <!-- Form users info -->
-        <div class="row col-md-12">
+        <div class="row col-md-12 mb-3">
             <form method="post" class="row g-3 needs-validation col-md-12" style="margin: 30px 0 0 30px;" novalidate>
                 <div class="row col-md-12">
                     <div style="margin-right: 20px;" class="col-md-5">
@@ -82,7 +82,7 @@ require_once '../../../controller/customer/oder.php';
                         <input type="hidden" name="ward_name" id="ward_name">
 
                         <!-- select  address-->
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-3">
                             <select name="city" style="margin-bottom: 20px;" class="form-select"
                                 aria-label="Default select example" id="city">
                                 <option value="" selected>Chọn tỉnh thành</option>
@@ -102,7 +102,7 @@ require_once '../../../controller/customer/oder.php';
                         <?php
                         $coupons = select_all_coupons();
                         ?>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-3">
                             <select name="coupon" class="form-select" aria-label="Default select example" id="coupon">
                                 <option value="" selected>Chọn mã giảm giá</option>
                                 <?php foreach ($coupons as $coupon) : ?>
@@ -200,21 +200,20 @@ require_once '../../../controller/customer/oder.php';
                             };
                         }
                         </script>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-3">
                             <select name="method_payment" class="form-select" aria-label="Default select example">
                                 <option value="" disabled selected>Phương thức thanh toán</option>
                                 <option value="1">COD</option>
                                 <option value="2">Bank</option>
                             </select>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-3">
                             <label for="validationCustom02" class="form-label">Ngày đặt hàng</label>
                             <input type="date" name="toDay" id="toDay" value="<?php echo date('Y-m-d'); ?>" readonly
                                 class="form-control" readonly>
                         </div>
                         <div class="col-12">
-                            <button name="btn_buy" class="btn btn-primary" data-bs-target="#exampleModal"
-                                style="width: 100%;" type="submit">ĐẶT
+                            <button name="btn_buy" class="btn btn-primary" style="width: 100%;" type="submit">ĐẶT
                                 HÀNG</button>
                         </div>
                         <!-- end info user -->
@@ -244,77 +243,77 @@ require_once '../../../controller/customer/oder.php';
 
                             <tbody style="margin-top: 30px">
                                 <?php
-        $totalPrice = 0; // total money
-        $itemPrice = 0; // price product now
-        $productDetails = array();
+                                $totalPrice = 0; // total money
+                                $itemPrice = 0; // price product now
+                                $productDetails = array();
 
-        if (isset($_SESSION['data-cart'])) {
-            $data = $_SESSION['data-cart'];
-        }
+                                if (isset($_SESSION['data-cart'])) {
+                                    $data = $_SESSION['data-cart'];
+                                }
 
-        foreach ($data as $key => $item) {
-            if ($key === 'totalQuantity') {
-                continue;
-            } else {
-                if (isset($data[$key]['order'])) {
-                    $productDetails[] = array(
-                        'product_id' => intval($item['id']),
-                        'size' => $item['size'],
-                        'quantity' => $item['quantity']
-                    );
-                    ?>
+                                foreach ($data as $key => $item) {
+                                    if ($key === 'totalQuantity') {
+                                        continue;
+                                    } else {
+                                        if (isset($data[$key]['order'])) {
+                                            $productDetails[] = array(
+                                                'product_id' => intval($item['id']),
+                                                'size' => $item['size'],
+                                                'quantity' => $item['quantity']
+                                            );
+                                ?>
                                 <tr>
                                     <td style="text-align: center;" scope="row">
                                         <?php echo $item['id'] ?>
-                                        <input value="<?php echo intval($item['id'])?>" name="product_id[]"
+                                        <input value="<?php echo intval($item['id']) ?>" name="product_id[]"
                                             type="hidden">
                                     </td>
                                     <td class="fs-6">
                                         <span class="fs-6"><?= $item['name'] ?></span>
                                     </td>
                                     <td class="quantity-input">
-                                        <?php echo $item['size']; // => lấy size insert vào oder_detail ?>
+                                        <?php echo $item['size']; // => lấy size insert vào oder_detail 
+                                                    ?>
                                         <input value="<?php echo $item['size'] ?>" name="size[]" type="hidden">
                                     </td>
                                     <td style="text-align: center;" class="quantity-input fs-6">
-                                        <?php echo $item['quantity']; // => lấy số lượng insert vào oder_detail ?>
+                                        <?php echo $item['quantity']; // => lấy số lượng insert vào oder_detail 
+                                                    ?>
                                         <input value="<?php echo $item['quantity'] ?>" name="quantity[]" type="hidden">
                                     </td>
                                     <td style="text-align: center;" colspan="2">
                                         <?php
-                            $amount_vnd = $item['price'];
-                            $amount_vnd = str_replace(",", "", $amount_vnd);
-                            $amount_vnd = str_replace("₫", "", $amount_vnd);
-                            $amount_integer = (int)$amount_vnd;
-                            $total = (int)$item['quantity'] * $amount_integer;
-                            $totalPrice += $total;
-                            $amount_vnd = number_format($total, 0, ',', ',') . " ₫";
-                            echo $amount_vnd;
-                            ?>
+                                                    $amount_vnd = $item['price'];
+                                                    $amount_vnd = str_replace(",", "", $amount_vnd);
+                                                    $amount_vnd = str_replace("₫", "", $amount_vnd);
+                                                    $amount_integer = (int)$amount_vnd;
+                                                    $total = (int)$item['quantity'] * $amount_integer;
+                                                    $totalPrice += $total;
+                                                    $amount_vnd = number_format($total, 0, ',', ',') . " ₫";
+                                                    echo $amount_vnd;
+                                                    ?>
                                     </td>
                                 </tr>
                                 <?php
-                } else {
-                    continue;
-                }
-            }
-        }
-        ?>
+                                        } else {
+                                            continue;
+                                        }
+                                    }
+                                }
+                                ?>
                                 <tr>
                                     <td style="text-align: center;" colspan="3">Tổng tiền</td>
                                     <td style="text-align: center;" colspan="3">
                                         <?php
-                echo number_format($totalPrice, 0, ',', ',') . ' đ';
-                // print total money
-                ?>
+                                        echo number_format($totalPrice, 0, ',', ',') . ' đ';
+                                        // print total money
+                                        ?>
                                         <input style="border: none;" name="total_money" id="input_total" type="hidden"
                                             value="<?php echo $totalPrice; ?>">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
-
                     </div>
                     <!-- end table -->
                 </div>
