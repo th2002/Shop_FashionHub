@@ -28,6 +28,9 @@ if (isset($_GET['id'])) {
             $status_delivery = $_POST['status_delivery'];
 
             $capnhat = updateOrder($order_id, $status_payment, $status_delivery);
+
+             // Gọi hàm cập nhật tổng số lượng sản phẩm tồn kho sau khi thanh toán đơn hàng
+               capNhatSoLuongSauKhiThanhToan($db, $order_id);
             if ($capnhat) {
                 $message = "Cập nhật đơn hàng thành công";
             } else {

@@ -2,6 +2,9 @@
 // Sử dụng hàm để lấy tổng số đơn hàng của tháng hiện tại
 $total_orders = getTongSoDonHangThangHienTai($db);
 
+// lấy tổng số sản phẩm theo tháng
+$products_thang = getTongSoSanPhamTheoThang($db);
+
 // Lấy tháng hiện tại
 $month = date('m');
 
@@ -10,6 +13,43 @@ $total_orders = getTongSoDonHangTuanHienTai($db);
 
 // Lấy số tuần trong năm hiện tại
 $week = date('W');
+
+// Lấy tổn số sản phẩm trong tuần
+
+$products_tuan = getTongSoSanPhamTheoTuan($db);
+
+// gọi hàm tính tổng danh thu
+$tong_doanh_thu = tinhTongDoanhThuDaBan($db);
+$formatted_number = number_format($tong_doanh_thu, 0, ',', ',') . 'đ';
+
+// gọi hàm tính tổng thu nhập theo ngày
+
+$tong_doanh_thu_ngay = tinhTongThuNhapTheoNgay($db, $date);
+$doanh_thu_ngay = number_format($tong_doanh_thu_ngay, 0, ',', ',') . 'đ';
+
+// Lấy ngày hiện tại và tính tuần hiện tại
+$ngay_hien_tai = date("Y-m-d");
+$tuần_hien_tại = date("W", strtotime($ngay_hien_tai));
+
+// Gọi hàm tính tổng doanh thu theo tuần
+$tong_doanh_thu_tuan = tinhTongDoanhThuTheoTuan($db, $tuần_hien_tại);
+
+
+// Lấy ngày hiện tại và tính tháng hiện tại
+$ngay_hien_tai = date("Y-m-d");
+$thang_hien_tai = date("Y-m", strtotime($ngay_hien_tai));
+
+// Gọi hàm tính tổng doanh thu theo tháng
+$tong_doanh_thu_thang = tinhTongDoanhThuTheoThang($db, $thang_hien_tai);
+
+// Gọi hàm tính tổng doanh thu trung bình mỗi ngày
+$doanh_thu_trung_binh_ngay = tinhTongDoanhThuTrungBinhNgay($db);
+
+// Lấy tổng số lượng tồn kho của tất cả sản phẩm
+$tong_so_luong_ton_kho = tinhTongSoLuongTonKho($db);
+
+// Lấy danh sách 10 đơn hàng gần đây
+$danhsach_donhang_ganday = lay10DonHangGanDay($db);
 
 ?>
 <div class="home-content">
@@ -35,20 +75,20 @@ $week = date('W');
         <th>Tổng đơn hàng</th>
     </tr>
     <tr>
-        <td>Ngày: <?= $date;?></td>
+        <td>Ngày hôm nay</td>
         <td class="count-up" data-end-value="<?= $totalOrders;?>"></td>
     </tr>
     <tr>
-    <h1>Tổng số đơn hàng tuần <?php echo $week; ?></h1>
-    <p><?php echo $total_orders; ?></p>
-        <td>Tuần</td>
-        <td></td>
+    <h1></h1>
+    <p></p>
+        <td>Tuần <?php echo $week; ?></td>
+        <td><?php echo $total_orders; ?> Đơn hàng</td>
     </tr>
     <tr>
-    <h1>Tổng số đơn hàng tháng <?php echo $month; ?>:</h1>
-    <p><?php echo  $total_orders; ?></p>
-        <td>Tháng</td>
-        <td></td>
+    <h1></h1>
+    <p></p>
+        <td>Tháng <?php echo $month; ?> </td>
+        <td><?php echo  $total_orders; ?> Đơn hàng</td>
     </tr>
 </table>
       </div>
@@ -63,7 +103,7 @@ $week = date('W');
           <span class="text">Tăng</span>
         </div>
       </div>
-      <i class="bx bxs-cart-add cart two animate__animated animate__headShake animate__repeat-3	3"></i>
+      <i class="bx bx-shopping-bag cart two animate__animated animate__headShake animate__repeat-3	3"></i>
       <div class="product-table table-chitiet">
         <table>
           <tr>
@@ -72,15 +112,15 @@ $week = date('W');
           </tr>
           <tr>
             <td>Ngày</td>
-            <td><?php echo getTotalAllProduct($date); ?></td>
+            <td><?php echo $totalProducts; ?> Sản phẩm</td>
           </tr>
           <tr>
             <td>Tuần</td>
-            <td>10 sản phẩm</td>
+            <td><?= $products_tuan;?> Sản phẩm</td>
           </tr>
           <tr>
             <td>Tháng</td>
-            <td>100 Sản phẩm</td>
+            <td><?php echo $products_thang; ?> Sản phẩm</td>
           </tr>
         </table>
         
@@ -90,82 +130,88 @@ $week = date('W');
     <div class="box">
       <div class="right-side">
         <div class="box-topic">Lợi nhuận</div>
-        <div class="number" id="countUpNumber">0đ</div>
+        <div class="number" id="countUpNumber"><?= $formatted_number; ?></div>
         <div class="indicator">
           <i class="bx bx-up-arrow-alt animate__animated animate__zoomIn animate__delay-1s animate__duration-2s animate__repeat-3"></i>
           <span class="text">Tăng</span>
         </div>
       </div>
       <i class="fa-solid fa-money-check-dollar cart three animate__animated animate__swing animate__repeat-3"></i>
+      <div class="product-table table-chitiet">
+        <table>
+          <tr>
+            <th>Thời gian</th>
+            <th>Tổng doanh thu</th>
+          </tr>
+          <tr>
+            <td>Ngày</td>
+            <td><?php echo $doanh_thu_ngay; ?> </td>
+          </tr>
+          <tr>
+            <td>Tuần</td>
+            <td><?php echo $tong_doanh_thu_tuan;?></td>
+          </tr>
+          <tr>
+            <td>Tháng</td>
+            <td><?php echo $tong_doanh_thu_thang; ?></td>
+            
+          </tr>
+          <td>Trung bình ngày</td>
+          <td><?= $doanh_thu_trung_binh_ngay; ?></td>
+        </table>
+        
+      </div>
     </div>
     <div class="box">
       <div class="right-side">
         <div class="box-topic">Sản phẩm ế </div>
-        <div class="number count-up" data-end-value="11086">11,086</div>
+        <div class="number count-up" data-end-value="<?= $tong_so_luong_ton_kho; ?>"><?= $tong_so_luong_ton_kho; ?></div>
         <div class="indicator">
           <i class="bx bx-down-arrow-alt down animate__animated animate__zoomIn animate__delay-1s animate__duration-2s animate__repeat-3"></i>
           <span class="text">Giảm</span>
         </div>
       </div>
-      <i class="bx bxs-cart-download cart four animate__animated animate__heartBeat animate__repeat-3"></i>
+      <i class="fa-solid fa-face-tired cart four animate__animated animate__heartBeat animate__repeat-3"></i>
     </div>
   </div>
 
   <div class="sales-boxes">
-    <div class="recent-sales box">
-      <div class="title">Đơn hàng gần đây</div>
-      <div class="sales-details">
-        <ul class="details">
-          <li class="topic">Ngày</li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-          <li><a href="#">15 10 2023</a></li>
-        </ul>
-        <ul class="details">
-          <li class="topic">Khách hàng</li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-          <li><a href="#">Lan Hương</a></li>
-        </ul>
-        <ul class="details">
-          <li class="topic">Trạng thái</li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-          <li><a href="#">Đã thanh toán</a></li>
-        </ul>
-        <ul class="details">
-          <li class="topic">Tổng tiền</li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-          <li><a href="#">99.000đ</a></li>
-        </ul>
-      </div>
-      <div class="button">
-        <a href="#">Tất cả</a>
-      </div>
+  <div class="recent-sales box">
+    <div class="title">Đơn hàng gần đây</div>
+    <div class="sales-details">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ngày</th>
+                    <th>Khách hàng</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                
+
+                // Hiển thị thông tin cho mỗi đơn hàng trong danh sách
+                foreach ($danhsach_donhang_ganday as $donhang) {
+                ?>
+                <tr>
+                    <td><a href="#"><?php echo $donhang['created_at']; ?></a></td>
+                    <td><a href="#"><?php echo $donhang['recipient_name']; ?></a></td>
+                    <td><a href="#"><?php echo $donhang['status_payment'] == 1 ? 'Đã thanh toán' : 'Chưa thanh toán'; ?></a></td>
+                    <td><a href="#"><?php echo number_format($donhang['total_amount'], 0, ',', '.') . 'đ'; ?></a></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+    <div class="button">
+        <a href="<?php echo $viewURL; ?>/view/odersList.php">Tất cả</a>
+    </div>
+</div>
+
     <div class="top-sales box">
       <div class="title">Sản phẩm bán chạy</div>
       <ul class="top-sales-details">

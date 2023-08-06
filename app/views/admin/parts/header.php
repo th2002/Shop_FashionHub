@@ -33,6 +33,8 @@ if($_SESSION['user_role'] != 1){
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Tải thư viện jquery từ CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -41,12 +43,12 @@ if($_SESSION['user_role'] != 1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
-/* .sidebar {
-    <?php //$start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#ff0000';
-    //$mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#00ff00';
-    //$end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#0000ff';
-    ?>background-image: linear-gradient(to top, <?php //echo $start_color; ?>, <?php //echo $mid_color; ?>, <?php //echo $end_color; ?>);
-} */
+.sidebar {
+    <?php $start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#3898c2';
+    $mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#ce7373';
+    $end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#cad719';
+    ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
+}
 
 /* drop-menu */
 .profile-details {
@@ -589,17 +591,70 @@ h5 {
 }
 
 /* end table view admin */
+
+  /* CSS cho bảng đơn hàng */
+  .table-chitiet {
+        border-radius: 10px;
+        position: absolute;
+        top: 200px;
+        /* Điều chỉnh khoảng cách bảng so với icon */
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1000;
+        display: none;
+        transition: all 0.7s;
+        box-shadow: 0 6px 6px 2px rgba(0, 0, 0, 0.2);
+    }
+    .table-chitiet th,
+    .table-chitiet td{
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #999999;
+    }
+/* Hiển thị bảng khi hover chuột vào icon */
+.box:hover .order-table {
+        display: block;
+        transition: all 0.7s;
+
+}
+.box:hover .product-table{
+    display: block;
+}
+
+.sales-details{
+    width: 100%;
+    margin: 0 auto;
+}
+.sales-details table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.sales-details th,
+.sales-details td{
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+.sales-details th{
+    background-color: #f2f2f2;
+}
+.sales-details tbody tr:hover{
+    background-color: #f9f9f9;
+}
+.button{
+    margin-top: 10px;
+}
 </style>
 
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <img src="<?=$ASSET_URL?>/images/logos/Main Logo.png" alt="" />
             <span class="logo_name">Admin</span>
         </div>
         <ul class="nav-links">
             <li>
-                <a href="../index.php" class="custom-link" id="link1">
+                <a href="../index.php">
                     <i class="bx bx-grid-alt"></i>
                     <span class="links_name">Dashboard</span>
                 </a>
@@ -611,7 +666,7 @@ h5 {
                 </a>
             </li>
             <li>
-                <a href="#" class="custom-link" id="link1">
+            <a href="<?php echo $viewURL; ?>/view/odersList.php">
                     <i class="bx bx-list-ul"></i>
                     <span class="links_name">Đơn hàng</span>
                 </a>
