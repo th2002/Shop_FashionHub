@@ -1,12 +1,18 @@
 <?php require_once '../page_user/header.php' ?>
 <?php require_once './edit-profile.php' ?>
+<?php
+    require_once '../../../models/DAO/edit-profile.php';
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        echo 'Vui lòng không truy cập bằng đường dẫn trực tiếp';
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 
 <body>

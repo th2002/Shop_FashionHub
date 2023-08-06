@@ -13,9 +13,18 @@ if (isset($_POST['btn_buy'])) {
     $district = $_POST['district_name'];
     $ward = $_POST['ward_name'];
     $coupon_code_id = $_POST['coupon'];
-    $payment_method = $_POST['method_payment'] == 1 ? 0 : 1;
+    if (!empty($_POST['method_payment'])) {
+        $payment_method = $_POST['method_payment'] == 1 ? 0 : 1;
+    }else{
+        $payment_method = "";
+    }
     $total_amount = $_POST['total_money'];
-    $status_payment = $_POST['method_payment'] == 2 ? 1 : 0;
+    if (!empty($_POST['method_payment'])) {
+        $status_payment = $_POST['method_payment'] == 2 ? 1 : 0;
+    } else {
+        $status_payment = "";
+    }
+    
     $status_delivery = 0;
     $created_at = $_POST['toDay'];
 
@@ -28,11 +37,53 @@ if (isset($_POST['btn_buy'])) {
 
     if (empty($phone_number)) {
         $loi .= "Không được bỏ trống sdt<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
     }
 
-    if (empty($address_detail)) {
+    elseif (empty($address_detail)) {
         $loi .= "Không được bỏ trống địa chỉ<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
     }
+
+    elseif (empty($province)) {
+        $loi .= "Không được bỏ trống Tỉnh / Thành Phố<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
+    elseif (empty($district)) {
+        $loi .= "Không được bỏ trống Quận / Huyện<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
+    elseif (empty($ward)) {
+        $loi .= "Không được bỏ trống Phường / xã<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
+    elseif (empty($coupon_code_id)) {
+        $loi .= "Không được bỏ trống mã giảm giá / xã<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
+    elseif (empty($payment_method)) {
+        $loi .= "Không được bỏ trống phương thức thanh toán / xã<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
 
     if (empty($loi)) {
         $oder_id = insert_info_users(
@@ -57,14 +108,10 @@ if (isset($_POST['btn_buy'])) {
             }
 
             echo '<script>';
-            echo 'Swal.fire({ title: "Cập nhật thành công!", icon: "success" }).then(function() {';
-            echo '   window.location.href = "' . $SITE_URL . '/page_user/form-edit-profile.php";';
+            echo 'Swal.fire({ title: "Đặt hàng thành công!", icon: "success" }).then(function() {';
+            echo '   window.location.href = "' . $SITE_URL . '/page_user/purchase-history.php";';
             echo '});';
             echo '</script>';
-        } else {
-            echo '<script>';
-            echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
-            echo '</script>';
-        }
+        } 
     }
 }
