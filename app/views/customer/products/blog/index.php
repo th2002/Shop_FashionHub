@@ -483,7 +483,15 @@
                             <?php
                                 foreach($coupons as $coupon){
                             ?>
-                            <div class="mini-vouchers"><?php echo $coupon['value']; ?><?php echo $coupon['type']; ?></div>
+                            <div class="mini-vouchers"><?php echo $coupon['value']; ?>
+                                  <?php 
+                                    if($coupon['type']==1){
+                                      echo "%";
+                                    }else{
+                                      echo "VNĐ";
+                                    }
+                                  ?>
+                            </div>
                             <?php
                                 }
                             ?>
