@@ -43,12 +43,12 @@ if($_SESSION['user_role'] != 1){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <style>
-.sidebar {
-    <?php $start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#3898c2';
-    $mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#ce7373';
-    $end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#cad719';
-    ?>background-image: linear-gradient(to top, <?php echo $start_color; ?>, <?php echo $mid_color; ?>, <?php echo $end_color; ?>);
-}
+/* .sidebar {
+    <?php //$start_color=isset($_COOKIE['start_color']) ? $_COOKIE['start_color']: '#3898c2';
+    //$mid_color=isset($_COOKIE['mid_color']) ? $_COOKIE['mid_color']: '#ce7373';
+    //$end_color=isset($_COOKIE['end_color']) ? $_COOKIE['end_color']: '#cad719';
+    ?>background-image: linear-gradient(to top, <?php //echo $start_color; ?>, <?php //echo $mid_color; ?>, <?php //echo $end_color; ?>);
+} */
 
 /* drop-menu */
 .profile-details {
@@ -650,6 +650,7 @@ h5 {
 <body>
     <div class="sidebar">
         <div class="logo-details">
+            <img src="<?=$ASSET_URL?>/images/logos/Main Logo.png" />
             <span class="logo_name">Admin</span>
         </div>
         <ul class="nav-links">

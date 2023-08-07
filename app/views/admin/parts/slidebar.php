@@ -111,7 +111,7 @@ require_once $modelPath;
         <div class="profile-details">
             <img src="../images/luu_duoc_phi.webp" alt="" class="drop-btn" />
             <span class="admin_name"><?php echo $_SESSION['user_fullname']; ?></span>
-            <i class="bx bx-chevron-down"></i>
+            <!-- <i class="bx bx-chevron-down"></i>
             <div class="drop-menu">
                 <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-face-grin-hearts"></i>
@@ -129,17 +129,17 @@ require_once $modelPath;
                     <i class="fa-solid fa-spider"></i>
                     <span class="links_name">Ngất</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="bx bx-cog"></i>
                     <span class="links_name">Cài đặt</span>
                 </a>
-                <a href="<?php echo $viewURL;  ?>/view/setting.php">
+                <a href="<?php //echo $viewURL;  ?>/view/setting.php">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="links_name">Logout</span>
                 </a>
 
 
-            </div>
+            </div> -->
         </div>
     </nav>
 
