@@ -335,6 +335,7 @@
       display: grid;
       grid-template-columns: auto auto;
     }
+    
     </style>
 
     
@@ -563,8 +564,8 @@
       </article>
 
       <article class="blog-post">
-        <h2 class="display-5 link-body-emphasis mb-1">Bình luận</h2>
-        <?php
+          <h2 class="display-5 link-body-emphasis mb-1">Bình luận</h2>
+            <?php
                 require '../comment.php';
             ?>
       </article>
