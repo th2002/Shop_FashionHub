@@ -498,14 +498,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
                                     </div>
                                 </div>
                                 <div>
-                                    <p><?php echo $row['quantity'] ?> sẩn phẩm có sẵn </p>
+                                    <p><span class="quantity-detail"><?php echo $row['quantity'] ?></span> sẩn phẩm có sẵn </p>
                                 </div>
                             </div>
                         </div>
+                        <span style="margin-top: 10px; color: red;" class="pro-quantity_overdue"></span>
                     </div>
                 </div>
                 <div class="pro-end">
-                    <button onclick="showSuccsecToast()" style="cursor: pointer;" data-id="<?= $id ?>" type="button" class="btn-tined">Thêm Vào Giỏ Hàng</button>
+                    <button style="cursor: pointer;" data-id="<?= $id ?>" type="button" class="btn-tined">Thêm Vào Giỏ Hàng</button>
                     <button type="button" class="btn-solid">Mua</button>
                 </div>
 
@@ -588,67 +589,41 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="<?=$ASSET_URL?>/js/toast.js"></script>
     <script>
-        $(document).ready(function() {
-            const btnAddCart = document.querySelector('.btn-tined'),
-                  ulListCart = document.querySelector('.nav_cart-list');
-            btnAddCart.addEventListener('click', function(e) {
-                const idProduct = e.target.dataset.id;
-                const nameProduct = document.querySelector('.pro-name span').innerHTML;
-                const priceProduct = document.querySelector('.pro-gia .pro-price_new').innerHTML;
-                const quantityProduct = document.querySelector('.quantity-input').value;
-                const img_product = document.querySelector('.header-left-img-main img').src;
-                const imgName = img_product.substring(img_product.lastIndexOf('/') + 1);
-                const priceInt = parseInt(priceProduct);
-                const id_price = idProduct + '_' + priceInt;
-                var productJson = {
-                    id: idProduct,
-                    imgName: imgName,
-                    name: nameProduct,
-                    price: priceProduct,
-                    quantity: quantityProduct,
-                    id_price: id_price,
-                }
-                $.ajax({
-                    url: '../../../models/DAO/add_cart.php', // Đường dẫn đến tập tin PHP xử lý dữ liệu
-                    type: 'POST', // Phương thức gửi dữ liệu (POST hoặc GET)
-                    data: JSON.stringify(productJson), //một đối tượng JSON
-                    contentType: 'application/json', //định dạng kiểu json
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response[0].length > 20) {
-                            ulListCart.innerHTML += response[0];
-                        } else {
-                            const quantityItem = document.querySelector(`.nav_cart-item-quantity[data-id_price="${response[0]}"]`);
-                            var intquan = parseInt(quantityItem.innerHTML);
-                            quantityItem.innerHTML = intquan + 1;
-                        }
-                        document.querySelector('.nav__cart-quantity span').innerHTML = response[1];
-                    },
-                    error: function(xhr, status, error) {
-                        // Xử lý lỗi (nếu có)
-                        console.log(error);
-                    }
-                });
-            })
-
-
-        })
-
-
-
-
-
-
-
+        const quantityText = parseInt(document.querySelector('.quantity-detail').innerHTML);
+        const quantityInput = document.querySelector('.quantity-input');
+        const textOverdue = document.querySelector('.pro-quantity_overdue');
         const decreaseBtn = document.querySelector('.decrease-btn');
         const increaseBtn = document.querySelector('.increase-btn');
-        const quantityInput = document.querySelector('.quantity-input');
+        let isvalid = true;
+        quantityInput.addEventListener('input', function(event) {
+            const newValue = parseInt(event.target.value);
+            if (newValue > quantityText) {
+                textOverdue.innerHTML = 'Số Lượng Sản Phẩm Không Vượt Quá Số Lượng Tồn Kho';
+                isvalid = false;
+            } else {
+                textOverdue.innerHTML = '';
+                isvalid = true;
+            }
+        });
+        (function validateQuantity() {
+            let quantityInt = parseInt(quantityInput.value);
+            if (quantityInt > quantityText) {
+                textOverdue.innerHTML = 'Hiện không Có Sản Phẩm Tồn Kho';
+                isvalid = false;
+            } else {
+                textOverdue.innerHTML = '';
+                isvalid = true;
+            }
+        })();
 
         decreaseBtn.addEventListener('click', () => {
             let currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
+                if (textOverdue.innerHTML != '') {
+                    textOverdue.innerHTML = '';
+                    isvalid = true;
+                }
                 quantityInput.value = currentValue - 1;
             }
         });
@@ -656,7 +631,142 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
         increaseBtn.addEventListener('click', () => {
             let currentValue = parseInt(quantityInput.value);
             quantityInput.value = currentValue + 1;
+            if (currentValue >= quantityText) {
+                textOverdue.innerHTML = 'Số Lượng Sản Phẩm Không Vượt Quá Số Lượng Tồn Kho';
+                isvalid = false;
+            } else {
+                textOverdue.innerHTML = '';
+                isvalid = true;
+            }
         });
+
+
+
+
+        $(document).ready(function() {
+            const btnAddCart = document.querySelector('.btn-tined'),
+                ulListCart = document.querySelector('.nav_cart-list');
+
+            btnAddCart.addEventListener('click', function(e) {
+                if (isvalid != false) {
+                    showSuccsecToast();
+                    const idProduct = e.target.dataset.id;
+                    const nameProduct = document.querySelector('.pro-name span').innerHTML;
+                    const priceProduct = document.querySelector('.pro-gia .pro-price_new').innerHTML;
+                    const quantityProduct = document.querySelector('.quantity-input').value;
+                    console.log(quantityProduct);
+                    const img_product = document.querySelector('.header-left-img-main img').src;
+                    const imgName = img_product.substring(img_product.lastIndexOf('/') + 1);
+                    const priceInt = parseInt(priceProduct);
+                    const id_price = idProduct + '_' + priceInt;
+                    var productJson = {
+                        id: idProduct,
+                        imgName: imgName,
+                        name: nameProduct,
+                        price: priceProduct,
+                        quantity: quantityProduct,
+                        id_price: id_price,
+                    }
+                    $.ajax({
+                        url: '../../../models/DAO/add_cart.php', // Đường dẫn đến tập tin PHP xử lý dữ liệu
+                        type: 'POST', // Phương thức gửi dữ liệu (POST hoặc GET)
+                        data: JSON.stringify(productJson), //một đối tượng JSON
+                        contentType: 'application/json', //định dạng kiểu json
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response[0].length > 20) {
+                                ulListCart.innerHTML += response[0];
+                            } else {
+                                const quantityItem = document.querySelector(`.nav_cart-item-quantity[data-id_price="${response[0]}"]`);
+                                var intquan = parseInt(quantityItem.innerHTML);
+                                quantityItem.innerHTML = intquan + parseInt(quantityProduct);
+                                console.log(response[0]);
+                            }
+                            document.querySelector('.nav__cart-quantity span').innerHTML = response[1];
+                        },
+                        error: function(xhr, status, error) {
+                            // Xử lý lỗi (nếu có)
+                            console.log(error);
+                        }
+                    });
+                }else{
+                    e.target.setAttribute("pointer-events", "none");
+                }
+            })
+
+
+
+
+
+        })
+
+        function toast({
+            title = '',
+            message = '',
+            type = 'warning',
+            timesliderLeft = 3000,
+            timefadeOut = 2000,
+            duration = 3000
+        }) {
+            const main = document.getElementById('toast')
+            if (main) {
+                const toast = document.createElement('div')
+                const icons = {
+                    succsec: 'fa-circle-check',
+                    warning: 'fa-circle-exclamation',
+                    error: 'fa-circle-exclamation'
+                }
+                //Auto removeChild
+                const autoremove = setTimeout(function() {
+                    main.removeChild(toast)
+                }, duration + timesliderLeft + timefadeOut)
+
+                //click close removeChild
+                toast.onclick = function(e) {
+                    if (e.target.closest('.toast__close')) {
+                        main.removeChild(toast)
+                        clearTimeout(autoremove);
+                    }
+                }
+                const icon = icons[type]
+                toast.classList.add('toast', `toast--${type}`)
+                const delay = (duration / 1000).toFixed(2) //lấy 2 số thập phân
+                const timeleft = (timesliderLeft / 1000).toFixed(2) //lấy 2 số thập phân
+                const timefadeout = (timefadeOut / 1000).toFixed(2) //lấy 2 số thập phân
+                toast.style.animation = `slideInLeft ${timeleft}s ease-in-out forwards,fadeOut ${timefadeout}s ${delay}s linear forwards`;
+                toast.innerHTML =
+                    `
+                <div class="toast__icon">
+                    <i class="fa-solid ${icon}"></i>
+                </div>
+                <div class="toast__body">
+                    <div class="toast__title">
+                        ${title}
+                    </div>
+                    <p class="toast__msg">
+                    ${message}
+                    </p>
+                </div>
+                <div class="toast__close">
+                    <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+                </div>
+        
+        `
+                main.appendChild(toast);
+            }
+
+        }
+
+        function showSuccsecToast() {
+            toast({
+                title: 'succsec',
+                message: 'Sản Phẩm đã được thêm giỏ hàng thành công.',
+                type: 'succsec',
+                timesliderLeft: 1500,
+                timefadeOut: 1000,
+                duration: 2000,
+            })
+        }
     </script>
 
 </body>

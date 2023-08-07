@@ -40,6 +40,39 @@ customLinks.forEach(link => {
         });
     });
 });
+   // Lấy tất cả các phần tử có lớp 'count-up'
+   const countUpElements = document.querySelectorAll('.count-up');
+
+// Thời gian chuyển động (tính bằng giây)
+const duration = 5;
+
+// Tính toán số bước chuyển động mỗi giây
+const stepsPerSecond = 50;
+const totalSteps = duration * stepsPerSecond;
+
+// Hàm thực hiện hiệu ứng số chạy
+function animateNumber(element, endValue) {
+  const stepValue = endValue / totalSteps;
+  let currentStep = 0;
+
+  function updateValue() {
+    if (currentStep <= totalSteps) {
+      const value = Math.round(stepValue * currentStep);
+      element.textContent = value.toLocaleString();
+      currentStep++;
+      setTimeout(updateValue, 1000 / stepsPerSecond);
+    }
+  }
+
+  updateValue();
+}
+
+// Gọi hàm animateNumber cho từng phần tử
+countUpElements.forEach((element) => {
+  const endValue = parseInt(element.dataset.endValue, 10);
+  animateNumber(element, endValue);
+});
+
 
 </script>
 <script src="../public/js/script.js"></script>

@@ -21,7 +21,8 @@ require_once $modelPath;
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="<?php echo $assets_css; ?>/singin.css" />
+    <link rel="stylesheet" href="<?=$ASSET_URL?>/css/singin.css">
+    <link rel="shortcut icon" href="<?=$ASSET_URL?>/images/logos/Main Logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@ require_once $modelPath;
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Mã giảm giá Shopee nhanh nhất|</title>
+    <title>Đăng nhập</title>
 </head>
 <style>
 body {
@@ -105,6 +106,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_fullname'] = $user['full_name'];
         $_SESSION['user_role'] = $user['role'];
         $_SESSION['user_phone'] = $user['phone_number'];
+        $_SESSION['user_email'] = $user['email'];
 
         // Sử dụng mã JavaScript để hiển thị thông báo SweetAlert2 "
         echo '<script>';

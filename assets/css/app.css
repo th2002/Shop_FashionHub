@@ -343,12 +343,7 @@ nav{
     position: absolute;
     right: 215px;
 }
-.nav_no-acount{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
+
 .nav_no-acount a{
     text-decoration: none;
     padding: 0 5px;
@@ -726,7 +721,7 @@ footer{
     position: relative;
     margin-top: 120px;
     width: 100%;
-    height: 372px;
+    height: 385px;
     background-color: #2E2E2E;
 }
 .footer_item{
@@ -742,7 +737,7 @@ footer{
     color: #fff;
     margin: 20px 0;
     font-weight: 900;
-
+    font-family: 'Bellota';
 }
 .footer_item-list{
     list-style: none;
@@ -754,6 +749,7 @@ footer{
 .footer_item-link{
     text-decoration: none;
     color: #fff;
+    font-family: 'Bellota';
 } 
 .footer_item-link:hover{
     text-decoration: underline;

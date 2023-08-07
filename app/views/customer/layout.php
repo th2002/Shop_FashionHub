@@ -1,3 +1,7 @@
+<?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -185,7 +189,8 @@
 
 
         </div>
-        <p>© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights reserved</p>
+        <p style="width: 580px;">© Copyright 2020 MAISON RETAIL MANAGEMENT INTERNATIONAL CORPORATION. All rights
+            reserved</p>
     </footer>
 
 
