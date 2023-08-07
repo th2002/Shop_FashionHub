@@ -311,13 +311,13 @@
       flex-wrap: wrap;
       flex-direction: row;
     }
-    .product_price-new {
+    .product_price-new_1 {
       display: flex;
     } 
-    .product_price-new > h4 {
+    .product_price-new_1 > h4 {
       margin-left:5px;
     }
-    .product_price {
+    .product_price_1 {
       margin : 0;
     }
     main > .main-right > .main-right-top10{
@@ -424,7 +424,7 @@
                 <h4 class="nav_cart-heading">Sản Phẩm Đã Thêm</h4>
                 <ul class="nav_cart-list">
                     <?php
-                        include 'view_cart.php'
+                        include '../../layout/view_cart.php';
                     ?>
 
                 </ul>
@@ -467,10 +467,10 @@
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" >
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success-emphasis"><?php echo $row['name']; ?></strong>
-            <div class="product_price product_price-new">
+            <div class="product_price_1 product_price-new_1">
                 <h4>Giá : </h4>
                 <h4><?php echo number_format($row['price']) . " " . "₫"; ?></h4>
-                <div class="product_price product_price-old">
+                <div class="product_price_1 product_price-old">
                         <h4> <?php echo $row['sale_price']; ?>  </h4> 
                 </div>
             </div>
