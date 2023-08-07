@@ -19,11 +19,11 @@ if (isset($_POST['btn_buy'])) {
     }
     // method_payment = 1
     if (!empty($_POST['method_payment'])) {
-        $payment_method = $_POST['method_payment'] == 1 ? 0 : 1;
+        $payment_method = $_POST['method_payment'] === "1" ? 0 : 1; // => 1 COD => 0
     }
     $total_amount = $_POST['total_money'];
     if (!empty($_POST['method_payment'])) {
-        $status_payment = $_POST['method_payment'] == 2 ? 1 : 0;
+        $status_payment = $_POST['method_payment'] === "2" ? 1 : 0;
     } else {
         $status_payment = null;
     }
@@ -72,6 +72,14 @@ if (isset($_POST['btn_buy'])) {
         echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
         echo '</script>';
     }
+
+     elseif ($payment_method === null) {
+        $loi .= "Không được bỏ trống<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) .  $payment_method .'", icon: "error" });';
+        echo '</script>';
+    }
+   
 
     
 
