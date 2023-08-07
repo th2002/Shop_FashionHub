@@ -371,7 +371,7 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="../home" class="nav__page-link">Trang Chủ</a>
+                <a href="../../home" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
                 <a href="home" class="nav__page-link">Liên Hệ</a>
@@ -428,7 +428,7 @@
                     ?>
 
                 </ul>
-                <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../layout/cart.php">Xem Giỏ
+                <a class="nav_cart-btn" style="text-decoration: none; color: #333;" href="../../layout/cart.php">Xem Giỏ
                     Hàng</a>
             </div>
         </div>
@@ -483,7 +483,7 @@
                             <?php
                                 foreach($coupons as $coupon){
                             ?>
-                            <div class="mini-vouchers"><?php echo $coupon['code']; ?>:<?php echo $coupon['value']; ?><?php echo $coupon['type']; ?></div>
+                            <div class="mini-vouchers"><?php echo $coupon['value']; ?><?php echo $coupon['type']; ?></div>
                             <?php
                                 }
                             ?>
@@ -612,7 +612,7 @@
       <div class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 bg-body-tertiary rounded">
           <h4 class="fst-italic">Giới thiệu</h4>
-          <p class="mb-0">Chào mừng bạn đến với FASHIONHUB.Với những sản phẩm tuyệt vời và phù hợp với mọi lứa tuổi</p>
+          <p class="mb-0">Chào mừng bạn đến với FASHIONHUB.Với những sản phẩm tuyệt vời và phù hợp với mọi lứa tuổi , tự tin khoe phong cách của bạn</p>
         </div>
 
         <div>
