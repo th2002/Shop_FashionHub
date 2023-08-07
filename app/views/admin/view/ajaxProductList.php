@@ -52,7 +52,12 @@ $products = getProductsByPage($page, $perPage);
                     <?php
                     $images = getProductImages($product['id']);
                     foreach ($images as $image) {
-                        echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                        if (strpos($image['image_url'], 'https') === 0) {
+                            echo "<img src='" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                        }else{
+                            echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                        }
+                        
                     }
                     ?>
                 </div>

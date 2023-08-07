@@ -8,7 +8,7 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
-    
+
 </style>
 
 
@@ -47,7 +47,6 @@ $users = getAllUsers();
                 <th>ID</th>
                 <th>Tên người dùng</th>
                 <th>Email</th>
-                <th>Ngày đăng ký</th>
                 <th>Địa chỉ Ip</th>
                 <th>Vai trò</th>
                 <th>Thao tác</th>
@@ -61,13 +60,12 @@ $users = getAllUsers();
         <tbody>
             <?php foreach ($users as $user) { ?>
 
-                <tr>
-                    <td><?= $user['id']; ?></td>
-                    <td><?= $user['user_name']; ?></td>
-                    <td><?= $user['email']; ?></td>
-                    <td><?= $user['register_date']; ?></td>
-                    <td><?= $user['ip_address']; ?></td>
-                    <!-- <td>
+            <tr>
+                <td><?= $user['id']; ?></td>
+                <td><?= $user['user_name']; ?></td>
+                <td><?= $user['email']; ?></td>
+                <td><?= $user['ip_address']; ?></td>
+                <!-- <td>
                         <?php
                         // Kiểm tra giá trị của trạng thái và áp dụng lớp CSS tương ứng
                         if ($user['role'] == '0') {
@@ -79,8 +77,8 @@ $users = getAllUsers();
                         }
                         ?>
                     </td> -->
-                    <td>
-                        <?php
+                <td>
+                    <?php
                         if ($user['role'] == '0') {
                             echo '<span class="role-user"> Khách hàng</span>';
                         } else {
@@ -88,36 +86,38 @@ $users = getAllUsers();
                         }
 
                         ?>
-                    </td>
+                </td>
 
 
 
-                    <td class="action-links">
-                        <a href="editUsers.php?id=<?php echo $user['id']; ?>" class="btn-sua">Sửa</a>
-                        <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')" class="btn-xoa">Xóa</a>
-                    </td>
-                </tr>
+                <td class="action-links">
+                    <a href="editUsers.php?id=<?php echo $user['id']; ?>" class="btn-sua">Sửa</a>
+                    <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"
+                        class="btn-xoa">Xóa</a>
+                </td>
+            </tr>
             <?php } ?>
         </tbody>
     </table>
 </div>
 <script>
-    function deleteAllUser() {
-        if (confirm('Bạn có chắc muốn xoá all ngời dùng?')) {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo $controller; ?>/admin/deleteAllUser.php',
-                success: function(response) {
-                    if (response === 'success') {
-                        alert("Xoá tất cả nguòi dùng thành công!");
-                        window.location.href = "<?php echo $controller; ?>/admin/users.php";
-                    } else {
-                        alert("Xoá all user thất bại!");
-                    }
+function deleteAllUser() {
+    if (confirm('Bạn có chắc muốn xoá all ngời dùng?')) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo $controller; ?>/admin/deleteAllUser.php',
+            success: function(response) {
+                if (response === 'success') {
+                    alert("Xoá tất cả nguòi dùng thành công!");
+                    window.location.href = "<?php echo $controller; ?>/admin/users.php";
+                } else {
+                    alert("Xoá all user thất bại!");
                 }
-            });
-        }
+            }
+        });
     }
+}
 </script>
 
 
