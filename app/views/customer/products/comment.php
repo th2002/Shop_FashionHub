@@ -11,8 +11,10 @@
         justify-content: flex-start;
         align-items: flex-start;
         padding: 1rem 0 1rem 1.25rem;
+        display:flex ;
     }
     .comment-section > .nav__acoun > .noi_dung{
+        margin-left: 10px;
         display:flex ;
         align-items: baseline;
         flex-direction: column;

@@ -42,11 +42,11 @@ function select_price_by_id($id) {
     return pdo_query($sql,$id);
 }
 function hang_hoa_select_by_name_loai_1(){
-    $sql = "SELECT * FROM size where size_cate = 0";
+    $sql = "SELECT * FROM size where cate_size = 0";
     return  pdo_query($sql);
 }
 function hang_hoa_select_by_name_loai_2(){
-    $sql = "SELECT * FROM size where size_cate = 1";
+    $sql = "SELECT * FROM size where cate_size = 1";
     return  pdo_query($sql);
 }
 function hang_hoa_select_by_img_id($id){
