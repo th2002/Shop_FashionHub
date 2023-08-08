@@ -170,24 +170,8 @@ function deleteAllProducts(){
         return false;
     }
 }
-function getSortedProducts($sortOrder)
-{
-    // Lấy danh sách sản phẩm từ cơ sở dữ liệu
-    global $db;
-    $query = $db->query("SELECT * FROM products");
-
-    // Sắp xếp danh sách sản phẩm dựa vào giá trị của $sortOrder
-    if ($sortOrder === 'desc') {
-        $query = $db->query("SELECT * FROM products ORDER BY create_at DESC");
-    } else {
-        $query = $db->query("SELECT * FROM products ORDER BY create_at ASC");
-    }
-
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-}
 
 
-// Các hàm khác trong functions.php vẫn giữ nguyên.
 
 // hàm xoá all người dùng
 function deleteAllUser(){
@@ -200,14 +184,35 @@ function deleteAllUser(){
         return false;
     }
 }
+// Hàm lấy danh sách sản phẩm
+// function getAllProducts() {
+//     global $db;
+
+//     $query = $db->query("SELECT * FROM products");
+//     return $query->fetchAll(PDO::FETCH_ASSOC);
+// }
 
 // Hàm lấy danh sách sản phẩm
-function getAllProducts() {
+// Hàm lấy tổng số sản phẩm với sắp xếp theo cột created_at
+function getTotalProductsSortedByCreatedAt($orderBy) {
     global $db;
 
-    $query = $db->query("SELECT * FROM products");
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+    $query = "SELECT COUNT(*) FROM products";
+    if ($orderBy === 'oldest') {
+        $query .= " ORDER BY create_at ASC";
+    } else {
+        $query .= " ORDER BY create_at DESC";
+    }
+
+    $result = $db->query($query);
+
+    return $result->fetchColumn();
 }
+
+
+
+
+
 
 // Lấy thông tin sản phẩm bằng ID
 function getProductById($productId) {
@@ -605,6 +610,50 @@ function getTotalOders(){
     }
 }
 
+function getOrdersInfo($paymentStatus, $orderBy) {
+    global $db;
+
+    $query = "SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        u.full_name AS customer_name,
+        p.name AS product_name
+    FROM oders o
+    INNER JOIN users u ON o.cus_id = u.id
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN products p ON od.product_id = p.id";
+
+    if ($paymentStatus === 'desc') {
+        $query .= " WHERE o.status_payment = 0";
+    } elseif ($paymentStatus === 'asc') {
+        $query .= " WHERE o.status_payment = 1";
+    }
+
+    if ($orderBy === 'newest') {
+        $query .= " ORDER BY o.created_at DESC";
+    } elseif ($orderBy === 'oldest') {
+        $query .= " ORDER BY o.created_at ASC";
+    }
+
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $orders;
+}
+
+
+
+
+
 // Hàm lấy tổng số đơn hàng theo ngày
 function getTotalOrdersByDate($date){
     global $db;
@@ -931,40 +980,40 @@ function getProductsByPage($page, $perPage) {
     }
 }
 // Hàm lấy thông tin đơn hàng
-function getOrdersInfo(){
-    global $db;
+// function getOrdersInfo(){
+//     global $db;
 
-    $sql = "
-    SELECT
-        o.id AS order_id,
-        o.recipient_name,
-        o.phone_number,
-        o.address_detail,
-        o.province,
-        o.district,
-        o.ward,
-        o.total_amount,
-        o.status_payment,
-        o.status_delivery,
-        o.created_at AS order_created_at,
-        od.product_id,
-        od.quantity,
-        p.name AS product_name,
-        u.full_name AS customer_name,
-        u.email AS customer_email
-    FROM
-        oders o
-    INNER JOIN oder_detail od ON o.id = od.oder_id
-    INNER JOIN products p ON od.product_id = p.id
-    INNER JOIN users u ON o.cus_id = u.id
-    ORDER BY o.created_at DESC
-    ";
+//     $sql = "
+//     SELECT
+//         o.id AS order_id,
+//         o.recipient_name,
+//         o.phone_number,
+//         o.address_detail,
+//         o.province,
+//         o.district,
+//         o.ward,
+//         o.total_amount,
+//         o.status_payment,
+//         o.status_delivery,
+//         o.created_at AS order_created_at,
+//         od.product_id,
+//         od.quantity,
+//         p.name AS product_name,
+//         u.full_name AS customer_name,
+//         u.email AS customer_email
+//     FROM
+//         oders o
+//     INNER JOIN oder_detail od ON o.id = od.oder_id
+//     INNER JOIN products p ON od.product_id = p.id
+//     INNER JOIN users u ON o.cus_id = u.id
+//     ORDER BY o.created_at DESC
+//     ";
 
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
+//     $stmt = $db->prepare($sql);
+//     $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
 // Hàm lấy đơn hàng theo id
 function getOrderById($order_id) {
     global $db;
