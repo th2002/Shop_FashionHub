@@ -13,6 +13,20 @@
     /* animation: slideInLeft 3s ease-in-out forwards,fadeOut 2s 3s linear forwards; */
     transition: all linear 0.2s;
 }
+.toast-1{
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    padding: 20px 0;
+    background-color: #fff;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    min-width: 400px;
+    max-width: 450px;
+    transform: translateX(calc(100% + 32px));
+    /* animation: slideInLeft 3s ease-in-out forwards,fadeOut 2s 3s linear forwards; */
+    transition: all linear 0.2s;
+}
 @keyframes slideInLeft {
     0% {
     opacity: 0;

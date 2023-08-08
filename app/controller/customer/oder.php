@@ -73,10 +73,17 @@ if (isset($_POST['btn_buy'])) {
         echo '</script>';
     }
 
-     elseif ($payment_method === null) {
-        $loi .= "Không được bỏ trống<br>";
+    elseif ($coupon_code_id === null) {
+        $loi .= "Không được bỏ trống mã giảm giá<br>";
         echo '<script>';
-        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) .  $payment_method .'", icon: "error" });';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) . '", icon: "error" });';
+        echo '</script>';
+    }
+
+     elseif ($payment_method === null) {
+        $loi .= "Không được bỏ trống phương thức thanh toán<br>";
+        echo '<script>';
+        echo 'Swal.fire({ title: "Lỗi", html: "' . addslashes($loi) .'", icon: "error" });';
         echo '</script>';
     }
    

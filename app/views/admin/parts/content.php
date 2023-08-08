@@ -133,7 +133,7 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
 
         <div class="box">
             <div class="right-side">
-                <div class="box-topic">Lợi nhuận</div>
+                <div class="box-topic">Thu nhập</div>
                 <div class="number" id="countUpNumber"><?= $formatted_number; ?></div>
                 <div class="indicator">
                     <i

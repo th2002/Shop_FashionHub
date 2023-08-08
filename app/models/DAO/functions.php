@@ -170,24 +170,8 @@ function deleteAllProducts(){
         return false;
     }
 }
-function getSortedProducts($sortOrder)
-{
-    // Lấy danh sách sản phẩm từ cơ sở dữ liệu
-    global $db;
-    $query = $db->query("SELECT * FROM products");
-
-    // Sắp xếp danh sách sản phẩm dựa vào giá trị của $sortOrder
-    if ($sortOrder === 'desc') {
-        $query = $db->query("SELECT * FROM products ORDER BY create_at DESC");
-    } else {
-        $query = $db->query("SELECT * FROM products ORDER BY create_at ASC");
-    }
-
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-}
 
 
-// Các hàm khác trong functions.php vẫn giữ nguyên.
 
 // hàm xoá all người dùng
 function deleteAllUser(){
@@ -200,14 +184,35 @@ function deleteAllUser(){
         return false;
     }
 }
+// Hàm lấy danh sách sản phẩm
+// function getAllProducts() {
+//     global $db;
+
+//     $query = $db->query("SELECT * FROM products");
+//     return $query->fetchAll(PDO::FETCH_ASSOC);
+// }
 
 // Hàm lấy danh sách sản phẩm
-function getAllProducts() {
+// Hàm lấy tổng số sản phẩm với sắp xếp theo cột created_at
+function getTotalProductsSortedByCreatedAt($orderBy) {
     global $db;
 
-    $query = $db->query("SELECT * FROM products");
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+    $query = "SELECT COUNT(*) FROM products";
+    if ($orderBy === 'oldest') {
+        $query .= " ORDER BY create_at ASC";
+    } else {
+        $query .= " ORDER BY create_at DESC";
+    }
+
+    $result = $db->query($query);
+
+    return $result->fetchColumn();
 }
+
+
+
+
+
 
 // Lấy thông tin sản phẩm bằng ID
 function getProductById($productId) {
@@ -590,9 +595,82 @@ function getTotalProducts() {
     }
 }
 
+// Hàm lấy tổng số đơn hàng
+function getTotalOders(){
+    global $db;
+
+    try {
+        $query = $db->prepare("SELECT COUNT(*) as total from oders");
+        $query->execute();
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
+    } catch (PDOException $e) {
+        error_log("Lỗi trong quá trình truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
+
+function getOrdersInfo($paymentStatus, $orderBy) {
+    global $db;
+
+    $query = "SELECT
+        o.id AS order_id,
+        o.recipient_name,
+        o.phone_number,
+        o.address_detail,
+        o.province,
+        o.district,
+        o.ward,
+        o.total_amount,
+        o.status_payment,
+        o.status_delivery,
+        o.created_at AS order_created_at,
+        u.full_name AS customer_name,
+        p.name AS product_name
+    FROM oders o
+    INNER JOIN users u ON o.cus_id = u.id
+    INNER JOIN oder_detail od ON o.id = od.oder_id
+    INNER JOIN products p ON od.product_id = p.id";
+
+    if ($paymentStatus === 'desc') {
+        $query .= " WHERE o.status_payment = 0";
+    } elseif ($paymentStatus === 'asc') {
+        $query .= " WHERE o.status_payment = 1";
+    }
+
+    if ($orderBy === 'newest') {
+        $query .= " ORDER BY o.created_at DESC";
+    } elseif ($orderBy === 'oldest') {
+        $query .= " ORDER BY o.created_at ASC";
+    }
+
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $orders;
+}
 
 
 
+
+
+// Hàm lấy tổng số đơn hàng theo ngày
+function getTotalOrdersByDate($date){
+    global $db;
+
+    try {
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE DATE(created_at) = :date";
+        $query = $db->prepare($sql);
+        $query->bindParam(':date', $date);
+        $query->execute();
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $total['total_orders'];
+    } catch (PDOException $e) {
+        error_log("Có lỗi khi truy vấn: " . $e->getMessage());
+        return 0;
+    }
+}
 
 // Hàm lấy tổng số sản phẩm theo ngày
 function getTongSoSanPhamTheoNgay($date){
@@ -611,92 +689,28 @@ function getTongSoSanPhamTheoNgay($date){
     }
 }
 
-// Hàm lấy tổng số đơn hàng
-function getTotalOrderCount($db) {
-    try {
-        $sql = "SELECT SUM(quantity) AS total_orders FROM oder_detail";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['total_orders'];
-    } catch (PDOException $e) {
-        echo "Có lỗi khi truy vấn: " . $e->getMessage();
-        return 0;
-    }
-}
-
-
-// Hàm lấy tổng số đơn hàng theo ngày
-function getTotalOrderCountByDate($db, $date) {
-    try {
-        $sql = "SELECT SUM(quantity) AS total_orders FROM oder_detail od
-                INNER JOIN oders o ON od.oder_id = o.id
-                WHERE DATE(o.created_at) = :date";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':date', $date);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['total_orders'];
-    } catch (PDOException $e) {
-        echo "Có lỗi khi truy vấn: " . $e->getMessage();
-        return 0;
-    }
-}
-
-// Hàm lấy tổng số đơn hàng tuần hiện tại
-function getTongSoDonHangTuanHienTai($db) {
-    try {
-        $tuan_hien_tai = date("W");
-
-        $sql = "SELECT SUM(quantity) AS total_orders 
-                FROM oder_detail od
-                INNER JOIN oders o ON od.oder_id = o.id
-                WHERE WEEK(o.created_at) = :tuan_hien_tai";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['total_orders'] ?? 0;
-    } catch (PDOException $e) {
-        echo "Có lỗi khi truy vấn: " . $e->getMessage();
-        return 0;
-    }
-}
 
 
 // Hàm lấy tổng số đơn hàng của tháng hiện tại
-function getTongSoDonHangThangHienTai($db){
-    $thang_hien_tai = date('m');
+function getTongSoDonHangThangHienTai($db)
+{
     try {
-        $sql = "SELECT SUM(quantity) AS total_orders from oder_detail od
-        INNER JOIN oders o ON od.oder_id = o.id
-        where MONTH(o.created_at) = :thang_hien_tai";
+        $thang_hien_tai = date("m");
+        // Câu truy vấn SQL để lấy tổng số đơn hàng của tháng hiện tại
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE MONTH(created_at) = :thang_hien_tai";
+        // Chuẩn bị và thực thi câu truy vấn
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':thang_hien_tai' , $thang_hien_tai);
+        $stmt->bindParam(':thang_hien_tai', $thang_hien_tai, PDO::PARAM_INT);
         $stmt->execute();
-
+        // Lấy kết quả
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['total_orders'] ?? 0;
+        // Tổng số đơn hàng của tháng hiện tại
+        $total_orders = $result['total_orders'];
+        return $total_orders;
     } catch (PDOException $e) {
-        echo "Có lổi khi truy vấn: " . $e->getMessage();
-        }
-}
-
-// Hàm kiểm tra trạng thái thanh toán của đơn hàng
-function isOrderPaid($order_id) {
-    global $db;
-    try {
-        $sql = "SELECT status_payment FROM oders WHERE id = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$order_id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['status_payment'] == 1; // Trả về true nếu đã thanh toán, false nếu chưa
-    } catch (PDOException $e) {
-        echo "Có lỗi khi truy vấn: " . $e->getMessage();
-        return false;
+        // Xử lý lỗi nếu có
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
+        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
     }
 }
 // Hàm lấy tổng số sản phẩm của tháng
@@ -901,7 +915,29 @@ function lay10DonHangGanDay($db) {
 
 
 
+// Hàm lấy tổng số đơn hàng tuần hiện tại
+function getTongSoDonHangTuanHienTai($db)
+{
+    try {
+        $tuan_hien_tai = date("W");
+        // Câu truy vấn SQL để lấy tổng số đơn hàng của tuần hiện tại
+        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE WEEK(created_at) = :tuan_hien_tai";
+        // Chuẩn bị và thực thi câu truy vấn
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai, PDO::PARAM_INT);
+        $stmt->execute();
+        // Lấy kết quả
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Tổng số đơn hàng của tuần hiện tại
+        $total_orders = $result['total_orders'];
 
+        return $total_orders;
+    } catch (PDOException $e) {
+        // Xử lý lỗi nếu có
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
+        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
+    }
+}
 
 // Hàm lấy tổng số sản phẩm theo tuần
 function getTongSoSanPhamTheoTuan($db){
@@ -923,7 +959,7 @@ function getTongSoSanPhamTheoTuan($db){
 // ngày
 $date = date('Y-m-d');
 $totalProducts = getTongSoSanPhamTheoNgay($date);
-$totalOrders = getTotalOrderCountByDate( $db, $date);
+$totalOrders = getTotalOrdersByDate($date);
 
 
 
@@ -944,40 +980,40 @@ function getProductsByPage($page, $perPage) {
     }
 }
 // Hàm lấy thông tin đơn hàng
-function getOrdersInfo(){
-    global $db;
+// function getOrdersInfo(){
+//     global $db;
 
-    $sql = "
-    SELECT
-        o.id AS order_id,
-        o.recipient_name,
-        o.phone_number,
-        o.address_detail,
-        o.province,
-        o.district,
-        o.ward,
-        o.total_amount,
-        o.status_payment,
-        o.status_delivery,
-        o.created_at AS order_created_at,
-        od.product_id,
-        od.quantity,
-        p.name AS product_name,
-        u.full_name AS customer_name,
-        u.email AS customer_email
-    FROM
-        oders o
-    INNER JOIN oder_detail od ON o.id = od.oder_id
-    INNER JOIN products p ON od.product_id = p.id
-    INNER JOIN users u ON o.cus_id = u.id
-    ORDER BY o.created_at DESC
-    ";
+//     $sql = "
+//     SELECT
+//         o.id AS order_id,
+//         o.recipient_name,
+//         o.phone_number,
+//         o.address_detail,
+//         o.province,
+//         o.district,
+//         o.ward,
+//         o.total_amount,
+//         o.status_payment,
+//         o.status_delivery,
+//         o.created_at AS order_created_at,
+//         od.product_id,
+//         od.quantity,
+//         p.name AS product_name,
+//         u.full_name AS customer_name,
+//         u.email AS customer_email
+//     FROM
+//         oders o
+//     INNER JOIN oder_detail od ON o.id = od.oder_id
+//     INNER JOIN products p ON od.product_id = p.id
+//     INNER JOIN users u ON o.cus_id = u.id
+//     ORDER BY o.created_at DESC
+//     ";
 
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
+//     $stmt = $db->prepare($sql);
+//     $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
 // Hàm lấy đơn hàng theo id
 function getOrderById($order_id) {
     global $db;

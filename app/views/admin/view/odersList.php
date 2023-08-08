@@ -155,27 +155,11 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 
-// Hàm chuyển đổi trạng thái đơn hàng thành chuỗi có icon
-function getOrderStatusWithIcon($status)
-{
-    switch ($status) {
-        case 0:
-            return '<span class="status-icon"><i class="fas fa-circle-notch"></i> Chưa giao</span>';
-            break;
-        case 1:
-            return '<span class="status-icon"><i class="fas fa-truck"></i> Đang giao</span>';
-            break;
-        case 2:
-            return '<span class="status-icon"><i class="fas fa-check-circle"></i> Đã giao</span>';
-            break;
-        case 3:
-            return '<span class="status-icon"><i class="fas fa-times-circle"></i> Hủy</span>';
-            break;
-        default:
-            return '<span class="status-icon">Không xác định</span>';
-            break;
-    }
-}
+$selectedStatus = isset($_GET['status']) ? $_GET['status'] : 'all';
+$selectedOrderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'newest';
+
+$orders = getOrdersInfo($selectedStatus, $selectedOrderBy);
+
 
 ?>
 
@@ -184,7 +168,7 @@ function getOrderStatusWithIcon($status)
     <div class="menu-left">
         <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
-        <h4 zclass="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i class="fas fa-file-excel"></i>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i class="fas fa-file-excel"></i>
                 Xuất Excel</a></h4>
         <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
                 Xuất PDF</a></h4>
@@ -203,18 +187,28 @@ function getOrderStatusWithIcon($status)
 
 </div>
 <div class="sap-xep">
-
+    <select name="status" id="status" onchange="changeStatus()">
+        <option value="all">Tất cả</option>
+        <option value="desc" <?php if ($selectedStatus === 'desc') echo 'selected'; ?>>Chưa thanh toán</option>
+        <option value="asc" <?php if ($selectedStatus === 'asc') echo 'selected'; ?>>Đã thanh toán</option>
+    </select>
 </div>
+
+<div class="sap-xep">
+    <select name="orderBy" id="orderBy" onchange="changeOrderBy()">
+        <option value="newest" <?php if ($selectedOrderBy === 'newest') echo 'selected'; ?>>Mới nhất</option>
+        <option value="oldest" <?php if ($selectedOrderBy === 'oldest') echo 'selected'; ?>>Cũ nhất</option>
+    </select>
+</div>
+
 <div class="table">
-    <!-- HTML -->
-    <!-- HTML -->
+
     <table class="category-table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Tên sản phẩm</th>
                 <th>Người nhận</th>
-                <th>Số lượng</th>
                 <th>Tổng tiền</th>
                 <th>Trạng thái</th>
                 <th>Thanh toán</th>
@@ -223,7 +217,7 @@ function getOrderStatusWithIcon($status)
         </thead>
         <tbody>
             <?php
-            $orders = getOrdersInfo(); // Lấy thông tin đơn hàng
+            // Lấy thông tin đơn hàng
 
             foreach ($orders as $order) {
                 $statusClass = '';
@@ -266,23 +260,14 @@ function getOrderStatusWithIcon($status)
                     <td><?php echo $order['order_id']; ?></td>
                     <td><?php echo $order['product_name']; ?></td>
                     <td><?php echo $order['recipient_name']; ?></td>
-                    <td><?php echo $order['quantity']; ?></td>
-
                     <td><?php echo number_format($order['total_amount'], 0, ',', ',');  ?></td>
                     <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
                     <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
                     <td class="action-links">
-                        <?php if($_SESSION['user_role'] = 1) { ?>
+                        <!-- <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a> -->
                         <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
-                        
-
-                            <a href="#" onclick="return confirmDelete(<?php echo $order['order_id']; ?>, '<?php echo $order['status_payment']; ?>');" class="btn-xoa">Xóa</a>
-                        
-                        <?php }else
-                          echo "Bạn đã bị cấm!!!";
-                        ?>
+                        <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
                     </td>
-
                 </tr>
             <?php
             }
@@ -321,31 +306,16 @@ function getOrderStatusWithIcon($status)
 </div>
 
 <script>
-function confirmDelete(orderId, statusPayment) {
-    if (statusPayment === '1') {
-        Swal.fire({
-            icon: 'error',
-            title: 'Đã nhận tiền thì không thể xóa!!!',
-            text: 'Đã nhận tiền thì không thể xóa!!!'
-        });
-        return false;
-    } else {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Xác nhận xóa đơn hàng',
-            text: 'Bạn có chắc chắn muốn xóa đơn hàng này không?',
-            showCancelButton: true,
-            confirmButtonText: 'Xóa',
-            cancelButtonText: 'Hủy',
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "deleteOrder.php?id=" + orderId;
-            }
-        });
-    }
-    return false;
+    function changeStatus() {
+    var selectedStatus = document.getElementById('status').value;
+    var selectedOrderBy = document.getElementById('orderBy').value;
+    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
+}
+
+function changeOrderBy() {
+    var selectedStatus = document.getElementById('status').value;
+    var selectedOrderBy = document.getElementById('orderBy').value;
+    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
 }
 
 </script>
