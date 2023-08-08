@@ -1,8 +1,8 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+require_once '../../../../global.php';
 
-$modelPath = "$rootDir/app/models/DAO/functions.php";
+$modelPath = "$DAO_URL/functions.php";
 
 
 
