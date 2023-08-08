@@ -7,24 +7,24 @@
         border: 1px solid #ddd;
         margin:10px;
     }
-    .comment-section > .nav__acounted{
+    .comment-section > .nav__acoun{
         justify-content: flex-start;
         align-items: flex-start;
         padding: 1rem 0 1rem 1.25rem;
+        display:flex ;
     }
-    .comment-section > .nav__acounted > .noi_dung{
+    .comment-section > .nav__acoun > .noi_dung{
+        margin-left: 10px;
         display:flex ;
         align-items: baseline;
         flex-direction: column;
-        
     }
-    .comment-section > .nav__acounted > .noi_dung > .content {
+    .comment-section > .nav__acoun > .noi_dung > .content {
         margin-top: 0.75rem;
         font-size: 20px;
         line-height: 1.25rem;
         color: black;
         word-break: break-word;
-        visibility: visible;
     }
     .comment-section h2 {
     font-size: 24px;
@@ -114,7 +114,7 @@
             }
             
             ?>
-    <div class="comment-section">
+        <div class="comment-section">
                 <?php
                 $id=$_GET['id'];
                 if(exist_param("content")){
@@ -130,11 +130,9 @@
                                                                 WHERE b.product_id=$id ORDER BY create_at DESC";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    
                     foreach ($result as $bl) {
                     ?>
-                    <!-- <li> <b>$bl[full_name]</b> Nội dung : $bl[content] <i class='pull-right'>, $bl[create_at]</i> </li> -->
-                    <div class="nav__acounted display-item">
+                    <div class="nav__acoun display-item">
                         <a href="<?php echo $SITE_URL; ?>/page_user/index.php" style="color: black;">
                             <i class="nav_acounted-icon fa-regular fa-user fa-beat"></i>
                         </a>
@@ -142,7 +140,7 @@
                             <h4 class="nav_acounted-name"><?php echo $bl['full_name'] ?></h4>
                             <i class='pull-right'><?php echo $bl['create_at'] ?></i>
                             <div class="content">
-                                <?php echo $bl['content'] ?>
+                                Nôi dung : <?php echo $bl['content'] ?>
                             </div>
                         </div>
                     </div>
@@ -158,7 +156,6 @@
                     echo '<b class="text-danger">Đăng nhập để bình luận về sản phẩm này</b>';
                     }else{
                 ?>
-                    <h2>Bình luận</h2>
                     <form action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
                         <textarea name="content" id="comment"></textarea>
                         <button type="submit" class="btn btn-default">Gửi</button>
@@ -166,6 +163,6 @@
                 <?php 
                     } 
                 ?>
-            </div>        
+        </div>
     </body>
 </html>

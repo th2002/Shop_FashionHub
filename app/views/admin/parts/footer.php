@@ -12,14 +12,14 @@
 </section>
 
 <script>
-// let sidebar = document.querySelector(".sidebar");
-// let sidebarBtn = document.querySelector(".sidebarBtn");
-// sidebarBtn.onclick = function () {
-// sidebar.classList.toggle("active");
-// if (sidebar.classList.contains("active")) {
-//   sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-// } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-// };
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function () {
+sidebar.classList.toggle("active");
+if (sidebar.classList.contains("active")) {
+  sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+} else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+};
 // Hiển thị thông báo SweetAlert2 khi nhấp vào các thẻ a có lớp "custom-link"
 const customLinks = document.querySelectorAll(".custom-link");
 customLinks.forEach(link => {
@@ -72,6 +72,52 @@ countUpElements.forEach((element) => {
   const endValue = parseInt(element.dataset.endValue, 10);
   animateNumber(element, endValue);
 });
+
+  // Lấy thẻ span và thẻ input
+  const spanElement = document.getElementById('dashboardText');
+  const inputElement = document.getElementById('searchInput');
+
+  // Chữ cần gõ tự động cho span và placeholder cho input
+  const textToTypeSpan = "Xin chào admin";
+  const textToTypeInput = "Tìm kiếm...";
+
+  // Thời gian gõ mỗi ký tự (tính bằng mili giây)
+  const typingSpeed = 100;
+
+  // Hàm thực hiện hiệu ứng gõ tự động cho span
+  function typeTextForSpan() {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < textToTypeSpan.length) {
+        const currentText = spanElement.textContent;
+        spanElement.textContent = currentText + textToTypeSpan[index];
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, typingSpeed);
+  }
+
+  // Hàm thực hiện hiệu ứng gõ tự động cho input
+  function typeTextForInput() {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < textToTypeInput.length) {
+        const currentText = inputElement.getAttribute('placeholder');
+        inputElement.setAttribute('placeholder', currentText + textToTypeInput[index]);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, typingSpeed);
+  }
+
+  // Gọi cả hai hàm typeTextForSpan và typeTextForInput sau khi trang tải xong
+  window.onload = () => {
+    typeTextForSpan();
+    typeTextForInput();
+  };
+
 
 
 </script>

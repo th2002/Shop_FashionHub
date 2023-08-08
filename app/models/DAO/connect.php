@@ -33,6 +33,7 @@ function pdo_execute($sql){
         global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute($sql_args);
+        return true;
     }
     catch(PDOException $e){
         throw $e;
@@ -40,6 +41,7 @@ function pdo_execute($sql){
     finally{
         unset($stmt);
     }
+    return false;
 }
 /**
  * Chạy câu lệnh sql SELECT

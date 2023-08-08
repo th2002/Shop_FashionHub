@@ -70,10 +70,10 @@ require_once $modelPath;
   <nav class="header">
     <div class="sidebar-button">
       <i class="bx bx-menu sidebarBtn" ></i>
-      <span class="dashboard">Dashboard</span>
+      <span class="dashboard" id="dashboardText"></span>
     </div>
     <div class="search-box">
-      <input type="text" placeholder="Tìm kiếm..." />
+      <input type="text" id="searchInput" placeholder="" />
       <i class="bx bx-search" title="Tìm kiếm"></i>
     </div>
     <div class="thong-bao">

@@ -125,6 +125,9 @@ include_once("../parts/header.php");
     color: red;
     opacity: 0.4;
 }
+.fa-face-angry{
+    color: red;
+}
 
 /* Màu chữ cho các trạng thái thanh toán */
 .status-not-paid {
@@ -135,6 +138,11 @@ include_once("../parts/header.php");
     color: green;
 }
 
+/* CSS cho hiệu ứng nhảy lên */
+.btn-chi-tiet{
+    padding: 5px;
+    background-color:aquamarine;
+}
 </style>
 
 <?php
@@ -217,15 +225,15 @@ function getOrderStatusWithIcon($status){
             if ($order['status_delivery'] == 0) {
                 $statusText = 'Chưa giao';
                 $statusClass = 'status-not-delivered';
-                $statusIcon = '<i class="fas fa-circle-notch"></i>';
+                $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__spin"></i>';
             } elseif ($order['status_delivery'] == 1) {
                 $statusText = 'Đang giao';
                 $statusClass = 'status-in-progress';
-                $statusIcon = '<i class="fas fa-truck"></i>';
+                $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__bounce"></i>';
             } elseif ($order['status_delivery'] == 2) {
                 $statusText = 'Đã giao';
                 $statusClass = 'status-delivered';
-                $statusIcon = '<i class="fas fa-check-circle"></i>';
+                $statusIcon = '<i class="fas fa-check-circle cart three animate__animated animate__swing animate__repeat-3"></i>';
             } elseif ($order['status_delivery'] == 3) {
                 $statusText = 'Đã hủy';
                 $statusClass = 'status-huy';
@@ -239,11 +247,11 @@ function getOrderStatusWithIcon($status){
             if ($order['status_payment'] == 0) {
                 $paymentText = 'Chưa thanh toán';
                 $paymentClass = 'status-not-paid';
-                $paymentIcon = '<i class="fas fa-times"></i>';
+                $paymentIcon = '<i class="fa-solid fa-face-angry animate__animated animate__swing animate__repeat-3"></i>';
             } elseif ($order['status_payment'] == 1) {
                 $paymentText = 'Đã thanh toán';
                 $paymentClass = 'status-paid';
-                $paymentIcon = '<i class="fa-solid fa-money-check-dollar"></i>';
+                $paymentIcon = '<i class="fa-solid fa-money-check-dollar animate__animated animate__swing animate__repeat-3"></i>';
             } else {
                 $paymentText = 'Không xác định';
             }
@@ -252,11 +260,11 @@ function getOrderStatusWithIcon($status){
                 <td><?php echo $order['order_id']; ?></td>
                 <td><?php echo $order['product_name']; ?></td>
                 <td><?php echo $order['recipient_name']; ?></td>
-                <td><?php echo $order['total_amount']; ?></td>
+                <td><?php echo number_format($order['total_amount'], 0, ',', ',');  ?></td>
                 <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
                 <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
                 <td class="action-links">
-                    <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a>
+                    <!-- <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a> -->
                     <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
                     <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
                 </td>
@@ -298,39 +306,7 @@ function getOrderStatusWithIcon($status){
 </div>
 
 <script>
-     function showDetail(order_id) {
-        // Hiển thị popup
-        var popup = document.getElementById('orderDetailPopup');
-        popup.style.display = 'block';
-
-        // Lấy thông tin đơn hàng theo id bằng Ajax và điền vào bảng chi tiết đơn hàng
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var order = JSON.parse(this.responseText);
-                var orderDetailBody = document.getElementById('orderDetailBody');
-                orderDetailBody.innerHTML = `
-                    <tr>
-                        <td>${order.order_id}</td>
-                        <td>${order.product_name}</td>
-                        <td>${order.recipient_name}</td>
-                        <td>${order.total_amount}</td>
-                        <td>${order.status_delivery}</td>
-                        <td>${order.status_payment}</td>
-                    </tr>
-                    <!-- Thêm thông tin chi tiết khác vào đây -->
-                `;
-            }
-        };
-        xhttp.open("GET", "getOrderDetail.php?order_id=" + order_id, true);
-        xhttp.send();
-    }
-
-    function hidePopup() {
-        // Ẩn popup
-        var popup = document.getElementById('orderDetailPopup');
-        popup.style.display = 'none';
-    }
+     
 
 </script>
 

@@ -368,9 +368,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
 
 
 <body>
-    <div id="toast"></div>
+    <div id="toast">
+    </div>
     <div id="wrapper">
-
         <div class="banner_top">
             <div class="banner_top__center">
                 <h3>Quà tặng hấp dẫn</h3>
@@ -502,7 +502,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
                                 </div>
                             </div>
                         </div>
-                        <span style="margin-top: 10px; color: red;" class="pro-quantity_overdue"></span>
+                        <span style="margin-top: 10px; color: red;" class="pro-quantity_overdue">dgdfg</span>
                     </div>
                 </div>
                 <div class="pro-end">
@@ -654,7 +654,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
                     const nameProduct = document.querySelector('.pro-name span').innerHTML;
                     const priceProduct = document.querySelector('.pro-gia .pro-price_new').innerHTML;
                     const quantityProduct = document.querySelector('.quantity-input').value;
-                    console.log(quantityProduct);
                     const img_product = document.querySelector('.header-left-img-main img').src;
                     const imgName = img_product.substring(img_product.lastIndexOf('/') + 1);
                     const priceInt = parseInt(priceProduct);
@@ -691,10 +690,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
                     });
                 }else{
                     e.target.setAttribute("pointer-events", "none");
+                    showErrorToast();
                 }
             })
-
-
 
 
 
@@ -709,6 +707,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
             duration = 3000
         }) {
             const main = document.getElementById('toast')
+            console.log(main);
             if (main) {
                 const toast = document.createElement('div')
                 const icons = {
@@ -737,31 +736,40 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php';
                 toast.innerHTML =
                     `
                 <div class="toast__icon">
-                    <i class="fa-solid ${icon}"></i>
+                    <i class="fa-solid fa-circle-check"></i>
                 </div>
                 <div class="toast__body">
                     <div class="toast__title">
-                        ${title}
+                     succsec
                     </div>
                     <p class="toast__msg">
-                    ${message}
+                     Sản Phẩm đã được thêm giỏ hàng thành công
                     </p>
                 </div>
                 <div class="toast__close">
                     <i class="fa-sharp fa-solid fa-circle-xmark"></i>
                 </div>
         
-        `
+         `
                 main.appendChild(toast);
             }
 
         }
-
         function showSuccsecToast() {
             toast({
                 title: 'succsec',
                 message: 'Sản Phẩm đã được thêm giỏ hàng thành công.',
                 type: 'succsec',
+                timesliderLeft: 1500,
+                timefadeOut: 1000,
+                duration: 2000,
+            })
+        }
+        function showErrorToast() {
+            toast({
+                title: 'error',
+                message: 'Sản Phẩm lỗi',
+                type: 'error',
                 timesliderLeft: 1500,
                 timefadeOut: 1000,
                 duration: 2000,

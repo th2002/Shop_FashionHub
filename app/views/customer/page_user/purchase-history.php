@@ -1,6 +1,11 @@
 <?php require_once '../page_user/header.php' ?>
-<?php require_once '../../../controller/customer/controller_oder_history.php' ?>
 <?php require_once '../../../models/DAO/oders.php'; ?>
+<?php
+    if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        header('Location:' . $SITE_URL . '/tai-khoan/login.php');
+        exit();
+    }
+?>
 <?php
 $user_id = $_SESSION['user_id'];
 ?>
@@ -23,7 +28,6 @@ $user_id = $_SESSION['user_id'];
                             href="<?= $SITE_URL ?>/page_user/form-edit-profile.php">Xin
                             chào,
                             <?php echo $_SESSION['user_fullname'] ?>
-                            <?php echo $user_id ?>
                         </a>
                     </span>
                 </a>
@@ -168,15 +172,21 @@ $user_id = $_SESSION['user_id'];
                     </div>
                     <?php
                         $coupon = select_all_coupon($oder['coupon_code_id']);
-                        ?>
+                        
+                    ?>
                     <div class="col-md-4">
                         <p>
                             : <?php
-                                    if ($coupon['type'] == 0) {
+                                    if (!empty($coupon)) {
+                                        if ($coupon['type'] == 0) {
                                         echo $coupon['code'] . ' ( ' . 'giảm ' .  number_format($coupon['value']) . 'đ' . ' )';
                                     } else {
                                         echo $coupon['code'] . ' ( ' . 'giảm ' . $coupon['value'] . '%' . ' )';
                                     }
+                                    } else {
+                                        echo 'Không có mã giảm giá';
+                                    }
+                                    
 
                                     ?>
                         </p>
@@ -184,10 +194,30 @@ $user_id = $_SESSION['user_id'];
                 </div>
                 <div class="row">
                     <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Tổng tiền </p>
+                        <p>Tổng hóa đơn </p>
                     </div>
-                    <div class="col-md-4 fs-6">
+                    <div class="col-md-3 fs-6">
                         <p>: <?php echo number_format($oder['total_amount'])  . 'đ' ?></p>
+                    </div>
+                    <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
+                        <p>Tiền phải trả</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>
+                            : <?php
+                            if (!empty($coupon)) {
+                                if ($coupon['type'] == 0) {
+                                echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
+                            } else {
+                                echo  number_format($oder['total_amount'] - (($oder['total_amount'] * $coupon['value'])/100) ) . 'đ';
+                            }
+                            } else {
+                                echo number_format($oder['total_amount'])  . 'đ';
+                            }
+                            
+                            
+                        ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row ms-3">
@@ -221,8 +251,20 @@ $user_id = $_SESSION['user_id'];
                             <div class="col-md-2">
                                 <p>Số lượng: <?php echo $oder_detail['quantity'] ?></p>
                             </div>
+                            <div class="col-md-2">
+                                <?php
+                                    if ($oder_detail['size'] != "") {
+                                        echo '<p>Size: '. $oder_detail['size']. '</p>'; 
+                                    } else {
+                                        echo '<p class="fs-6">No size</p>';
+                                    }
+                                    
+                                ?>
+                            </div>
                             <div class="col-md-3">
-                                <p>Giá: <?php echo number_format($oder_detail['price']) . 'đ' ?></p>
+                                <p>Giá:
+                                    <?php echo number_format($oder_detail['price'] * $oder_detail['quantity']) . 'đ' ?>
+                                </p>
                             </div>
                         </div>
                     </div>

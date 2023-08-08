@@ -1,6 +1,10 @@
 <!-- Controller -->
 <?php
 require_once '../../../models/DAO/edit-profile.php';
+if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
+        echo 'Vui lòng không truy cập bằng đường dẫn trực tiếp';
+        exit();
+    }
 $loi = "";
 $user_id = $_SESSION['user_id'];
 $user = select_user($_SESSION['user_id']);
