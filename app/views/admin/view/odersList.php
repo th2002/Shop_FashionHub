@@ -100,49 +100,53 @@ include_once("../parts/header.php");
         font-size: 14px;
         font-weight: 500;
     }
-    .name-product{
+
+    .name-product {
         text-align: end;
     }
- /* CSS */
-/* Màu chữ cho các trạng thái đơn hàng */
-.status-not-delivered {
-    color: red;
-}
 
-.status-in-progress {
-    color: orange;
-}
+    /* CSS */
+    /* Màu chữ cho các trạng thái đơn hàng */
+    .status-not-delivered {
+        color: red;
+    }
 
-.status-delivered {
-    color: green;
-}
+    .status-in-progress {
+        color: orange;
+    }
 
-.status-huy {
-    color: red;
-    font-weight: 500;
-}
-.fa-times-circle{
-    color: red;
-    opacity: 0.4;
-}
-.fa-face-angry{
-    color: red;
-}
+    .status-delivered {
+        color: green;
+    }
 
-/* Màu chữ cho các trạng thái thanh toán */
-.status-not-paid {
-    color: red;
-}
+    .status-huy {
+        color: red;
+        font-weight: 500;
+    }
 
-.status-paid {
-    color: green;
-}
+    .fa-times-circle {
+        color: red;
+        opacity: 0.4;
+    }
 
-/* CSS cho hiệu ứng nhảy lên */
-.btn-chi-tiet{
-    padding: 5px;
-    background-color:aquamarine;
-}
+    .fa-face-angry {
+        color: red;
+    }
+
+    /* Màu chữ cho các trạng thái thanh toán */
+    .status-not-paid {
+        color: red;
+    }
+
+    .status-paid {
+        color: green;
+    }
+
+    /* CSS cho hiệu ứng nhảy lên */
+    .btn-chi-tiet {
+        padding: 5px;
+        background-color: aquamarine;
+    }
 </style>
 
 <?php
@@ -151,26 +155,11 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 
-// Hàm chuyển đổi trạng thái đơn hàng thành chuỗi có icon
-function getOrderStatusWithIcon($status){
-    switch ($status) {
-        case 0:
-            return '<span class="status-icon"><i class="fas fa-circle-notch"></i> Chưa giao</span>';
-            break;
-        case 1:
-            return '<span class="status-icon"><i class="fas fa-truck"></i> Đang giao</span>';
-            break;
-        case 2:
-            return '<span class="status-icon"><i class="fas fa-check-circle"></i> Đã giao</span>';
-            break;
-        case 3:
-            return '<span class="status-icon"><i class="fas fa-times-circle"></i> Hủy</span>';
-            break;
-        default:
-            return '<span class="status-icon">Không xác định</span>';
-            break;
-    }
-}
+$selectedStatus = isset($_GET['status']) ? $_GET['status'] : 'all';
+$selectedOrderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'newest';
+
+$orders = getOrdersInfo($selectedStatus, $selectedOrderBy);
+
 
 ?>
 
@@ -198,89 +187,22 @@ function getOrderStatusWithIcon($status){
 
 </div>
 <div class="sap-xep">
-    
+    <select name="status" id="status" onchange="changeStatus()">
+        <option value="all">Tất cả</option>
+        <option value="desc" <?php if ($selectedStatus === 'desc') echo 'selected'; ?>>Chưa thanh toán</option>
+        <option value="asc" <?php if ($selectedStatus === 'asc') echo 'selected'; ?>>Đã thanh toán</option>
+    </select>
 </div>
+
+<div class="sap-xep">
+    <select name="orderBy" id="orderBy" onchange="changeOrderBy()">
+        <option value="newest" <?php if ($selectedOrderBy === 'newest') echo 'selected'; ?>>Mới nhất</option>
+        <option value="oldest" <?php if ($selectedOrderBy === 'oldest') echo 'selected'; ?>>Cũ nhất</option>
+    </select>
+</div>
+
 <div class="table">
-<!-- HTML -->
-<!-- HTML -->
-<table class="category-table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên sản phẩm</th>
-            <th>Người nhận</th>
-            <th>Tổng tiền</th>
-            <th>Trạng thái</th>
-            <th>Thanh toán</th>
-            <th>Thao tác</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $orders = getOrdersInfo(); // Lấy thông tin đơn hàng
 
-        foreach ($orders as $order) {
-            $statusClass = '';
-            $statusIcon = '';
-            if ($order['status_delivery'] == 0) {
-                $statusText = 'Chưa giao';
-                $statusClass = 'status-not-delivered';
-                $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__spin"></i>';
-            } elseif ($order['status_delivery'] == 1) {
-                $statusText = 'Đang giao';
-                $statusClass = 'status-in-progress';
-                $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__bounce"></i>';
-            } elseif ($order['status_delivery'] == 2) {
-                $statusText = 'Đã giao';
-                $statusClass = 'status-delivered';
-                $statusIcon = '<i class="fas fa-check-circle cart three animate__animated animate__swing animate__repeat-3"></i>';
-            } elseif ($order['status_delivery'] == 3) {
-                $statusText = 'Đã hủy';
-                $statusClass = 'status-huy';
-                $statusIcon = '<i class="fas fa-times-circle"></i>';
-            } else {
-                $statusText = 'Không xác định';
-            }
-
-            $paymentClass = '';
-            $paymentIcon = '';
-            if ($order['status_payment'] == 0) {
-                $paymentText = 'Chưa thanh toán';
-                $paymentClass = 'status-not-paid';
-                $paymentIcon = '<i class="fa-solid fa-face-angry animate__animated animate__swing animate__repeat-3"></i>';
-            } elseif ($order['status_payment'] == 1) {
-                $paymentText = 'Đã thanh toán';
-                $paymentClass = 'status-paid';
-                $paymentIcon = '<i class="fa-solid fa-money-check-dollar animate__animated animate__swing animate__repeat-3"></i>';
-            } else {
-                $paymentText = 'Không xác định';
-            }
-        ?>
-            <tr>
-                <td><?php echo $order['order_id']; ?></td>
-                <td><?php echo $order['product_name']; ?></td>
-                <td><?php echo $order['recipient_name']; ?></td>
-                <td><?php echo number_format($order['total_amount'], 0, ',', ',');  ?></td>
-                <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
-                <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
-                <td class="action-links">
-                    <!-- <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a> -->
-                    <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
-                    <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
-                </td>
-            </tr>
-        <?php
-        }
-        ?>
-    </tbody>
-</table>
-
-
-
-
-<!-- Table chi tiết -->
-<div id="orderDetailPopup" class="popup" style="display: none;">
-    <h2>Chi tiết đơn hàng</h2>
     <table class="category-table">
         <thead>
             <tr>
@@ -290,23 +212,111 @@ function getOrderStatusWithIcon($status){
                 <th>Tổng tiền</th>
                 <th>Trạng thái</th>
                 <th>Thanh toán</th>
+                <th>Thao tác</th>
             </tr>
         </thead>
-        <tbody id="orderDetailBody">
-            <!-- Dữ liệu của bảng chi tiết đơn hàng sẽ được điền vào đây bằng JavaScript -->
+        <tbody>
+            <?php
+            // Lấy thông tin đơn hàng
+
+            foreach ($orders as $order) {
+                $statusClass = '';
+                $statusIcon = '';
+                if ($order['status_delivery'] == 0) {
+                    $statusText = 'Chưa giao';
+                    $statusClass = 'status-not-delivered';
+                    $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__spin"></i>';
+                } elseif ($order['status_delivery'] == 1) {
+                    $statusText = 'Đang giao';
+                    $statusClass = 'status-in-progress';
+                    $statusIcon = '<i class="fas fa-shipping-fast animate__animated animate__bounce"></i>';
+                } elseif ($order['status_delivery'] == 2) {
+                    $statusText = 'Đã giao';
+                    $statusClass = 'status-delivered';
+                    $statusIcon = '<i class="fas fa-check-circle cart three animate__animated animate__swing animate__repeat-3"></i>';
+                } elseif ($order['status_delivery'] == 3) {
+                    $statusText = 'Đã hủy';
+                    $statusClass = 'status-huy';
+                    $statusIcon = '<i class="fas fa-times-circle"></i>';
+                } else {
+                    $statusText = 'Không xác định';
+                }
+
+                $paymentClass = '';
+                $paymentIcon = '';
+                if ($order['status_payment'] == 0) {
+                    $paymentText = 'Chưa thanh toán';
+                    $paymentClass = 'status-not-paid';
+                    $paymentIcon = '<i class="fa-solid fa-face-angry animate__animated animate__swing animate__repeat-3"></i>';
+                } elseif ($order['status_payment'] == 1) {
+                    $paymentText = 'Đã thanh toán';
+                    $paymentClass = 'status-paid';
+                    $paymentIcon = '<i class="fa-solid fa-money-check-dollar animate__animated animate__swing animate__repeat-3"></i>';
+                } else {
+                    $paymentText = 'Không xác định';
+                }
+            ?>
+                <tr>
+                    <td><?php echo $order['order_id']; ?></td>
+                    <td><?php echo $order['product_name']; ?></td>
+                    <td><?php echo $order['recipient_name']; ?></td>
+                    <td><?php echo number_format($order['total_amount'], 0, ',', ',');  ?></td>
+                    <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
+                    <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
+                    <td class="action-links">
+                        <!-- <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a> -->
+                        <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
+                        <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
         </tbody>
     </table>
-    <button onclick="hidePopup()">Đóng</button>
-</div>
+
+
+
+
+    <!-- Table chi tiết -->
+    <div id="orderDetailPopup" class="popup" style="display: none;">
+        <h2>Chi tiết đơn hàng</h2>
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Người nhận</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                </tr>
+            </thead>
+            <tbody id="orderDetailBody">
+                <!-- Dữ liệu của bảng chi tiết đơn hàng sẽ được điền vào đây bằng JavaScript -->
+            </tbody>
+        </table>
+        <button onclick="hidePopup()">Đóng</button>
+    </div>
 
 </div>
 <!-- Hiển thị nút phân trang -->
 <div class="pagination">
-    
+
 </div>
 
 <script>
-     
+    function changeStatus() {
+    var selectedStatus = document.getElementById('status').value;
+    var selectedOrderBy = document.getElementById('orderBy').value;
+    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
+}
+
+function changeOrderBy() {
+    var selectedStatus = document.getElementById('status').value;
+    var selectedOrderBy = document.getElementById('orderBy').value;
+    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
+}
 
 </script>
 
