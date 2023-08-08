@@ -57,8 +57,8 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
         <div class="box">
             <div class="right-side">
                 <div class="box-topic animate__animated animate__heartBeat animate__repeat-3">Tổng đơn hàng</div>
-                <div class="number count-up" data-end-value="<?php echo getTotalOders(); ?>">
-                    <?php echo getTotalOders(); ?></div>
+                <div class="number count-up" data-end-value="<?php echo getTotalOrderCount($db); ?>">
+                    <?php echo getTotalOrderCount($db); ?></div>
 
                 <div class="indicator">
                     <i
