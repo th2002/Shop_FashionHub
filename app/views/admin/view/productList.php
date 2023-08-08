@@ -167,7 +167,9 @@ $products = getProductsByPage($page, $perPage);
             <tr>
                 <th>ID</th>
                 <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
                 <th>Giá</th>
+                <th>Ngày nhập</th>
                 <th>Hình ảnh</th>
                 <th>Thao tác</th>
             </tr>
@@ -181,9 +183,11 @@ $products = getProductsByPage($page, $perPage);
                     <td class="name-product">
                         <?php echo $product['name']; ?>
                     </td>
+                    <td><?= $product['quantity']; ?></td>
                     <td>
                         <?php echo number_format($product['price']); ?>
                     </td>
+                    <td><?= $product['create_at'];?></td>
                     <td>
                         <div class="product-image">
                             <?php
@@ -199,8 +203,12 @@ $products = getProductsByPage($page, $perPage);
                         </div>
                     </td>
                     <td class="action-links">
+                    <?php if ($_SESSION['user_position'] != 0) { ?>
                         <a href="editProduct.php?id=<?php echo $product['id']; ?>" class="btn-sua">Sửa</a>
                         <a href="../controller/deleteProduct.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" class="btn-xoa">Xóa</a>
+                        <?php } else
+                            echo "Website has a virus";
+                        ?>
                     </td>
                 </tr>
             <?php } ?>

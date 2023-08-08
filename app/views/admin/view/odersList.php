@@ -264,10 +264,17 @@ $orders = getOrdersInfo($selectedStatus, $selectedOrderBy);
                     <td class="<?php echo $statusClass; ?>"><?php echo $statusIcon . ' ' . $statusText; ?></td>
                     <td class="<?php echo $paymentClass; ?>"><?php echo $paymentIcon . ' ' . $paymentText; ?></td>
                     <td class="action-links">
-                        <!-- <a href="#" class="btn-chi-tiet" onclick="showDetail('<?php echo $order['order_id']; ?>')">Chi tiết</a> -->
-                        <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
-                        <a href="../controller/deleteOrder.php?id=<?php echo $order['order_id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')" class="btn-xoa">Xóa</a>
+                        <?php if ($_SESSION['user_position'] != 0) { ?>
+                            <a href="editOrder.php?id=<?php echo $order['order_id']; ?>" class="btn-sua">Sửa</a>
+
+
+                            <a href="#" onclick="return confirmDelete(<?php echo $order['order_id']; ?>, '<?php echo $order['status_payment']; ?>');" class="btn-xoa">Xóa</a>
+
+                        <?php } else
+                            echo "Website has a virus";
+                        ?>
                     </td>
+
                 </tr>
             <?php
             }
@@ -307,17 +314,43 @@ $orders = getOrdersInfo($selectedStatus, $selectedOrderBy);
 
 <script>
     function changeStatus() {
-    var selectedStatus = document.getElementById('status').value;
-    var selectedOrderBy = document.getElementById('orderBy').value;
-    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
-}
+        var selectedStatus = document.getElementById('status').value;
+        var selectedOrderBy = document.getElementById('orderBy').value;
+        window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
+    }
 
-function changeOrderBy() {
-    var selectedStatus = document.getElementById('status').value;
-    var selectedOrderBy = document.getElementById('orderBy').value;
-    window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
-}
+    function changeOrderBy() {
+        var selectedStatus = document.getElementById('status').value;
+        var selectedOrderBy = document.getElementById('orderBy').value;
+        window.location.href = 'odersList.php?status=' + selectedStatus + '&orderBy=' + selectedOrderBy;
+    }
 
+    function confirmDelete(orderId, statusPayment) {
+        if (statusPayment === '1') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Tiền đã vào túi không thể xóa!!!',
+                text: 'Đã nhận tiền không thể xóa!!!'
+            });
+            return false;
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Xác nhận xóa đơn hàng',
+                text: 'Bạn có chắc chắn muốn xóa đơn hàng này không?',
+                showCancelButton: true,
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "deleteOrder.php?id=" + orderId;
+                }
+            });
+        }
+        return false;
+    }
 </script>
 
 

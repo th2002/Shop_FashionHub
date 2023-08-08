@@ -7,7 +7,8 @@ require 'PHPMailer/src/SMTP.php';
 require 'PHPMailer/src/Exception.php';
 
 // Hàm thêm danh mục sản phẩm
-function addCategory($cate_name, $has_size){
+function addCategory($cate_name, $has_size)
+{
     global $db;
 
     $create_at = date("Y-m-d");
@@ -19,7 +20,8 @@ function addCategory($cate_name, $has_size){
 }
 
 // Hàm lấy danh sách danh mục
-function getAllCategories(){
+function getAllCategories()
+{
     global $db;
     $query = $db->query("SELECT * FROM category_product");
 
@@ -27,7 +29,8 @@ function getAllCategories(){
 }
 
 // Hàm lấy thông tin danh mục bằng id
-function getCategoryById($id) {
+function getCategoryById($id)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM category_product WHERE id = ?");
@@ -36,7 +39,8 @@ function getCategoryById($id) {
 }
 
 // Hàm thêm sản phẩm
-function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller){
+function addProduct($name, $decsription, $quantity, $price, $sale_price, $featured, $best_seller)
+{
     global $db;
 
     $create_at = date("Y-m-d");
@@ -48,7 +52,8 @@ function addProduct($name, $decsription, $quantity, $price, $sale_price, $featur
     return $query->rowCount(); // Số dòng bị ảnh hưởng bởi câu lệnh INSERT
 }
 // hàm thêm thông báo
-function addnotification($notification_type, $notification_content, $pinned){
+function addnotification($notification_type, $notification_content, $pinned)
+{
     global $db;
 
     $created_at = date('Y-m-d');
@@ -59,7 +64,8 @@ function addnotification($notification_type, $notification_content, $pinned){
 }
 
 // Hàm lấy danh sách thông báo
-function getAllNotifications(){
+function getAllNotifications()
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM notifications  ORDER BY pinned DESC, created_at DESC");
@@ -67,7 +73,8 @@ function getAllNotifications(){
     return $query->fetchAll(PDO::FETCH_ASSOC); // Trả về kết quả
 }
 // Hàm đếm số lượng thông báo
-function countNotifications() {
+function countNotifications()
+{
     global $db;
 
     $query = $db->prepare("SELECT COUNT(*) AS total FROM notifications");
@@ -78,7 +85,8 @@ function countNotifications() {
 }
 
 // Hàm cập nhật thông tin sản phẩm
-function updateProduct($productId, $productName, $decsription, $quantity, $price) {
+function updateProduct($productId, $productName, $decsription, $quantity, $price)
+{
     global $db;
 
     $updateAt = date("Y-m-d");
@@ -88,7 +96,8 @@ function updateProduct($productId, $productName, $decsription, $quantity, $price
 }
 
 // Hàm lấy top 10 sản phẩm bán chạy
-function getTopSalesProducts(){
+function getTopSalesProducts()
+{
     global $db;
 
     // Chuẩn bị câu truy vấn SQL kết hợp hai bảng products và product_images
@@ -99,18 +108,19 @@ function getTopSalesProducts(){
     ORDER BY p.id DESC
     LIMIT 10");
 
-// Thực thi câu truy vấn
-$query->execute();
+    // Thực thi câu truy vấn
+    $query->execute();
 
-// Lấy kết quả trả về thành một mảng danh sách sản phẩm
-$topSalesProducts = $query->fetchAll(PDO::FETCH_ASSOC);
-return $topSalesProducts;
+    // Lấy kết quả trả về thành một mảng danh sách sản phẩm
+    $topSalesProducts = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $topSalesProducts;
 }
 
 
 
 // Hàm cập nhật đơn hàng
-function updateOrder($order_id, $status_payment, $status_delivery) {
+function updateOrder($order_id, $status_payment, $status_delivery)
+{
     global $db;
 
     // Lấy thời gian hiện tại
@@ -127,7 +137,8 @@ function updateOrder($order_id, $status_payment, $status_delivery) {
 }
 
 // Hàm chuyển đổi trạng thái đơn hàng thành chuỗi:
-function getOrderStatus($status){
+function getOrderStatus($status)
+{
     switch ($status) {
         case 0:
             return 'Chưa giao';
@@ -140,8 +151,8 @@ function getOrderStatus($status){
             break;
         case 3:
             return 'Hủy';
-            break;         
-        
+            break;
+
         default:
             return 'Không xác định';
             break;
@@ -149,7 +160,8 @@ function getOrderStatus($status){
 }
 // Hàm xóa sản phẩm
 
-function deleteProduct($productId){
+function deleteProduct($productId)
+{
     global $db;
 
     $query = $db->prepare("DELETE FROM products where id=?");
@@ -159,7 +171,8 @@ function deleteProduct($productId){
 }
 
 // HÀm xóa tất cả sản phẩm
-function deleteAllProducts(){
+function deleteAllProducts()
+{
     global $db;
     try {
         $query = $db->prepare("DELETE FROM products");
@@ -174,7 +187,8 @@ function deleteAllProducts(){
 
 
 // hàm xoá all người dùng
-function deleteAllUser(){
+function deleteAllUser()
+{
     global $db;
     try {
         $query = $db->prepare("DELETE FROM users");
@@ -194,7 +208,8 @@ function deleteAllUser(){
 
 // Hàm lấy danh sách sản phẩm
 // Hàm lấy tổng số sản phẩm với sắp xếp theo cột created_at
-function getTotalProductsSortedByCreatedAt($orderBy) {
+function getTotalProductsSortedByCreatedAt($orderBy)
+{
     global $db;
 
     $query = "SELECT COUNT(*) FROM products";
@@ -215,7 +230,8 @@ function getTotalProductsSortedByCreatedAt($orderBy) {
 
 
 // Lấy thông tin sản phẩm bằng ID
-function getProductById($productId) {
+function getProductById($productId)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM products WHERE id = ?");
@@ -224,25 +240,26 @@ function getProductById($productId) {
 }
 
 // Hàm lấy tổng số sản phẩm theo ngày
-function getTotalAllProduct($date){
+function getTotalAllProduct($date)
+{
     global $db;
     try {
         $query = $db->prepare("SELECT COUNT(*) as total from products where DATE(created_at) = ?");
-    $query->execute([$date]);
-    $total = $query->fetch(PDO::FETCH_ASSOC);
-    return $total['total'];
+        $query->execute([$date]);
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        return $total['total'];
     } catch (PDOException $e) {
         error_log("Có lỗi khi truy vấn:" . $e->getMessage());
         return 0;
     }
-
 }
 
 
 // Hàm cập nhật danh mục sản phẩm
-function updateCategory($id, $cate_name, $has_size) {
+function updateCategory($id, $cate_name, $has_size)
+{
     global $db;
-     
+
     $update_at = date("Y-m-d");
     $query = $db->prepare("UPDATE category_product SET cate_name = ?, has_size = ?, update_at = ? WHERE id = ?");
     return $query->execute([$cate_name, $has_size, $update_at, $id]);
@@ -252,14 +269,15 @@ function updateCategory($id, $cate_name, $has_size) {
 
 
 // Hàm xoá danh mục
-function deleteCategory($cate_id){
+function deleteCategory($cate_id)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM category_product where id=?");
     $query->execute([$cate_id]);
     $cate = $query->fetch(PDO::FETCH_ASSOC);
 
-    if(!$cate){
+    if (!$cate) {
         return false;
     }
 
@@ -284,7 +302,8 @@ function addProductImage($productId, $imagePath)
 }
 
 // Hàm lấy danh sách hình ảnh của một sản phẩm
-function getProductImages($productId) {
+function getProductImages($productId)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM product_images WHERE product_id = ?");
@@ -293,19 +312,21 @@ function getProductImages($productId) {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 // hàm lấy địa chỉ ip người dùng
-function getUserIP(){
-    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+function getUserIP()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
-    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }else{
+    } else {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
     return $ip;
 }
 
 // hàm đăng ký tài khoản
-function registerUser($user_name, $email, $password, $full_name, $phone_number){
+function registerUser($user_name, $email, $password, $full_name, $phone_number)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM users where user_name = ? or email = ?");
@@ -313,7 +334,7 @@ function registerUser($user_name, $email, $password, $full_name, $phone_number){
 
     $user = $query->fetch(PDO::FETCH_ASSOC);
 
-   if($user){
+    if ($user) {
         return "false"; // tên đăng nhập or email đã tồn tại
     }
     // Thêm dữ liệu vào database users
@@ -327,8 +348,9 @@ function registerUser($user_name, $email, $password, $full_name, $phone_number){
 }
 
 
-  // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
-function checkEmailExists($email){
+// Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
+function checkEmailExists($email)
+{
     // Thực hiện truy vấn kiểm tra
     // Đây chỉ là một ví dụ, bạn cần thay thế nó với truy vấn thực tế
     global $db;
@@ -341,7 +363,8 @@ function checkEmailExists($email){
 }
 
 // hàm lấy danh sách người dùng
-function getAllUsers(){
+function getAllUsers()
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM users");
@@ -353,7 +376,8 @@ function getAllUsers(){
 }
 
 // Lấy thông tin người dùng theo ID
-function getUserById($id) {
+function getUserById($id)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM users WHERE id = ?");
@@ -381,17 +405,19 @@ function login($username, $password)
 }
 
 // Hàm tạo mật khẩu ngẫu nhiên
-function randomPassword($length = 10){
+function randomPassword($length = 10)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $kytu = strlen($characters);
     $randomPassword = '';
-    for($i = 0; $i <= $length; $i++){
+    for ($i = 0; $i <= $length; $i++) {
         $randomPassword .= $characters[rand(0, $kytu - 1)];
     }
     return $randomPassword;
 }
 
-function sendPassword($email, $newPassword){
+function sendPassword($email, $newPassword)
+{
     // gửi email chức mật khẩu cho user
     $mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -405,27 +431,28 @@ function sendPassword($email, $newPassword){
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-     // Cấu hình email
-     $mail->setFrom('duc7sao@gmail.com', '中国话 中國話 華文/华文'); // Thay thế bằng địa chỉ email và tên của bạn
-     $mail->addAddress($email); // Địa chỉ email người nhận
- 
-     $mail->isHTML(true);
-     $mail->Subject = 'Email cấp lại mật khẩu'; // Tiêu đề email
-     $mail->Body = ''; // Nội dung email
+    // Cấu hình email
+    $mail->setFrom('duc7sao@gmail.com', '中国话 中國話 華文/华文'); // Thay thế bằng địa chỉ email và tên của bạn
+    $mail->addAddress($email); // Địa chỉ email người nhận
 
-     $mail->Body = 'Vui lòng đổi mật khẩu ngay khi có thể! Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
- 
-     // Gửi email
-     if (!$mail->send()) {
-         // Có lỗi xảy ra khi gửi email, bạn có thể xử lý lỗi ở đây
-          echo 'Mailer Error: ' . $mail->ErrorInfo;
-         return false;
-     } else {
-         return true;
-     }
+    $mail->isHTML(true);
+    $mail->Subject = 'Email cấp lại mật khẩu'; // Tiêu đề email
+    $mail->Body = ''; // Nội dung email
+
+    $mail->Body = 'Vui lòng đổi mật khẩu ngay khi có thể! Mật khẩu mới của bạn là: ' . $newPassword; // Nội dung email
+
+    // Gửi email
+    if (!$mail->send()) {
+        // Có lỗi xảy ra khi gửi email, bạn có thể xử lý lỗi ở đây
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+        return false;
+    } else {
+        return true;
+    }
 }
 // Hàm cập nhật mật khẩu mới vào cơ sở dữ liệu
-function updatePasswordInDatabase($email, $newPassword) {
+function updatePasswordInDatabase($email, $newPassword)
+{
     // Gọi biến kết nối PDO đã được tạo trước đó
     global $db;
 
@@ -460,7 +487,8 @@ function updatePasswordInDatabase($email, $newPassword) {
 }
 
 // Hàm cập nhật thông tin người dùng
-function updateUser($id, $user_name, $email, $role) {
+function updateUser($id, $user_name, $email, $role)
+{
     global $db;
 
     $query = $db->prepare("UPDATE users SET user_name = ?, email = ?, role = ? WHERE id = ?");
@@ -471,14 +499,15 @@ function updateUser($id, $user_name, $email, $role) {
 
 // hàm xoá người dùng
 
-function deleteUser($id){
+function deleteUser($id)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM users WHERE id=?");
     $query->execute([$id]);
-    $user= $query->fetch(PDO::FETCH_ASSOC);
+    $user = $query->fetch(PDO::FETCH_ASSOC);
 
-    if(!$user){
+    if (!$user) {
         return false; // người dùng không tồn tại
     }
 
@@ -489,7 +518,8 @@ function deleteUser($id){
 }
 // Hàm kiểm tra đăng nhập
 
-function authenUser($user_name, $password){
+function authenUser($user_name, $password)
+{
     global $db;
 
     // kiểm tra  tên login có tồn tại hay không
@@ -498,14 +528,14 @@ function authenUser($user_name, $password){
 
     $user = $query->fetch(PDO::FETCH_ASSOC);
 
-    if($user && password_verify($password, $user['password'])){
+    if ($user && password_verify($password, $user['password'])) {
         return true;
-
     }
     return false;
 }
 // Hàm phân trang danh mục
-function getCategoriesWithPagination($limit, $offset) {
+function getCategoriesWithPagination($limit, $offset)
+{
     global $db;
 
     $query = $db->prepare("SELECT * FROM categories LIMIT ? OFFSET ?");
@@ -517,7 +547,8 @@ function getCategoriesWithPagination($limit, $offset) {
 }
 
 // Thêm mã giảm giá
-function addCoupon($code, $type, $value, $status, $date_end){
+function addCoupon($code, $type, $value, $status, $date_end)
+{
     global $db;
     $create_at = date("Y-m-d");
     $update_at = date("Y-m-d");
@@ -525,6 +556,45 @@ function addCoupon($code, $type, $value, $status, $date_end){
     $query->execute([$code, $type, $value, $status, $date_end, $create_at, $update_at]);
 
     return $query->rowCount() > 0; // Trả về true nếu số dòng bị ảnh hưởng > 0, ngược lại false
+}
+
+// Hàm lấy danh sách mã giảm giá
+function getAllCoupon()
+{
+    global $db;
+
+    $sql = $db->prepare("SELECT * FROM coupon");
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Hàm lấy mã giảm giá theo id
+
+function getCouponId($id)
+{
+    global $db;
+    $sql = $db->prepare("SELECT * FROM coupon where id =?");
+    $sql->execute([$id]);
+    return $sql->fetch(PDO::FETCH_ASSOC);
+}
+
+// Hàm cập nhật mã giảm giá
+function updateCoupon($id, $code, $type, $value, $status, $date_end)
+{
+    global $db;
+    $update_at = date('Y-m-d');
+    $query = $db->prepare("UPDATE coupon SET code = ?, type = ?, value = ?, status = ?, date_end = ?, update_at = ? WHERE id = ?");
+    $query->execute([$code, $type, $value, $status, $date_end, $update_at, $id]);
+    return $query->rowCount();
+}
+
+// Hàm xóa mã giảm giá
+function deleteCoupon($id)
+{
+    global $db;
+    $query = $db->prepare("DELETE from coupon where id = ?");
+    $query->execute([$id]);
+    return $query->rowCount();
 }
 
 // functions.php
@@ -536,11 +606,13 @@ function addCoupon($code, $type, $value, $status, $date_end){
 require_once('tcpdf_include.php');
 
 // extend TCPF with custom functions
-class MYPDF extends TCPDF {
+class MYPDF extends TCPDF
+{
     // Tùy chỉnh và định nghĩa các phương thức khác nếu cần thiết...
 
     // Colored table
-    public function ColoredTable($header, $data) {
+    public function ColoredTable($header, $data)
+    {
         // Mã để tạo bảng màu
         // Ví dụ:
         // ...
@@ -549,7 +621,8 @@ class MYPDF extends TCPDF {
 // Xóa dữ liệu đệm và đảm bảo không có dữ liệu tiêu đề hoặc nội dung HTML nào đã được gửi từ trước
 ob_end_clean();
 // Hàm xử lý yêu cầu xuất PDF
-function exportPDF($products) {
+function exportPDF($products)
+{
     // Tạo mới tệp PDF với lớp con MYPDF
     $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -581,7 +654,8 @@ function exportPDF($products) {
 
 // Hàm phân trang sản phẩm
 // Hàm lấy tổng số sản phẩm
-function getTotalProducts() {
+function getTotalProducts()
+{
     global $db;
 
     try {
@@ -596,21 +670,25 @@ function getTotalProducts() {
 }
 
 // Hàm lấy tổng số đơn hàng
-function getTotalOders(){
-    global $db;
-
+function getTotalOrderCount($db)
+{
     try {
-        $query = $db->prepare("SELECT COUNT(*) as total from oders");
-        $query->execute();
-        $total = $query->fetch(PDO::FETCH_ASSOC);
-        return $total['total'];
+        $sql = "SELECT SUM(quantity) AS total_orders FROM oder_detail";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total_orders'];
     } catch (PDOException $e) {
-        error_log("Lỗi trong quá trình truy vấn: " . $e->getMessage());
+        echo "Có lỗi khi truy vấn: " . $e->getMessage();
         return 0;
     }
 }
 
-function getOrdersInfo($paymentStatus, $orderBy) {
+
+
+function getOrdersInfo($paymentStatus, $orderBy)
+{
     global $db;
 
     $query = "SELECT
@@ -655,25 +733,29 @@ function getOrdersInfo($paymentStatus, $orderBy) {
 
 
 // Hàm lấy tổng số đơn hàng theo ngày
-function getTotalOrdersByDate($date){
-    global $db;
-
+function getTotalOrderCountByDate($db, $date)
+{
     try {
-        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE DATE(created_at) = :date";
-        $query = $db->prepare($sql);
-        $query->bindParam(':date', $date);
-        $query->execute();
-        $total = $query->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT SUM(quantity) AS total_orders FROM oder_detail od
+                INNER JOIN oders o ON od.oder_id = o.id
+                WHERE DATE(o.created_at) = :date";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':date', $date);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $total['total_orders'];
+        return $result['total_orders'];
     } catch (PDOException $e) {
-        error_log("Có lỗi khi truy vấn: " . $e->getMessage());
+        echo "Có lỗi khi truy vấn: " . $e->getMessage();
         return 0;
     }
 }
 
+
+
 // Hàm lấy tổng số sản phẩm theo ngày
-function getTongSoSanPhamTheoNgay($date){
+function getTongSoSanPhamTheoNgay($date)
+{
     global $db;
     try {
         $sql = "SELECT COUNT(*) AS total_products from products where date(create_at) = :date";
@@ -691,30 +773,10 @@ function getTongSoSanPhamTheoNgay($date){
 
 
 
-// Hàm lấy tổng số đơn hàng của tháng hiện tại
-function getTongSoDonHangThangHienTai($db)
-{
-    try {
-        $thang_hien_tai = date("m");
-        // Câu truy vấn SQL để lấy tổng số đơn hàng của tháng hiện tại
-        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE MONTH(created_at) = :thang_hien_tai";
-        // Chuẩn bị và thực thi câu truy vấn
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':thang_hien_tai', $thang_hien_tai, PDO::PARAM_INT);
-        $stmt->execute();
-        // Lấy kết quả
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        // Tổng số đơn hàng của tháng hiện tại
-        $total_orders = $result['total_orders'];
-        return $total_orders;
-    } catch (PDOException $e) {
-        // Xử lý lỗi nếu có
-        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
-        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
-    }
-}
+
 // Hàm lấy tổng số sản phẩm của tháng
-function getTongSoSanPhamTheoThang($db){
+function getTongSoSanPhamTheoThang($db)
+{
     try {
         $thang_hien_tai = date('m');
         $sql = "SELECT COUNT(*) AS total_products from products where MONTH(create_at) = :thang_hien_tai";
@@ -732,7 +794,8 @@ function getTongSoSanPhamTheoThang($db){
 }
 
 // Hàm tính tổng doanh thu oders đã bán
-function tinhTongDoanhThuDaBan($db){
+function tinhTongDoanhThuDaBan($db)
+{
     try {
         $sql = "SELECT SUM(total_amount) as total_revenue FROM oders WHERE status_payment = 1";
         $stmt = $db->prepare($sql);
@@ -841,7 +904,8 @@ function tinhTongDoanhThuTrungBinhNgay($db)
 }
 
 // Hàm cập nhật tổng số lượng sản phẩm tồn kho sau khi thanh toán đơn hàng
-function capNhatSoLuongSauKhiThanhToan($db, $order_id) {
+function capNhatSoLuongSauKhiThanhToan($db, $order_id)
+{
     try {
         // Lấy thông tin sản phẩm và số lượng mua trong đơn hàng
         $sql = "SELECT product_id, quantity FROM oder_detail WHERE oder_id = :order_id";
@@ -881,7 +945,8 @@ function capNhatSoLuongSauKhiThanhToan($db, $order_id) {
 }
 
 // Hàm lấy tổng số lượng sản phẩm tồn kho
-function tinhTongSoLuongTonKho($db){
+function tinhTongSoLuongTonKho($db)
+{
     try {
         $sql = "SELECT SUM(quantity) as total_quantity from products";
         $stmt = $db->prepare($sql);
@@ -897,7 +962,8 @@ function tinhTongSoLuongTonKho($db){
 }
 
 // Hàm lấy 10 đơn hàng gần đây
-function lay10DonHangGanDay($db) {
+function lay10DonHangGanDay($db)
+{
     try {
         $sql = "SELECT * FROM oders ORDER BY created_at DESC LIMIT 10";
         $stmt = $db->prepare($sql);
@@ -912,6 +978,29 @@ function lay10DonHangGanDay($db) {
 }
 
 
+// Hàm lấy tổng số đơn hàng ngày hiện tại
+function getTongSoDonHangNgayHienTai($db)
+{
+    try {
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); // Đặt múi giờ là Việt Nam
+        $ngay_hien_tai = date("Y-m-d"); // Lấy ngày hiện tại theo múi giờ Việt Nam
+
+
+        $sql = "SELECT SUM(quantity) AS total_orders
+                FROM oder_detail od
+                INNER JOIN oders o ON od.oder_id = o.id
+                WHERE DATE(o.created_at) = :ngay_hien_tai";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':ngay_hien_tai', $ngay_hien_tai);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total_orders'] ?? 0;
+    } catch (PDOException $e) {
+        echo "Có lỗi khi truy vấn: " . $e->getMessage();
+        return 0;
+    }
+}
 
 
 
@@ -920,29 +1009,53 @@ function getTongSoDonHangTuanHienTai($db)
 {
     try {
         $tuan_hien_tai = date("W");
-        // Câu truy vấn SQL để lấy tổng số đơn hàng của tuần hiện tại
-        $sql = "SELECT COUNT(*) AS total_orders FROM oders WHERE WEEK(created_at) = :tuan_hien_tai";
-        // Chuẩn bị và thực thi câu truy vấn
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai, PDO::PARAM_INT);
-        $stmt->execute();
-        // Lấy kết quả
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        // Tổng số đơn hàng của tuần hiện tại
-        $total_orders = $result['total_orders'];
 
-        return $total_orders;
+        $sql = "SELECT SUM(quantity) AS total_orders 
+                FROM oder_detail od
+                INNER JOIN oders o ON od.oder_id = o.id
+                WHERE WEEK(o.created_at) = :tuan_hien_tai";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total_orders'] ?? 0;
     } catch (PDOException $e) {
-        // Xử lý lỗi nếu có
-        echo "Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage();
-        return 0; // Hoặc giá trị khác thích hợp nếu xử lý lỗi khác
+        echo "Có lỗi khi truy vấn: " . $e->getMessage();
+        return 0;
     }
 }
 
-// Hàm lấy tổng số sản phẩm theo tuần
-function getTongSoSanPhamTheoTuan($db){
+// Hàm lấy tổng số đơn hàng tháng hiện tại
+function getTongSoDonHangThangHienTai($db)
+{
     try {
-        $tuan_hien_tai =date("W");
+        $thang_hien_tai = date("m"); // Lấy số tháng hiện tại
+
+        $sql = "SELECT SUM(quantity) AS total_orders
+                FROM oder_detail od
+                INNER JOIN oders o ON od.oder_id = o.id
+                WHERE MONTH(o.created_at) = :thang_hien_tai";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':thang_hien_tai', $thang_hien_tai);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total_orders'] ?? 0;
+    } catch (PDOException $e) {
+        echo "Có lỗi khi truy vấn: " . $e->getMessage();
+        return 0;
+    }
+}
+
+
+
+
+// Hàm lấy tổng số sản phẩm theo tuần
+function getTongSoSanPhamTheoTuan($db)
+{
+    try {
+        $tuan_hien_tai = date("W");
         $sql = "SELECT COUNT(*) AS total_products from products where WEEK(create_at) = :tuan_hien_tai";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':tuan_hien_tai', $tuan_hien_tai, PDO::PARAM_INT);
@@ -959,12 +1072,13 @@ function getTongSoSanPhamTheoTuan($db){
 // ngày
 $date = date('Y-m-d');
 $totalProducts = getTongSoSanPhamTheoNgay($date);
-$totalOrders = getTotalOrdersByDate($date);
+$totalOrders = getTotalOrderCountByDate($db, $date);
 
 
 
 // Hàm lấy danh sách sản phẩm phân trang
-function getProductsByPage($page, $perPage) {
+function getProductsByPage($page, $perPage)
+{
     global $db;
 
     try {
@@ -1015,7 +1129,8 @@ function getProductsByPage($page, $perPage) {
 //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 // }
 // Hàm lấy đơn hàng theo id
-function getOrderById($order_id) {
+function getOrderById($order_id)
+{
     global $db;
 
     $sql = "
@@ -1047,4 +1162,15 @@ function getOrderById($order_id) {
     $stmt->execute();
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function getOrdersData() {
+    global $db; // Đảm bảo biến $conn là biến toàn cục
+
+    $sql = "SELECT * FROM oders";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
 }

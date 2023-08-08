@@ -1,22 +1,14 @@
 <?php
-// Kết nối đến cơ sở dữ liệu bằng PDO (sử dụng thông tin kết nối tương ứng của bạn)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "fashionhub_shop";
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Kết nối thất bại: " . $e->getMessage());
-}
 
-// Lấy dữ liệu từ bảng "orders"
-$sql = "SELECT * FROM oders";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$modelPath = "$rootDir/app/models/DAO/functions.php";
+
+// Gọi tệp functions
+require_once $modelPath;
+
+$ordersData = getOrdersData();
 
 // Thiết lập tiêu đề và kiểu tập tin cho xuất Excel
 header('Content-Type: application/vnd.ms-excel');
@@ -41,7 +33,7 @@ echo '<table border="1">
             <th style="border: 1px solid #555;">Created At</th>
         </tr>';
 
-foreach ($data as $row) {
+foreach ($ordersData as $row) {
     echo '<tr>';
     echo '<td style="border: 1px solid #000;">' . $row['id'] . '</td>';
     echo '<td style="border: 1px solid #000;">' . $row['cus_id'] . '</td>';

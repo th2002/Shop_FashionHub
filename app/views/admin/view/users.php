@@ -21,7 +21,7 @@ $users = getAllUsers();
 ?>
 
 <h2 class="title">Danh sách người dùng</h2>
-<!-- <div class="menu-chucnang">
+<div class="menu-chucnang">
     <div class="menu-left">
         <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
@@ -39,7 +39,7 @@ $users = getAllUsers();
         <h5>Thời gian hiện tại: <span id="current-time"></span></h5>
 
     </div>
-</div> -->
+</div>
 <div class="table">
     <table class="category-table">
         <thead>
@@ -91,10 +91,14 @@ $users = getAllUsers();
 
 
                 <td class="action-links">
+                <?php if ($_SESSION['user_position'] != 0) { ?>
                     <a href="editUsers.php?id=<?php echo $user['id']; ?>" class="btn-sua">Sửa</a>
                     <a href="<?php echo $controller; ?>/admin/deleteUser.php?id=<?php echo $user['id']; ?>"
                         onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')"
                         class="btn-xoa">Xóa</a>
+                        <?php }else
+                             echo "Website has a virus";
+                        ?>
                 </td>
             </tr>
             <?php } ?>
