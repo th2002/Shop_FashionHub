@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/app/models/DAO/connect.php';
+require_once '../../../models/DAO/connect.php';
 
 // Đường dẫn tới tệp PHPMailerAutoload.php, tuỳ thuộc vào cấu trúc của dự án của bạn
 require 'PHPMailer/src/PHPMailer.php';

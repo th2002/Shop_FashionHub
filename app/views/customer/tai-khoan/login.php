@@ -2,16 +2,13 @@
 
 require_once '../../../../global.php';
 
-$modelPath = "../../../models/DAO/functions.php";
-
-
-
-// Gọi tệp models
-require_once $modelPath;
-
+// Gọi tệp model
 
 ?>
 
+<?php
+    require_once '../../../models/DAO/functions.php';
+?>
 
 <!-- Tiếp tục các phần HTML và mã PHP của trang login.php như trước -->
 
