@@ -2,7 +2,7 @@
 
 require_once '../../../../global.php';
 
-$modelPath = "$DAO_URL/functions.php";
+$modelPath = "../../../models/DAO/functions.php";
 
 
 
@@ -152,7 +152,7 @@ if (isset($_POST['login'])) {
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
         </form>
     </div>
-    <script src="<?php echo $assets_js; ?>/script.js"></script>
+    <script src="../../admin/public/js//script.js"></script>
 
 </body>
 
