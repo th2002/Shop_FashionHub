@@ -3,7 +3,6 @@
 <?php 
 if (isset($_SESSION['data-cart'])) {
   $data = $_SESSION['data-cart'];
-}
 foreach ($data as $key => $item) {
   if ($key === 'totalQuantity') {
       continue;
@@ -15,6 +14,7 @@ foreach ($data as $key => $item) {
           break;
       }
   }
+}
 }
 
 ?>
