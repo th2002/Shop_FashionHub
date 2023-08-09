@@ -1,4 +1,23 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php'); ?>
+
+<?php 
+if (isset($_SESSION['data-cart'])) {
+  $data = $_SESSION['data-cart'];
+}
+foreach ($data as $key => $item) {
+  if ($key === 'totalQuantity') {
+      continue;
+  } else {
+      if (isset($data[$key]['order'])) {
+          unset($_SESSION['data-cart'][$key]['order']);
+          unset($_SESSION['data-cart'][$key]['size']);
+      } else {
+          break;
+      }
+  }
+}
+
+?>
 <!doctype html>
 <html lang="vi">
 
@@ -360,6 +379,10 @@
       display: grid;
       grid-template-columns: auto auto;
     }
+
+    .btnSize-active {
+      border: 1px solid red !important;
+    }
   </style>
 
 
@@ -558,6 +581,7 @@
                       ?>
                     </div>
                   </div>
+                  <div style="color: red;" class="validate-size"></div>
                 </div>
                 <div class="pro-so_luong">
                   <div class="pro-so_luong-top">Số lượng</div>
@@ -577,7 +601,11 @@
                 <span style="color: red;" class="pro-quantity_overdue"></span>
                 <div class="pro-end">
                   <button style="cursor: pointer;" data-id="<?= $id ?>" type="button" class="btn-tined">Thêm Vào Giỏ Hàng</button>
-                  <button type="button" class="btn-solid">Mua</button>
+                  <button type="button" data-id="<?= $id ?>" class="btn-solid <?php
+                                                                              if (isset($_SESSION['user_id'])) {
+                                                                                echo "btn-buy";
+                                                                              }
+                                                                              ?>">Mua</button>
                 </div>
               </div>
             </div>
@@ -699,7 +727,6 @@
   ?>
 </footer>
 
-
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -708,6 +735,93 @@
   const textOverdue = document.querySelector('.pro-quantity_overdue');
   const decreaseBtn = document.querySelector('.decrease-btn');
   const increaseBtn = document.querySelector('.increase-btn');
+  const buttons = document.querySelectorAll('button.product-variation');
+  const vldSize = document.querySelector('.validate-size');
+  let isbuttons = true;
+  let isSize = true;
+  if (buttons.length > 0) {
+    isbuttons = false;
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        buttons.forEach(function(btn) {
+          btn.classList.remove('btnSize-active');
+        });
+        button.classList.add('btnSize-active');
+        vldSize.innerHTML = '';
+        isSize = false;
+      });
+    });
+  }
+  $(document).ready(function() {
+    const btnBuy = document.querySelector('.btn-solid');
+    btnBuy.addEventListener('click', function(e) {
+
+
+      if (btnBuy.classList.contains('btn-buy')) {
+        const idProduct = e.target.dataset.id;
+        const nameProduct = document.querySelector('.pro-name').innerHTML;
+        const priceProduct = document.querySelector('.detail-price').innerHTML;
+        const quantityProduct = document.querySelector('.quantity-input').value;
+        const img_product = document.querySelector('.header-left-img-main img').src;
+        const imgName = img_product.substring(img_product.lastIndexOf('/') + 1);
+        const priceInt = parseInt(priceProduct.replace(/,|₫/g, ''));
+        const id_price = idProduct + '_' + priceInt;
+        var productJson = {};
+        productJson = {
+              id: idProduct,
+              name: nameProduct,
+              price: priceProduct,
+              quantity: quantityProduct,
+              imgName: imgName,
+              id_price: id_price,
+              order: "order",
+              size: "No size"
+            };
+        if (!isbuttons) {
+          if (isSize) {
+            vldSize.innerHTML = 'Vui Lòng chọn size';
+          } else {
+            const size = document.querySelector('.product-variation.btnSize-active').innerHTML;
+            productJson.size = size;
+            $.ajax({
+              url: '../../../../models/DAO/add_buyNow.php', // Đường dẫn đến tập tin PHP xử lý dữ liệu
+              type: 'POST', // Phương thức gửi dữ liệu (POST hoặc GET)
+              data: JSON.stringify(productJson), //một đối tượng JSON
+              contentType: 'application/json', //định dạng kiểu json
+              dataType: 'json',
+              success: function(response) {
+                console.log(response);
+              },
+              error: function(xhr, status, error) {
+                console.log(error);
+              }
+            });
+            window.location.href = "../../oders/index.php";
+          }
+        } else {
+          $.ajax({
+              url: '../../../../models/DAO/add_buyNow.php', // Đường dẫn đến tập tin PHP xử lý dữ liệu
+              type: 'POST', // Phương thức gửi dữ liệu (POST hoặc GET)
+              data: JSON.stringify(productJson), //một đối tượng JSON
+              contentType: 'application/json', //định dạng kiểu json
+              dataType: 'json',
+              success: function(response) {
+                console.log(response);
+              },
+              error: function(xhr, status, error) {
+                console.log(error);
+              }
+            });
+            window.location.href = "../../oders/index.php";
+        }
+      } else {
+        showErrorLoginToast()
+      }
+    })
+
+  });
+
+
   let isvalid = true;
   quantityInput.addEventListener('input', function(event) {
     const newValue = parseInt(event.target.value);
@@ -766,7 +880,7 @@
         const quantityProduct = document.querySelector('.quantity-input').value;
         const img_product = document.querySelector('.header-left-img-main img').src;
         const imgName = img_product.substring(img_product.lastIndexOf('/') + 1);
-        const priceInt = parseInt(priceProduct);
+        const priceInt = parseInt(priceProduct.replace(/,|₫/g, ''));
         const id_price = idProduct + '_' + priceInt;
         var productJson = {
           id: idProduct,
@@ -799,7 +913,6 @@
         });
       } else {
         showErrorToast();
-        // e.target.setAttribute("pointer-events", "none");
       }
     })
 
@@ -873,6 +986,7 @@
       duration: 2000,
     })
   }
+
   function showErrorToast() {
     toast({
       title: 'error',
@@ -881,6 +995,17 @@
       timesliderLeft: 1500,
       timefadeOut: 1000,
       duration: 2000,
+    })
+  }
+
+  function showErrorLoginToast() {
+    toast({
+      title: 'error',
+      message: 'Vui Lòng Đăng Nhập',
+      type: 'error',
+      timesliderLeft: 1500,
+      timefadeOut: 1000,
+      duration: 2500,
     })
   }
 </script>
