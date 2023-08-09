@@ -3,23 +3,21 @@ include '../../../../global.php';
 include '../../../models/DAO/connect.php';
 include '../../../models/DAO/products.php';
 // $cus_id = $_SESSION['user_id']; 
-
 if (isset($_SESSION['data-cart'])) {
     $data = $_SESSION['data-cart'];
-}
-foreach ($data as $key => $item) {
-    if ($key === 'totalQuantity') {
-        continue;
-    } else {
-        if (isset($data[$key]['order'])) {
-            unset($_SESSION['data-cart'][$key]['order']);
-            unset($_SESSION['data-cart'][$key]['size']);
+    foreach ($data as $key => $item) {
+        if ($key === 'totalQuantity') {
+            continue;
         } else {
-            break;
+            if (isset($data[$key]['order'])) {
+                unset($_SESSION['data-cart'][$key]['order']);
+                unset($_SESSION['data-cart'][$key]['size']);
+            } else {
+                break;
+            }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +41,7 @@ foreach ($data as $key => $item) {
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
-        .nav__acount{
+        .nav__acount {
             right: 70px;
         }
     </style>
