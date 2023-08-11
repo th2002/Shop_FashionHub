@@ -53,9 +53,10 @@ $imageDir = "$rootDir/app/views/admin/images";
 $ROOT_URL_2 = "Shop_FashionHub";
 $ROOT_URL = "/Shop_FashionHub"; //đường dẫn gốc của website
 $ASSET_URL = "$ROOT_URL/assets"; //link to assets
+$CONTROLLER_URL = "$ROOT_URL/app/controller/customer"; //link to controller
 $ADMIN_URL = "$ROOT_URL/app/views/admin"; //link to admin
 $SITE_URL = "$ROOT_URL/app/views/customer"; //link to customer
-$DAO_URL = "$ROOT_URL/app/models/DAO"; //link to DAO
+$DAO_URL = "$ROOT_URL/app/models"; //link to DAO
 $ADMIN_CSS_URL = "$ROOT_URL/app/views/admin/public/css"; //link to admin css
 
 //Kiểm tra sự tồn tại của 1 tham số trong request, trả về true nếu tồn tại

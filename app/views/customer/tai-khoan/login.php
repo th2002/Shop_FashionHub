@@ -1,17 +1,14 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+require_once '../../../../global.php';
 
-$modelPath = "$rootDir/app/models/DAO/functions.php";
-
-
-
-// Gọi tệp models
-require_once $modelPath;
-
+// Gọi tệp model
 
 ?>
 
+<?php
+    require_once '../../../models/DAO/functions.php';
+?>
 
 <!-- Tiếp tục các phần HTML và mã PHP của trang login.php như trước -->
 
@@ -105,6 +102,7 @@ if (isset($_POST['login'])) {
         $_SESSION['user_name'] = $user['user_name'];
         $_SESSION['user_fullname'] = $user['full_name'];
         $_SESSION['user_role'] = $user['role'];
+        $_SESSION['user_position'] = $user['position'];
         $_SESSION['user_phone'] = $user['phone_number'];
         $_SESSION['user_email'] = $user['email'];
 
@@ -151,7 +149,7 @@ if (isset($_POST['login'])) {
             <h4>Bạn chứa có tài khoản? <a href="singin.php">Đăng ký</a></h4>
         </form>
     </div>
-    <script src="<?php echo $assets_js; ?>/script.js"></script>
+    <script src="../../admin/public/js//script.js"></script>
 
 </body>
 

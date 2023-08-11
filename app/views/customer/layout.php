@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/Shop_FashionHub/global.php');
+    require_once '../../../../global.php';
     require_once '../../../models/DAO/edit-profile.php';
     
 ?>

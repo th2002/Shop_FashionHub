@@ -1,6 +1,8 @@
 <?php
+// Hàm lấy tổng số đơn hàng ngày hiện tại
+$don_hang_ngay = getTongSoDonHangNgayHienTai($db);
 // Sử dụng hàm để lấy tổng số đơn hàng của tháng hiện tại
-$total_orders = getTongSoDonHangThangHienTai($db);
+$don_hang_thang = getTongSoDonHangThangHienTai($db);
 
 // lấy tổng số sản phẩm theo tháng
 $products_thang = getTongSoSanPhamTheoThang($db);
@@ -33,7 +35,7 @@ $tuần_hien_tại = date("W", strtotime($ngay_hien_tai));
 
 // Gọi hàm tính tổng doanh thu theo tuần
 $tong_doanh_thu_tuan = tinhTongDoanhThuTheoTuan($db, $tuần_hien_tại);
-
+$doanh_thu_tuan = number_format($tong_doanh_thu_tuan, 0, ',', ',') . 'đ';
 
 // Lấy ngày hiện tại và tính tháng hiện tại
 $ngay_hien_tai = date("Y-m-d");
@@ -41,9 +43,11 @@ $thang_hien_tai = date("Y-m", strtotime($ngay_hien_tai));
 
 // Gọi hàm tính tổng doanh thu theo tháng
 $tong_doanh_thu_thang = tinhTongDoanhThuTheoThang($db, $thang_hien_tai);
-
+$doanh_thu_thang = number_format($tong_doanh_thu_thang, 0, ',', ',') . 'đ';
 // Gọi hàm tính tổng doanh thu trung bình mỗi ngày
 $doanh_thu_trung_binh_ngay = tinhTongDoanhThuTrungBinhNgay($db);
+
+$trung_binh_doanh_thu_ngay = number_format($doanh_thu_trung_binh_ngay, 0, ',', ',') . '$';
 
 // Lấy tổng số lượng tồn kho của tất cả sản phẩm
 $tong_so_luong_ton_kho = tinhTongSoLuongTonKho($db);
@@ -57,8 +61,8 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
         <div class="box">
             <div class="right-side">
                 <div class="box-topic animate__animated animate__heartBeat animate__repeat-3">Tổng đơn hàng</div>
-                <div class="number count-up" data-end-value="<?php echo getTotalOders(); ?>">
-                    <?php echo getTotalOders(); ?></div>
+                <div class="number count-up" data-end-value="<?php echo getTotalOrderCount($db); ?>">
+                    <?php echo getTotalOrderCount($db); ?></div>
 
                 <div class="indicator">
                     <i
@@ -77,8 +81,8 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
                         <th>Tổng đơn hàng</th>
                     </tr>
                     <tr>
-                        <td>Ngày hôm nay</td>
-                        <td class="count-up" data-end-value="<?= $totalOrders; ?>"></td>
+                        <td>Ngày hôm nay <?= $ngay_hien_tai ?></td>
+                        <td class="count-up" data-end-value="<?= $don_hang_ngay;  ?> "><?= $don_hang_ngay;  ?> Đơn hàng</td>
                     </tr>
                     <tr>
                         <h1></h1>
@@ -90,7 +94,7 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
                         <h1></h1>
                         <p></p>
                         <td>Tháng <?php echo $month; ?> </td>
-                        <td><?php echo  $total_orders; ?> Đơn hàng</td>
+                        <td><?php echo  $don_hang_thang; ?> Đơn hàng</td>
                     </tr>
                 </table>
             </div>
@@ -133,7 +137,7 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
 
         <div class="box">
             <div class="right-side">
-                <div class="box-topic">Lợi nhuận</div>
+                <div class="box-topic">Thu nhập</div>
                 <div class="number" id="countUpNumber"><?= $formatted_number; ?></div>
                 <div class="indicator">
                     <i
@@ -150,19 +154,19 @@ $danhsach_donhang_ganday = lay10DonHangGanDay($db);
                     </tr>
                     <tr>
                         <td>Ngày</td>
-                        <td><?php echo $doanh_thu_ngay; ?> </td>
+                        <td><?= $doanh_thu_ngay; ?> </td>
                     </tr>
                     <tr>
                         <td>Tuần</td>
-                        <td><?php echo $tong_doanh_thu_tuan; ?></td>
+                        <td><?= $tong_doanh_thu_tuan; ?></td>
                     </tr>
                     <tr>
                         <td>Tháng</td>
-                        <td><?php echo $tong_doanh_thu_thang; ?></td>
+                        <td><?= $doanh_thu_thang; ?></td>
 
                     </tr>
                     <td>Trung bình ngày</td>
-                    <td><?= $doanh_thu_trung_binh_ngay; ?></td>
+                    <td><?= $trung_binh_doanh_thu_ngay; ?></td>
                 </table>
 
             </div>

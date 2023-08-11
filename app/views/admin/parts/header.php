@@ -672,6 +672,12 @@ h5 {
                     <span class="links_name">Đơn hàng</span>
                 </a>
             </li>
+            <li>
+                <a href="<?= $viewURL; ;?>/view/categoryList.php" >
+                    <i class="bx bx-heart"></i>
+                    <span class="links_name">Danh mục</span>
+                </a>
+            </li>
             <!-- <li>
                 <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-pie-chart-alt-2"></i>
@@ -687,7 +693,22 @@ h5 {
             <li>
                 <a href="#" class="custom-link" id="link1">
                     <i class="bx bx-book-alt"></i>
-                    <span class="links_name">Tổng đơn hàng</span>
+                    <span class="links_name">Analytics</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="custom-link" id="link1">
+                    <i class="bx bx-message"></i>
+                    <span class="links_name">Bình luận</span>
+                </a>
+            </li>
+            
+            
+            <li>
+                <a href="#" class="custom-link" id="link1">
+                    <i class="bx bx-heart"></i>
+                    <span class="links_name">Favrorites</span>
                 </a>
             </li>
             <li>
@@ -697,15 +718,9 @@ h5 {
                 </a>
             </li>
             <li>
-                <a href="#" class="custom-link" id="link1">
-                    <i class="bx bx-message"></i>
-                    <span class="links_name">Bình luận</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="custom-link" id="link1">
+                <a href="<?= $viewURL;?>/view/couPonlist.php " >
                     <i class="bx bx-heart"></i>
-                    <span class="links_name">Favrorites</span>
+                    <span class="links_name">Mã giảm giá</span>
                 </a>
             </li>
             <!-- <li>

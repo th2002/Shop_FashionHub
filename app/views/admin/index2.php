@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+<h4 class="add-category">
+    <a href="export.php" class="add-links" id="xuat-excel">
+        <i class="fas fa-file-excel"></i> Xuất Excel
+    </a>
+</h4>
+
+    
     
 </body>
 </html>

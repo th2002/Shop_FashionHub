@@ -1,5 +1,6 @@
 <?php require_once '../page_user/header.php' ?>
 <?php require_once '../../../models/DAO/oders.php'; ?>
+<?php require_once '../../../controller/customer/oder_history.php'; ?>
 <?php
     if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
         header('Location:' . $SITE_URL . '/tai-khoan/login.php');
@@ -15,6 +16,7 @@ $user_id = $_SESSION['user_id'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -92,17 +94,20 @@ $user_id = $_SESSION['user_id'];
             </div>
             <?php endif; ?>
 
-            <?php foreach ($result as $oder) : ?>
-            <div style="box-shadow: 0px 0px 2px 0.5px #868D95; margin-left: 9%" class="have-oder col-md-10 mb-3">
-                <div style="margin-left: 0px;--bs-border-opacity: .5;"
-                    class="row col-md-12 border-bottom border-1 border-secondary">
-                    <!-- Title -->
-                    <div class="col-md-6">
-                        <h6 style="margin-left: 4%; padding-top: 7px; ">Mã hóa đơn: <?php echo $oder['id'] ?></h6>
-                    </div>
-                    <div class="col-md-3">
-
-                        <?php
+            <form style="width: 80%; left: 23%; top: 43%" method="post" action="">
+                <?php foreach ($result as $oder) : ?>
+                <div style="box-shadow: 0px 0px 2px 0.5px #868D95; margin-left: 9%" class="have-oder col-md-10 mb-3">
+                    <div style="margin-left: 0px;--bs-border-opacity: .5;"
+                        class="row col-md-12 border-bottom border-1 border-secondary">
+                        <!-- Title -->
+                        <div class="col-md-6">
+                            <!-- name = oder_id16 -->
+                            <input name="oder_id" value="<?php echo $oder['id'] ?>" type="hidden">
+                            <h6 style="margin-left: 4%; padding-top: 7px; ">Mã hóa đơn: <?php echo $oder['id'] ?></h6>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="status_delivery" value="<?php echo $oder['status_delivery'] ?>" type="hidden">
+                            <?php
                             if ($oder['status_delivery'] == 0) {
                                 echo '<h6 style="color: cornflowerblue; padding-top: 7px; margin-left: -1%;">Chưa giao</h6>';
                             } elseif ($oder['status_delivery'] == 1) {
@@ -113,52 +118,59 @@ $user_id = $_SESSION['user_id'];
                                 echo '<h6 style="color: red; padding-top: 7px; margin-left: -1%;">Đã hủy</h6>';
                             }
                             ?>
+                        </div>
+                        <div class="col-md-3">
+                            <?php
+                                $created_at = $oder['created_at']; // String created_at oder
+                                $timestamp = strtotime($created_at); // Convert timestamp
+                                $format_Created_Day = date("d/m/Y", $timestamp); // Convert format_Created_Day
+                            ?>
+                            <h6 class="ms-4" style="color: grey; padding-top: 7px;">Ngày tạo đơn:
+                                <?=$format_Created_Day?></h6>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <h6 class="ms-4" style="color: grey; padding-top: 7px;">Ngày tạo đơn: 5/8/2023</h6>
+                    <div class="row mt-3">
+                        <div style="margin-left: 3%;" class="col-md-2 fs-6">
+                            <p>Tên người nhận</p>
+                        </div>
+                        <div class="col-md-3 fs-6">
+                            <p>: <?php echo $oder['recipient_name'] ?></p>
+                        </div>
+                        <div class="col-md-2 fs-6 ms-5">
+                            <p>Số điện thoại</p>
+                        </div>
+                        <div class="col-md-3 fs-6">
+                            <p>: <?php echo $oder['phone_number'] ?></p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Tên người nhận</p>
-                    </div>
-                    <div class="col-md-3 fs-6">
-                        <p>: <?php echo $oder['recipient_name'] ?></p>
-                    </div>
-                    <div class="col-md-2 fs-6 ms-5">
-                        <p>Số điện thoại</p>
-                    </div>
-                    <div class="col-md-3 fs-6">
-                        <p>: <?php echo $oder['phone_number'] ?></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Trạng thái </p>
-                    </div>
-                    <div class="col-md-3 fs-6">
-                        <?php
+                    <div class="row">
+                        <div style="margin-left: 3%;" class="col-md-2 fs-6">
+                            <p>Trạng thái </p>
+                        </div>
+                        <div class="col-md-3 fs-6">
+                            <input name="status_payment" value="<?php echo $oder['status_payment'] ?>" type="hidden">
+                            <?php
                             if ($oder['status_payment'] == 1) {
                                 echo '<p style="color: green;">: Đã thanh toán</p>';
                             } else {
                                 echo '<p style="color: red;">: Chưa thanh toán</p>';
                             }
                             ?>
+                        </div>
+                        <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
+                            <p>Địa chỉ </p>
+                        </div>
+                        <div class="col-md-4 fs-6">
+                            <p>: <?php echo $oder['address_detail'] . ', ' . $oder['ward'] . ', ' . $oder['district'] . ', ' . $oder['province'] ?>
+                            </p>
+                        </div>
                     </div>
-                    <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
-                        <p>Địa chỉ </p>
-                    </div>
-                    <div class="col-md-4 fs-6">
-                        <p>: <?php echo $oder['address_detail'] . ', ' . $oder['ward'] . ', ' . $oder['district'] . ', ' . $oder['province'] ?>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Thanh toán </p>
-                    </div>
-                    <div class="col-md-3 fs-6">
-                        <?php
+                    <div class="row">
+                        <div style="margin-left: 3%;" class="col-md-2 fs-6">
+                            <p>Thanh toán </p>
+                        </div>
+                        <div class="col-md-3 fs-6">
+                            <?php
                             if ($oder['payment_method'] == 0) {
                                 echo '<p>: Tiền mặt</p>';
                             } else {
@@ -166,17 +178,17 @@ $user_id = $_SESSION['user_id'];
                             }
 
                             ?>
-                    </div>
-                    <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
-                        <p>Mã giảm giá</p>
-                    </div>
-                    <?php
+                        </div>
+                        <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
+                            <p>Mã giảm giá</p>
+                        </div>
+                        <?php
                         $coupon = select_all_coupon($oder['coupon_code_id']);
                         
                     ?>
-                    <div class="col-md-4">
-                        <p>
-                            : <?php
+                        <div class="col-md-4">
+                            <p>
+                                : <?php
                                     if (!empty($coupon)) {
                                         if ($coupon['type'] == 0) {
                                         echo $coupon['code'] . ' ( ' . 'giảm ' .  number_format($coupon['value']) . 'đ' . ' )';
@@ -189,22 +201,22 @@ $user_id = $_SESSION['user_id'];
                                     
 
                                     ?>
-                        </p>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div style="margin-left: 3%;" class="col-md-2 fs-6">
-                        <p>Tổng hóa đơn </p>
-                    </div>
-                    <div class="col-md-3 fs-6">
-                        <p>: <?php echo number_format($oder['total_amount'])  . 'đ' ?></p>
-                    </div>
-                    <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
-                        <p>Tiền phải trả</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>
-                            : <?php
+                    <div class="row">
+                        <div style="margin-left: 3%;" class="col-md-2 fs-6">
+                            <p>Tổng hóa đơn </p>
+                        </div>
+                        <div class="col-md-3 fs-6">
+                            <p>: <?php echo number_format($oder['total_amount'])  . 'đ' ?></p>
+                        </div>
+                        <div style="margin-left: 5%;" class="col-md-2 fs-6 ms-6 ">
+                            <p>Tiền phải trả</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                : <?php
                             if (!empty($coupon)) {
                                 if ($coupon['type'] == 0) {
                                 echo  number_format($oder['total_amount'] - $coupon['value']) . 'đ';
@@ -217,42 +229,54 @@ $user_id = $_SESSION['user_id'];
                             
                             
                         ?>
-                        </p>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row ms-3">
-                    <div class="col-md-3 mb-3">
-                        <a style="text-decoration: none;" class="" data-bs-toggle="collapse"
-                            href="#collapseExample<?= $oder['id'] ?>" role="button" aria-expanded="false"
-                            aria-controls="collapseExample<?= $oder['id'] ?>">
-                            Xem thêm
-                        </a>
-                    </div>
-                    <!-- product in oder_detail -->
-                    <?php
+                    <div class="row ms-3">
+                        <div class="col-md-2 mb-3">
+                            <a style="text-decoration: none;" class="" data-bs-toggle="collapse"
+                                href="#collapseExample<?= $oder['id'] ?>" role="button" aria-expanded="false"
+                                aria-controls="collapseExample<?= $oder['id'] ?>">
+                                Xem thêm
+                            </a>
+                        </div>
+                        <?php
+                            if($oder['status_payment'] == 0 && $oder['status_delivery'] != 3) {
+                                echo '<div class="col-md-2 mb-3">
+                                        <a href=" ' . $CONTROLLER_URL . '/oder_history.php?oder_id=' . $oder['id'] .'" class="btn btn-danger col-md-12">Hủy đơn hàng</a>
+                            </div>';
+                            }elseif($oder['status_delivery'] === 3){
+                            echo '<p class="text-success-emphasis">Đơn hàng đã hủy</p>';
+                            }else{
+                            echo '<p class="text-success-emphasis">Đơn hàng đã thanh toán không thể hủy</p>';
+                            }
+                            ?>
+
+                        <!-- product in oder_detail -->
+                        <?php
                         $oder_details = select_order_details_with_product_info($oder['id']);
                         ?>
-                    <?php
+                        <?php
                         foreach ($oder_details as $oder_detail) :
                         ?>
-                    <div class="collapse mb-3" id="collapseExample<?= $oder['id'] ?>">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img style="width: 80px; height: 80px" src="<?= $oder_detail['image_url'] ?>" alt=""
-                                    class="img-thumbnail">
-                            </div>
-                            <div class="col-md-3">
-                                <p>
-                                    <?php
+                        <div class="collapse mb-3" id="collapseExample<?= $oder['id'] ?>">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img style="width: 80px; height: 80px" src="<?= $oder_detail['image_url'] ?>" alt=""
+                                        class="img-thumbnail">
+                                </div>
+                                <div class="col-md-3">
+                                    <p>
+                                        <?php
                                             echo $oder_detail['product_name'];
                                             ?>
-                                </p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Số lượng: <?php echo $oder_detail['quantity'] ?></p>
-                            </div>
-                            <div class="col-md-2">
-                                <?php
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>Số lượng: <?php echo $oder_detail['quantity'] ?></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <?php
                                     if ($oder_detail['size'] != "") {
                                         echo '<p>Size: '. $oder_detail['size']. '</p>'; 
                                     } else {
@@ -260,20 +284,21 @@ $user_id = $_SESSION['user_id'];
                                     }
                                     
                                 ?>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Giá:
-                                    <?php echo number_format($oder_detail['price'] * $oder_detail['quantity']) . 'đ' ?>
-                                </p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>Giá:
+                                        <?php echo number_format($oder_detail['price'] * $oder_detail['quantity']) . 'đ' ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
                         endforeach;
                         ?>
+                    </div>
                 </div>
-            </div>
-            <?php endforeach ?>
+                <?php endforeach ?>
+            </form>
             <!-- No oders -->
 
         </section>

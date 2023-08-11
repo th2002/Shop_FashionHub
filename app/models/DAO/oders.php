@@ -65,3 +65,9 @@ function select_order_details_with_product_info($order_id) {
     
     return pdo_query($sql, $order_id);
 }
+
+// update oder_history
+function update_oder_history($oder_id, $status_delivery){
+    $sql = "UPDATE oders SET status_delivery = ? WHERE id = ?;";
+    pdo_execute($sql, $status_delivery, $oder_id);
+}

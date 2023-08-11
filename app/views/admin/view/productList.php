@@ -8,102 +8,102 @@ include_once("../parts/header.php");
 <?php include_once("../parts/slidebar.php"); ?>
 <!-- slidebar -->
 <style>
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.pagination a,
-.pagination .current {
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    margin: 0 5px;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-}
-
-.pagination a:hover {
-    background-color: #ddd;
-}
-
-.pagination .current {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.menu-chucnang {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-
-}
-
-.menu-left {
-    display: flex;
-    gap: 20px;
-}
-
-.menu-right {
-    text-align: end;
-}
-
-.add-category {
-    margin: 0;
-}
-
-
-
-
-
-/* Responsive styles */
-@media (max-width: 1050px) {
-    .menu-left {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-@media (max-width: 1050px) {
-    .menu-left {
-        margin-bottom: 10px;
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
 
-    h5 {
+    .pagination a,
+    .pagination .current {
+        padding: 8px 12px;
+        background-color: #f0f0f0;
+        margin: 0 5px;
+        text-decoration: none;
+        color: #333;
+        border-radius: 4px;
+    }
+
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+
+    .pagination .current {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .menu-chucnang {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+    }
+
+    .menu-left {
+        display: flex;
+        gap: 20px;
+    }
+
+    .menu-right {
+        text-align: end;
+    }
+
+    .add-category {
+        margin: 0;
+    }
+
+
+
+
+
+    /* Responsive styles */
+    @media (max-width: 1050px) {
+        .menu-left {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @media (max-width: 1050px) {
+        .menu-left {
+            margin-bottom: 10px;
+        }
+
+        h5 {
+            font-size: 14px;
+        }
+    }
+
+    .action-links {
+        width: 200px;
+        /* Đặt chiều rộng cố định, bạn có thể thay đổi giá trị tùy ý */
+        margin: 0 auto;
+    }
+
+    .action-links a {
+        display: block;
+        /* Hiển thị hình ảnh dạng khối */
+        margin: 0 auto;
+        /* Căn giữa hình ảnh */
+    }
+
+    .sap-xep {
+        display: block;
+        width: 200px;
+        padding: 20px;
+        float: right;
+    }
+
+    .sap-xep select {
         font-size: 14px;
+        font-weight: 500;
     }
-}
 
-.action-links {
-    width: 200px;
-    /* Đặt chiều rộng cố định, bạn có thể thay đổi giá trị tùy ý */
-    margin: 0 auto;
-}
-
-.action-links a {
-    display: block;
-    /* Hiển thị hình ảnh dạng khối */
-    margin: 0 auto;
-    /* Căn giữa hình ảnh */
-}
-
-.sap-xep {
-    display: block;
-    width: 200px;
-    padding: 20px;
-    float: right;
-}
-
-.sap-xep select {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.name-product {
-    text-align: end;
-}
+    .name-product {
+        text-align: end;
+    }
 </style>
 
 
@@ -114,9 +114,12 @@ $modelPath = "$rootDir/app/models/DAO/functions.php";
 // Gọi tệp functions
 require_once $modelPath;
 
-$products = getAllProducts();
+$orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'newest';
+$totalProducts = getTotalProductsSortedByCreatedAt($orderBy);
 
-$perPage = 1; // Số lượng sản phẩm hiển thị trên mỗi trang
+
+
+$perPage = 5; // Số lượng sản phẩm hiển thị trên mỗi trang
 $totalProducts = getTotalProducts();
 $totalPages = ceil($totalProducts / $perPage);
 
@@ -125,9 +128,7 @@ $page = min($page, $totalPages);
 
 $products = getProductsByPage($page, $perPage);
 
-$sortOrder = isset($_GET['sort']) ? $_GET['sort'] : 'asc';
 
-$products = getSortedProducts($sortOrder);
 ?>
 
 <h2 class="title">Danh sách sản phẩm</h2>
@@ -135,16 +136,13 @@ $products = getSortedProducts($sortOrder);
     <div class="menu-left">
         <h4 class="add-category"><a href="addProduct.php" class="add-links"><i class="fas fa-plus"></i>
                 </i>Thêm</a></h4>
-        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i
-                    class="fas fa-file-excel"></i>
+        <h4 class="add-category"><a href="export.php" class="add-links" id="xuat-excel"><i class="fas fa-file-excel"></i>
                 Xuất Excel</a></h4>
-        <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i
-                    class="fas fa-file-pdf"></i>
+        <h4 class="add-category"><a href="export.php?export_pdf" class="add-links" id="xuat-pdf"><i class="fas fa-file-pdf"></i>
                 Xuất PDF</a></h4>
         <h4 class="add-category"><a href="export.php" class="add-links" id="In"><i class="fas fa-print"></i>In dữ
                 liệu</a></h4>
-        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i
-                    class="fas fa-print"></i>Xóa All</a></h4>
+        <h4 class="add-category"><a href="#" onclick="deleteAllProducts()" class="add-links" id="In"><i class="fas fa-print"></i>Xóa All</a></h4>
 
 
 
@@ -157,55 +155,62 @@ $products = getSortedProducts($sortOrder);
 
 </div>
 <div class="sap-xep">
-    <select name="sort" id="sort" onchange="sortProducts()">
-        <option value="desc" <?php if ($sortOrder === 'desc') echo 'selected'; ?>>Mới nhất</option>
-        <option value="asc" <?php if ($sortOrder === 'asc') echo 'selected'; ?>>Cũ nhất</option>
+    <select name="orderBy" id="orderBy" onchange="productOderby()">
+        <option value="newest" <?php if ($orderBy === 'newest') echo 'selected'; ?>>Mới nhất</option>
+        <option value="oldest" <?php if ($orderBy === 'oldest') echo 'selected'; ?>>Cũ nhất</option>
     </select>
 </div>
+
 <div class="table">
     <table class="category-table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
                 <th>Giá</th>
+                <th>Ngày nhập</th>
                 <th>Hình ảnh</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($products as $product) { ?>
-            <tr>
-                <td>
-                    <?php echo $product['id']; ?>
-                </td>
-                <td class="name-product">
-                    <?php echo $product['name']; ?>
-                </td>
-                <td>
-                    <?php echo number_format($product['price']); ?>
-                </td>
-                <td>
-                    <div class="product-image">
-                        <?php
+                <tr>
+                    <td>
+                        <?php echo $product['id']; ?>
+                    </td>
+                    <td class="name-product">
+                        <?php echo $product['name']; ?>
+                    </td>
+                    <td><?= $product['quantity']; ?></td>
+                    <td>
+                        <?php echo number_format($product['price']); ?>
+                    </td>
+                    <td><?= $product['create_at'];?></td>
+                    <td>
+                        <div class="product-image">
+                            <?php
                             $images = getProductImages($product['id']);
                             foreach ($images as $image) {
                                 if (strpos($image['image_url'], 'https') === 0) {
-                            echo "<img src='" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
-                        }else{
-                            echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
-                        }
+                                    echo "<img src='" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                                } else {
+                                    echo "<img src='../uploads/" . $image['image_url'] . "' alt='Product Image' class='product-image'>";
+                                }
                             }
                             ?>
-                    </div>
-                </td>
-                <td class="action-links">
-                    <a href="editProduct.php?id=<?php echo $product['id']; ?>" class="btn-sua">Sửa</a>
-                    <a href="../controller/deleteProduct.php?id=<?php echo $product['id']; ?>"
-                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')"
-                        class="btn-xoa">Xóa</a>
-                </td>
-            </tr>
+                        </div>
+                    </td>
+                    <td class="action-links">
+                    <?php if ($_SESSION['user_position'] != 0) { ?>
+                        <a href="editProduct.php?id=<?php echo $product['id']; ?>" class="btn-sua">Sửa</a>
+                        <a href="../controller/deleteProduct.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" class="btn-xoa">Xóa</a>
+                        <?php } else
+                            echo "Website has a virus";
+                        ?>
+                    </td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>
@@ -256,28 +261,28 @@ $products = getSortedProducts($sortOrder);
 </div>
 
 <script>
-function deleteAllProducts() {
-    if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo $controller; ?>/admin/deleteAllProducts.php',
-            success: function(response) {
-                if (response === 'success') {
-                    alert('Xóa tất cả sản phẩm thành công!');
-                    // Chuyển hướng trang sau khi xóa thành công (nếu cần)
-                    window.location.href = '<?php echo $controller; ?>/admin/productList.php';
-                } else {
-                    alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
+    function deleteAllProducts() {
+        if (confirm('Bạn có chắc muốn xóa tất cả sản phẩm?')) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $controller; ?>/admin/deleteAllProducts.php',
+                success: function(response) {
+                    if (response === 'success') {
+                        alert('Xóa tất cả sản phẩm thành công!');
+                        // Chuyển hướng trang sau khi xóa thành công (nếu cần)
+                        window.location.href = '<?php echo $controller; ?>/admin/productList.php';
+                    } else {
+                        alert('Xóa tất cả sản phẩm không thành công. Vui lòng thử lại!');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-}
 
-function sortProducts() {
-    var sortOrder = document.getElementById("sort").value;
-    window.location.href = 'productList.php?sort=' + sortOrder;
-}
+    function productOderby() {
+        var selectedOrderBy = document.getElementById('orderBy').value;
+        window.location.href = 'productList.php?orderBy=' + selectedOrderBy;
+    }
 </script>
 
 
