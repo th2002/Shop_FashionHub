@@ -1,13 +1,31 @@
 <!-- Controller -->
 
-<?php
+<!DOCTYPE html>
+<html>
 
-    $error = "";
-    if(isset($_POST['btnHuy'])) {
-    $canceled_order_ids = $_POST['oder_id']; // Array oder id
+<head>
+
+    <!--Link library Swal -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<?php
+   
+
+if (isset($_GET['oder_id'])) {
+    require_once '../../models/DAO/oders.php';
+    require_once '../../models/DAO/connect.php';
+    require_once '../../../global.php';
+    $oder_id = $_GET['oder_id'];
     $status_delivery = 3;
 
-    foreach ($canceled_order_ids as $oder_id) {
+    if(isset($oder_id)) {
         update_oder_history($oder_id, $status_delivery);
         echo '<script>';
         echo 'Swal.fire({ title: "Hủy đơn hàng thành công!", icon: "success" }).then(function() {';

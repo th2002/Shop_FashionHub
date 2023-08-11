@@ -102,7 +102,7 @@ $user_id = $_SESSION['user_id'];
                         <!-- Title -->
                         <div class="col-md-6">
                             <!-- name = oder_id16 -->
-                            <input name="oder_id[]" value="<?php echo $oder['id'] ?>" type="hidden">
+                            <input name="oder_id" value="<?php echo $oder['id'] ?>" type="hidden">
                             <h6 style="margin-left: 4%; padding-top: 7px; ">Mã hóa đơn: <?php echo $oder['id'] ?></h6>
                         </div>
                         <div class="col-md-3">
@@ -243,14 +243,14 @@ $user_id = $_SESSION['user_id'];
                         <?php
                             if($oder['status_payment'] == 0 && $oder['status_delivery'] != 3) {
                                 echo '<div class="col-md-2 mb-3">
-                                        <button class="btn btn-danger col-md-12" name="btnHuy" type="submit">Hủy đơn hàng</button>
-                                    </div>';
-                            }elseif($oder['status_delivery'] === 3){
-                                echo '<p class="text-success-emphasis">Đơn hàng đã hủy</p>';
-                            }else{
-                                echo '<p class="text-success-emphasis">Đơn hàng đã thanh toán không thể hủy</p>';
-                            }
-                        ?>
+                                        <a href=" ' . $CONTROLLER_URL . '/oder_history.php?oder_id=' . $oder['id'] .'" class="btn btn-danger col-md-12">Hủy đơn hàng</a>
+                    </div>';
+                    }elseif($oder['status_delivery'] === 3){
+                    echo '<p class="text-success-emphasis">Đơn hàng đã hủy</p>';
+                    }else{
+                    echo '<p class="text-success-emphasis">Đơn hàng đã thanh toán không thể hủy</p>';
+                    }
+                    ?>
 
                         <!-- product in oder_detail -->
                         <?php
