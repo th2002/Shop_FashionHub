@@ -76,3 +76,7 @@ function danh_muc_select_all(){
     $sql = "SELECT * FROM category_product ";
     return  pdo_query($sql);
 }
+function lien_he($uer_name,$email,$content,$create_at){
+    $sql = "INSERT INTO submit_contact( name , email , content, create_at) VALUES ( ?,?,?,?)";
+    return  pdo_execute($sql,$uer_name,$email,$content,$create_at);
+}

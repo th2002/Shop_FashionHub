@@ -3,16 +3,16 @@
     <div class="nav__left">
         <ul class="nav__page-list">
             <li class="nav__page-item">
-                <a href="../home" class="nav__page-link">Trang Chủ</a>
+                <a href="<?= $SITE_URL ?>/home" class="nav__page-link">Trang Chủ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home" class="nav__page-link">Liên Hệ</a>
+                <a href="<?= $SITE_URL ?>/home/lienhe.php" class="nav__page-link">Liên Hệ</a>
             </li>
             <li class="nav__page-item">
-                <a href="home" class="nav__page-link">Giới Thiệu</a>
+                <a href="<?= $SITE_URL ?>/home/gioithieu/gioithieu.php" class="nav__page-link">Giới Thiệu</a>
             </li>
             <li class="nav__page-item">
-                <a href="home?category" class="nav__page-link">Danh mục</a>
+                <a href="../home?category" class="nav__page-link">Danh mục</a>
                 <ul class="submenu">
                     <?php
                         $result = danh_muc_select_all();
