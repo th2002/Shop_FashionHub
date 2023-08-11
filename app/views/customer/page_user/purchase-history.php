@@ -244,13 +244,13 @@ $user_id = $_SESSION['user_id'];
                             if($oder['status_payment'] == 0 && $oder['status_delivery'] != 3) {
                                 echo '<div class="col-md-2 mb-3">
                                         <a href=" ' . $CONTROLLER_URL . '/oder_history.php?oder_id=' . $oder['id'] .'" class="btn btn-danger col-md-12">Hủy đơn hàng</a>
-                    </div>';
-                    }elseif($oder['status_delivery'] === 3){
-                    echo '<p class="text-success-emphasis">Đơn hàng đã hủy</p>';
-                    }else{
-                    echo '<p class="text-success-emphasis">Đơn hàng đã thanh toán không thể hủy</p>';
-                    }
-                    ?>
+                            </div>';
+                            }elseif($oder['status_delivery'] === 3){
+                            echo '<p class="text-success-emphasis">Đơn hàng đã hủy</p>';
+                            }else{
+                            echo '<p class="text-success-emphasis">Đơn hàng đã thanh toán không thể hủy</p>';
+                            }
+                            ?>
 
                         <!-- product in oder_detail -->
                         <?php
