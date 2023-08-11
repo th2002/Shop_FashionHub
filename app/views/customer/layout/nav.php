@@ -33,9 +33,10 @@
     </div>
     <div class="nav__right">
         <div class="nav__seach">
-            <i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i>
-            <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm">
-
+            <form method="POST" action="<?php echo $SITE_URL ?>/search_products/index.php">
+                <button type="submit"><i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i></button>
+                <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm" name="searchInput">
+            </form>
         </div>
         <div class="nav__cart">
             <a class="nav__cart-link" href=""><i class="nav__cart-icon fa-solid fa-cart-shopping fa-bounce">
