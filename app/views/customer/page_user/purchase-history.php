@@ -120,7 +120,13 @@ $user_id = $_SESSION['user_id'];
                             ?>
                         </div>
                         <div class="col-md-3">
-                            <h6 class="ms-4" style="color: grey; padding-top: 7px;">Ngày tạo đơn: 5/8/2023</h6>
+                            <?php
+                                $created_at = $oder['created_at']; // String created_at oder
+                                $timestamp = strtotime($created_at); // Convert timestamp
+                                $format_Created_Day = date("d/m/Y", $timestamp); // Convert format_Created_Day
+                            ?>
+                            <h6 class="ms-4" style="color: grey; padding-top: 7px;">Ngày tạo đơn:
+                                <?=$format_Created_Day?></h6>
                         </div>
                     </div>
                     <div class="row mt-3">
