@@ -453,8 +453,10 @@ foreach ($data as $key => $item) {
       </div>
       <div class="nav__right">
         <div class="nav__seach">
-          <i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i>
-          <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm">
+            <form method="POST" action="<?php echo $SITE_URL ?>/search_products/index.php">
+                <button type="submit" name="Input" disabled><i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i></button>
+                <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm" name="searchInput" onkeyup="checkInput()">
+            </form>
 
         </div>
         <div class="nav__cart">
@@ -729,6 +731,7 @@ foreach ($data as $key => $item) {
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?=$ASSET_URL?>/js/checkinput.js"></script>
 <script>
   const quantityText = parseInt(document.querySelector('.quantity-detail').innerHTML);
   const quantityInput = document.querySelector('.quantity-input');

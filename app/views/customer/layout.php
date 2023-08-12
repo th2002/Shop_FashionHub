@@ -203,6 +203,7 @@
     <script src="<?=$ASSET_URL?>/js/page.js"></script>
     <script src="<?=$ASSET_URL?>/js/cart.js"></script>
     <script src="<?=$ASSET_URL?>/js/toast.js"></script>
+    <script src="<?=$ASSET_URL?>/js/checkinput.js"></script>
 
     <!-- Scroll trang web về đầu trang -->
     <script>

@@ -34,8 +34,8 @@
     <div class="nav__right">
         <div class="nav__seach">
             <form method="POST" action="<?php echo $SITE_URL ?>/search_products/index.php">
-                <button type="submit"><i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i></button>
-                <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm" name="searchInput">
+                <button type="submit" name="Input" disabled><i class="navbar_seach-icon fa-solid fa-magnifying-glass"></i></button>
+                <input class="navbar_seach-input" type="text" placeholder="Tìm Kiếm" name="searchInput" onkeyup="checkInput()">
             </form>
         </div>
         <div class="nav__cart">
