@@ -2,7 +2,7 @@
 Xin chào, em là nhóm trưởng của team Mutiny. 
 Đây là dự án của môn dự án 1 trường FPT Polytechnic!
  Dự án do team Mutiny thực hiện dưới sự hướng dẫn của cô Nguyễn Thị Nam.
- Mọi mô tả của dự án có trong FashionHub.docx.
+ Mọi mô tả của dự án có trong FashionHub.docx. Testcase trong testcase.xlsx.
  Slide thuyết trình SlideMutiny.pptx có đầy đủ quy trình thực hiện dự án và phân chia công việc.
  Link website: http://addon-domain.top/.
  Em xin gửi lời cám ơn đến giảng viên hướng dẫn là Cô Nguyễn Thị Nam và các thành viên trong nhóm đã nỗ lực để hoàn thành dự án.
